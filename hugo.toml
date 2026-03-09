@@ -5,6 +5,9 @@ theme = 'PaperMod'
 # Multilingual configuration
 defaultContentLanguage = 'vi'
 
+[outputs]
+    home = ["HTML", "RSS", "JSON"]
+
 [languages.vi]
     languageName = 'Tiếng Việt'
     contentDir = 'content'
@@ -13,8 +16,24 @@ defaultContentLanguage = 'vi'
     [languages.vi.params]
         description = 'Chia sẻ kiến thức lập trình và cuộc sống.'
         [languages.vi.params.homeInfoParams]
-            Title = "Chào mừng 👋"
-            Content = "Blog hướng dẫn Hugo, PaperMod và công nghệ."
+            Title = "Chào bạn, mình là Thái 🚀"
+            Content = "Nơi mình chia sẻ về Hugo, PaperMod và những hành trình công nghệ."
+    # Vietnamese Menu
+    [[languages.vi.menu.main]]
+        identifier = "posts"
+        name = "Bài viết"
+        url = "/posts/"
+        weight = 10
+    [[languages.vi.menu.main]]
+        identifier = "tags"
+        name = "Tags"
+        url = "/tags/"
+        weight = 20
+    [[languages.vi.menu.main]]
+        identifier = "search"
+        name = "Tìm kiếm"
+        url = "/search/"
+        weight = 30
 
 [languages.en]
     languageName = 'English'
@@ -24,15 +43,31 @@ defaultContentLanguage = 'vi'
     [languages.en.params]
         description = 'Sharing coding knowledge and life experiences.'
         [languages.en.params.homeInfoParams]
-            Title = "Welcome 👋"
-            Content = "A blog about Hugo, PaperMod, and tech."
+            Title = "Hey, I'm Thai 🚀"
+            Content = "A place where I share my journey with Hugo, PaperMod, and tech stories."
+    # English Menu
+    [[languages.en.menu.main]]
+        identifier = "posts"
+        name = "Posts"
+        url = "/posts/"
+        weight = 10
+    [[languages.en.menu.main]]
+        identifier = "tags"
+        name = "Tags"
+        url = "/tags/"
+        weight = 20
+    [[languages.en.menu.main]]
+        identifier = "search"
+        name = "Search"
+        url = "/en/search/" # Point to English search page
+        weight = 30
 
 [markup]
   [markup.highlight]
-    noClasses = false  # CRITICAL: Use classes instead of inline styles
+    noClasses = false
     codeFences = true
     guessSyntax = true
-    style = "monokai"  # Base, but will be overridden
+    style = "monokai"
 
 [params]
     author = "Hoang Nguyen Thai"
@@ -48,11 +83,9 @@ defaultContentLanguage = 'vi'
     [[params.socialIcons]]
         name = "github"
         url = "https://github.com/thaig2pro"
-    
     [[params.socialIcons]]
         name = "facebook"
         url = "https://www.facebook.com/thailovedata"
-    
     [[params.socialIcons]]
         name = "linkedin"
         url = "https://www.linkedin.com/in/thai-love-data/"

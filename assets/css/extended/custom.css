@@ -16,14 +16,14 @@
     /* Global borders */
     --border: #e1dbd0;          
 
-    /* Syntax Highlighting Colors (High Contrast Ink for Light Mode) */
-    --syntax-keyword: #000080;   /* Deep Navy */
-    --syntax-string: #006400;    /* Dark Green */
-    --syntax-function: #005555;  /* Dark Teal */
-    --syntax-class: #800000;     /* Deep Maroon */
-    --syntax-comment: #696969;   /* Dim Gray */
-    --syntax-builtin: #222222;   /* Deep charcoal */
-    --syntax-number: #a52a2a;    /* Dark Brown */
+    /* Syntax Highlighting Colors */
+    --syntax-keyword: #000080;   
+    --syntax-string: #006400;    
+    --syntax-function: #005555;  
+    --syntax-class: #800000;     
+    --syntax-comment: #696969;   
+    --syntax-builtin: #222222;   
+    --syntax-number: #a52a2a;    
     
     --code-block-bg: #f8f5f0;
     --code-text: #2d2d2d;       
@@ -39,7 +39,7 @@
     --content: #ddc7a1;
     --border: #3c3836;
 
-    /* Syntax Highlighting Colors (Vivid for Dark Mode) */
+    /* Syntax Highlighting Colors */
     --syntax-keyword: #fe8019;   
     --syntax-string: #b8bb26;    
     --syntax-function: #b8bb26;  
@@ -52,7 +52,7 @@
     --code-text: #ebdbb2;
 }
 
-/* 2. TYPOGRAPHY (LORA - OPTIMIZED FOR VIETNAMESE)
+/* 2. TYPOGRAPHY
    -------------------------------------------------------------------------- */
 body {
     font-family: 'Lora', Georgia, 'Times New Roman', serif;
@@ -80,12 +80,12 @@ h1, h2, h3, h4, h5, h6 {
     border-bottom: 1px solid var(--border) !important;
     position: sticky;
     top: 0;
-    transition: transform 0.3s ease-in-out; /* Smooth slide effect */
+    transition: transform 0.3s ease-in-out;
     z-index: 1000;
 }
 
 .header.nav-up {
-    transform: translateY(-100%); /* Hide header upward */
+    transform: translateY(-100%);
 }
 
 /* Fix for PaperMod list background */
@@ -93,20 +93,70 @@ body, .list, .main {
     background: var(--theme) !important;
 }
 
-/* Post entry cards styling */
+/* --- POST ENTRY CARDS (HOMEPAGE LIST) --- */
 .post-entry {
     background: var(--entry) !important;
     border: 1px solid var(--border) !important;
-    border-radius: 8px;
-    padding: 28px;
-    margin-bottom: 24px;
+    border-radius: 12px;
+    padding: 0; 
+    margin-bottom: 30px;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.post-entry:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.05);
+}
+
+/* Fixed Layout ONLY for Homepage cards */
+.post-entry .entry-cover {
+    margin-bottom: 0 !important;
+    width: 100%;
+    height: 240px; /* Fixed height for consistency on homepage */
+    overflow: hidden;
+}
+
+.post-entry .entry-cover img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important; 
+}
+
+/* --- SINGLE POST PAGE COVER (ORIGINAL ASPECT RATIO) --- */
+/* This overrides any general entry-cover rules for the actual blog post page */
+.post-single .entry-cover {
+    height: auto !important; /* Reset fixed height */
+    max-height: 600px; /* Optional: limit very tall images */
+    margin-bottom: 20px !important;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.post-single .entry-cover img {
+    width: 100% !important;
+    height: auto !important; /* Show full image */
+    object-fit: contain !important; /* Or just let it be natural */
+}
+
+/* Text area within the card */
+.post-entry .entry-header, 
+.post-entry .entry-content, 
+.post-entry .entry-footer {
+    padding: 20px 28px;
+}
+
+.post-entry .entry-header h2 {
+    font-size: 24px;
+    margin: 0;
+    line-height: 1.3;
 }
 
 /* 4. CODE BLOCK & SYNTAX HIGHLIGHTING (SYSTEMATIC OVERRIDE)
    -------------------------------------------------------------------------- */
 
-/* FORCE BASE COLOR FOR ALL CODE ELEMENTS */
 .post-content pre, 
 .post-content code, 
 .post-content .chroma,
@@ -114,7 +164,6 @@ body, .list, .main {
     color: var(--code-text) !important;
 }
 
-/* Pre block styling */
 .post-content pre {
     background-color: var(--code-block-bg) !important;
     border: 1px solid var(--border);
@@ -123,7 +172,6 @@ body, .list, .main {
     padding: 1.5rem !important;
 }
 
-/* Chroma Systemic Overrides */
 .chroma .p, .chroma .n, .chroma .nx, .chroma .nv, .chroma .vc, .chroma .vg, .chroma .vi, .chroma .vm, .chroma .l, .chroma .x {
     color: var(--code-text) !important;
 }
@@ -136,18 +184,12 @@ body, .list, .main {
 .chroma .mi, .chroma .mf, .chroma .mh, .chroma .mo, .chroma .m, .chroma .il { color: var(--syntax-number) !important; }
 .chroma .o, .chroma .ow { color: var(--primary) !important; font-weight: normal !important; }
 
-/* Inline Code readability */
 :not(pre) > code {
     background-color: var(--theme);
     filter: brightness(0.95); 
     color: #8b0000; 
-    padding: 0.15em 0.4em;
+    padding: 0.1em 0.4em;
     border-radius: 3px;
     border: 1px solid var(--border);
     font-weight: 500; 
-}
-
-[data-theme="dark"] :not(pre) > code {
-    color: #fb4934;
-    filter: brightness(1.2);
 }

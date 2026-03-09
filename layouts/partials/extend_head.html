@@ -11,4 +11,23 @@
         text-rendering: optimizeLegibility;
         -webkit-font-smoothing: antialiased;
     }
+
+    /* Reading Progress Bar Style */
+    #reading-progress {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 0%;
+        height: 4px;
+        background: #8b0000; /* Dark Red to match our Kindle accents */
+        z-index: 2000;
+        transition: width 0.1s ease-out;
+    }
+    
+    [data-theme="dark"] #reading-progress {
+        background: #fb4934; /* Vivid orange-red for dark mode */
+    }
 </style>
+
+<!-- Progress Bar Element -->
+<div id="reading-progress"></div>
