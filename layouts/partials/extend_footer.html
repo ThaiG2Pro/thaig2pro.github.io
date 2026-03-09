@@ -1,0 +1,22 @@
+<script>
+    // Smart Header: Hide on scroll down, show on scroll up
+    var lastScrollTop = 0;
+    var header = document.querySelector('.header');
+    var threshold = 50; // Minimum scroll amount before hiding
+
+    window.addEventListener('scroll', function() {
+        var st = window.pageYOffset || document.documentElement.scrollTop;
+        
+        // Ensure header exists and we've scrolled past the threshold
+        if (header && Math.abs(lastScrollTop - st) > threshold) {
+            if (st > lastScrollTop && st > 100) {
+                // Scrolling Down - Hide Header
+                header.classList.add('nav-up');
+            } else {
+                // Scrolling Up - Show Header
+                header.classList.remove('nav-up');
+            }
+        }
+        lastScrollTop = st;
+    });
+</script>

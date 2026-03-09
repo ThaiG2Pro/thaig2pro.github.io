@@ -18,7 +18,7 @@ defaultContentLanguage = 'vi'
 
 [languages.en]
     languageName = 'English'
-    contentDir = 'content' # PaperMod works best with shared contentDir but different file extensions
+    contentDir = 'content'
     weight = 2
     title = 'My Blog'
     [languages.en.params]
@@ -26,6 +26,13 @@ defaultContentLanguage = 'vi'
         [languages.en.params.homeInfoParams]
             Title = "Welcome 👋"
             Content = "A blog about Hugo, PaperMod, and tech."
+
+[markup]
+  [markup.highlight]
+    noClasses = false  # CRITICAL: Use classes instead of inline styles
+    codeFences = true
+    guessSyntax = true
+    style = "monokai"  # Base, but will be overridden
 
 [params]
     author = "Hoang Nguyen Thai"
@@ -36,3 +43,16 @@ defaultContentLanguage = 'vi'
     ShowShareButtons = true
     ShowBreadCrumbs = true
     ShowToc = true
+
+    # Social icons for home page
+    [[params.socialIcons]]
+        name = "github"
+        url = "https://github.com/thaig2pro"
+    
+    [[params.socialIcons]]
+        name = "facebook"
+        url = "https://facebook.com/your-profile"
+    
+    [[params.socialIcons]]
+        name = "linkedin"
+        url = "https://linkedin.com/in/your-profile"

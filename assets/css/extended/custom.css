@@ -1,85 +1,153 @@
-/* Professional Code Block Styles for Hugo PaperMod */
+/* ==========================================================================
+   KINDLE SEPIA THEME FOR PAPERMOD (Optimized for Reading)
+   ========================================================================== */
 
-/* --- GLOBAL CODE BLOCK SETTINGS --- */
-.post-content pre {
-    border-radius: 6px;
-    padding: 1.25rem;
-    margin: 1.5rem 0;
-    overflow-x: auto;
-    border: 1px solid transparent;
-    transition: background 0.3s, border 0.3s;
-    line-height: 1.6;
-}
-
-/* Typography for all code */
-.post-content code {
-    font-family: 'JetBrains Mono', 'Fira Code', 'Menlo', 'Monaco', 'Consolas', monospace;
-    font-size: 14px; /* Optimal size for readability */
-    tab-size: 4;
-    -webkit-font-smoothing: antialiased;
-}
-
-/* --- LIGHT MODE STYLES (Default) --- */
+/* 1. CORE VARIABLES (LOGIC-BASED)
+   -------------------------------------------------------------------------- */
 :root {
-    --code-bg: #f6f8fa;       /* GitHub Light style */
-    --code-border: #d0d7de;
-    --code-text: #24292f;
-    --inline-code-bg: rgba(175, 184, 193, 0.2);
-    --inline-code-color: #cf222e;
+    /* Kindle Sepia Palette - Light Mode */
+    --theme: #f4f1ea;           
+    --entry: #fdfbf7;           
+    --primary: #2c3e50;         
+    --secondary: #6b6659;       
+    --tertiary: #a8a295;        
+    --content: #37352f;         
+    
+    /* Global borders */
+    --border: #e1dbd0;          
+
+    /* Syntax Highlighting Colors (High Contrast Ink for Light Mode) */
+    --syntax-keyword: #000080;   /* Deep Navy */
+    --syntax-string: #006400;    /* Dark Green */
+    --syntax-function: #005555;  /* Dark Teal */
+    --syntax-class: #800000;     /* Deep Maroon */
+    --syntax-comment: #696969;   /* Dim Gray */
+    --syntax-builtin: #222222;   /* Deep charcoal */
+    --syntax-number: #a52a2a;    /* Dark Brown */
+    
+    --code-block-bg: #f8f5f0;
+    --code-text: #2d2d2d;       
 }
 
+[data-theme="dark"] {
+    /* Dark Sepia Palette - Dark Mode */
+    --theme: #1d2021;
+    --entry: #282828;
+    --primary: #d4be98;
+    --secondary: #a89984;
+    --tertiary: #504945;
+    --content: #ddc7a1;
+    --border: #3c3836;
+
+    /* Syntax Highlighting Colors (Vivid for Dark Mode) */
+    --syntax-keyword: #fe8019;   
+    --syntax-string: #b8bb26;    
+    --syntax-function: #b8bb26;  
+    --syntax-class: #fabd2f;     
+    --syntax-comment: #928374;   
+    --syntax-builtin: #d3869b;   
+    --syntax-number: #d3869b;
+
+    --code-block-bg: #282828;
+    --code-text: #ebdbb2;
+}
+
+/* 2. TYPOGRAPHY (LORA - OPTIMIZED FOR VIETNAMESE)
+   -------------------------------------------------------------------------- */
+body {
+    font-family: 'Lora', Georgia, 'Times New Roman', serif;
+    font-size: 19px;
+    line-height: 1.8;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Lora', serif;
+    color: var(--primary);
+    font-weight: 700;
+}
+
+.post-content {
+    font-size: 1.15rem;
+    text-align: justify;
+}
+
+/* 3. COMPONENTS REFINEMENT
+   -------------------------------------------------------------------------- */
+
+/* Header Refinement (Smart Hide/Show) */
+.header {
+    background: var(--theme) !important;
+    border-bottom: 1px solid var(--border) !important;
+    position: sticky;
+    top: 0;
+    transition: transform 0.3s ease-in-out; /* Smooth slide effect */
+    z-index: 1000;
+}
+
+.header.nav-up {
+    transform: translateY(-100%); /* Hide header upward */
+}
+
+/* Fix for PaperMod list background */
+body, .list, .main {
+    background: var(--theme) !important;
+}
+
+/* Post entry cards styling */
+.post-entry {
+    background: var(--entry) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: 8px;
+    padding: 28px;
+    margin-bottom: 24px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* 4. CODE BLOCK & SYNTAX HIGHLIGHTING (SYSTEMATIC OVERRIDE)
+   -------------------------------------------------------------------------- */
+
+/* FORCE BASE COLOR FOR ALL CODE ELEMENTS */
+.post-content pre, 
+.post-content code, 
+.post-content .chroma,
+.post-content pre code {
+    color: var(--code-text) !important;
+}
+
+/* Pre block styling */
 .post-content pre {
-    background-color: var(--code-bg) !important;
-    border-color: var(--code-border);
-    color: var(--code-text);
-    border-left: 4px solid #005cc5; /* Blue accent for light mode */
-}
-
-/* Inline code for light mode */
-:not(pre) > code {
-    background-color: var(--inline-code-bg);
-    color: var(--inline-code-color);
-    padding: 0.2em 0.4em;
+    background-color: var(--code-block-bg) !important;
+    border: 1px solid var(--border);
+    border-left: 5px solid var(--tertiary);
     border-radius: 4px;
-    font-size: 0.9em;
+    padding: 1.5rem !important;
 }
 
-/* --- DARK MODE STYLES --- */
-.dark {
-    --code-bg: #161b22;       /* GitHub Dark style */
-    --code-border: #30363d;
-    --code-text: #c9d1d9;
-    --inline-code-bg: rgba(110, 118, 129, 0.4);
-    --inline-code-color: #ff7b72;
+/* Chroma Systemic Overrides */
+.chroma .p, .chroma .n, .chroma .nx, .chroma .nv, .chroma .vc, .chroma .vg, .chroma .vi, .chroma .vm, .chroma .l, .chroma .x {
+    color: var(--code-text) !important;
+}
+.chroma .k, .chroma .kd, .chroma .kn, .chroma .kp, .chroma .kr, .chroma .kt { color: var(--syntax-keyword) !important; font-weight: normal !important; }
+.chroma .nc, .chroma .nn { color: var(--syntax-class) !important; font-weight: normal !important; }
+.chroma .nf, .chroma .fm { color: var(--syntax-function) !important; font-weight: normal !important; }
+.chroma .s, .chroma .s1, .chroma .s2, .chroma .sb, .chroma .sc, .chroma .si, .chroma .sa { color: var(--syntax-string) !important; }
+.chroma .c, .chroma .c1, .chroma .cm, .chroma .ch, .chroma .cs { color: var(--syntax-comment) !important; font-style: italic !important; }
+.chroma .nb, .chroma .bp { color: var(--syntax-builtin) !important; font-weight: normal !important; }
+.chroma .mi, .chroma .mf, .chroma .mh, .chroma .mo, .chroma .m, .chroma .il { color: var(--syntax-number) !important; }
+.chroma .o, .chroma .ow { color: var(--primary) !important; font-weight: normal !important; }
+
+/* Inline Code readability */
+:not(pre) > code {
+    background-color: var(--theme);
+    filter: brightness(0.95); 
+    color: #8b0000; 
+    padding: 0.15em 0.4em;
+    border-radius: 3px;
+    border: 1px solid var(--border);
+    font-weight: 500; 
 }
 
-.dark .post-content pre {
-    background-color: var(--code-bg) !important;
-    border-color: var(--code-border);
-    color: var(--code-text);
-    border-left: 4px solid #58a6ff; /* Lighter blue accent for dark mode */
+[data-theme="dark"] :not(pre) > code {
+    color: #fb4934;
+    filter: brightness(1.2);
 }
-
-.dark :not(pre) > code {
-    background-color: var(--inline-code-bg);
-    color: var(--inline-code-color);
-}
-
-/* --- SYNTAX HIGHLIGHTING (CHROMA) OVERRIDES --- */
-/* These ensure key elements like YAML keys are readable in both modes */
-
-/* YAML Keys / JSON Properties */
-.highlight .nt { font-weight: 600; color: #0550ae; }
-.dark .highlight .nt { color: #79c0ff; }
-
-/* Strings */
-.highlight .s2, .highlight .s { color: #0a3069; }
-.dark .highlight .s2, .dark .highlight .s { color: #a5d6ff; }
-
-/* Comments */
-.highlight .c1 { color: #6e7781; font-style: italic; }
-.dark .highlight .c1 { color: #8b949e; }
-
-/* Keywords */
-.highlight .k { color: #cf222e; font-weight: 600; }
-.dark .highlight .k { color: #ff7b72; }
