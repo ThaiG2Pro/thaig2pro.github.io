@@ -9,7 +9,7 @@ author: "Hoang Nguyen Thai"
 showToc: true
 TocOpen: true
 cover:
-    image: "images/posts/hugo-papermod-guide-for-beginners/cover.jpg"
+    image: "/images/posts/hugo-papermod-guide-for-beginners/architecture-diagram.png"
     alt: "Hugo and PaperMod blog system architecture"
 ---
 

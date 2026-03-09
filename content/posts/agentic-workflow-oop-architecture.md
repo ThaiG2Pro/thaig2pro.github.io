@@ -1,123 +1,110 @@
 ---
-title: "Kiến trúc Agentic Workflow: Sức mạnh của OOP trong việc điều phối AI Agent"
+title: "Phân tích Kiến trúc Agentic Workflow qua lăng kính OOP: Case Study loop.py"
 date: 2026-03-06T14:00:00+07:00
 draft: false
-description: "Phân tích cách 4 tính chất OOP (Encapsulation, Abstraction, Composition, Polymorphism) được áp dụng để xây dựng hệ thống điều phối vòng lặp ReAct bền bỉ cho AI Agent."
-tags: ["AIAgent", "Python", "SoftwareArchitecture", "OOP", "LLMs", "CleanCode"]
+description: "Phân tích thực tế cách Encapsulation, Abstraction, Composition và Polymorphism được áp dụng để xây dựng hệ thống điều phối ReAct bền bỉ cho AI Agent."
+tags: ["AIAgent", "Python", "SoftwareArchitecture", "OOP", "CleanCode"]
 categories: ["Kiến trúc hệ thống"]
 author: "Hoang Nguyen Thai"
 showToc: true
 TocOpen: true
 cover:
-    image: "images/posts/agentic-workflow-oop-architecture/cover.jpg"
-    alt: "Kiến trúc Agentic Workflow qua lăng kính OOP"
+    image: "images/posts/agentic-workflow-oop-architecture/loop-oop.png"
+    alt: "Kiến trúc Agentic Workflow trong mã nguồn thực tế"
 ---
 
-## Tư duy hướng đối tượng trong điều phối AI Agent
+Tháng trước, khi bắt tay vào xây dựng hệ thống AI Agent, tôi bắt đầu bằng một file script đơn giản dài khoảng 200 dòng. Mọi thứ hoạt động hoàn hảo cho đến khi tôi thêm công cụ (Tool) thứ 5 và bắt đầu xử lý các tác vụ bất đồng bộ. Code trở thành một mớ bòng bong (Spaghetti code) không thể debug.
 
-Trong việc xây dựng các hệ thống AI Agent phức tạp, tệp tin `loop.py` – nơi chứa vòng lặp điều phối ReAct (Reasoning and Acting) – được coi là "trái tim" của toàn bộ kiến trúc. Việc chỉ viết các kịch bản (scripts) đơn lẻ sẽ nhanh chóng bộc lộ những hạn chế về khả năng bảo trì và mở rộng. 
-
-Thay vào đó, việc áp dụng 4 tính chất kinh điển của lập trình hướng đối tượng (OOP) giúp chúng ta đóng gói một "Agent Loop" thực thụ, đảm bảo tính bền bỉ và linh hoạt cho hệ thống.
+Đó là lúc tôi nhận ra: Xây dựng AI Agent không phải là bài toán viết Prompt hay gọi API mô hình ngôn ngữ. Nó là bài toán về **Kỹ thuật Phần mềm (Software Engineering)**. Tệp tin `loop.py` mà tôi thiết kế lại sau đó chính là minh chứng cho việc áp dụng 4 nguyên lý OOP kinh điển để kiểm soát sự phức tạp của vòng lặp ReAct (Reasoning and Acting).
 
 ---
 
-## 1. Tính Đóng Gói (Encapsulation)
+## 1. Tính Đóng Gói (Encapsulation): Tránh "đầu độc" Context
 
-Lớp `AgentLoop` đóng vai trò che giấu các chi tiết thực thi phức tạp bên trong. Người dùng hệ thống hoặc các module khác không cần can thiệp vào cách thức tin nhắn được xử lý hay cách LLM được gọi.
+Trong kiến trúc của tôi, lớp `AgentLoop` hoạt động như một máy trạng thái (State machine) khép kín. Việc đóng gói không chỉ để code trông "sạch" hơn, mà để giải quyết một lỗi chí mạng: **Context poisoning**. Khi LLM trả về một phản hồi lỗi (ví dụ: HTTP 400), nếu không được cách ly, lỗi này sẽ bị ghi vào lịch sử hội thoại, khiến Agent kẹt vĩnh viễn trong một vòng lặp lỗi.
 
-- **Thực thi:** Các logic nhạy cảm như `_process_message` hay `_run_agent_loop` được định nghĩa dưới dạng phương thức private.
-- **Lợi ích:** Đảm bảo tính toàn vẹn của dữ liệu và luồng thực thi. Người dùng chỉ tương tác qua bộ giao diện (API) sạch sẽ như `run()`, `stop()`, hoặc `process_direct()`.
+- **Thực thi:** Tôi khóa chặt các logic nhạy cảm như `_run_agent_loop` hay `_process_message` thành phương thức private. Trạng thái `self._running` và `self._processing_lock` đảm bảo Agent không bao giờ xử lý chồng chéo tin nhắn.
 
-**Minh họa cấu trúc lớp:**
 ```python
 class AgentLoop:
-    def __init__(self, agent_id: str):
-        self.__state = "IDLE" # Private state
+    def __init__(self, ...):
+        self._running = False
+        self._processing_lock = asyncio.Lock()
 
-    def run(self):
-        self.__state = "RUNNING"
-        self._run_agent_loop() # Internal execution
-
-    def _run_agent_loop(self):
-        # Logic phức tạp nằm ở đây
-        pass
+    async def run(self) -> None:
+        """EntryPoint duy nhất để hệ thống bên ngoài tương tác"""
+        async with self._processing_lock:
+            self._running = True
+            await self._run_agent_loop()
 ```
 
 ---
 
-## 2. Tính Trừu Tượng (Abstraction)
+## 2. Tính Trừu Tượng (Abstraction): Chống "Vendor Lock-in"
 
-Một AI Agent chuyên nghiệp không nên phụ thuộc trực tiếp vào một mô hình ngôn ngữ cụ thể nào (GPT-4, Claude 3.5, hay Local LLM). Nó chỉ nên tương tác với một giao diện trừu tượng là `LLMProvider`.
+Khi OpenAI gặp sự cố diện rộng, tôi cần chuyển sang hệ thống Claude của Anthropic ngay lập tức. Nếu gọi trực tiếp API của OpenAI trong vòng lặp, toàn bộ hệ thống sẽ tê liệt.
 
-- **Thực thi:** Agent gửi tin nhắn và nhận phản hồi thông qua giao diện chung. Việc gọi API cụ thể, xử lý lỗi mạng hay chuyển đổi định dạng dữ liệu là trách nhiệm của lớp kế thừa Provider.
-- **Lợi ích:** Dễ dàng thay đổi mô hình ngôn ngữ hoặc hạ tầng backend mà không phải sửa đổi logic cốt lõi của Agent.
+- **Giải pháp:** `AgentLoop` chỉ giao tiếp với một Interface trừu tượng là `LLMProvider`.
+- **Thực thi:** Tại thời điểm chạy, `self.provider` có thể là bất kỳ mô hình nào. `AgentLoop` không cần biết việc chuẩn bị Payload cho GPT-4 khác với Claude 3.5 ra sao.
 
----
-
-## 3. Tính Hợp Thành (Composition)
-
-Thay vì tạo ra một lớp "vạn năng" chứa đựng mọi tính năng, kiến trúc hiện đại ưu tiên việc lắp ghép các module chuyên biệt vào trong `AgentLoop`. Lúc này, Agent đóng vai trò là nhạc trưởng điều phối:
-
-- **ToolRegistry:** Quản lý danh sách các công cụ và kỹ năng mà Agent có thể sử dụng.
-- **SessionManager:** Quản lý trạng thái, lịch sử hội thoại và bộ nhớ đệm (Cache).
-- **ContextBuilder:** Xây dựng Prompt và cấu trúc ngữ cảnh tối ưu trước khi gửi cho LLM.
-
-**Minh họa cấu trúc Hợp thành:**
 ```python
-class AgentLoop:
-    def __init__(self):
-        self.tools = ToolRegistry()
-        self.session = SessionManager()
-        self.context = ContextBuilder()
+# Gọi LLM thông qua interface chung, miễn nhiễm với sự thay đổi của Vendor
+response = await self.provider.chat(
+    messages=messages,
+    tools=self.tools.get_definitions(),
+    model=self.model,
+)
 ```
 
 ---
 
-## 4. Tính Đa Hình (Polymorphism)
+## 3. Tính Hợp Thành (Composition): Giải quyết "Diamond Problem"
 
-Đây là mấu chốt để hệ thống có khả năng mở rộng (Scalability). Agent thực hiện lệnh gọi chung một phương thức `.execute()` trên mọi công cụ (Tool).
+**Điều tôi đã thử và thất bại:** Ban đầu, tôi dùng tính Kế thừa (Inheritance) để tạo ra `CoderAgent` kế thừa từ `BaseAgent`. Nhưng khi cần một Agent vừa biết code vừa biết tìm kiếm (Researcher), kiến trúc phả hệ vỡ vụn vì vấn đề đa kế thừa (Diamond problem).
 
-- **Thực thi:** Tuy cùng một lời gọi hàm, nhưng `ReadFileTool` sẽ thực hiện thao tác trên ổ cứng, trong khi `WebSearchTool` sẽ gọi API bên thứ ba.
-- **Lợi ích:** Hệ thống có thể dễ dàng "cắm" thêm các công cụ mới (như MCP server) mà không cần can thiệp vào mã nguồn lõi của Agent Loop.
+- **Giải pháp:** Chuyển sang tính Hợp thành (Composition - "Has-a"). Tôi thiết kế `AgentLoop` như một nhạc trưởng, không tự làm gì cả mà chỉ điều phối các module chuyên biệt.
+- **Cấu trúc:** 
+    - `self.context = ContextBuilder()`: Xử lý build prompt.
+    - `self.sessions = SessionManager()`: Quản lý bộ nhớ.
+    - `self.tools = ToolRegistry()`: Quản lý kỹ năng.
 
----
-
-## Sơ đồ kiến trúc (Mermaid Diagram)
-
-Dưới đây là sơ đồ lớp minh họa sự phối hợp giữa các thành phần trong hệ thống:
-
-```mermaid
-classDiagram
-    class AgentLoop {
-        +run()
-        +stop()
-        -process_message()
-        -run_agent_loop()
-    }
-    class LLMProvider {
-        <<interface>>
-        +generate_response()
-    }
-    class Tool {
-        <<interface>>
-        +execute()
-    }
-    class ToolRegistry {
-        +register_tool()
-        +get_tool()
-    }
-
-    AgentLoop *-- ToolRegistry : Composition
-    AgentLoop *-- LLMProvider : Abstraction
-    ToolRegistry o-- Tool : Polymorphism
-    Tool <|-- ReadFileTool
-    Tool <|-- WebSearchTool
+```python
+def __init__(self, ...):
+    # AgentLoop không tự quản lý bộ nhớ hay tool, nó sở hữu các module thực hiện việc đó
+    self.context = ContextBuilder(workspace)   
+    self.sessions = SessionManager(workspace)   
+    self.tools = ToolRegistry()                 
 ```
 
-## Kết luận
+---
 
-Hiệu năng của một AI Agent không chỉ nằm ở sức mạnh của mô hình ngôn ngữ hay Prompt Engineering. Nó nằm ở **hệ thống điều phối bền bỉ** được xây dựng trên những nguyên lý kỹ thuật phần mềm vững chắc. Việc áp dụng OOP vào Agentic Workflow chính là chìa khóa để đưa các dự án AI từ mức độ thử nghiệm lên quy mô sản xuất thực tế.
+## 4. Tính Đa Hình (Polymorphism): Plug-and-Play Architecture
+
+Làm sao để Agent biết cách gọi một công cụ tìm kiếm web so với một công cụ đọc file local, khi mà bản chất hai hành động này hoàn toàn khác nhau? Câu trả lời là Đa hình.
+
+- **Thực thi:** Mọi công cụ (từ `ReadFileTool` đến `WebSearchTool`) đều tuân thủ chung một interface có hàm `execute()`.
+- **Lợi ích:** Trong vòng lặp ReAct, đoạn code thực thi công cụ luôn cố định. Khi cần cắm thêm giao thức mới như MCP (Model Context Protocol), tôi không phải sửa dù chỉ một dòng code bên trong `loop.py`.
+
+```python
+# Một lời gọi duy nhất, nhưng hành vi thực thi biến hóa theo từng Tool cụ thể
+for tool_call in response.tool_calls:
+    result = await self.tools.execute(tool_call.name, tool_call.arguments)
+    messages = self.context.add_tool_result(messages, tool_call.id, tool_call.name, result)
+```
 
 ---
 
-**Bạn đánh giá thế nào về việc áp dụng kiến trúc phần mềm truyền thống vào AI? Hãy chia sẻ ý kiến của mình nhé.**
+## Sơ đồ kiến trúc tối giản
+
+Sơ đồ dưới đây minh họa sự phối hợp nhịp nhàng của 4 tính chất OOP để tạo nên một bộ điều phối hoàn chỉnh:
+
+![Kiến trúc Agentic Workflow](/images/posts/agentic-workflow-oop-architecture/loop-oop.png)
+*Hình 1: Kiến trúc điều phối của AgentLoop.*
+
+---
+
+## Đúc kết
+
+Sự khác biệt giữa một bản "demo chạy cho vui" và một hệ thống AI dùng trong Production không nằm ở việc bạn viết Prompt khéo đến đâu. Nó nằm ở việc bạn tổ chức kiến trúc phần mềm như thế nào. 
+
+Bài học tôi rút ra sau khi đập đi xây lại `loop.py`: **Mô hình ngôn ngữ (LLM) là bộ não, nhưng nếu không có một khung xương (Architecture) vững chắc, bộ não đó cũng không thể nâng đỡ được một cơ thể hoạt động bền bỉ.**
