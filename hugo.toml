@@ -51,8 +51,8 @@ defaultContentLanguage = 'vi'
     
     [[params.socialIcons]]
         name = "facebook"
-        url = "https://facebook.com/your-profile"
+        url = "https://www.facebook.com/thailovedata"
     
     [[params.socialIcons]]
         name = "linkedin"
-        url = "https://linkedin.com/in/your-profile"
+        url = "https://www.linkedin.com/in/thai-love-data/"
