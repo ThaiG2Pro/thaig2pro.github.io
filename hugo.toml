@@ -1,0 +1,14 @@
+baseURL = 'https://thaig2pro.github.io/' # Thay username của bạn vào
+languageCode = 'vi'
+title = 'Blog của Tôi'
+theme = 'PaperMod'
+
+[params]
+    author = "Hoang Nguyen Thai"
+    defaultTheme = "auto" # Tự động đổi Dark/Light mode theo hệ thống
+    showCodeCopyButtons = true
+    displayFullContent = false
+    ShowReadingTime = true
+    ShowShareButtons = true
+    ShowBreadCrumbs = true
+    ShowToc = true # Hiện mục lục bài viết
