@@ -1,14 +1,38 @@
-baseURL = 'https://thaig2pro.github.io/' # Thay username của bạn vào
-languageCode = 'vi'
+baseURL = 'https://thaig2pro.github.io/'
 title = 'Blog của Tôi'
 theme = 'PaperMod'
 
+# Multilingual configuration
+defaultContentLanguage = 'vi'
+
+[languages.vi]
+    languageName = 'Tiếng Việt'
+    contentDir = 'content'
+    weight = 1
+    title = 'Blog của Tôi'
+    [languages.vi.params]
+        description = 'Chia sẻ kiến thức lập trình và cuộc sống.'
+        [languages.vi.params.homeInfoParams]
+            Title = "Chào mừng 👋"
+            Content = "Blog hướng dẫn Hugo, PaperMod và công nghệ."
+
+[languages.en]
+    languageName = 'English'
+    contentDir = 'content' # PaperMod works best with shared contentDir but different file extensions
+    weight = 2
+    title = 'My Blog'
+    [languages.en.params]
+        description = 'Sharing coding knowledge and life experiences.'
+        [languages.en.params.homeInfoParams]
+            Title = "Welcome 👋"
+            Content = "A blog about Hugo, PaperMod, and tech."
+
 [params]
     author = "Hoang Nguyen Thai"
-    defaultTheme = "auto" # Tự động đổi Dark/Light mode theo hệ thống
+    defaultTheme = "auto"
     showCodeCopyButtons = true
     displayFullContent = false
     ShowReadingTime = true
     ShowShareButtons = true
     ShowBreadCrumbs = true
-    ShowToc = true # Hiện mục lục bài viết
+    ShowToc = true

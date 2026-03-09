@@ -1,0 +1,31 @@
+# Hugo default output directory (the "cooked" web files)
+public/
+resources/
+_vendor/
+
+# Obsidian
+.obsidian/
+
+# Hugo resources directory (cache for SASS/SCSS, image processing)
+resources/_gen/
+
+# Executable lock file
+.hugo_build.lock
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+core
+*.tmp
+
+# Editor-specific files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Environment variables (secrets)
+.env
+
+.gemini/
+skills/
