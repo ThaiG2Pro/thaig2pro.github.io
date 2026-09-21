@@ -9,7 +9,7 @@ author: "Hoang Nguyen Thai"
 showToc: true
 TocOpen: true
 cover:
-    image: "images/posts/agentic-workflow-oop-architecture/loop-oop.png"
+    image: "/images/posts/agentic-workflow-oop-architecture/loop-oop.png"
     alt: "Kiến trúc Agentic Workflow trong mã nguồn thực tế"
 ---
 

@@ -29,3 +29,11 @@ core
 
 .gemini/
 skills/
+drafts/
+career/
+bench/**/raw/
+
+# Bộ skill dây chuyền content — ghi đè global ignore của .claude
+!.claude/
+!.claude/skills/
+!.claude/skills/**

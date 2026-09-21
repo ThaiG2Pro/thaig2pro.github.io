@@ -1,14 +1,17 @@
-+++
-title = 'Async Agent Loop: Đảm bảo khả năng kiểm soát và phản hồi thời gian thực cho AI Agent'
-date = 2024-03-10T00:00:00+07:00
-draft = false
-description = 'Phân tích kiến trúc xử lý không đồng bộ (asynchronous) để giữ cho AI Agent luôn nhạy bén và có khả năng kiểm soát cao trong môi trường production.'
-tags = ['Python', 'Asyncio', 'AI Agent', 'Software Architecture']
-categories = ['Engineering']
-author = 'Hoang Nguyen Thai'
-showToc = true
-TocOpen = false
-+++
+---
+title: "Async Agent Loop: Đảm bảo khả năng kiểm soát và phản hồi thời gian thực cho AI Agent"
+date: 2026-03-12T10:00:00+07:00
+draft: false
+description: "Phân tích kiến trúc xử lý không đồng bộ (asynchronous) để giữ cho AI Agent luôn nhạy bén và có khả năng kiểm soát cao trong môi trường production."
+tags: ["Python", "Asyncio", "AIAgent", "SoftwareArchitecture"]
+categories: ["Kiến trúc hệ thống"]
+author: "Hoang Nguyen Thai"
+showToc: true
+TocOpen: true
+cover:
+    image: "/images/posts/async-agent-loop-engineering/architecture-overview.png"
+    alt: "Kiến trúc Async Agent Loop"
+---
 
 Trong kiến trúc của một AI Agent, "Loop" chính là bộ não điều hành. Tuy nhiên, một sai lầm phổ biến là thiết kế Loop theo dạng tuần tự (synchronous). Nếu Agent đang thực hiện một task nặng (như crawl web hoặc chạy một script dài), nó sẽ hoàn toàn "mù điếc" trước các lệnh mới của người dùng cho đến khi task đó xong.
 

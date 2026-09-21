@@ -9,7 +9,7 @@ author: "Hoang Nguyen Thai"
 showToc: true
 TocOpen: true
 cover:
-    image: "images/posts/uuidv7-performance-and-standardization/uuidv7.png"
+    image: "/images/posts/uuidv7-performance-and-standardization/uuidv7.png"
     alt: "UUIDv7 Structure and B-Tree Performance"
 ---
 

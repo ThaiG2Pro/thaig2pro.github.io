@@ -35,6 +35,12 @@ defaultContentLanguage = 'vi'
         url = "/search/"
         weight = 30
 
+    [[languages.vi.menu.main]]
+        identifier = "about"
+        name = "Giới thiệu"
+        url = "/about/"
+        weight = 40
+
 [languages.en]
     languageName = 'English'
     contentDir = 'content'
@@ -61,6 +67,12 @@ defaultContentLanguage = 'vi'
         name = "Search"
         url = "/en/search/" # Point to English search page
         weight = 30
+
+    [[languages.en.menu.main]]
+        identifier = "about"
+        name = "About"
+        url = "/en/about/"
+        weight = 40
 
 [markup]
   [markup.highlight]

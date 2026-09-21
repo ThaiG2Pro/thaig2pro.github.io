@@ -1,0 +1,428 @@
+{
+  "version": 1,
+  "cadence": {
+    "posts_per_month": 2,
+    "min_deep_per_month": 1
+  },
+  "behavioral_coverage": {
+    "that-bai": "1184-test-xanh-bug-van-len-staging",
+    "mau-thuan": null,
+    "deadline": null,
+    "tu-hoc": "lock-bi-danh-roi-khi-refactor",
+    "quyet-dinh-kho": "feature-flag-nhu-release-gate"
+  },
+  "items": [
+    {
+      "slug": "async-agent-loop-engineering",
+      "title": "Async Agent Loop",
+      "created": "2026-09-21",
+      "genre": "C",
+      "stage": "needs-assets",
+      "lang_primary": "vi",
+      "evidence": {
+        "numbers": null,
+        "method": null,
+        "repro": null
+      },
+      "blocked_on": "thiếu architecture-overview.png, streaming-feedback.png; chưa có bản EN",
+      "next_action": "Tạo 3 ảnh trong static/images/posts/async-agent-loop-engineering/ rồi viết bản .en.md",
+      "paths": {
+        "post": "content/posts/async-agent-loop-engineering.md"
+      },
+      "history": [
+        {
+          "date": "2026-09-21",
+          "event": "seed từ bài đã publish"
+        }
+      ]
+    },
+    {
+      "slug": "uuidv7-performance-and-standardization",
+      "title": "UUIDv7 & B-Tree",
+      "created": "2026-09-21",
+      "genre": "C",
+      "stage": "published",
+      "lang_primary": "vi",
+      "evidence": {
+        "numbers": null,
+        "method": null,
+        "repro": null
+      },
+      "blocked_on": "số 30-40% chưa truy được nguồn đo",
+      "next_action": "Cắt dẫn xuất; cân nhắc nâng lên thể loại B bằng benchmark tự chạy (~1 buổi tối)",
+      "paths": {
+        "post": "content/posts/uuidv7-performance-and-standardization.md",
+        "post_alt": "content/posts/uuidv7-performance-and-standardization.en.md"
+      },
+      "history": [
+        {
+          "date": "2026-09-21",
+          "event": "seed từ bài đã publish"
+        }
+      ]
+    },
+    {
+      "slug": "agentic-workflow-oop-architecture",
+      "title": "Agentic Workflow qua OOP",
+      "created": "2026-09-21",
+      "genre": "C",
+      "stage": "published",
+      "lang_primary": "vi",
+      "evidence": {
+        "numbers": null,
+        "method": null,
+        "repro": null
+      },
+      "blocked_on": null,
+      "next_action": "Cắt dẫn xuất (kịch bản video + post social)",
+      "paths": {
+        "post": "content/posts/agentic-workflow-oop-architecture.md",
+        "post_alt": "content/posts/agentic-workflow-oop-architecture.en.md"
+      },
+      "history": [
+        {
+          "date": "2026-09-21",
+          "event": "seed từ bài đã publish"
+        }
+      ]
+    },
+    {
+      "slug": "hugo-papermod-guide-for-beginners",
+      "title": "Hugo + PaperMod",
+      "created": "2026-09-21",
+      "genre": "C",
+      "stage": "published",
+      "lang_primary": "vi",
+      "evidence": {
+        "numbers": null,
+        "method": null,
+        "repro": null
+      },
+      "blocked_on": null,
+      "next_action": "Cắt dẫn xuất (kịch bản video)",
+      "paths": {
+        "post": "content/posts/hugo-papermod-guide-for-beginners.md",
+        "post_alt": "content/posts/hugo-papermod-guide-for-beginners.en.md"
+      },
+      "history": [
+        {
+          "date": "2026-09-21",
+          "event": "seed từ bài đã publish"
+        }
+      ]
+    },
+    {
+      "slug": "cong-thuc-tru-hai-lan",
+      "title": "Công thức trong ticket trừ hai lần",
+      "created": "2026-09-21",
+      "genre": "A",
+      "stage": "ready",
+      "lang_primary": "en",
+      "evidence": {
+        "numbers": "80 (đọc nghĩa đen) vs 90 (đúng) trên bộ số 200 / Σphân bổ 110 / Σđã bán 10; sai số 10 = Σ đã bán",
+        "method": "kiểm đại số 2 cách đọc công thức trên 1 SKU × 3 chương trình",
+        "repro": "bảng số trong bài — SKU-A, tổng nhập 200, 3 chương trình 10/1, 88/9, 12/0; không cần dữ liệu thật"
+      },
+      "blocked_on": null,
+      "next_action": "Viết bài A/EN. Bộ số minh họa đã khử định danh xong, đăng công khai được. ~1 buổi (4-5 giờ)",
+      "paths": {},
+      "history": [
+        {
+          "date": "2026-09-21",
+          "event": "capture từ dự án công việc"
+        },
+        {
+          "date": "2026-09-21",
+          "event": "triage: A nhưng chặn ở cổng repro"
+        },
+        {
+          "date": "2026-09-21",
+          "event": "gỡ chặn: bộ số đã có sẵn trong proposal.md:48 và vốn không chứa định danh — dựng bảng đại số 2 cách đọc, không cần 2 giờ"
+        }
+      ]
+    },
+    {
+      "slug": "pool-dung-chung-moi-where-la-quyet-dinh",
+      "title": "Pool dùng chung: mọi WHERE là quyết định kinh doanh",
+      "created": "2026-09-21",
+      "genre": "A",
+      "stage": "ready",
+      "lang_primary": "en",
+      "evidence": {
+        "numbers": "90 → 85 khi thêm 1 mệnh đề WHERE vào aggregate",
+        "method": "test assert chuỗi SQL sinh ra; đối chiếu 2 biến thể query",
+        "repro": "bench/pool-dung-chung/ — schema tối giản 3 bảng + 2 biến thể aggregate"
+      },
+      "blocked_on": null,
+      "next_action": "Viết bài A/EN. Kèm repro tối giản: 3 bảng + 2 biến thể aggregate cho ra 90 và 85. ~1 buổi (4-5 giờ)",
+      "paths": {},
+      "history": [
+        {
+          "date": "2026-09-21",
+          "event": "capture từ dự án công việc"
+        },
+        {
+          "date": "2026-09-21",
+          "event": "triage: A/EN, ready"
+        }
+      ]
+    },
+    {
+      "slug": "quota-ma-thieu-foreign-key",
+      "title": "Quota ma: thiếu foreign key",
+      "created": "2026-09-21",
+      "genre": "A",
+      "stage": "ready",
+      "lang_primary": "en",
+      "evidence": {
+        "numbers": "14 dòng orphan = 294 đơn vị bị khoá trên DB dev; net delta +348 đơn vị (294 phantom + 54 clamp âm) trên 54 SKU, ~0.018%; production chưa đo",
+        "method": "query pre-check V7 — LEFT JOIN 2 cấp, đếm dòng có cha NULL hoặc cha đã xoá mềm",
+        "repro": "query V7 dán nguyên trong bài + seed 1 dòng orphan trong test migration"
+      },
+      "blocked_on": null,
+      "next_action": "Viết bài A/EN với số từ DB dev, nói rõ production chưa chạy — luận điểm là cơ chế (thiếu FK biến nợ kỹ thuật thành trần bán bị hạ), không phụ thuộc quy mô. ~1 buổi",
+      "paths": {},
+      "history": [
+        {
+          "date": "2026-09-21",
+          "event": "capture từ dự án công việc"
+        },
+        {
+          "date": "2026-09-21",
+          "event": "triage: A nhưng chặn ở cổng số"
+        },
+        {
+          "date": "2026-09-21",
+          "event": "gỡ chặn: số DB dev + query V7 đã đủ qua cổng đo; 'production chưa đo được' là một phần của bài, không phải thiếu sót"
+        }
+      ]
+    },
+    {
+      "slug": "lock-bi-danh-roi-khi-refactor",
+      "title": "Lock bị đánh rơi khi refactor",
+      "created": "2026-09-21",
+      "genre": "A",
+      "stage": "done",
+      "lang_primary": "en",
+      "evidence": {
+        "numbers": "0 → 4 test đồng thời trên 3 đường ghi; suite 1101 → 1184 passed",
+        "method": "TDD pha red; trait swap SQLiteGrammar::compileLock() để lộ FOR UPDATE bị sqlite nuốt",
+        "repro": "bench/lock-bi-danh-roi-khi-refactor/ — chạy thật trên Laravel 12 / PHP 8.2, khớp kịch bản README"
+      },
+      "blocked_on": null,
+      "next_action": null,
+      "paths": {
+        "post": "content/posts/lock-bi-danh-roi-khi-refactor.en.md",
+        "post_alt": "content/posts/lock-bi-danh-roi-khi-refactor.md",
+        "bench": "bench/lock-bi-danh-roi-khi-refactor/",
+        "cover": "static/images/posts/lock-bi-danh-roi-khi-refactor/cover.png",
+        "career": "career/lock-bi-danh-roi-khi-refactor.md",
+        "social": "drafts/social-lock-bi-danh-roi-khi-refactor.md"
+      },
+      "history": [
+        {
+          "date": "2026-09-21",
+          "event": "capture từ dự án công việc"
+        },
+        {
+          "date": "2026-09-21",
+          "event": "triage: A/EN, ready — mạnh nhất lô này"
+        },
+        {
+          "date": "2026-09-21",
+          "event": "content-write: bản EN 1063 từ + bản VI 791 từ; dựng bench/lock-bi-danh-roi-khi-refactor/; hugo build sạch; chặn ở cover.png"
+        },
+        {
+          "date": "2026-09-21",
+          "event": "cover.png xong; checklist đạt 6/7; còn lại: bench chưa verify"
+        },
+        {
+          "date": "2026-09-21",
+          "event": "cover.png xong; chạy bench bằng Docker lần đầu: thất bại, phát hiện 2 lỗi mới"
+        },
+        {
+          "date": "2026-09-21",
+          "event": "bench XANH đúng kịch bản trên Laravel 12; thêm NaiveConcurrencyTest"
+        },
+        {
+          "date": "2026-09-21",
+          "event": "checklist 7/7, published"
+        },
+        {
+          "date": "2026-09-21",
+          "event": "content-derive: thẻ CV/STAR + post social; không làm video (thể loại A)"
+        }
+      ]
+    },
+    {
+      "slug": "derived-table-trong-vong-lap-export",
+      "title": "Derived table trong vòng lặp export",
+      "created": "2026-09-21",
+      "genre": "B",
+      "stage": "needs-measure",
+      "lang_primary": "en",
+      "evidence": {
+        "numbers": "4 → 2 query; N lần materialize → ≤1 lần. Chưa có wall-clock theo quy mô",
+        "method": "đếm query + EXPLAIN trên MariaDB thật (5.03ms) — chưa có phép đo lặp lại",
+        "repro": null
+      },
+      "blocked_on": "thiếu script bench: chưa đo được ngưỡng row-count mà bản 2 pha thắng (sqlite :memory: cho kết quả ngược)",
+      "next_action": "needs-measure: dựng bench/derived-table-trong-vong-lap-export/ trên MariaDB thật — seed 10k/100k/1M dòng, đo wall-clock + query count cho 2 biến thể, 3 lần chạy mỗi mức, dựng biểu đồ ngưỡng giao nhau. ~1 buổi tối (3-4 giờ)",
+      "paths": {},
+      "history": [
+        {
+          "date": "2026-09-21",
+          "event": "capture từ dự án công việc"
+        },
+        {
+          "date": "2026-09-21",
+          "event": "triage: chuyển C→B — đây là phép đo tự dựng, không phải case study"
+        }
+      ]
+    },
+    {
+      "slug": "selector-jquery-lot-len-staging",
+      "title": "Selector jQuery trỏ nhầm vùng tab + lỗi 422 bị nuốt",
+      "created": "2026-09-21",
+      "genre": "A",
+      "stage": "ready",
+      "lang_primary": "en",
+      "evidence": {
+        "numbers": "100% thao tác Tăng fail 422 trên STG; 0 thông báo lỗi hiển thị cho user",
+        "method": "QC thủ công trên STG + đọc DOM: selector match 0 phần tử",
+        "repro": "bench/selector-jquery/ — 1 trang HTML tĩnh: tab ul + tab-content, selector sai vs đúng"
+      },
+      "blocked_on": null,
+      "next_action": "Viết bài A/EN, ngắn. Trọng tâm là phần 2 (lỗi validation gắn vào input ẩn → fallback alert chung), không phải selector. ~3 giờ",
+      "paths": {},
+      "history": [
+        {
+          "date": "2026-09-21",
+          "event": "capture từ dự án công việc"
+        },
+        {
+          "date": "2026-09-21",
+          "event": "tách khỏi mục gốc: phần kỹ thuật"
+        },
+        {
+          "date": "2026-09-21",
+          "event": "triage: A/EN, ready — bài ngắn"
+        }
+      ]
+    },
+    {
+      "slug": "feature-flag-nhu-release-gate",
+      "title": "Feature flag như release gate liên team",
+      "created": "2026-09-21",
+      "genre": "D",
+      "stage": "ready",
+      "lang_primary": "vi",
+      "evidence": {
+        "numbers": "không có số — thể loại D không cần",
+        "method": "mốc 2026-09-08; vai trò: người quyết định ship; quyết định: ship đủ code + migration, flag mặc định false, điều kiện bật flag viết thành thứ tự deploy bắt buộc cho team kia",
+        "repro": null
+      },
+      "blocked_on": null,
+      "next_action": "Viết bài D/VI — lấp ô behavioral quyet-dinh-kho. Đủ 3 điều kiện D (mốc thời gian, vai trò, quyết định). ~3 giờ",
+      "paths": {},
+      "history": [
+        {
+          "date": "2026-09-21",
+          "event": "capture từ dự án công việc"
+        },
+        {
+          "date": "2026-09-21",
+          "event": "triage: D/VI, ready — không chờ số nữa, D không cần số"
+        }
+      ]
+    },
+    {
+      "slug": "bug-import-tra-nham-bang",
+      "title": "Import tra nhầm bảng vì id hai bảng trùng nhau",
+      "created": "2026-09-21",
+      "genre": "A",
+      "stage": "ready",
+      "lang_primary": "en",
+      "evidence": {
+        "numbers": "0 test bắt được → 1 regression test cross-campaign",
+        "method": "audit handler khi thêm AC resolve cặp (SKU × Campaign)",
+        "repro": "bench/bug-import-tra-nham-bang/ — 2 bảng auto-increment id trùng nhau, 1 test pass sai + 1 test bắt đúng"
+      },
+      "blocked_on": null,
+      "next_action": "Viết bài A/EN. Repro dựng được hoàn toàn ngoài repo công ty (2 bảng id trùng). ~4 giờ",
+      "paths": {},
+      "history": [
+        {
+          "date": "2026-09-21",
+          "event": "capture từ dự án công việc"
+        },
+        {
+          "date": "2026-09-21",
+          "event": "triage: A/EN, ready — evidence là hệ thống thật + fix, không phải trải nghiệm không số nên vào A chứ không phải D"
+        }
+      ]
+    },
+    {
+      "slug": "1184-test-xanh-bug-van-len-staging",
+      "title": "1184 test xanh mà bug vẫn lên staging",
+      "created": "2026-09-21",
+      "genre": "D",
+      "stage": "ready",
+      "lang_primary": "vi",
+      "evidence": {
+        "numbers": "1184 passed / 15 skipped; 69 TC QA thiết kế, 0 chạy; coverage không đo được",
+        "method": "mốc 2026-09-17; vai trò: người viết suite và người nhận bug từ STG; quyết định: nhận khoảng trống server-test vs E2E thay vì thêm test server",
+        "repro": null
+      },
+      "blocked_on": null,
+      "next_action": "Viết bài D/VI — lấp ô behavioral that-bai. ~3 giờ",
+      "paths": {
+        "post": "content/posts/1184-test-xanh-bug-van-len-staging.md"
+      },
+      "history": [
+        {
+          "date": "2026-09-21",
+          "event": "capture từ dự án công việc"
+        },
+        {
+          "date": "2026-09-21",
+          "event": "tách khỏi selector-jquery-lot-len-staging: phần behavioral"
+        },
+        {
+          "date": "2026-09-21",
+          "event": "triage: D/VI, ready"
+        }
+      ]
+    }
+  ],
+  "log": [
+    {
+      "date": "2026-09-21",
+      "event": "khởi tạo dây chuyền, seed 4 bài đã publish"
+    },
+    {
+      "date": "2026-09-21",
+      "event": "capture 6 mục từ dự án công việc"
+    },
+    {
+      "date": "2026-09-21",
+      "event": "capture thêm 2 mục (import tra nhầm bảng, feature flag như release gate)"
+    },
+    {
+      "date": "2026-09-21",
+      "event": "tách selector-jquery thành 2 mục (A kỹ thuật / D behavioral); cong-thuc-tru-hai-lan chuyển sang cần dựng số minh họa"
+    },
+    {
+      "date": "2026-09-21",
+      "event": "content-triage 9 mục: 6 ready (4A/EN + 2D/VI), 3 needs-measure (2A thiếu số/repro, 1B thiếu bench); derived-table chuyển thể loại B; lấp 2 ô behavioral_coverage (that-bai, quyet-dinh-kho)"
+    },
+    {
+      "date": "2026-09-21",
+      "event": "content-write lock-bi-danh-roi-khi-refactor (A/EN): viết 2 bản + bench repro, còn thiếu cover.png"
+    },
+    {
+      "date": "2026-09-21",
+      "event": "gỡ chặn 2/3 mục needs-measure: cong-thuc-tru-hai-lan (bộ số vốn đã khử định danh) và quota-ma-thieu-foreign-key (số dev + query V7 đủ qua cổng đo) → ready. Còn derived-table chờ bench MariaDB thật"
+    }
+  ]
+}
