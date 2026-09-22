@@ -7,7 +7,7 @@
   <g font-size="26">
     <text x="80" y="150" fill="#a89984">order-service.js</text>
     <rect x="80" y="168" width="660" height="52" rx="6" fill="none" stroke="#665c54" stroke-width="1.5"/>
-    <text x="100" y="202" fill="#ebdbb2">Number(quota_total ?? 0)</text>
+    <text x="100" y="202" fill="#ebdbb2">quota = empty  -&gt;  0</text>
     <text x="760" y="202" fill="#fb4934" font-size="22">0 = out of stock</text>
   </g>
 
@@ -19,7 +19,7 @@
   <g font-size="26">
     <text x="80" y="336" fill="#a89984">storefront.js — same repo, other team</text>
     <rect x="80" y="354" width="660" height="52" rx="6" fill="none" stroke="#665c54" stroke-width="1.5"/>
-    <text x="100" y="388" fill="#ebdbb2">quota_total === null</text>
+    <text x="100" y="388" fill="#ebdbb2">quota = empty  -&gt;  unlimited</text>
     <text x="760" y="388" fill="#83a598" font-size="22">null = unlimited</text>
   </g>
 

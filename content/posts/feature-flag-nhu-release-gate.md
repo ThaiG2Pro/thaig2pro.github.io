@@ -22,10 +22,11 @@ là xong hay chưa xong?"
 
 ## Bối cảnh
 
-Đầu tháng 9 năm nay, tôi phụ trách phần chức năng cho một chế độ khuyến mãi mới trong
-một hệ thống bán hàng: mỗi sản phẩm trong chương trình được cấp một quota bán riêng, và
-hệ thống phải từ chối đơn khi quota đó hết. Tính năng có lịch ship định sẵn, phần việc
-của tôi nằm trong lịch đó.
+Đầu tháng 9 năm nay, tôi phụ trách phần chức năng cho một chế độ nguồn hàng thứ hai
+trong chương trình khuyến mãi của một hệ thống bán hàng. Chế độ đang chạy: mỗi sản phẩm
+muốn bán trong chương trình phải được cấp trước một quota cố định. Chế độ mới ngược lại:
+sản phẩm không có quota riêng, trần bán là tồn khả dụng của kho tổng ngay lúc đặt hàng.
+Tính năng có lịch ship định sẵn, phần việc của tôi nằm trong lịch đó.
 
 Việc của tôi giới hạn trong service quản lý quota — nơi tôi có toàn quyền sửa. Nhưng đơn
 hàng đi qua một service khác, do team khác giữ. Service đó phải đọc đúng giá trị quota
@@ -36,8 +37,8 @@ mới thì tính năng mới bán được hàng. Tôi không có quyền merge 
 Trước khi viết dòng code nào, tôi đọc code của service kia để xem nó đọc quota như thế
 nào. Hai chỗ trong cùng một repo đọc giá trị rỗng (`NULL`) theo hai nghĩa trái nhau:
 
-1. Chỗ kiểm tra đơn ép `NULL` thành số 0 — `Number(quota_total ?? 0)`. Rỗng nghĩa là
-   "hết hàng", đơn bị từ chối.
+1. Chỗ kiểm tra đơn ép quota rỗng thành số 0. Rỗng nghĩa là "hết hàng", đơn bị từ
+   chối.
 2. Chỗ hiển thị coi `NULL` là "không giới hạn". Trang bán hàng vẫn hiện sản phẩm còn
    mua được.
 
@@ -75,10 +76,16 @@ Làm ngược thứ tự thì ra lỗi ngược chiều. Bật sớm là từ ch
 bán vượt kho (oversell) 100%. Lý do: giữa hai bước, đơn theo kho chung không bị quota
 riêng chặn, cũng không bị kho đã giữ chặn.
 
-Một ví dụ bằng số giả định, để thấy vì sao thứ tự quan trọng. Giả sử kho chung còn 10
-đơn vị, và cả 10 đã được giữ cho một chương trình khác. Nới `NULL` trước khi rào: đơn
-theo kho chung đọc ra "không giới hạn" và bán được cả 10 đơn vị đó — hàng của chương
-trình kia. Rào trước rồi mới nới: cùng đơn ấy thấy kho chung còn 0 và bị từ chối đúng.
+Một ví dụ bằng số giả định, để thấy vì sao thứ tự quan trọng. Giả sử kho tổng có 10 đơn
+vị vật lý, và cả 10 đã được phân bổ cho một chương trình khác — nên phần kho chung còn
+bán được là 0. Nới `NULL` trước khi rào: đơn theo kho chung đọc ra "không giới hạn" và
+bán hết 10 đơn vị của chương trình kia. Rào trước rồi mới nới: cùng đơn ấy thấy kho
+chung bằng 0 và bị từ chối đúng.
+
+Flag tắt ở đây không phải chỉ là ẩn nút. Nó được kiểm ở hai tầng — giao diện và lớp
+nhận request lẫn import — nên gọi thẳng API khi flag tắt vẫn bị từ chối. Và điều kiện
+bật không chỉ là "team kia đã deploy": dữ liệu production phải qua các câu kiểm tra tiền
+điều kiện với kết quả 0 dòng lỗi.
 
 Flag ở đây không dùng để thử nghiệm dần. Nó là cách viết một phụ thuộc liên team thành
 thứ kiểm tra được: flag còn tắt nghĩa là điều kiện chưa đủ, và điều kiện nằm trong một
@@ -105,9 +112,8 @@ buộc trong review thiết kế liên team, chứ không phải thứ một ng�
 đọc code trước khi sửa.
 
 Tôi cũng sẽ đề xuất coi flag như một hợp đồng có hai bên ký từ ngày đầu, thay vì một
-mình tôi đặt điều kiện rồi chuyển sang cho team kia. Thứ tự deploy được thống nhất lúc
-thiết kế thì nằm trong backlog của cả hai bên ngay từ đầu, không phải một tài liệu bên
-này viết rồi chờ bên kia đọc.
+mình tôi đặt điều kiện rồi chuyển sang cho team kia. Thống nhất lúc thiết kế thì thứ tự
+deploy nằm trong backlog của cả hai bên ngay từ đầu.
 
 ---
 

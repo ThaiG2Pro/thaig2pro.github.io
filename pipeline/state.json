@@ -386,7 +386,7 @@
       "title": "Feature flag như release gate liên team",
       "created": "2026-09-21",
       "genre": "D",
-      "stage": "needs-audit",
+      "stage": "published",
       "lang_primary": "vi",
       "evidence": {
         "numbers": "không có số — thể loại D không cần",
@@ -394,7 +394,7 @@
         "repro": null
       },
       "blocked_on": null,
-      "next_action": "Audit ĐẠT, nên-sửa cuối đã áp. Commit + push (cần bạn gật) rồi đổi stage -> published, /content-derive trong 24h",
+      "next_action": "Chạy /content-derive trong 24h (trước 2026-09-23 17:00): career/feature-flag-nhu-release-gate.md (câu behavioral: mâu thuẫn liên team / deadline) + social",
       "paths": {
         "post": "content/posts/feature-flag-nhu-release-gate.md",
         "post_alt": "content/posts/feature-flag-nhu-release-gate.en.md",
@@ -441,6 +441,14 @@
         {
           "date": "2026-09-22",
           "event": "content-audit lượt 4: ĐẠT, không đổi so với lượt 3 — file bài không sửa từ 16:32 (mtime), quét định danh thật 5 file sạch, hugo sạch, ảnh đã mở. Còn 1 nên-sửa cũ: 'lỗi này' -> 'hậu quả này' (VI dòng 55, EN dòng 55). Chờ commit+push."
+        },
+        {
+          "date": "2026-09-22",
+          "event": "publish: áp nên-sửa cuối ('lỗi này' -> 'hậu quả này'). Commit b5b17e8 lên main, push thành công; hook pre-commit quét 6 file sạch. Stage needs-audit -> published. Kiểm URL live sau khi Actions build."
+        },
+        {
+          "date": "2026-09-22",
+          "event": "hotfix sau publish (tác giả review bản live): (1) lỗi sự thật — Bối cảnh mô tả nhầm chế độ CŨ (quota cố định riêng) thành chế độ mới; viết lại: chế độ mới = không quota riêng, bán theo tồn khả dụng kho tổng; (2) ví dụ số 10 tự mâu thuẫn (pool vừa 10 vừa 0) — tách tồn vật lý 10 / đã phân bổ 10 / pool 0; (3) rò rỉ — bỏ dòng code nguyên văn + tên cột thật của repo team khác khỏi 2 bài và cover, chỉ giữ cơ chế; (4) thêm 2 chi tiết làm flag thành rào thật: kiểm 2 tầng UI + request/import, pre-check production = 0 dòng trước khi bật. Nguồn: bổ sung inbox 2026-09-22. VI ~1200 từ, EN 1062 từ. Bài đã live 30s sau push đầu; hotfix push tiếp."
         }
       ]
     },

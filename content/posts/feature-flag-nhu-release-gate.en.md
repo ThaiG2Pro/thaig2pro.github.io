@@ -22,9 +22,11 @@ single time, if flipped on too early, counts as done.
 
 ## Context
 
-Early this September I owned the backend piece of a new promotional mode: every product
-in a campaign gets its own sale quota, and the system must reject orders once that quota
-runs out. The feature had a fixed ship date, and my part sat inside it.
+Early this September I owned the backend piece of a second stock mode for promotional
+campaigns. The mode already in production: a product has to be allocated a fixed quota
+before it can sell in a campaign. The new mode is the reverse: a product gets no quota of
+its own — it sells against the warehouse's available stock, live, at order time. The
+feature had a fixed ship date, and my part sat inside it.
 
 My scope was the quota service, where I had full write access. But orders flow through a
 second service, owned by another team, and that service has to read the new quota value
@@ -35,8 +37,8 @@ correctly before anything can actually sell. I had no merge rights into that rep
 Before writing any code, I read through that other service to see how it reads quota.
 Two spots in the same repo treated an empty value (`NULL`) in opposite ways:
 
-1. The order check coerced `NULL` to zero — `Number(quota_total ?? 0)`. Empty means
-   "out of stock," the order is rejected.
+1. The order check coerces an empty quota to zero. Empty means "out of stock," the
+   order is rejected.
 2. The storefront treated `NULL` as "unlimited," so the product still showed as
    purchasable.
 
@@ -76,10 +78,16 @@ order is rejected. Loosen before fencing: 100% oversell. The reason: between the
 steps, a shared-pool order is held back neither by its own quota nor by the reserved
 stock.
 
-An illustrative number, to show why the order matters. Say the shared pool holds 10
-units, and all 10 are reserved for another campaign. Loosen `NULL` before fencing: a
-shared-pool order reads "unlimited" and sells all 10 — the other campaign's stock. Fence
-first, then loosen: the same order sees a pool of 0 and is correctly rejected.
+An illustrative number, to show why the order matters. Say the warehouse holds 10
+physical units, all 10 already allocated to another campaign — so the shared pool is 0.
+Loosen `NULL` before fencing: a shared-pool order reads "unlimited" and sells all 10 of
+the other campaign's units. Fence first, then loosen: the same order sees a pool of 0 and
+is correctly rejected.
+
+The flag being off isn't just a hidden button. It's checked at two layers — the UI and
+the request/import layer — so calling the API directly with the flag off is still
+rejected. And the go condition isn't only "the other team has deployed": production data
+has to pass the pre-check queries with 0 offending rows first.
 
 The flag here isn't for gradual rollout. It's a way to turn a cross-team dependency into
 something checkable: the flag being off means the conditions aren't met, and the
