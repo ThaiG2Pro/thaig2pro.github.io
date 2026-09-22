@@ -30,7 +30,8 @@ hugo --gc --minify      # build kiểm tra trước khi push
 
 ## Dây chuyền content (nhiều tuần)
 
-Spec đầy đủ: `CONTENT_STYLE.md`. Trạng thái: `pipeline/state.json` (đừng sửa tay).
+Spec đầy đủ: `CONTENT_STYLE.md` (luật). Kinh nghiệm: `lessons/` (lỗi đã xảy ra).
+Trạng thái: `pipeline/state.json` (đừng sửa tay).
 
 | Skill | Tầng | Khi nào |
 |---|---|---|
@@ -41,8 +42,10 @@ Spec đầy đủ: `CONTENT_STYLE.md`. Trạng thái: `pipeline/state.json` (đ�
 | `/content-write` | 3 | Mục ở stage `ready`/`drafting`/`needs-translation` |
 | `/content-artwork` | 3 | Mục ở stage `needs-assets` — ảnh cover, sơ đồ |
 | `/content-bench` | 3 | Mục ở stage `needs-bench` — code bằng chứng, phải chạy thật |
+| `/content-audit` | 3 | **Soi độc lập trước publish** — không tin tự kiểm của write |
 | `/content-derive` | 4 | Trong 24h sau publish |
 | `/content-review` | 5 | Mỗi quý, hoặc trước khi nộp CV |
+| `/content-lesson` | — | Ngay khi gặp lỗi — ghi vào `lessons/` |
 
 `career/` và `drafts/` không commit. `bench/` thì có — script reproduce là bằng chứng.
 

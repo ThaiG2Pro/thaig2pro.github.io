@@ -11,6 +11,8 @@ câu hỏi phỏng vấn "bạn đo bằng cách nào", chỗ mà phần lớn �
 
 Spec: `CONTENT_STYLE.md` mục 3.
 
+Đọc `lessons/evidence.md` trước.
+
 ## Quy trình
 
 ### Bước 1 — Phát biểu câu hỏi đo trước khi viết code

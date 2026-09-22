@@ -282,6 +282,19 @@ tiên sinh nguyên liệu cho câu đó.
 
 ---
 
+## 7b. Kho kinh nghiệm
+
+`CONTENT_STYLE.md` là **luật**: phải làm gì. `lessons/` là **sự cố**: đã sai như thế nào,
+ai bắt được, vì sao lọt, dấu hiệu nhận ra ở bài khác.
+
+Luật sinh ra từ lessons. Một lỗi lặp **lần thứ hai** phải được nâng thành luật ở đây hoặc
+thành một bước trong skill chuyên môn — kho kinh nghiệm là nơi ghi nhận, không thay thế
+được cổng chặn.
+
+Ghi lỗi mới bằng `/content-lesson`. Soi bài theo kho này bằng `/content-audit`.
+
+---
+
 ## 8. Checklist trước khi publish
 
 1. `draft: false`, `date` không nằm ở tương lai xa
@@ -289,4 +302,5 @@ tiên sinh nguyên liệu cho câu đó.
 3. Mọi ảnh tồn tại trong `static/images/posts/<slug>/`
 4. Có mục Trade-offs và mục giới hạn
 5. Mọi con số truy được về `bench/<slug>/` hoặc nguồn ngoài có link
-6. `hugo --gc --minify` chạy sạch
+6. Đã qua `/content-audit` — vòng soi độc lập, không phải tự kiểm
+7. `hugo --gc --minify` chạy sạch

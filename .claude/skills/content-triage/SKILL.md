@@ -12,6 +12,8 @@ interviewer sẽ đào đúng vào đó.
 
 Spec: `CONTENT_STYLE.md` mục 3 và 4.
 
+Đọc `lessons/triage.md` trước khi phân loại.
+
 ## Quy trình
 
 Với mỗi mục `stage: "inbox"` trong `pipeline/state.json` (hoặc mục người dùng vừa nêu):

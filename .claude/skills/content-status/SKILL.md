@@ -32,6 +32,7 @@ Trạng thái: `pipeline/state.json`.
 | `ready` | đã có bằng chứng + thể loại | viết bản gốc | `/content-write` |
 | `drafting` | bản gốc đang dở | viết tiếp phần còn thiếu | `/content-write` |
 | `needs-translation` | bản gốc xong, thiếu bản dịch | viết bản rút gọn | `/content-write` |
+| `needs-audit` | viết xong, chưa soi độc lập | kiểm duyệt trước publish | `/content-audit` |
 | `needs-assets` | thiếu ảnh cover/sơ đồ | thiết kế và dựng ảnh | `/content-artwork` |
 | `needs-bench` | bench chưa viết, chưa chạy thử, hoặc đang lỗi | dựng và chạy thật bằng Docker | `/content-bench` |
 | `published` | đã lên, chưa cắt dẫn xuất | cắt CV/STAR/video trong 24h | `/content-derive` |
@@ -44,7 +45,7 @@ thực hóa khi bài lên; còn mục `published` chưa cắt dẫn xuất thì 
 đắt vì trí nhớ phai.
 
 1. `published` chưa dẫn xuất (quá 24h thì đánh dấu trễ)
-2. `needs-translation` / `needs-assets` / `needs-bench` (gần xong nhất)
+2. `needs-audit` / `needs-translation` / `needs-assets` / `needs-bench` (gần xong nhất)
 3. `drafting`
 4. `ready`
 5. `needs-measure`

@@ -289,16 +289,19 @@
       "title": "Selector jQuery trỏ nhầm vùng tab + lỗi 422 bị nuốt",
       "created": "2026-09-21",
       "genre": "A",
-      "stage": "ready",
+      "stage": "needs-bench",
       "lang_primary": "en",
       "evidence": {
         "numbers": "100% thao tác Tăng fail 422 trên STG; 0 thông báo lỗi hiển thị cho user",
         "method": "QC thủ công trên STG + đọc DOM: selector match 0 phần tử",
-        "repro": "bench/selector-jquery/ — 1 trang HTML tĩnh: tab ul + tab-content, selector sai vs đúng"
+        "repro": "bench/selector-jquery-lot-len-staging/ — 1 trang HTML tĩnh (CHƯA dựng)"
       },
-      "blocked_on": null,
-      "next_action": "Viết bài A/EN, ngắn. Trọng tâm là phần 2 (lỗi validation gắn vào input ẩn → fallback alert chung), không phải selector. ~3 giờ",
-      "paths": {},
+      "blocked_on": "thiếu bench/selector-jquery-lot-len-staging/ (link trong bài đang 404) và static/images/posts/selector-jquery-lot-len-staging/cover.png",
+      "next_action": "Chạy /content-bench dựng trang HTML tĩnh repro, rồi /content-artwork làm cover.png; sau đó mới publish",
+      "paths": {
+        "post": "content/posts/selector-jquery-lot-len-staging.en.md",
+        "post_alt": "content/posts/selector-jquery-lot-len-staging.md"
+      },
       "history": [
         {
           "date": "2026-09-21",
@@ -311,6 +314,10 @@
         {
           "date": "2026-09-21",
           "event": "triage: A/EN, ready — bài ngắn"
+        },
+        {
+          "date": "2026-09-22",
+          "event": "content-write: bản EN 1327 từ + bản VI 1470 từ; hugo build sạch; quét định danh sạch; chặn ở bench + cover.png"
         }
       ]
     },
@@ -427,6 +434,10 @@
     {
       "date": "2026-09-21",
       "event": "gỡ chặn 2/3 mục needs-measure: cong-thuc-tru-hai-lan (bộ số vốn đã khử định danh) và quota-ma-thieu-foreign-key (số dev + query V7 đủ qua cổng đo) → ready. Còn derived-table chờ bench MariaDB thật"
+    },
+    {
+      "date": "2026-09-22",
+      "event": "content-write selector-jquery-lot-len-staging (A/EN): viết 2 bản, chặn ở bench chưa dựng và cover.png"
     }
   ]
 }

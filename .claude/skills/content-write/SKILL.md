@@ -10,7 +10,8 @@ Skill này giữ giọng đó và chặn các lỗi làm bài mất giá trị v
 nguồn, thiếu mục đánh đổi, ảnh hỏng).
 
 Spec giọng văn và quy ước kỹ thuật: đọc `CONTENT_STYLE.md` mục 5 **trước khi viết dòng
-đầu tiên**.
+đầu tiên**. Và đọc `lessons/writing-vi.md` — bảng từ điển dịch trật ở đầu file là những
+lỗi đã thực sự xảy ra trên blog này, không phải ví dụ giả định.
 
 ## Bước 0 — Xác định thể loại và ngôn ngữ gốc
 
@@ -115,7 +116,11 @@ Thiếu ảnh → stage `needs-assets`, gọi `/content-artwork`. Bench chưa ch
 đang lỗi → gọi `/content-bench`. Skill này **không** vẽ ảnh và **không** viết bench —
 mỗi việc có skill riêng, vì gộp vào đây thì cả ba đều bị làm qua loa.
 
-Xong hết → `stage: "published"`, và nói ngay rằng bước dẫn xuất (`/content-derive`) nên
+Checklist này là **tự kiểm**, nên đừng coi nó là bằng chứng. Xong hết thì chuyển sang
+`/content-audit` để có một vòng soi độc lập trước khi publish — người vừa viết xong đọc
+lại chỉ thấy trôi chảy vì đã biết đáp án.
+
+Qua được vòng audit → `stage: "published"`, và nói ngay rằng bước dẫn xuất (`/content-derive`) nên
 làm trong 24h khi còn nhớ chi tiết.
 
 ## Trả lời

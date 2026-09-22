@@ -14,6 +14,9 @@ phải là bằng chứng. Trên blog này, một bench "đúng về kỹ thuậ
 (thiếu class trung tâm, file schema mồ côi, sai namespace nên không autoload, và không
 tương thích phiên bản framework mới) — cả bốn chỉ lộ ra khi thực sự chạy.
 
+Đọc `lessons/bench.md` trước khi viết dòng đầu — sáu lỗi chặn trong đó đều chỉ lộ ra
+khi chạy thật, và đều có thể tái phát.
+
 ## Bench phải đạt hai việc cùng lúc
 
 1. **Tái hiện đúng phát hiện của bài.** Nếu bài nói "test xanh cả khi có lỗi", thì bench

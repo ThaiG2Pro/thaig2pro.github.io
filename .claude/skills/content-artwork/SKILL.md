@@ -9,6 +9,9 @@ description: Thiết kế và dựng ảnh cho bài blog — ảnh cover 1200×6
 quả tìm kiếm. Nó phải **kể được ý chính của bài trong hai giây**, không phải làm nền
 cho cái tiêu đề.
 
+Đọc `lessons/artwork.md` trước — đặc biệt mục Hugo không nạp thư mục `static/` mới tạo,
+lỗi đã làm mất thời gian chẩn đoán một lần.
+
 ## Nguyên tắc thiết kế
 
 Trước khi vẽ, trả lời: *ý bất ngờ nhất của bài là gì, và nó có hình dạng không?*
