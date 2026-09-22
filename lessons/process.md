@@ -48,3 +48,21 @@ như chắc chắn là định danh thật. Phép thử một lệnh:
 `grep -nE "khử định danh \(|đã loại \(|không xuất hiện" pipeline/state.json lessons/*.md`.
 **Đã vá:** nâng thành luật ở `CONTENT_STYLE.md` mục 3b, gạch đầu dòng "Log và history".
 Thêm tên sản phẩm vào `.git/identifiers.local` để lần sau bộ quét bắt được cả nó.
+
+## L-056 · 2026-09-22 · bộ-quét-bỏ-qua-đối-số
+**Lỗi:** `scripts/scan-identifiers.sh <file...>` **không quét file được truyền vào**. Nó
+chỉ đọc `git diff --cached`, tức file đang staged — đối số bị bỏ qua hoàn toàn. Trong một
+phiên, `/content-write` và `/content-audit` gọi nó 6 lần với đường dẫn hai bài và đều nhận
+"Quét định danh: sạch"; thực tế nó đang quét file mà một tiến trình khác vừa stage, hoặc
+báo "không có file nào để quét" khi staging rỗng. Lần duy nhất nó bắt được gì (L-055) là
+vì `pipeline/state.json` tình cờ đang staged.
+**Ai bắt:** `/content-audit` lượt 3, khi câu "không có file nào để quét" xuất hiện dù đã
+truyền 4 đường dẫn — đọc script mới thấy dòng `FILES=$(git diff --cached ...)`.
+**Vì sao lọt:** script viết cho hook `pre-commit` (không có đối số) rồi được các skill gọi
+như một CLI. Thông báo "sạch" không nói *đã quét file nào*, nên không ai nhận ra danh sách
+rỗng hoặc lệch.
+**Dấu hiệu:** bộ quét trả "sạch" nhanh bất thường, hoặc "không có file nào để quét" khi
+đã truyền tên file. Phép thử: cố tình chèn một chuỗi khớp regex vào file rồi quét — không
+báo thì bộ quét không nhìn file đó.
+**Đã vá:** script nhận đối số: có đối số thì quét đúng các file đó (vẫn áp `EXCLUDE`),
+không có thì quét staged như cũ; và in ra số file đã quét thay vì chỉ nói "sạch".

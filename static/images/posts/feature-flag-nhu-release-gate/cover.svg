@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" font-family="ui-monospace,'SFMono-Regular',Menlo,Consolas,monospace">
+  <rect width="1200" height="630" fill="#1d2021"/>
+  <rect x="0" y="0" width="1200" height="6" fill="#fb4934"/>
+
+  <text x="80" y="90" fill="#928374" font-size="22" letter-spacing="3">SAME NULL. TWO MEANINGS.</text>
+
+  <g font-size="26">
+    <text x="80" y="150" fill="#a89984">order-service.js</text>
+    <rect x="80" y="168" width="660" height="52" rx="6" fill="none" stroke="#665c54" stroke-width="1.5"/>
+    <text x="100" y="202" fill="#ebdbb2">Number(quota_total ?? 0)</text>
+    <text x="760" y="202" fill="#fb4934" font-size="22">0 = out of stock</text>
+  </g>
+
+  <g stroke="#665c54" stroke-width="2" stroke-dasharray="6 6">
+    <line x1="230" y1="220" x2="230" y2="288"/>
+    <polygon points="230,300 222,284 238,284" fill="#665c54" stroke="none"/>
+  </g>
+
+  <g font-size="26">
+    <text x="80" y="336" fill="#a89984">storefront.js — same repo, other team</text>
+    <rect x="80" y="354" width="660" height="52" rx="6" fill="none" stroke="#665c54" stroke-width="1.5"/>
+    <text x="100" y="388" fill="#ebdbb2">quota_total === null</text>
+    <text x="760" y="388" fill="#83a598" font-size="22">null = unlimited</text>
+  </g>
+
+  <text x="80" y="470" fill="#928374" font-size="22" letter-spacing="3">FLAG STAYS OFF UNTIL:</text>
+
+  <g font-size="24">
+    <rect x="80" y="490" width="230" height="60" rx="6" fill="none" stroke="#b8bb26" stroke-width="1.5"/>
+    <text x="100" y="527" fill="#b8bb26">1. fence stock</text>
+
+    <line x1="318" y1="520" x2="368" y2="520" stroke="#665c54" stroke-width="2"/>
+    <polygon points="378,520 364,513 364,527" fill="#665c54" stroke="none"/>
+
+    <rect x="386" y="490" width="230" height="60" rx="6" fill="none" stroke="#b8bb26" stroke-width="1.5"/>
+    <text x="406" y="527" fill="#b8bb26">2. loosen NULL</text>
+
+    <line x1="624" y1="520" x2="674" y2="520" stroke="#665c54" stroke-width="2"/>
+    <polygon points="684,520 670,513 670,527" fill="#665c54" stroke="none"/>
+
+    <rect x="692" y="490" width="130" height="60" rx="30" fill="#3c3836" stroke="#fb4934" stroke-width="1.5"/>
+    <circle cx="722" cy="520" r="20" fill="#fb4934"/>
+    <text x="752" y="527" fill="#928374" font-size="20">OFF</text>
+  </g>
+
+  <text x="1120" y="590" fill="#a89984" font-size="20" text-anchor="end">flag default: OFF</text>
+  <text x="1120" y="612" fill="#fb4934" font-size="20" text-anchor="end">flag on early = 100% reject</text>
+</svg>

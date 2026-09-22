@@ -393,8 +393,8 @@
         "method": "mốc 2026-09-08; vai trò: người quyết định ship; quyết định: ship đủ code + migration, flag mặc định false, điều kiện bật flag viết thành thứ tự deploy bắt buộc cho team kia",
         "repro": null
       },
-      "blocked_on": "audit lượt 2: 1 chặn — nghĩa của NULL ở chế độ mới ('không quota riêng = bán theo kho chung', dòng 44-45) là suy ra từ inbox, tác giả phải xác nhận hoặc hạ giọng",
-      "next_action": "Tác giả xác nhận nghĩa NULL (thêm 1 dòng vào inbox qua /content-capture) hoặc /content-write hạ giọng dòng 44-45 + 3 mục nên sửa; rồi publish",
+      "blocked_on": null,
+      "next_action": "Audit ĐẠT, nên-sửa cuối đã áp. Commit + push (cần bạn gật) rồi đổi stage -> published, /content-derive trong 24h",
       "paths": {
         "post": "content/posts/feature-flag-nhu-release-gate.md",
         "post_alt": "content/posts/feature-flag-nhu-release-gate.en.md",
@@ -429,6 +429,18 @@
         {
           "date": "2026-09-22",
           "event": "content-audit lượt 2: CHƯA ĐẠT, còn 1 chặn nhẹ. 4 chặn lượt 1 đã hết: mốc khớp inbox, không còn sự kiện ngoài inbox, hai kịch bản reject/oversell tách đúng theo inbox, không còn suy đoán về team kia. Chặn mới: dòng 44-45 (EN 43-44) khẳng định NULL ở chế độ mới nghĩa là 'bán theo kho chung' — inbox chỉ có 'NULL = vô hạn' ở chỗ hiển thị và 'nới NULL sau'; nghĩa thiết kế là suy ra, tác giả phải xác nhận. Nên sửa: 'đã có trong giao diện' (85) không có nguồn và trái với flag tắt; 'tình cờ' (98) trái với 'thói quen' (100); câu 70-72 nén 4 khái niệm. Đạt: mọi chữ số truy được (100%, 0, 2 chỗ, 10 giả định); scan sạch; hugo sạch; ảnh đã mở, callout khớp inbox; 10 trường, 5 tiêu đề cả hai bản."
+        },
+        {
+          "date": "2026-09-22",
+          "event": "content-write: tác giả trả lời chặn lượt 2 — NULL KHÔNG mang nghĩa 'bán theo kho chung'; chế độ do một cột nguồn hàng riêng mang, NULL chỉ là hệ quả của bất biến; hệ kia chưa đọc cột đó; tài liệu thiết kế đếm NULL = 0 ở 3 chỗ và = vô hạn ở 3 chỗ trên 2 hệ; đơn bị chặn 100% là đơn theo kho chung, không phải mọi đơn chế độ mới. Đã ghi bổ sung vào drafts/inbox.md mục 2026-09-08 (vùng riêng, có định danh) để làm nguồn. Viết lại đoạn cơ chế ở Xung đột và bước 2 ở Quyết định cả hai bản; đổi 'đơn chế độ mới' → 'đơn theo kho chung'. Áp 3 nên-sửa: bỏ 'đã có trong giao diện', bỏ 'tình cờ', chẻ câu nén. VI 1136 từ, EN 971 từ. Scan sạch, hugo sạch. Stage giữ needs-audit, chờ audit lượt 3."
+        },
+        {
+          "date": "2026-09-22",
+          "event": "content-audit lượt 3: ĐẠT. Mọi con số truy được về drafts/inbox.md mục 2026-09-08 + dòng bổ sung 2026-09-22 (100%; 2 chỗ ?? 0; 3 chỗ = 0 / 3 chỗ = vô hạn / 2 hệ; đơn kho chung; 10 là giả định). Không còn lượng từ, không còn sự kiện ngoài inbox. Phát hiện tooling: scripts/scan-identifiers.sh bỏ qua đối số, chỉ quét staged — mọi lần 'sạch' trước trong ngày là quét nhầm file; đã vá script nhận đối số + in số file, ghi L-056 vào lessons/process.md, quét lại thật: 2 bài + state.json + lessons sạch, canary bắt được. Ảnh đã mở, không chồng. hugo sạch. Nên sửa (không chặn): 'lỗi này' -> 'hậu quả này' ở câu 'Team kia không sai' vì bản thân độ lệch NULL đã tồn tại trước chế độ mới. Stage giữ needs-audit tới khi commit+push."
+        },
+        {
+          "date": "2026-09-22",
+          "event": "content-audit lượt 4: ĐẠT, không đổi so với lượt 3 — file bài không sửa từ 16:32 (mtime), quét định danh thật 5 file sạch, hugo sạch, ảnh đã mở. Còn 1 nên-sửa cũ: 'lỗi này' -> 'hậu quả này' (VI dòng 55, EN dòng 55). Chờ commit+push."
         }
       ]
     },
@@ -437,16 +449,21 @@
       "title": "Import tra nhầm bảng vì id hai bảng trùng nhau",
       "created": "2026-09-21",
       "genre": "A",
-      "stage": "ready",
+      "stage": "needs-bench",
       "lang_primary": "en",
       "evidence": {
         "numbers": "0 test bắt được → 1 regression test cross-campaign",
         "method": "audit handler khi thêm AC resolve cặp (SKU × Campaign)",
         "repro": "bench/bug-import-tra-nham-bang/ — 2 bảng auto-increment id trùng nhau, 1 test pass sai + 1 test bắt đúng"
       },
-      "blocked_on": null,
-      "next_action": "Viết bài A/EN. Repro dựng được hoàn toàn ngoài repo công ty (2 bảng id trùng). ~4 giờ",
-      "paths": {},
+      "blocked_on": "bench/bug-import-tra-nham-bang/ chưa tồn tại (bài đã link tới); cover.png chưa có",
+      "next_action": "(1) bổ inbox hoặc hạ giọng 5 chi tiết chưa có nguồn (2) /content-bench (3) /content-artwork (4) /content-audit vòng 2",
+      "paths": {
+        "vi": "content/posts/bug-import-tra-nham-bang.md",
+        "en": "content/posts/bug-import-tra-nham-bang.en.md",
+        "bench": "bench/bug-import-tra-nham-bang/",
+        "cover": "static/images/posts/bug-import-tra-nham-bang/cover.png"
+      },
       "history": [
         {
           "date": "2026-09-21",
@@ -455,6 +472,14 @@
         {
           "date": "2026-09-21",
           "event": "triage: A/EN, ready — evidence là hệ thống thật + fix, không phải trải nghiệm không số nên vào A chứ không phải D"
+        },
+        {
+          "date": "2026-09-22",
+          "event": "content-write: viết EN (gốc, ~1150 từ thân) + VI (~1300 từ thân). Checklist tự kiểm: front matter 10 trường, scan định danh sạch, hugo build sạch, số liệu chỉ có 0→1 test (nguồn inbox). Không đạt: bench chưa tồn tại, cover.png chưa có. Vòng đọc lại 2b chưa chạy."
+        },
+        {
+          "date": "2026-09-22",
+          "event": "content-audit vòng 1: CHƯA ĐẠT. Chặn: bench chưa tồn tại (link 404), cover.png thiếu, EN:52/VI:52 \"two queries instead of one\" không có nguồn. Nên sửa: 5 chi tiết bản sửa/QA không có trong inbox (auto-increment từ 1, file một dòng, fixture kiểm soát auto-increment, ba phương án đã cân nhắc, file cũ phải sinh lại); VI 3 câu nén >2 khái niệm, 3 cụm dịch cứng. Đạt: scan định danh sạch, hugo sạch, tiêu đề 2 bản khớp, front matter 10/10, bảng số 2 bản khớp."
         }
       ]
     },

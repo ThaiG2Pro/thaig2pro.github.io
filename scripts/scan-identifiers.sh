@@ -35,8 +35,14 @@ if [[ -f "$LOCAL" ]]; then
 fi
 
 EXCLUDE='^(themes|public|resources/_gen)/|\.(png|jpe?g|gif|webp|ico|svg|woff2?|ttf|pdf|lock)$|^\.gitmodules$'
-FILES=$(git diff --cached --name-only --diff-filter=ACM | grep -vE "$EXCLUDE" || true)
+# Có đối số -> quét đúng các file đó (skill gọi tay). Không có -> quét staged (hook pre-commit).
+if [[ $# -gt 0 ]]; then
+  FILES=$(printf '%s\n' "$@" | sed 's|^\./||' | grep -vE "$EXCLUDE" || true)
+else
+  FILES=$(git diff --cached --name-only --diff-filter=ACM | grep -vE "$EXCLUDE" || true)
+fi
 [[ -z "$FILES" ]] && { echo "Quét định danh: không có file nào để quét."; exit 0; }
+NFILES=$(printf '%s\n' "$FILES" | grep -c .)
 
 HITS=0
 while IFS= read -r f; do
@@ -66,4 +72,4 @@ EOF
   exit 1
 fi
 
-echo "Quét định danh: sạch."
+echo "Quét định danh: sạch ($NFILES file)."

@@ -124,3 +124,32 @@ D kiểm "có mốc thời gian chưa" (có/không), không kiểm "mốc đó k
 so với `date` trong front matter.
 **Đã vá:** chưa vá — lần đầu gặp. Đề xuất nếu lặp: khung D đổi mục kiểm "có mốc" thành
 "mốc khớp ngày mục inbox".
+
+## L-018 · 2026-09-22 · suy-nghĩa-dữ-liệu-từ-hướng-sửa
+**Lỗi:** bước viết **định nghĩa** một giá trị của hệ khác bằng suy luận. Inbox bài feature
+flag chỉ ghi hành vi code — "chỗ này ép `NULL` về 0, chỗ kia coi `NULL` là vô hạn" — và
+hướng sửa — "rào reserved trước, nới `NULL` sau". Từ hướng sửa, bản nháp suy ra *"`NULL` là
+giá trị có nghĩa: không quota riêng thì bán theo kho chung"* và viết như thiết kế đã biết.
+Tác giả tra lại: sai. Chế độ do một **cột riêng** mang; `NULL` chỉ là hệ quả của một bất
+biến, và tài liệu thiết kế ghi rõ *không* mã hóa chế độ bằng `NULL`. Cùng lúc lộ thêm một
+sai lệch nhỏ hơn trong chính inbox: "mọi đơn chế độ mới fail" — đúng là "mọi đơn **theo kho
+chung** fail". Bản nháp lượt 1 còn gộp hai kịch bản lỗi ngược nhau (bật sớm = từ chối hết;
+nới trước rào sau = bán vượt kho) thành một, vì đọc inbox chưa kỹ.
+**Ai bắt:** `/content-audit` lượt 2 — không kiểm được nên chặn và hỏi ngược tác giả; tác
+giả tra proposal và design doc rồi trả lời. Không cổng tự động nào bắt.
+**Vì sao lọt:** mục inbox ba dòng ghi *code làm gì* và *sửa theo thứ tự nào*, không ghi
+*giá trị đó nghĩa là gì theo nghiệp vụ* và *tập bị ảnh hưởng chính xác là tập nào*. Khung
+bài đòi một đoạn cơ chế, nên bước viết lấp chỗ trống bằng suy luận nghe hợp lý — cùng cơ
+chế với L-010 (số bịa) và L-016 (sự kiện bịa), lần này ở tầng **định nghĩa dữ liệu**.
+L-014 soi khẳng định dạng "dự án không có X"; câu "X nghĩa là Y" không thuộc lớp đó nên
+lượt audit đầu không hỏi. Tệ hơn: câu suy ra lại **hợp lý hơn** bản gốc của inbox, nên
+tự đọc lại thấy trôi.
+**Dấu hiệu:** mọi câu dạng *"`X` nghĩa là …"*, *"`NULL` means …"*, *"giá trị này biểu
+thị …"* về dữ liệu của hệ **mình không sở hữu**, mà dòng inbox tương ứng chỉ mô tả code
+đọc nó thế nào. Và mọi cụm *"mọi đơn / all orders / toàn bộ"* — hỏi ngay: mọi = tập nào,
+inbox ghi tập đó chưa? Hai câu hỏi này rẻ, tác giả trả lời được trong một phút, và không
+trả lời được thì interviewer sẽ hỏi đúng câu đó.
+**Đã vá:** chưa vá — lần đầu gặp ở tầng này. Đề xuất nếu lặp: `/content-capture` với mục
+có hành vi dữ liệu lệch nhau phải ghi thêm hai dòng — "nghĩa nghiệp vụ của giá trị trung
+tâm, theo tài liệu nào" và "tập bị ảnh hưởng chính xác"; `/content-audit` vòng 1 thêm bước
+"liệt kê mọi câu định nghĩa dữ liệu và trỏ về dòng inbox".
