@@ -52,8 +52,7 @@ Hậu quả tôi đọc ra được từ hai dòng code: bật chế độ mới
 chung bị từ chối, trong khi màn hình vẫn bảo còn hàng.
 
 Tôi không sửa được chỗ đó — không phải repo của tôi, không phải team của tôi. Vì sao hai
-chỗ trong cùng một repo lệch nhau, tôi không biết và cũng không đi hỏi; bài này chỉ nói
-được thứ tôi đọc thấy. Team kia không sai khi chưa sửa: hậu quả này chỉ xuất hiện khi
+chỗ trong cùng một repo lệch nhau, tôi không biết và cũng không đi hỏi. Team kia không sai khi chưa sửa: hậu quả này chỉ xuất hiện khi
 chế độ mới bật, mà chế độ đó lúc ấy chưa tồn tại.
 
 Hai điều đều đúng, nhưng không thể cùng đúng. Thứ nhất: lịch ship đã định, và phần việc
@@ -99,7 +98,7 @@ một tính năng chưa xong, dù phần việc của tôi đã hoàn tất đú
 tính năng giờ phụ thuộc vào lịch của một team tôi không điều khiển được.
 
 Tôi cũng làm thêm một việc không có trong phạm vi ban đầu: viết tài liệu thứ tự deploy
-cho một repo không phải của mình, đủ rõ để team kia làm theo mà không cần tôi ngồi cạnh.
+cho một repo không phải của mình.
 Và giá trị kinh doanh của chế độ khuyến mãi mới bị hoãn đúng bằng khoảng thời gian chờ
 team kia deploy. Bao lâu, bao nhiêu đơn — tôi chưa có con số, vì việc chưa kết thúc.
 
