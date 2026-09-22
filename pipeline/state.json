@@ -172,16 +172,21 @@
       "title": "Quota ma: thiếu foreign key",
       "created": "2026-09-21",
       "genre": "A",
-      "stage": "ready",
+      "stage": "published",
       "lang_primary": "en",
       "evidence": {
-        "numbers": "14 dòng orphan = 294 đơn vị bị khoá trên DB dev; net delta +348 đơn vị (294 phantom + 54 clamp âm) trên 54 SKU, ~0.018%; production chưa đo",
+        "numbers": "14 dòng orphan = 294 đơn vị bị khoá trên DB dev; production chưa đo",
         "method": "query pre-check V7 — LEFT JOIN 2 cấp, đếm dòng có cha NULL hoặc cha đã xoá mềm",
         "repro": "query V7 dán nguyên trong bài + seed 1 dòng orphan trong test migration"
       },
       "blocked_on": null,
-      "next_action": "Viết bài A/EN với số từ DB dev, nói rõ production chưa chạy — luận điểm là cơ chế (thiếu FK biến nợ kỹ thuật thành trần bán bị hạ), không phụ thuộc quy mô. ~1 buổi",
-      "paths": {},
+      "next_action": "Chạy /content-derive trong 24h (trước 2026-09-23 15:45). Sau đó: /content-bench dựng bench/quota-ma-thieu-foreign-key/ (schema 3 bảng + seed 1 orphan + query V7); sửa cover quota=294 → quota nhỏ hơn tổng.",
+      "paths": {
+        "post": "content/posts/quota-ma-thieu-foreign-key.en.md",
+        "post_alt": "content/posts/quota-ma-thieu-foreign-key.md",
+        "cover": "static/images/posts/quota-ma-thieu-foreign-key/cover.png",
+        "cover_svg": "static/images/posts/quota-ma-thieu-foreign-key/cover.svg"
+      },
       "history": [
         {
           "date": "2026-09-21",
@@ -194,6 +199,26 @@
         {
           "date": "2026-09-21",
           "event": "gỡ chặn: số DB dev + query V7 đã đủ qua cổng đo; 'production chưa đo được' là một phần của bài, không phải thiếu sót"
+        },
+        {
+          "date": "2026-09-22",
+          "event": "content-write: bản EN 979 từ + bản VI viết lại (không dịch sát); hugo build sạch; quét định danh sạch. content-artwork: cover.svg + cover.png 1200x630 dựng ngay — sơ đồ 'dòng mồ côi vẫn bị SUM tính vào kho dùng chung'. Đã mở ảnh, không tràn khung. Stage ready -> needs-audit."
+        },
+        {
+          "date": "2026-09-22",
+          "event": "content-write: áp 5 mục audit — xóa 2 số bịa (+348/54 SKU/0.018%; 'sáu bản nháp' cho tên V7), chẻ 2 câu nén quá tay, đổi ẩn dụ 'lưới giăng dưới sợi dây' thành câu trực tiếp, gắn nhãn SQL là bản dựng lại chứ không phải nguyên văn production, bỏ khẳng định không nguồn về code path tạo orphan. EN 996 từ, VI 1189 từ. Identifier scan sạch, hugo build sạch."
+        },
+        {
+          "date": "2026-09-22",
+          "event": "content-write: sửa 5 mục chặn audit vòng 2 — bỏ 'nhiều năm liền/for years', đổi 'không ai mở ticket' thành lời tự khai chưa tra ticket, bỏ 'chỉ lộ ra khi thật sự thử làm', đổi 'chưa có ngày cam kết' thành 'tôi không biết đã có ngày chưa'; scrub định danh rò trong history item feature-flag-nhu-release-gate."
+        },
+        {
+          "date": "2026-09-22",
+          "event": "content-write: sửa 2 mục chặn audit vòng 3 — bỏ 'vô hình lâu vậy/for so long' (mốc thời gian không nguồn), 'vài báo cáo/handful of reports' → 'báo cáo/reporting'. Còn 5 mục Nên sửa chưa đụng (cover quota=294 lệch tổng, 2 câu dài L55/L57, chi tiết audit-table và test assert, không bench)."
+        },
+        {
+          "date": "2026-09-22",
+          "event": "content-audit vòng 4 đạt (0 chặn, 5 nên sửa để lại: cover quota=294 lệch tổng, 2 câu dài L51/L55, chi tiết audit-table EN L49, chưa có bench). Stage needs-audit -> published."
         }
       ]
     },
@@ -355,16 +380,21 @@
       "title": "Feature flag như release gate liên team",
       "created": "2026-09-21",
       "genre": "D",
-      "stage": "ready",
+      "stage": "needs-audit",
       "lang_primary": "vi",
       "evidence": {
         "numbers": "không có số — thể loại D không cần",
         "method": "mốc 2026-09-08; vai trò: người quyết định ship; quyết định: ship đủ code + migration, flag mặc định false, điều kiện bật flag viết thành thứ tự deploy bắt buộc cho team kia",
         "repro": null
       },
-      "blocked_on": null,
-      "next_action": "Viết bài D/VI — ô behavioral quyet-dinh-kho đã do selector-jquery-lot-len-staging giữ. Đủ 3 điều kiện D (mốc thời gian, vai trò, quyết định). ~3 giờ",
-      "paths": {},
+      "blocked_on": "audit lượt 2: 1 chặn — nghĩa của NULL ở chế độ mới ('không quota riêng = bán theo kho chung', dòng 44-45) là suy ra từ inbox, tác giả phải xác nhận hoặc hạ giọng",
+      "next_action": "Tác giả xác nhận nghĩa NULL (thêm 1 dòng vào inbox qua /content-capture) hoặc /content-write hạ giọng dòng 44-45 + 3 mục nên sửa; rồi publish",
+      "paths": {
+        "post": "content/posts/feature-flag-nhu-release-gate.md",
+        "post_alt": "content/posts/feature-flag-nhu-release-gate.en.md",
+        "cover": "static/images/posts/feature-flag-nhu-release-gate/cover.png",
+        "cover_svg": "static/images/posts/feature-flag-nhu-release-gate/cover.svg"
+      },
       "history": [
         {
           "date": "2026-09-21",
@@ -373,6 +403,26 @@
         {
           "date": "2026-09-21",
           "event": "triage: D/VI, ready — không chờ số nữa, D không cần số"
+        },
+        {
+          "date": "2026-09-22",
+          "event": "content-write: bản VI 1001 từ (khung Bối cảnh/Xung đột/Quyết định/Cái giá/Điều làm khác đi) + bản EN 782 từ viết lại. Nguồn: drafts/inbox.md mục 2026-09-08, đã khử định danh (không nhắc tên định danh ở đây). hugo --gc --minify sạch; quét định danh sạch. Chặn ở cover.png. Stage ready -> needs-assets."
+        },
+        {
+          "date": "2026-09-22",
+          "event": "content-artwork: cover.svg + cover.png 1200x630 dựng — sơ đồ 'cùng một NULL, hai cách đọc trái nhau trong hai file của cùng repo team kia' + chuỗi điều kiện bắt buộc trước khi bật flag (fence NULL → loosen NULL → flag ON) và callout 'sai thứ tự = 100% đơn bị từ chối'. Sửa 2 lần vì chữ callout chồng lên nhãn code block và lên toggle switch; đã mở ảnh kiểm tra lần cuối, không còn tràn/chồng. Stage needs-assets -> needs-audit."
+        },
+        {
+          "date": "2026-09-22",
+          "event": "content-audit: CHƯA ĐẠT. Chặn: (1) mốc 'năm ngoái' sai — inbox 2026-09-08 cùng năm; (2) sự kiện không có trong inbox: trình bày ví dụ cho PM/trưởng nhóm và họ đồng ý, khách hàng lớn + ngày chốt, giải thích/nhắc nhiều lần, chậm vài giờ; (3) cơ chế fail mâu thuẫn: 'quota luôn có số' mà '?? 0' vẫn fire, và reject bị gọi là oversell — cover ghi 'wrong order = 100% reject' còn inbox ghi ngược thứ tự = oversell; (4) giải thích vì sao team kia không biết là suy đoán. Nên sửa: 3 câu L-008, 'oversell' chưa gloss, câu gồng dòng 48, lặp ý dòng 52. Đạt: scan sạch, hugo sạch, ảnh đã mở không chồng, 10 trường front matter, 2 bản cùng khung. Gỡ rò rỉ định danh ở history content-write trong file này. Ghi L-016, L-017 vào lessons/evidence.md. Stage giữ needs-audit."
+        },
+        {
+          "date": "2026-09-22",
+          "event": "content-write: áp 4 chặn + 5 nên-sửa của audit lượt 1, cả hai bản. Mốc đổi thành 'đầu tháng 9 năm nay'; xóa mọi sự kiện không có trong inbox (trình bày cho PM, khách hàng lớn, nhắc nhiều lần, vài giờ); mục Cái giá viết ở thì hiện tại, tự khai 'chưa có con số vì việc chưa kết thúc'; cơ chế fail viết lại theo inbox — NULL là giá trị hợp lệ ở chế độ mới, tách hai kịch bản: bật sớm = 100% từ chối, nới trước rào sau = oversell 100%; ví dụ số 10 giữ dạng giả định và minh họa oversell; bỏ suy đoán vì sao team kia không biết. Chẻ 2 câu nén thành danh sách, gloss 'oversell', sửa câu gồng, bỏ ý lặp. Cover: đổi nhãn '1. fence stock' và callout 'flag on early = 100% reject', xuất lại, đã mở ảnh. VI 1091 từ, EN 920 từ. Scan sạch, hugo sạch. Stage giữ needs-audit, chờ audit lượt 2."
+        },
+        {
+          "date": "2026-09-22",
+          "event": "content-audit lượt 2: CHƯA ĐẠT, còn 1 chặn nhẹ. 4 chặn lượt 1 đã hết: mốc khớp inbox, không còn sự kiện ngoài inbox, hai kịch bản reject/oversell tách đúng theo inbox, không còn suy đoán về team kia. Chặn mới: dòng 44-45 (EN 43-44) khẳng định NULL ở chế độ mới nghĩa là 'bán theo kho chung' — inbox chỉ có 'NULL = vô hạn' ở chỗ hiển thị và 'nới NULL sau'; nghĩa thiết kế là suy ra, tác giả phải xác nhận. Nên sửa: 'đã có trong giao diện' (85) không có nguồn và trái với flag tắt; 'tình cờ' (98) trái với 'thói quen' (100); câu 70-72 nén 4 khái niệm. Đạt: mọi chữ số truy được (100%, 0, 2 chỗ, 10 giả định); scan sạch; hugo sạch; ảnh đã mở, callout khớp inbox; 10 trường, 5 tiêu đề cả hai bản."
         }
       ]
     },
