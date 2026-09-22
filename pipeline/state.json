@@ -5,11 +5,11 @@
     "min_deep_per_month": 1
   },
   "behavioral_coverage": {
-    "that-bai": "1184-test-xanh-bug-van-len-staging",
+    "that-bai": "selector-jquery-lot-len-staging",
     "mau-thuan": null,
     "deadline": null,
     "tu-hoc": "lock-bi-danh-roi-khi-refactor",
-    "quyet-dinh-kho": "feature-flag-nhu-release-gate"
+    "quyet-dinh-kho": "selector-jquery-lot-len-staging"
   },
   "items": [
     {
@@ -289,21 +289,23 @@
       "title": "Selector jQuery trỏ nhầm vùng tab + lỗi 422 bị nuốt",
       "created": "2026-09-21",
       "genre": "A",
-      "stage": "needs-audit",
+      "stage": "done",
       "lang_primary": "en",
       "evidence": {
         "numbers": "100% thao tác Tăng fail 422 trên STG; 0 thông báo lỗi hiện cho user (đo TRƯỚC khi sửa, không có lượt QC sau); commit fix = 1 file view, 0 file test; 0 spec trình duyệt cho modal này",
         "method": "QC thủ công trên STG + đọc DOM; kiểm lại sau 5 ngày: git log nhánh, grep artifact SDLC, đối chiếu package.json và 8 change khác có qa/pw-scripts/",
         "repro": "bench/selector-jquery-lot-len-staging/ — trang HTML tĩnh + 1 spec Playwright; đã chạy thật, 6/6 xanh"
       },
-      "blocked_on": "không còn thiếu tài sản; bench chưa push lên main nên link trong bài vẫn 404 cho tới khi commit+push",
-      "next_action": "Chạy /content-audit lại (vòng 2: số liệu, bench chạy thật, ảnh), rồi commit+push và chuyển published",
+      "blocked_on": null,
+      "next_action": "Đăng bản social khi muốn (việc thủ công, ngoài pipeline)",
       "paths": {
         "post": "content/posts/selector-jquery-lot-len-staging.en.md",
         "post_alt": "content/posts/selector-jquery-lot-len-staging.md",
         "bench": "bench/selector-jquery-lot-len-staging/",
         "cover": "static/images/posts/selector-jquery-lot-len-staging/cover.png",
-        "cover_svg": "static/images/posts/selector-jquery-lot-len-staging/cover.svg"
+        "cover_svg": "static/images/posts/selector-jquery-lot-len-staging/cover.svg",
+        "career": "career/selector-jquery-lot-len-staging.md",
+        "social": "drafts/social-selector-jquery-lot-len-staging.md"
       },
       "history": [
         {
@@ -337,6 +339,14 @@
         {
           "date": "2026-09-22",
           "event": "content-artwork: cover.svg + cover.png 1200x630. Hình chia hai nửa — trái \"what the operator saw\" (modal, tab Increase, ô nhập 5, thông báo lỗi co thành một vạch đỏ cao 0), phải \"what the DOM contained\" (khối tab-pane display:none chứa nguyên văn thông báo), mũi tên nối hai bên, dòng chốt boundingBox() -> null. Đã mở ảnh ra nhìn: không tràn khung, không chồng chữ, chữ nhỏ nhất 22px."
+        },
+        {
+          "date": "2026-09-22",
+          "event": "audit vòng 3 đạt sau khi sửa tên field (increase_quantity/decrease_quantity) cho khớp bench; commit c42c651 push lên main; bench link và cover.png đã trả 200 trên bản live; stage needs-audit -> published"
+        },
+        {
+          "date": "2026-09-22",
+          "event": "content-derive: thẻ phỏng vấn (CV bullet + STAR + 3 lát cắt + 3 câu đào sâu) và post social 2 thứ tiếng; 3 link kiểm 200; stage published -> done"
         }
       ]
     },
@@ -353,7 +363,7 @@
         "repro": null
       },
       "blocked_on": null,
-      "next_action": "Viết bài D/VI — lấp ô behavioral quyet-dinh-kho. Đủ 3 điều kiện D (mốc thời gian, vai trò, quyết định). ~3 giờ",
+      "next_action": "Viết bài D/VI — ô behavioral quyet-dinh-kho đã do selector-jquery-lot-len-staging giữ. Đủ 3 điều kiện D (mốc thời gian, vai trò, quyết định). ~3 giờ",
       "paths": {},
       "history": [
         {
@@ -405,7 +415,7 @@
         "repro": null
       },
       "blocked_on": null,
-      "next_action": "Viết bài D/VI — lấp ô behavioral that-bai. ~3 giờ",
+      "next_action": "Viết bài D/VI — ô behavioral that-bai đã do selector-jquery-lot-len-staging giữ. ~3 giờ",
       "paths": {
         "post": "content/posts/1184-test-xanh-bug-van-len-staging.md"
       },
@@ -465,6 +475,18 @@
     {
       "date": "2026-09-22",
       "entry": "selector-jquery-lot-len-staging: cover.png xong, stage needs-assets -> needs-audit. Hết blocker tài sản."
+    },
+    {
+      "date": "2026-09-22",
+      "entry": "selector-jquery-lot-len-staging: publish. Bench Playwright 6/6 xanh, cover 200, link bench 200. Tháng 9 đủ 2 bài (lock-bi-danh-roi-khi-refactor + selector), cả hai đều thể loại A."
+    },
+    {
+      "date": "2026-09-22",
+      "entry": "selector-jquery-lot-len-staging: cắt dẫn xuất xong trong ngày publish. Bài này trả lời được 2 ô behavioral (that-bai, quyet-dinh-kho) nhưng cả hai ô đang trỏ vào mục chưa publish — chưa đổi, chờ quyết định."
+    },
+    {
+      "date": "2026-09-22",
+      "entry": "behavioral_coverage: that-bai (1184-test-xanh-bug-van-len-staging) và quyet-dinh-kho (feature-flag-nhu-release-gate) chuyển sang selector-jquery-lot-len-staging — bài đã publish, có thẻ phỏng vấn. Hai mục cũ vẫn ở stage ready và giờ không còn giữ ô nào."
     }
   ]
 }
