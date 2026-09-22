@@ -39,6 +39,20 @@ Mẫu chi tiết: `references/career-card.md` và `references/video-script.md`.
 - **Không bê nguyên bài kỹ thuật thành video.** Video cần hook 3 giây và một cung cảm
   xúc; blog cần bằng chứng. Cùng nguyên liệu, hai cách đóng gói.
 
+## Link phải thật, không được để placeholder
+
+Bản social chỉ có giá trị khi dán được ngay. Trước khi đánh dấu xong:
+
+1. Điền **URL thật** cho bài (cả hai ngôn ngữ) và cho `bench/` — đừng để `<link ...>`.
+   Site đã deploy thì URL có dạng `https://<user>.github.io/posts/<slug>/` và
+   `https://<user>.github.io/en/posts/<slug>/`.
+2. **Kiểm từng link trả về 200** bằng `curl -s -o /dev/null -w "%{http_code}"`. Link
+   `bench/` chỉ sống sau khi thư mục đó đã được push.
+3. Chưa deploy xong thì stage vẫn là `published`, **chưa phải** `done` — nói rõ đang
+   chờ gì thay vì để lại file đầy chỗ trống mà người dùng tưởng đã xong.
+
+Một bản nháp còn placeholder là việc chưa làm xong, dù file đã tồn tại.
+
 ## Sau khi cắt
 
 Cập nhật `pipeline/state.json`: `stage: "done"`, ghi `paths.career`, `paths.video`.

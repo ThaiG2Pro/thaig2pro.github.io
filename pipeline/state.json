@@ -210,7 +210,7 @@
         "repro": "bench/lock-bi-danh-roi-khi-refactor/ — chạy thật trên Laravel 12 / PHP 8.2, khớp kịch bản README"
       },
       "blocked_on": null,
-      "next_action": null,
+      "next_action": "Đăng bản social khi muốn (việc thủ công, ngoài pipeline)",
       "paths": {
         "post": "content/posts/lock-bi-danh-roi-khi-refactor.en.md",
         "post_alt": "content/posts/lock-bi-danh-roi-khi-refactor.md",
@@ -251,6 +251,10 @@
         {
           "date": "2026-09-21",
           "event": "content-derive: thẻ CV/STAR + post social; không làm video (thể loại A)"
+        },
+        {
+          "date": "2026-09-22",
+          "event": "điền 3 link thật vào bản social, kiểm 200 OK — trước đó còn placeholder"
         }
       ]
     },
