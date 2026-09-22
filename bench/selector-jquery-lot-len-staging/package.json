@@ -1,0 +1,12 @@
+{
+  "name": "selector-jquery-lot-len-staging-bench",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Repro for the post: a jQuery selector that matches zero elements, and a 422 that renders into a hidden tab pane.",
+  "scripts": {
+    "test": "playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.63.0"
+  }
+}

@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Adjust quantity — selector / hidden-pane repro</title>
+<style>
+  :root { font: 15px/1.5 system-ui, sans-serif; }
+  body { margin: 0; padding: 24px; background: #f4f5f7; color: #16181d; }
+  .controls { max-width: 560px; margin: 0 auto 16px; padding: 12px 16px;
+              background: #fff; border: 1px solid #d7dae0; border-radius: 6px; }
+  .controls label { margin-right: 18px; }
+  .modal { max-width: 560px; margin: 0 auto; background: #fff;
+           border: 1px solid #d7dae0; border-radius: 6px; }
+  .modal-header { padding: 14px 18px; border-bottom: 1px solid #e6e8ec; font-weight: 600; }
+  .modal-body { padding: 18px; }
+  ul.nav { display: flex; gap: 4px; list-style: none; margin: 0 0 14px; padding: 0;
+           border-bottom: 1px solid #e6e8ec; }
+  ul.nav .nav-link { display: block; padding: 8px 16px; cursor: pointer;
+                     border: 1px solid transparent; border-bottom: none; border-radius: 4px 4px 0 0; }
+  ul.nav .nav-link.active { background: #fff; border-color: #e6e8ec; font-weight: 600; }
+  .tab-pane { display: none; }
+  .tab-pane.active { display: block; }
+  label.field { display: block; margin-bottom: 6px; color: #4a4f59; }
+  input[type=number] { width: 100%; box-sizing: border-box; padding: 8px 10px;
+                       border: 1px solid #c8ccd4; border-radius: 4px; font: inherit; }
+  .field-error { margin-top: 6px; color: #b3261e; font-size: 14px; }
+  .alert { margin: 0 0 14px; padding: 10px 12px; border-radius: 4px;
+           background: #fdeceb; border: 1px solid #f3b8b4; color: #8c1d18; }
+  button { margin-top: 16px; padding: 9px 18px; font: inherit; cursor: pointer;
+           background: #1a56db; color: #fff; border: 0; border-radius: 4px; }
+  .wire { max-width: 560px; margin: 16px auto 0; }
+  .wire h2 { font-size: 13px; text-transform: uppercase; letter-spacing: .04em;
+             color: #6b717c; margin: 0 0 6px; }
+  pre { margin: 0; padding: 12px 14px; background: #16181d; color: #e4e6ea;
+        border-radius: 6px; overflow-x: auto; font-size: 13px; }
+</style>
+</head>
+<body>
+
+<div class="controls">
+  <strong>Config</strong> (also settable as <code>?broken=1&amp;naive=1</code>)<br>
+  <label><input type="checkbox" id="cfg-broken"> broken selector</label>
+  <label><input type="checkbox" id="cfg-naive"> naive error rendering</label>
+  <div style="margin-top:6px;color:#6b717c;font-size:14px">
+    Stock available for this SKU: <strong id="stock">3</strong>
+  </div>
+</div>
+
+<div class="modal">
+  <div class="modal-header">Adjust allocated quantity — SKU-A</div>
+  <div class="modal-body" id="modal-body">
+
+    <!-- The tab HEADERS live here, in the <ul>. They carry .nav-link and data-type. -->
+    <ul class="nav" id="adjustmentTabs">
+      <li><span class="nav-link active" data-type="increase" data-pane="pane-increase">Increase</span></li>
+      <li><span class="nav-link" data-type="decrease" data-pane="pane-decrease">Decrease</span></li>
+    </ul>
+
+    <!-- The tab PANES live here. No .nav-link inside this element. -->
+    <div id="adjustmentTabContent">
+      <div class="tab-pane active" id="pane-increase">
+        <label class="field" for="increase_quantity">Increase by</label>
+        <input type="number" id="increase_quantity" name="increase_quantity" min="1" placeholder="0">
+      </div>
+      <div class="tab-pane" id="pane-decrease">
+        <label class="field" for="decrease_quantity">Decrease by</label>
+        <input type="number" id="decrease_quantity" name="decrease_quantity" min="1" placeholder="0">
+      </div>
+    </div>
+
+    <button id="submit" type="button">Submit</button>
+  </div>
+</div>
+
+<div class="wire">
+  <h2>What went over the wire</h2>
+  <pre id="wire">(nothing submitted yet)</pre>
+  <h2 style="margin-top:12px">Server response</h2>
+  <pre id="response">(nothing submitted yet)</pre>
+</div>
+
+<script src="vendor/jquery-3.7.1.slim.min.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  var STOCK = 3;
+
+  // ----- config -------------------------------------------------------------
+  var params = new URLSearchParams(location.search);
+  var cfg = {
+    broken: params.get('broken') !== '0',   // default: reproduce the bug
+    naive:  params.get('naive')  !== '0'
+  };
+  $('#cfg-broken').prop('checked', cfg.broken);
+  $('#cfg-naive').prop('checked', cfg.naive);
+  $('#cfg-broken, #cfg-naive').on('change', function () {
+    location.search = '?broken=' + ($('#cfg-broken').is(':checked') ? 1 : 0) +
+                      '&naive='  + ($('#cfg-naive').is(':checked')  ? 1 : 0);
+  });
+  $('#stock').text(STOCK);
+
+  // ----- tab behaviour (what Bootstrap does: display:none on the inactive pane)
+  $('#adjustmentTabs').on('click', '.nav-link', function () {
+    $('#adjustmentTabs .nav-link').removeClass('active');
+    $(this).addClass('active');
+    $('#adjustmentTabContent .tab-pane').removeClass('active');
+    $('#' + $(this).data('pane')).addClass('active');
+  });
+
+  // ----- the bug ------------------------------------------------------------
+  // #adjustmentTabContent holds the PANES. The .nav-link elements are in the <ul>
+  // ABOVE it. This selector is valid, and matches zero elements.
+  var SELECTOR_BROKEN = '#adjustmentTabContent .nav-link.active';
+  var SELECTOR_FIXED  = '#adjustmentTabs .nav-link.active';
+
+  function buildPayload() {
+    var $active = $(cfg.broken ? SELECTOR_BROKEN : SELECTOR_FIXED);
+
+    // jQuery does not treat "zero matches" as an error.
+    // .data() on an empty set returns undefined, and the default branch wins.
+    var type = $active.data('type') || 'decrease';
+
+    var field = type + '_quantity';
+    var payload = { adjustment_type: type };
+    payload[field] = Number($('[name="' + field + '"]').val() || 0);
+    return payload;
+  }
+
+  // ----- fake server: well-formed 422, keyed to a field name ----------------
+  function server(payload) {
+    var field = payload.adjustment_type + '_quantity';
+    var qty = payload[field];
+    var errors = {};
+    if (!(qty >= 1)) {
+      errors[field] = 'The quantity must be at least 1.';
+    } else if (payload.adjustment_type === 'increase' && qty > STOCK) {
+      errors[field] = 'Only ' + STOCK + ' units are available.';
+    }
+    return $.isEmptyObject(errors) ? { status: 200 } : { status: 422, errors: errors };
+  }
+
+  // ----- error rendering ----------------------------------------------------
+  function clearErrors() {
+    $('.field-error').remove();
+    $('#fallback-alert').remove();
+  }
+
+  // What the front end did: for each field, find the input, render next to it.
+  function renderNaive(errors) {
+    clearErrors();
+    Object.keys(errors).forEach(function (field) {
+      var $input = $('[name="' + field + '"]');
+      $('<div class="field-error"></div>').text(errors[field]).insertAfter($input);
+    });
+  }
+
+  // The fix: a message that cannot be shown in place falls through to a shared box.
+  function renderVisibilityAware(errors) {
+    clearErrors();
+    var orphans = [];
+    Object.keys(errors).forEach(function (field) {
+      var $input = $('[name="' + field + '"]');
+      if ($input.length && $input.is(':visible')) {
+        $('<div class="field-error"></div>').text(errors[field]).insertAfter($input);
+      } else {
+        orphans.push(errors[field]);
+      }
+    });
+    if (orphans.length) {
+      $('#modal-body').prepend(
+        $('<div class="alert" id="fallback-alert"></div>').text(orphans.join(' '))
+      );
+    }
+  }
+
+  // ----- submit -------------------------------------------------------------
+  $('#submit').on('click', function () {
+    var payload = buildPayload();
+    $('#wire').text(JSON.stringify(payload));
+
+    var res = server(payload);
+    $('#response').text(JSON.stringify(res));
+
+    clearErrors();
+    if (res.status === 422) {
+      (cfg.naive ? renderNaive : renderVisibilityAware)(res.errors);
+    }
+  });
+}());
+</script>
+</body>
+</html>

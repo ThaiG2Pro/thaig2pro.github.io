@@ -289,18 +289,21 @@
       "title": "Selector jQuery trỏ nhầm vùng tab + lỗi 422 bị nuốt",
       "created": "2026-09-21",
       "genre": "A",
-      "stage": "needs-bench",
+      "stage": "needs-audit",
       "lang_primary": "en",
       "evidence": {
-        "numbers": "100% thao tác Tăng fail 422 trên STG; 0 thông báo lỗi hiển thị cho user",
-        "method": "QC thủ công trên STG + đọc DOM: selector match 0 phần tử",
-        "repro": "bench/selector-jquery-lot-len-staging/ — 1 trang HTML tĩnh (CHƯA dựng)"
+        "numbers": "100% thao tác Tăng fail 422 trên STG; 0 thông báo lỗi hiện cho user (đo TRƯỚC khi sửa, không có lượt QC sau); commit fix = 1 file view, 0 file test; 0 spec trình duyệt cho modal này",
+        "method": "QC thủ công trên STG + đọc DOM; kiểm lại sau 5 ngày: git log nhánh, grep artifact SDLC, đối chiếu package.json và 8 change khác có qa/pw-scripts/",
+        "repro": "bench/selector-jquery-lot-len-staging/ — trang HTML tĩnh + 1 spec Playwright; đã chạy thật, 6/6 xanh"
       },
-      "blocked_on": "thiếu bench/selector-jquery-lot-len-staging/ (link trong bài đang 404) và static/images/posts/selector-jquery-lot-len-staging/cover.png",
-      "next_action": "Chạy /content-bench dựng trang HTML tĩnh repro, rồi /content-artwork làm cover.png; sau đó mới publish",
+      "blocked_on": "không còn thiếu tài sản; bench chưa push lên main nên link trong bài vẫn 404 cho tới khi commit+push",
+      "next_action": "Chạy /content-audit lại (vòng 2: số liệu, bench chạy thật, ảnh), rồi commit+push và chuyển published",
       "paths": {
         "post": "content/posts/selector-jquery-lot-len-staging.en.md",
-        "post_alt": "content/posts/selector-jquery-lot-len-staging.md"
+        "post_alt": "content/posts/selector-jquery-lot-len-staging.md",
+        "bench": "bench/selector-jquery-lot-len-staging/",
+        "cover": "static/images/posts/selector-jquery-lot-len-staging/cover.png",
+        "cover_svg": "static/images/posts/selector-jquery-lot-len-staging/cover.svg"
       },
       "history": [
         {
@@ -318,6 +321,22 @@
         {
           "date": "2026-09-22",
           "event": "content-write: bản EN 1327 từ + bản VI 1470 từ; hugo build sạch; quét định danh sạch; chặn ở bench + cover.png"
+        },
+        {
+          "date": "2026-09-22",
+          "event": "content-audit: 2 lỗi chặn (số \"sau khi sửa\" không nguồn, bench 404) + 6 mục nên sửa. Tác giả xác minh: không có lượt QC lại, không có test; Playwright CÓ sẵn trong repo (8 ticket khác dùng) → luận điểm bài đổi từ \"thiếu hạ tầng E2E\" sang \"hạ tầng có sẵn mà ticket không dùng\". Đã sửa 2 bản + inbox."
+        },
+        {
+          "date": "2026-09-22",
+          "event": "content-write: áp 5 mục \"nên sửa\" của audit (dịch trật \"hai đường\", 2 chỗ lệch nội dung hai bản, chẻ mệnh đề 3 chi phí, cắt 1 ý trùng ở mục Đánh đổi). EN 1356 từ, VI 1568 từ."
+        },
+        {
+          "date": "2026-09-22",
+          "event": "content-bench: dựng bench và CHẠY THẬT trong mcr.microsoft.com/playwright:v1.63.0-noble — 6/6 spec xanh trong 2.2s. Phát hiện của bài nằm ở test 3: cùng một lượt chạy, assertion \"lỗi có được vẽ ra không\" xanh trong khi boundingBox() trả null. Đo được chi phí khung alert chung: form bị đẩy xuống 59px (viewport 900x900 của repro, không phải số của production). Lỗi gặp khi chạy: caret ^1.60.0 resolve lên 1.63.0 nên không khớp image v1.60.0 → đã ghim đúng phiên bản."
+        },
+        {
+          "date": "2026-09-22",
+          "event": "content-artwork: cover.svg + cover.png 1200x630. Hình chia hai nửa — trái \"what the operator saw\" (modal, tab Increase, ô nhập 5, thông báo lỗi co thành một vạch đỏ cao 0), phải \"what the DOM contained\" (khối tab-pane display:none chứa nguyên văn thông báo), mũi tên nối hai bên, dòng chốt boundingBox() -> null. Đã mở ảnh ra nhìn: không tràn khung, không chồng chữ, chữ nhỏ nhất 22px."
         }
       ]
     },
@@ -438,6 +457,14 @@
     {
       "date": "2026-09-22",
       "event": "content-write selector-jquery-lot-len-staging (A/EN): viết 2 bản, chặn ở bench chưa dựng và cover.png"
+    },
+    {
+      "date": "2026-09-22",
+      "entry": "selector-jquery-lot-len-staging: bench đã chạy thật (Playwright 1.63.0, 6/6 xanh), stage needs-bench → needs-assets. Blocker còn lại duy nhất: cover.png."
+    },
+    {
+      "date": "2026-09-22",
+      "entry": "selector-jquery-lot-len-staging: cover.png xong, stage needs-assets -> needs-audit. Hết blocker tài sản."
     }
   ]
 }

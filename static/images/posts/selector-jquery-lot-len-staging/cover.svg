@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <style>
+      .mono { font-family: ui-monospace, "DejaVu Sans Mono", monospace; }
+      .label { font-size: 22px; fill: #6b717c; letter-spacing: 2px; }
+      .dim   { fill: #6b717c; }
+      .fg    { fill: #e4e6ea; }
+      .err   { fill: #ef6a63; }
+    </style>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#ef6a63"/>
+    </marker>
+  </defs>
+
+  <rect width="1200" height="630" fill="#16181d"/>
+
+  <!-- ================= LEFT: what the operator saw ================= -->
+  <text xml:space="preserve" class="mono label" x="80" y="112">WHAT THE OPERATOR SAW</text>
+
+  <rect x="80" y="146" width="480" height="300" rx="10" fill="#1e2128" stroke="#2c3038" stroke-width="2"/>
+
+  <!-- tab headers -->
+  <rect x="104" y="174" width="150" height="44" rx="6" fill="#262a33"/>
+  <text xml:space="preserve" class="mono fg"  x="179" y="205" font-size="24" text-anchor="middle">Increase</text>
+  <text xml:space="preserve" class="mono dim" x="330" y="205" font-size="24" text-anchor="middle">Decrease</text>
+  <line x1="104" y1="228" x2="536" y2="228" stroke="#2c3038" stroke-width="2"/>
+
+  <!-- input -->
+  <rect x="104" y="256" width="432" height="52" rx="6" fill="#16181d" stroke="#3a3f4a" stroke-width="2"/>
+  <text xml:space="preserve" class="mono fg" x="122" y="290" font-size="26">5</text>
+
+  <!-- the collapsed error: zero pixels tall -->
+  <line x1="104" y1="330" x2="536" y2="330" stroke="#ef6a63" stroke-width="4"/>
+
+  <!-- submit -->
+  <rect x="104" y="356" width="150" height="46" rx="6" fill="#1a56db"/>
+  <text xml:space="preserve" class="mono" x="179" y="386" font-size="22" fill="#ffffff" text-anchor="middle">Submit</text>
+
+  <!-- ================= RIGHT: what the DOM contained ================= -->
+  <text xml:space="preserve" class="mono label" x="680" y="112">WHAT THE DOM CONTAINED</text>
+
+  <rect x="680" y="146" width="440" height="300" rx="10" fill="#1e2128" stroke="#2c3038" stroke-width="2"/>
+
+  <text xml:space="preserve" class="mono dim" x="704" y="192" font-size="22">&lt;div class="tab-pane"</text>
+  <text xml:space="preserve" class="mono"     x="704" y="224" font-size="22"><tspan class="dim">     style="</tspan><tspan class="fg">display:none</tspan><tspan class="dim">"&gt;</tspan></text>
+  <text xml:space="preserve" class="mono dim" x="704" y="268" font-size="22">  &lt;div class="field-error"&gt;</text>
+  <text xml:space="preserve" class="mono err" x="704" y="300" font-size="22">    The quantity must be</text>
+  <text xml:space="preserve" class="mono err" x="704" y="330" font-size="22">    at least 1.</text>
+  <text xml:space="preserve" class="mono dim" x="704" y="362" font-size="22">  &lt;/div&gt;</text>
+  <text xml:space="preserve" class="mono dim" x="704" y="394" font-size="22">&lt;/div&gt;</text>
+
+  <!-- arrow: the message on the right is the hairline on the left -->
+  <path d="M 672 318 C 630 318 610 330 572 330" fill="none" stroke="#ef6a63"
+        stroke-width="3" marker-end="url(#arrow)"/>
+
+  <!-- ================= the punchline ================= -->
+  <text xml:space="preserve" class="mono fg" x="600" y="548" font-size="36" text-anchor="middle">boundingBox() -&gt; null</text>
+  <text xml:space="preserve" class="mono dim" x="600" y="586" font-size="22" text-anchor="middle">a well-formed 422, rendered into nothing</text>
+</svg>

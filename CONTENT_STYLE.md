@@ -52,6 +52,31 @@ Một bài kèm script reproduce mạnh hơn hẳn bài chỉ có kết luận.
 Ngoại lệ duy nhất: thể loại D (storytelling) không có số — bù lại phải có
 **mốc thời gian, vai trò cụ thể, và quyết định bạn đã ra**.
 
+### Khẳng định về bối cảnh cũng phải truy nguồn
+
+Cổng trên chỉ soi **con số**. Nhưng một bài kỹ thuật còn khẳng định rất nhiều thứ về
+codebase và về quy trình mà không dùng đến chữ số nào — và những câu đó lọt sạch. Hai
+dạng đã thực sự lọt lên blog này (L-014, L-015):
+
+| Dạng | Ví dụ thật đã lọt |
+|---|---|
+| Phủ định về năng lực | *"dự án chưa có bộ khung test trình duyệt nào"* — sai, Playwright có sẵn |
+| Lượng từ thay cho số đếm | *"modal này có **vài** ô như vậy"* — chưa ai đếm, inbox ghi đúng một |
+
+Cả hai đều **có lợi cho tác giả**: câu thứ nhất giải thích vì sao không làm việc lẽ ra
+phải làm, câu thứ hai phóng to vấn đề vừa đủ để phương án đã chọn nghe hợp lý. Đó là lý
+do chính tác giả không muốn đi kiểm.
+
+**Hành động kiểm được:** liệt kê mọi câu nói dự án **có** hay **không có** thứ gì, mọi
+câu ước lượng công sức ("mất vài ngày"), và mọi lượng từ không đếm — **vài, nhiều, hầu
+hết, thường xuyên, một số, hiếm khi**. Với mỗi câu, ghi **lệnh đã dùng để kiểm**: một
+dòng `git log`, `package.json`, hay một lần `grep`. Không có lệnh thì chọn một trong ba:
+đổi thành con số đã đếm · hạ xuống điều chứng minh được · viết thẳng *"tôi không kiểm
+lại chỗ này"*.
+
+Soi trước hai vị trí, vì lỗi này gần như luôn nằm ở đó: câu **loại một phương án** trong
+mục Đánh đổi, và câu **giải thích vì sao bug lọt**.
+
 ---
 
 ## 3b. Cổng bảo mật nghề nghiệp (áp dụng từ Tầng 0)
@@ -141,6 +166,22 @@ giả là hiển nhiên. Người đọc không có bối cảnh đó, và một
 
 Phép thử: đưa bài cho một kỹ sư không làm trong dự án. Chỗ nào họ hỏi "cái này là gì",
 chỗ đó thiếu một mắt xích — kể cả khi từ ngữ đã đúng.
+
+### Một câu, tối đa hai khái niệm mới
+
+Giải thích đủ mắt xích rồi thì lỗi tiếp theo là nhồi hết chúng vào một câu. Tác giả đọc
+trôi vì đã biết trước cả chuỗi; người đọc phải giữ đồng thời từng mảnh trong đầu.
+
+**Hành động kiểm được:** với mỗi câu dài, đếm số **khái niệm kỹ thuật mới** nó bắt người
+đọc giữ — tên biến, tên hàm, trạng thái, giá trị, hệ quả. Quá **2** thì tách câu hoặc
+chuyển thành danh sách đánh số. Không cắt chữ, chỉ chẻ câu.
+
+| Nén quá tay (5 khái niệm) | Tách ra |
+|---|---|
+| "Gọi `.data('type')` trên một tập rỗng thì nhận về `undefined`, đoạn ráp dữ liệu rơi vào nhánh mặc định, nên mọi lần gửi đều đi ra dưới dạng mặc định: giảm, số lượng 0." | "Gọi `.data('type')` trên một tập rỗng thì trả về `undefined`. Đoạn ráp dữ liệu vì thế rơi vào nhánh mặc định. Kết quả: mọi request đều được gửi đi dưới dạng giảm, số lượng 0." |
+
+Một mệnh đề liệt kê từ ba chi phí / ba lý do trở lên cũng tính là nén quá tay — chẻ bằng
+dấu chấm phẩy có dẫn nhập ("Cái giá phải trả có ba phần: ...") hoặc tách thành bullet.
 
 ### Bằng chứng của thể loại A: tách hai loại
 
@@ -301,6 +342,9 @@ Ghi lỗi mới bằng `/content-lesson`. Soi bài theo kho này bằng `/conten
 2. Có bản dịch
 3. Mọi ảnh tồn tại trong `static/images/posts/<slug>/`
 4. Có mục Trade-offs và mục giới hạn
-5. Mọi con số truy được về `bench/<slug>/` hoặc nguồn ngoài có link
-6. Đã qua `/content-audit` — vòng soi độc lập, không phải tự kiểm
+5. Mọi con số truy được về `bench/<slug>/` hoặc nguồn ngoài có link. Kể cả thứ **không
+   phải con số**: mỗi khẳng định về bối cảnh và mỗi lượng từ không đếm phải ghi được
+   lệnh đã dùng để kiểm (mục "Khẳng định về bối cảnh cũng phải truy nguồn")
+6. Đã qua `/content-audit` — vòng soi độc lập, không phải tự kiểm. Trong đó có bước
+   đếm khái niệm mới trên mỗi câu dài (mục "Một câu, tối đa hai khái niệm mới")
 7. `hugo --gc --minify` chạy sạch

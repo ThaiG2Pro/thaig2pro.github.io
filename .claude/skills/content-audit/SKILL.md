@@ -30,6 +30,22 @@ xóa hoặc đổi thành lời tự khai.
 Soi kỹ nhất những con số **bất lợi cho tác giả** (L-010): chúng nghe như tự phê bình nên
 dễ lọt qua mọi vòng kiểm.
 
+Rồi làm lượt thứ hai, cho thứ **không phải con số** (L-014, L-015). Liệt kê mọi câu nói
+dự án **có** hay **không có** thứ gì, mọi câu ước lượng công sức ("mất vài ngày"), và
+mọi lượng từ không đếm — **vài, nhiều, hầu hết, thường xuyên, một số, hiếm khi**. Với
+mỗi câu, ghi **lệnh đã dùng để kiểm** nó: một dòng `git log`, `package.json`, hay một
+lần `grep`. Không có lệnh → báo là **khẳng định không nguồn**, đề xuất một trong ba: đổi
+thành con số đã đếm · hạ xuống điều chứng minh được · viết thẳng "tôi không kiểm lại chỗ
+này".
+
+Hai vị trí soi trước, vì lỗi này gần như luôn nằm ở đó: câu **loại một phương án** trong
+mục Đánh đổi, và câu **giải thích vì sao bug lọt**. Ở cả hai, khẳng định luôn có lợi cho
+tác giả — đó là dấu hiệu, không phải sự trùng hợp.
+
+Đọc luôn mục "What this does not measure" trong `bench/<slug>/README.md` và đối chiếu
+với bài: thứ bench tự khai là **không chứng minh được** mà bài vẫn khẳng định chắc nịch,
+là đúng chỗ cần soi.
+
 ### 2. Chạy lại bằng chứng
 Đừng đọc `bench/README.md` rồi tin. **Chạy** kịch bản trong đó bằng Docker, so từng bước
 với kết quả được ghi. Đồng thời `curl` mọi link trong bài — link `bench/` chỉ sống sau
@@ -44,6 +60,14 @@ thành ngữ Anh dịch thẳng, câu nhiều danh từ ghép, câu bị nuốt 
 
 Rồi tìm **mắt xích bị bỏ** (L-003): hậu quả có ví dụ số chưa · đã giải thích vì sao không
 ai phát hiện ra chưa · công cụ cư xử lạ đã nói vì sao chưa.
+
+Rồi **đếm khái niệm mới trên từng câu dài** (L-008): tên biến, tên hàm, trạng thái, giá
+trị, hệ quả. Quá 2 thì đề xuất chẻ câu; một mệnh đề liệt kê từ ba chi phí trở lên cũng
+tính. Đây là bước đếm, không phải bước cảm nhận — làm được mà không cần đọc to.
+
+Hai lỗi giọng hay gặp, cùng nhóm: **gồng văn** (L-006) — câu không thêm thông tin nào cho
+câu trước, xóa đi đoạn vẫn đủ nghĩa; và **lộ đáp án quá sớm** (L-007) — che mục Mổ xẻ
+lại, nếu mục đầu đã trả lời được "vì sao hỏng" thì lộ rồi.
 
 Báo cáo theo **số dòng**, kèm câu viết lại đề xuất. Nói "văn hơi cứng" là vô dụng.
 
