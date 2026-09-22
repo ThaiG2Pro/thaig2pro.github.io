@@ -96,6 +96,10 @@ Trước khi ghi bất cứ thứ gì sang vùng công khai, thay:
 - Đường dẫn module nội bộ → mô tả vai trò: "service tính tồn khả dụng"
 - Tên sản phẩm/khách hàng/đồng nghiệp → mô tả chung: "một hệ thống bán hàng có chương
   trình khuyến mãi"
+- **Log và history** (`pipeline/state.json`, `lessons/`) cũng là vùng công khai. Khi ghi
+  "đã khử định danh", **không liệt kê thứ đã khử** — viết "đã khử định danh" rồi dừng.
+  Kiểm: `grep -nE "khử định danh \(|đã loại \(" pipeline/state.json lessons/*.md` phải
+  trả về rỗng (L-055).
 
 **Giữ nguyên:** con số, tỷ lệ, cơ chế, quyết định, cái giá phải trả. Đó mới là thứ làm
 bài có giá trị — và không có thứ nào trong đó cần định danh để hiểu được.

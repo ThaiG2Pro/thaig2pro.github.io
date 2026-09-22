@@ -406,7 +406,7 @@
         },
         {
           "date": "2026-09-22",
-          "event": "content-write: bản VI 1001 từ (khung Bối cảnh/Xung đột/Quyết định/Cái giá/Điều làm khác đi) + bản EN 782 từ viết lại. Nguồn: drafts/inbox.md mục 2026-09-08, đã khử định danh (không nhắc tên định danh ở đây). hugo --gc --minify sạch; quét định danh sạch. Chặn ở cover.png. Stage ready -> needs-assets."
+          "event": "content-write: bản VI 1001 từ (khung Bối cảnh/Xung đột/Quyết định/Cái giá/Điều làm khác đi) + bản EN 782 từ viết lại. Nguồn: drafts/inbox.md mục 2026-09-08, đã khử định danh. hugo --gc --minify sạch; quét định danh sạch. Chặn ở cover.png. Stage ready -> needs-assets."
         },
         {
           "date": "2026-09-22",

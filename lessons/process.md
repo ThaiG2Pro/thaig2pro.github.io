@@ -29,3 +29,22 @@ nhưng đã đánh dấu mục là `done`. Dán lên là ra chữ trong ngoặc 
 sửa 3 vòng, ảnh bị đẩy sang "người dùng tự lo", bench viết ra 6 lỗi chặn.
 **Luật:** mỗi skill một chuyên môn. Tách ra thì luật của từng skill mới đủ sâu.
 **Đã vá:** tách `/content-artwork` và `/content-bench`.
+
+## L-055 · 2026-09-22 · log-nhắc-tên-định-danh-để-chứng-minh-đã-khử
+**Lỗi:** history của một mục trong `pipeline/state.json` ghi *"đã khử định danh"* rồi mở ngoặc
+liệt kê luôn mã ticket, tên sản phẩm và tên file thiết kế "không xuất hiện trong bài" — chính câu
+báo cáo đã khử lại chép nguyên ba định danh vào file công khai. Lặp lần hai của L-050
+(cùng file, cùng loại rò), khác cơ chế: lần này là **bước viết tự ghi log**, không phải
+người gõ tay.
+**Ai bắt:** `scripts/scan-identifiers.sh` khi `/content-audit` vòng 2 stage file — bắt
+được mã ticket theo regex chung; tên sản phẩm chỉ lộ khi đọc tay dòng bên cạnh, vì chưa
+có trong `.git/identifiers.local`.
+**Vì sao lọt:** bước viết kiểm bài xong thì muốn *chứng minh* đã kiểm, và cách chứng
+minh tự nhiên nhất là liệt kê thứ đã loại — tức là chép định danh từ vùng riêng sang
+vùng công khai. Checklist mục 6 chỉ hỏi "bài đã khử chưa", không hỏi "log ghi gì".
+**Dấu hiệu:** trong `pipeline/state.json` hoặc `lessons/`, mọi cụm *"đã khử (…)"*, *"đã
+loại (…)"*, *"không nhắc tới (…)"* có dấu ngoặc mở theo sau. Nội dung trong ngoặc gần
+như chắc chắn là định danh thật. Phép thử một lệnh:
+`grep -nE "khử định danh \(|đã loại \(|không xuất hiện" pipeline/state.json lessons/*.md`.
+**Đã vá:** nâng thành luật ở `CONTENT_STYLE.md` mục 3b, gạch đầu dòng "Log và history".
+Thêm tên sản phẩm vào `.git/identifiers.local` để lần sau bộ quét bắt được cả nó.
