@@ -6,7 +6,7 @@
   },
   "behavioral_coverage": {
     "that-bai": "selector-jquery-lot-len-staging",
-    "mau-thuan": null,
+    "mau-thuan": "quota-ma-thieu-foreign-key",
     "deadline": null,
     "tu-hoc": "lock-bi-danh-roi-khi-refactor",
     "quyet-dinh-kho": "selector-jquery-lot-len-staging"
@@ -172,7 +172,7 @@
       "title": "Quota ma: thiếu foreign key",
       "created": "2026-09-21",
       "genre": "A",
-      "stage": "published",
+      "stage": "done",
       "lang_primary": "en",
       "evidence": {
         "numbers": "14 dòng orphan = 294 đơn vị bị khoá trên DB dev; production chưa đo",
@@ -180,12 +180,14 @@
         "repro": "query V7 dán nguyên trong bài + seed 1 dòng orphan trong test migration"
       },
       "blocked_on": null,
-      "next_action": "Chạy /content-derive trong 24h (trước 2026-09-23 15:45). Sau đó: /content-bench dựng bench/quota-ma-thieu-foreign-key/ (schema 3 bảng + seed 1 orphan + query V7); sửa cover quota=294 → quota nhỏ hơn tổng.",
+      "next_action": "Tùy chọn: /content-bench dựng bench/quota-ma-thieu-foreign-key/ (schema 3 bảng + seed 1 orphan + query V7); /content-artwork sửa cover quota=294 → nhỏ hơn tổng.",
       "paths": {
         "post": "content/posts/quota-ma-thieu-foreign-key.en.md",
         "post_alt": "content/posts/quota-ma-thieu-foreign-key.md",
         "cover": "static/images/posts/quota-ma-thieu-foreign-key/cover.png",
-        "cover_svg": "static/images/posts/quota-ma-thieu-foreign-key/cover.svg"
+        "cover_svg": "static/images/posts/quota-ma-thieu-foreign-key/cover.svg",
+        "career": "career/quota-ma-thieu-foreign-key.md",
+        "social": "drafts/social-quota-ma-thieu-foreign-key.md"
       },
       "history": [
         {
@@ -219,6 +221,10 @@
         {
           "date": "2026-09-22",
           "event": "content-audit vòng 4 đạt (0 chặn, 5 nên sửa để lại: cover quota=294 lệch tổng, 2 câu dài L51/L55, chi tiết audit-table EN L49, chưa có bench). Stage needs-audit -> published."
+        },
+        {
+          "date": "2026-09-22",
+          "event": "Commit 1dc336b + 21e986f push main; site live 200 cả EN/VI/cover. content-derive: career card (CV bullet, STAR, 3 lát cắt, 3 câu đào sâu) + social EN/VI, link đã curl 200. behavioral_coverage mau-thuan ← slug này. Stage published -> done."
         }
       ]
     },

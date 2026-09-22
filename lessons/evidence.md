@@ -88,3 +88,39 @@ trả lời được thì mọi con số khác trong bài cũng mất giá theo.
 **Đã vá:** nâng thành luật ở hai chỗ, cùng với L-014 — `CONTENT_STYLE.md` mục 3, tiểu
 mục "Khẳng định về bối cảnh cũng phải truy nguồn"; và `/content-audit` vòng 1, bước liệt
 kê khẳng định bối cảnh kèm lệnh đã dùng để kiểm.
+
+## L-016 · 2026-09-22 · sự-kiện-kể-chuyện-bịa
+**Lỗi:** bài thể loại D (kể chuyện) viết ra **sự kiện chưa xảy ra**, không phải con số.
+Bản nháp bài feature flag kể: "dựng ví dụ số giả định, trình bày cho người quản lý sản
+phẩm và trưởng nhóm bên kia, họ đồng ý không cần tranh luận", "phải giải thích lại
+nhiều lần", "nhắc lại nhiều lần", "khách hàng lớn đang chờ, ngày ra mắt đã chốt với đối
+tác", "làm ngược thứ tự thì chậm lại vài giờ". Mục inbox tương ứng không có sự kiện nào
+trong đó, và còn ghi rõ *"chưa đo, flag vẫn false trên production"* — tức là phần Cái giá
+kể hậu quả của một việc **chưa kết thúc**.
+**Ai bắt:** `/content-audit` vòng 1, lượt soi thứ hai (khẳng định không phải con số).
+**Vì sao lọt:** thể loại D không bắt buộc có số, nên cổng số (checklist mục 5) gần như
+không có gì để soi. L-014/L-015 nhắm vào **khẳng định bối cảnh** ("dự án không có X") và
+**lượng từ**; một câu kể *"tôi đã làm A, họ phản ứng B"* không thuộc hai lớp đó nên đi
+qua. Cơ chế sinh lỗi giống L-010: khung D yêu cầu mục "Quyết định" và "Cái giá" có
+độ dài nhất định, inbox chỉ có ba dòng, nên bước viết **tự điền** cho đủ khung.
+**Dấu hiệu:** trong bài D, mọi câu có **người khác hành động hoặc phản ứng** (đồng ý, hỏi
+lại, từ chối, sốt ruột) và mọi câu ở mục Cái giá viết ở **thì quá khứ hoàn thành** trong
+khi inbox ghi việc còn đang dở. Phép thử: với mỗi sự kiện, tìm được dòng inbox nào kể nó
+không? Không có → hoặc bổ inbox bằng `/content-capture` (nếu thật), hoặc xóa.
+**Đã vá:** chưa vá — lần đầu gặp. Đề xuất nếu lặp: thêm vào
+`references/genre-d-storytelling.md` một bước "liệt kê từng sự kiện có người khác tham
+gia, trỏ về dòng inbox", và `/content-audit` vòng 1 soi mục Cái giá của bài D trước.
+
+## L-017 · 2026-09-22 · mốc-thời-gian-bịa
+**Lỗi:** bài viết *"Đầu tháng 9 năm ngoái"* / *"Early last September"* trong khi mục inbox
+ghi ngày 2026-09-08 và bài đăng ngày 2026-09-22 — sự việc xảy ra hai tuần trước, cùng
+năm. Thể loại D **bắt buộc có mốc thời gian**, và mốc đó bị viết sai.
+**Ai bắt:** `/content-audit` vòng 1.
+**Vì sao lọt:** "năm ngoái" là chữ, không phải chữ số, nên cổng số không bắt. Checklist
+D kiểm "có mốc thời gian chưa" (có/không), không kiểm "mốc đó khớp inbox chưa". Bước viết
+điền mốc theo phản xạ kể chuyện (kể chuyện thì "hồi đó"), không tra ngày trong inbox.
+**Dấu hiệu:** mọi cụm thời gian tương đối — *năm ngoái, hồi đó, vài tháng trước, gần đây*
+— trong bài D. Phép thử một lệnh: `grep -n '^## 20' drafts/inbox.md` lấy ngày mục nguồn,
+so với `date` trong front matter.
+**Đã vá:** chưa vá — lần đầu gặp. Đề xuất nếu lặp: khung D đổi mục kiểm "có mốc" thành
+"mốc khớp ngày mục inbox".
