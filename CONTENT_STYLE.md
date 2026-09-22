@@ -79,6 +79,17 @@ Phép thử trước khi publish: *người trong câu chuyện đọc được 
 ngoài có suy ra được đây là công ty nào không?* Một câu trả lời "không chắc" nghĩa là
 chưa khử đủ.
 
+**Quét tự động.** `scripts/scan-identifiers.sh` chạy qua git hook `pre-commit` trên
+**mọi file sắp commit**, không riêng `content/`. Hai rò rỉ thật đều nằm ngoài thư mục
+bài viết — một trong `pipeline/state.json`, một trong chính mục luật này — nên kiểm
+bằng mắt ở tầng bài viết là không đủ.
+
+- Mẫu chung nằm trong script (file công khai).
+- Từ khóa riêng của công ty nằm ở `.git/identifiers.local` — **không bao giờ commit**.
+  Gặp tên dự án/sản phẩm/đồng nghiệp mới thì thêm một dòng regex vào đó.
+- Dương tính giả: thêm chuỗi `scan-ok` vào cuối dòng, hoặc `git commit --no-verify`.
+- Sau khi clone lại: `git config core.hooksPath .githooks` (git config không theo repo).
+
 Kiểm tra thêm hợp đồng lao động/NDA của bạn về việc viết công khai chi tiết kỹ thuật
 công việc. Khử định danh làm giảm rủi ro nhưng không thay thế được việc đọc điều khoản.
 

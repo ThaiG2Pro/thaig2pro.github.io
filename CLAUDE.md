@@ -45,3 +45,15 @@ Spec đầy đủ: `CONTENT_STYLE.md`. Trạng thái: `pipeline/state.json` (đ�
 | `/content-review` | 5 | Mỗi quý, hoặc trước khi nộp CV |
 
 `career/` và `drafts/` không commit. `bench/` thì có — script reproduce là bằng chứng.
+
+## Quét định danh trước khi commit
+
+Hook `pre-commit` chạy `scripts/scan-identifiers.sh` trên mọi file sắp commit. Sau khi
+clone lại phải bật tay một lần:
+
+```bash
+git config core.hooksPath .githooks
+```
+
+Từ khóa riêng của công ty đặt ở `.git/identifiers.local` (không commit). Dương tính giả:
+thêm `scan-ok` vào cuối dòng.
