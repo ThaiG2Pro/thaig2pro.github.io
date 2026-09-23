@@ -27,7 +27,7 @@ The answer chosen was neither. The development branch, a third branch that was n
 
 It had not. Development did not have staging's line, so the copy dropped it. That is the first layer of damage: a resolve that was supposed to keep both sides kept one.
 
-The second layer is the one that crashed. Development also had one more line in that group: another ticket had registered a rate-limiting middleware there. It was backed by a package installed on development and never on staging. The copy brought the registration line and nothing else. On staging, the kernel now named a class that did not exist on disk. The framework resolves that class on every request that passes through the API group, so every API request failed the same way.
+The second layer is the one that crashed. Development also had one more line in that group: another ticket had registered a rate-limiting middleware there. It was backed by a package installed on development and never on staging. The copy brought the registration line and nothing else. On staging, the kernel now named a class that did not exist on disk. On staging, every request through the API group hit that missing class, so every API request failed the same way.
 
 Why did the check after the resolve not catch it? Because of the question it asked. The check was a diff of the resolved file against the branch being merged into, read with one question in mind: *did any line disappear?* Every line in the diff was a `+`. No `-`. Passed. The question that was never asked was the one that mattered: *does each of these `+` lines belong to one of the two sides of this merge?* One of them did not. The first fix restored the dropped line and went out verified the same one-sided way: zero lines missing, pass. The stray line was still in the file. It took the server log to say so.
 
@@ -38,13 +38,13 @@ git show -s --format='%P' <merge-commit>      # two hashes, p1 and p2
 git merge-base p1 p2                          # where they forked
 ```
 
-Relative to that merge-base, parent 1 added some lines and parent 2 added some lines. The resolved file may add the union of those and nothing more. Any `+` line in `base..merge` that is not a `+` line in `base..p1` or `base..p2` came from somewhere else. Same rule for `-` lines. Three diffs instead of one, all against reference points the merge itself defines. Run that way, the second fix showed zero lines whose origin could not be explained.
+Relative to that merge-base, parent 1 added some lines and parent 2 added some lines. The resolved file may add the union of those and nothing more. Any `+` line in `base..merge` that is not a `+` line in `base..p1` or `base..p2` came from somewhere else. Same rule for `-` lines. Three reference points instead of one, all defined by the merge itself. Run that way, the second fix showed zero lines whose origin could not be explained.
 
 ---
 
 ## Trade-offs
 
-- **Re-do the merge by hand, from the conflict markers.** Available, and it would have produced the same correct file. I did not take it, because the bad merge was already on the branch and I wanted a check that works on any merge commit *after the fact*, not only on one I am about to make. Re-resolving fixes this merge; a provenance check can be pointed at the last twenty.
+- **Re-do the merge by hand, from the conflict markers.** Available, and it would have produced the same correct file. I did not take it, because the bad merge was already on the branch and I wanted a check that works on any merge commit *after the fact*, not only on one I am about to make. Re-resolving fixes this merge; a provenance check can be pointed at every merge already on the branch.
 - **Keep the one-sided diff, read it more carefully.** Rejected. Reading harder is not a control. The diff against a single reference cannot distinguish "a line the other parent added" from "a line a third branch added", because both show as `+`. The information is not in that diff; no amount of attention puts it there.
 - **Compare against both true parents** (chosen). Cost: six `git diff` calls at three reference points, and 38 lines of shell. It also came with a rule I now hold as absolute. Never take content from a branch that is not one of the two parents to resolve a conflict between them, no matter how "complete" that branch looks. The check is a line-set comparison, so it is blind to ordering, and I will come back to that below.
 - **Install the missing package on staging instead.** Rejected. That would make the stray line stop crashing while leaving it stray. The rate limiter belonged to another ticket. Making the symptom go away is not the same as removing the line that had no right to be there.

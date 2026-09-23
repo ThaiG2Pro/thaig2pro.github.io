@@ -1,0 +1,35 @@
+{
+  "incident_set": {
+    "T": 200,
+    "campaigns": [
+      [
+        10,
+        1
+      ],
+      [
+        88,
+        9
+      ],
+      [
+        12,
+        0
+      ]
+    ],
+    "central_sold": 0,
+    "sum_qt": 110,
+    "sum_qu": 10,
+    "literal": 80,
+    "correct": 90,
+    "canon": 90,
+    "gap": 10
+  },
+  "random": {
+    "n": 10000,
+    "seed": 20260907,
+    "identity_violations": 0,
+    "canon_mismatches": 0,
+    "indistinguishable_cases": 1422,
+    "literal_negative_while_correct_nonneg": 7487
+  },
+  "assumption": "batch quantity_used = sum(quota_used) + central_sold; confirmed against the ordering write path (both counters written in one transaction, both reverted on cancel)"
+}

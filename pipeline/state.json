@@ -116,7 +116,7 @@
       "title": "Công thức trong ticket trừ hai lần",
       "created": "2026-09-21",
       "genre": "A",
-      "stage": "needs-assets",
+      "stage": "published",
       "lang_primary": "en",
       "evidence": {
         "numbers": "80 (đọc nghĩa đen) vs 90 (đúng, khớp màn hình) trên bộ số 200 / 10-1, 88-9, 12-0; sai số 10 = Σquota_used; 0/10000 ca ngẫu nhiên vi phạm đồng nhất thức gap = Σquota_used; hai dạng của spec (dạng batch và dạng T − Σqt − C, dạng sau là dạng đã ship) trùng nhau 10000/10000 ca dưới bất biến batch_used = Σqu + C; hai cách đọc trùng nhau khi Σquota_used = 0",
@@ -124,7 +124,7 @@
         "repro": "bench/cong-thuc-tru-hai-lan/run.sh — một lệnh, ghi results/summary.json; exit 1 nếu đồng nhất thức vỡ"
       },
       "blocked_on": null,
-      "next_action": "/content-audit vòng 3. Đạt thì commit bài + bench + ảnh trong một commit, push, kiểm link bench 200.",
+      "next_action": "Commit bài + bench + ảnh + state một commit, push, curl link bench 200. Rồi /content-derive trong 24h.",
       "paths": {
         "bench": "bench/cong-thuc-tru-hai-lan/",
         "vi": "content/posts/cong-thuc-tru-hai-lan.md",
@@ -169,6 +169,14 @@
         {
           "date": "2026-09-23",
           "event": "content-write fix pass 2 sau audit vòng 2: d.22 thành giả định 'nếu được cài y nguyên' (hai bản); 'every inventory rule' → 'a familiar shape'; 'unchecked' → 'tôi chưa kiểm'; chẻ câu cuối d.54; 3 câu VI viết lại (d.22, d.44, d.69). hugo sạch"
+        },
+        {
+          "date": "2026-09-23",
+          "event": "Tác giả đối chiếu tài liệu gốc: mọi khẳng định đạt. Sửa: câu d.22 thiếu động từ (hai bản); cắt bullet 3 Đánh đổi vì trùng ý d.77; thêm ví dụ thật ảnh thứ ba 14 phút sau hiện 89 (bổ inbox trước). Hai ảnh chụp và số 89 đã có nguồn trong inbox"
+        },
+        {
+          "date": "2026-09-23",
+          "event": "content-audit vòng 3: ĐẠT. Bench Docker khớp README 0 dòng lệch; 89 và 14 phút truy về inbox d.30; d.22 đủ động từ; 2 bullet Đánh đổi; scan sạch; 0 code span; hugo sạch; H2 4/4, front matter 10/10 hai bản. Còn duy nhất link bench 404 — hết khi push cùng commit. Nên sửa nhẹ: 'every other inventory rule' d.78."
         }
       ]
     },

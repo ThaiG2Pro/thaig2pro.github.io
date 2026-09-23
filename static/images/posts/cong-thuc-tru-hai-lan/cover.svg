@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" font-family="ui-monospace,'SFMono-Regular',Menlo,Consolas,monospace">
+  <rect width="1200" height="630" fill="#1d2021"/>
+  <rect x="0" y="0" width="1200" height="6" fill="#fb4934"/>
+
+  <text x="60" y="72" fill="#928374" font-size="22" letter-spacing="3">ONE SENTENCE, TWO SUBTRACTIONS</text>
+
+  <!-- scale: 5 px per unit, bar from x=100 to x=1100 = 200 units -->
+  <text x="100" y="128" fill="#a89984" font-size="24">total intake 200</text>
+  <text x="1100" y="128" fill="#a89984" font-size="24" text-anchor="end">one SKU</text>
+
+  <!-- bar -->
+  <g>
+    <!-- allocated 110 -->
+    <rect x="100" y="150" width="550" height="90" fill="#fabd2f" opacity="0.16" stroke="#fabd2f" stroke-width="1.5"/>
+    <!-- pool 90 -->
+    <rect x="650" y="150" width="450" height="90" fill="#8ec07c" opacity="0.14" stroke="#8ec07c" stroke-width="1.5"/>
+    <!-- campaign dividers -->
+    <line x1="150" y1="150" x2="150" y2="240" stroke="#fabd2f" stroke-width="1" opacity="0.6"/>
+    <line x1="590" y1="150" x2="590" y2="240" stroke="#fabd2f" stroke-width="1" opacity="0.6"/>
+    <!-- sold out of quota: 1 in P1, 9 in P2 -->
+    <rect x="145" y="150" width="5" height="90" fill="#fb4934"/>
+    <rect x="545" y="150" width="45" height="90" fill="#fb4934"/>
+  </g>
+
+  <!-- labels inside bar -->
+  <g font-size="24" fill="#ebdbb2">
+    <text x="102" y="205" font-size="20">10</text>
+    <text x="370" y="205" text-anchor="middle">quota 88</text>
+    <text x="620" y="205" text-anchor="middle" font-size="20">12</text>
+    <text x="875" y="205" text-anchor="middle">shared pool 90</text>
+  </g>
+  <text x="375" y="272" fill="#fabd2f" font-size="22" text-anchor="middle">allocated 110</text>
+
+  <!-- sold callout -->
+  <text x="567" y="300" fill="#fb4934" font-size="22" text-anchor="middle">sold out of quota: 10</text>
+  <line x1="567" y1="280" x2="567" y2="244" stroke="#fb4934" stroke-width="1.5"/>
+
+  <!-- readings -->
+  <g font-size="34">
+    <text x="100" y="400" fill="#a89984" font-size="24">ticket, read literally</text>
+    <text x="1100" y="400" fill="#fb4934" text-anchor="end">200 − 110 − 10 = 80</text>
+
+    <text x="100" y="480" fill="#a89984" font-size="24">production screen</text>
+    <text x="1100" y="480" fill="#8ec07c" text-anchor="end">200 − 110 −  0 = 90</text>
+  </g>
+  <!-- box around the second "10" (approx x 925-965 at 34px mono, right-anchored) -->
+  <rect x="954" y="366" width="50" height="44" rx="4" fill="none" stroke="#fb4934" stroke-width="1.5" stroke-dasharray="4 3"/>
+  <text x="979" y="345" fill="#fb4934" font-size="20" text-anchor="middle">already inside 110</text>
+
+  <line x1="100" y1="520" x2="1100" y2="520" stroke="#3c3836" stroke-width="1"/>
+  <text x="100" y="568" fill="#ebdbb2" font-size="26">gap = units sold out of quotas: the fingerprint of counting twice</text>
+</svg>

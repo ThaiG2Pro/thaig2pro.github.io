@@ -27,7 +27,7 @@ Câu trả lời là không bên nào cả. Nhánh development, nhánh thứ ba 
 
 Chưa có ai làm cả. Development không có dòng của phía staging, nên lần copy làm rơi mất dòng đó. Đây là lớp hỏng thứ nhất: một lần resolve đáng ra phải giữ cả hai bên thì chỉ giữ được một.
 
-Lớp thứ hai mới là lớp gây sập. Development còn có thêm một dòng nữa trong nhóm đó: một ticket khác đã đăng ký ở đây một middleware giới hạn tần suất (rate limit). Middleware này dựa trên một package được cài ở development và chưa bao giờ được cài ở staging. Lần copy mang theo dòng đăng ký, và chỉ dòng đăng ký. Trên staging, kernel giờ gọi tên một class không tồn tại trên đĩa. Framework tìm class đó ở mỗi request đi qua nhóm API, nên mọi request API đều hỏng theo cùng một kiểu.
+Lớp thứ hai mới là lớp gây sập. Development còn có thêm một dòng nữa trong nhóm đó: một ticket khác đã đăng ký ở đây một middleware giới hạn tần suất (rate limit). Middleware này dựa trên một package được cài ở development và chưa bao giờ được cài ở staging. Lần copy mang theo dòng đăng ký, và chỉ dòng đăng ký. Trên staging, kernel giờ gọi tên một class không tồn tại trên đĩa. Trên staging, mỗi request đi qua nhóm API đều đụng vào class còn thiếu đó, nên mọi request API đều hỏng theo cùng một kiểu.
 
 Vì sao phép kiểm sau lúc resolve không bắt được? Vì câu hỏi nó đặt ra. Phép kiểm là một lần diff file đã resolve với nhánh được merge vào, đọc với đúng một câu hỏi trong đầu: *có dòng nào bị mất không?* Mọi dòng trong diff đều là dấu `+`. Không có dấu `-`. Đạt. Câu hỏi chưa bao giờ được hỏi mới là câu quan trọng: *mỗi dòng `+` đó có thật sự thuộc về một trong hai bên đang merge không?* Có một dòng thì không. Bản fix đầu khôi phục dòng đã rơi, rồi được kiểm y theo cách một phía ấy: không dòng nào mất, đạt. Dòng lạ vẫn nằm trong file. Phải nhờ log server mới lòi ra.
 
@@ -38,13 +38,13 @@ git show -s --format='%P' <merge-commit>      # hai hash, p1 và p2
 git merge-base p1 p2                          # chỗ hai nhánh tách ra
 ```
 
-So với merge-base đó, cha thứ nhất thêm một số dòng, cha thứ hai thêm một số dòng. File đã resolve chỉ được phép thêm hợp của hai tập đó, không hơn. Dòng `+` nào trong `base..merge` mà không phải là dòng `+` trong `base..p1` hay `base..p2` thì đến từ chỗ khác. Dòng `-` cũng theo đúng luật ấy. Ba lần diff thay cho một, và mốc so sánh lần nào cũng do chính lần merge định ra. Kiểm theo cách đó, bản fix thứ hai cho ra không dòng nào không giải thích được nguồn gốc.
+So với merge-base đó, cha thứ nhất thêm một số dòng, cha thứ hai thêm một số dòng. File đã resolve chỉ được phép thêm hợp của hai tập đó, không hơn. Dòng `+` nào trong `base..merge` mà không phải là dòng `+` trong `base..p1` hay `base..p2` thì đến từ chỗ khác. Dòng `-` cũng theo đúng luật ấy. Ba mốc so sánh thay cho một, và mốc nào cũng do chính lần merge định ra. Kiểm theo cách đó, bản fix thứ hai cho ra không dòng nào không giải thích được nguồn gốc.
 
 ---
 
 ## Đánh đổi (Trade-offs)
 
-- **Merge lại từ đầu, resolve bằng tay từ dấu conflict.** Làm được, và sẽ ra đúng file đúng. Tôi không chọn, vì lần merge hỏng đã nằm trên nhánh rồi, và tôi muốn một phép kiểm chạy được trên bất kỳ merge commit nào *sau khi nó đã xảy ra*, không chỉ trên lần merge tôi sắp làm. Resolve lại thì sửa được lần này; kiểm nguồn gốc thì trỏ được vào hai mươi lần trước.
+- **Merge lại từ đầu, resolve bằng tay từ dấu conflict.** Làm được, và sẽ ra đúng cái file cần có. Tôi không chọn, vì lần merge hỏng đã nằm trên nhánh rồi, và tôi muốn một phép kiểm chạy được trên bất kỳ merge commit nào *sau khi nó đã xảy ra*, không chỉ trên lần merge tôi sắp làm. Resolve lại thì sửa được lần này; kiểm nguồn gốc thì trỏ được vào mọi lần merge đã nằm sẵn trên nhánh.
 - **Giữ cách diff một phía, đọc kỹ hơn.** Loại. Đọc kỹ hơn không phải là một cơ chế kiểm soát. Diff với một mốc duy nhất không phân biệt được "dòng cha bên kia thêm" với "dòng nhánh thứ ba thêm", vì cả hai đều hiện ra là `+`. Thông tin đó không nằm trong bản diff ấy; nhìn chăm chú đến đâu cũng không làm nó xuất hiện.
 - **So với cả hai cha thật** (đã chọn). Cái giá: sáu lệnh `git diff` tại ba mốc so sánh, và 38 dòng shell. Kèm theo là một luật tôi giờ coi là tuyệt đối. Không bao giờ lấy nội dung từ một nhánh không phải là một trong hai cha để resolve conflict giữa hai cha đó, dù nhánh kia trông "đầy đủ" đến mức nào. Phép kiểm này so tập dòng, nên mù với thứ tự; tôi sẽ quay lại điểm này ở cuối.
 - **Cài package còn thiếu lên staging.** Loại. Làm vậy thì dòng lạ hết gây sập nhưng vẫn là dòng lạ. Cái rate limit đó thuộc một ticket khác. Làm triệu chứng biến mất không giống với bỏ đi dòng không có quyền nằm ở đó.
@@ -77,7 +77,7 @@ Dòng thứ ba là đối chứng: nó cho thấy phép kiểm một phía vẫn
 
 ## Giới hạn, và điều tôi sẽ làm khác
 
-**Thứ phép kiểm không thấy.** Nó so tập nội dung dòng, không so vị trí. Một dòng mà cả hai cha đều có hợp lệ, nhưng lần resolve xếp sai chỗ, thì vẫn qua. Trong danh sách middleware, thứ tự chính là hành vi, nên đây là một lớp bug thật mà phép kiểm bỏ sót. Nó cũng chạy theo từng file; một lần copy chạm nhiều file thì cần vòng lặp qua các đường dẫn đã đổi. Và nó coi khoảng trắng là nội dung, đúng với manifest nhưng ồn với thứ khác. Bench chỉ có 12 dòng và bốn nhánh; nó cho thấy âm tính giả có tồn tại, không nói gì về cách phép kiểm cư xử trên một file có hàng trăm hunk conflict.
+**Thứ phép kiểm không thấy.** Nó so tập nội dung dòng, không so vị trí. Một dòng mà cả hai cha đều có hợp lệ, nhưng lần resolve xếp sai chỗ, thì vẫn qua. Trong danh sách middleware, thứ tự chính là hành vi, nên đây là một lớp bug thật mà phép kiểm bỏ sót. Nó cũng chạy theo từng file; một lần copy chạm nhiều file thì cần vòng lặp qua các đường dẫn đã đổi. Và nó coi khoảng trắng là nội dung, đúng với manifest nhưng sinh báo nhầm với file khác. Bench chỉ có 12 dòng và bốn nhánh; nó cho thấy âm tính giả có tồn tại, không nói gì về cách phép kiểm cư xử trên một file có hàng trăm hunk conflict.
 
 **Thứ bench không cho thấy.** Không có framework, không có PHP, không có lỗi 500. Kiểm boot chỉ chứng minh điều kiện "đã đăng ký mà không tồn tại", không phải cú sập. Và không gì ở đây tái lập được 17h55'; con số đó nằm trong một file log bạn không đọc được.
 
