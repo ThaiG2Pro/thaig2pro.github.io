@@ -33,6 +33,7 @@ Spec: `CONTENT_STYLE.md` mục 2.
 - Loại: 1|2|3|4
 - Số: <trước> → <sau>  |  chưa đo
 - Nguồn: <đường dẫn code/log/PR/commit>
+- Chế độ/nghĩa: <trước: hệ làm gì · sau: hệ làm gì · giá trị trung tâm (NULL, 0, flag) nghĩa là gì theo tài liệu nào · tập bị ảnh hưởng chính xác> — bỏ trống nếu không có thay đổi hệ thống (L-018, L-019)
 - Ghi chú: <2-3 câu, viết như nói, không cần hay>
 ```
 

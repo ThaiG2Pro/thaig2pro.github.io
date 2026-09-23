@@ -42,6 +42,14 @@ Hai vị trí soi trước, vì lỗi này gần như luôn nằm ở đó: câu
 mục Đánh đổi, và câu **giải thích vì sao bug lọt**. Ở cả hai, khẳng định luôn có lợi cho
 tác giả — đó là dấu hiệu, không phải sự trùng hợp.
 
+Rồi lượt thứ ba, cho **định nghĩa hệ thống** (L-018, L-019): mọi câu *"`X` nghĩa là …"*,
+*"chế độ mới là …"*, *"trước đây … / bây giờ …"* trong mục Bối cảnh và mục cơ chế. Với
+mỗi câu, ghi **số dòng inbox** nói đúng điều đó. Không có dòng → **chặn**, không được coi
+là "bối cảnh chung". "Không tìm thấy trong inbox" với một định nghĩa nghĩa là bước viết
+đã suy ra nó — và L-019 cho thấy suy ra thường ra đúng cái *đang chạy*, tức ngược với
+cái mới. Thêm: ví dụ số có hai giá trị cho cùng một đại lượng (pool = 10 rồi pool = 0)
+là dấu hiệu lẫn hai đại lượng.
+
 Đọc luôn mục "What this does not measure" trong `bench/<slug>/README.md` và đối chiếu
 với bài: thứ bench tự khai là **không chứng minh được** mà bài vẫn khẳng định chắc nịch,
 là đúng chỗ cần soi.
@@ -75,6 +83,12 @@ Báo cáo theo **số dòng**, kèm câu viết lại đề xuất. Nói "văn h
 Chạy `scripts/scan-identifiers.sh` trên các file của bài. Rồi tự đọc một lượt tìm thứ
 regex không bắt được: tên sản phẩm, tên đồng nghiệp, chi tiết đủ đặc trưng để nhận ra
 công ty. Phép thử: *người ngoài đọc xong có suy ra được đây là công ty nào không?*
+
+Rồi soi riêng **code nguyên văn** (L-057): chạy
+`grep -nE '`[^`]*[a-z]_[a-z][^`]*`' content/posts/<slug>*.md static/images/posts/<slug>/*.svg`.
+Mỗi hit phải trả lời được "cái này ở `bench/<slug>/` hay ở repo người khác?" — ở repo
+người khác thì **chặn**, dù không suy ra được công ty. Phép thử thứ hai của mục 3b áp ở
+đây: *team sở hữu đoạn code đó đọc được thì có ổn không?*
 
 ### 5. Ảnh
 Mọi ảnh được tham chiếu có tồn tại không. **Mở ảnh ra nhìn** — chữ tràn khung và chữ

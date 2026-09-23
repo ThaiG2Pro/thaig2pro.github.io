@@ -149,7 +149,30 @@ thị …"* về dữ liệu của hệ **mình không sở hữu**, mà dòng i
 đọc nó thế nào. Và mọi cụm *"mọi đơn / all orders / toàn bộ"* — hỏi ngay: mọi = tập nào,
 inbox ghi tập đó chưa? Hai câu hỏi này rẻ, tác giả trả lời được trong một phút, và không
 trả lời được thì interviewer sẽ hỏi đúng câu đó.
-**Đã vá:** chưa vá — lần đầu gặp ở tầng này. Đề xuất nếu lặp: `/content-capture` với mục
-có hành vi dữ liệu lệch nhau phải ghi thêm hai dòng — "nghĩa nghiệp vụ của giá trị trung
-tâm, theo tài liệu nào" và "tập bị ảnh hưởng chính xác"; `/content-audit` vòng 1 thêm bước
-"liệt kê mọi câu định nghĩa dữ liệu và trỏ về dòng inbox".
+**Đã vá:** lặp lần hai cùng ngày (L-019) → nâng thành luật: `CONTENT_STYLE.md` mục 3,
+tiểu mục "Khẳng định về bối cảnh", dòng "Định nghĩa hệ thống"; `/content-audit` vòng 1;
+`/content-capture` template thêm dòng `Chế độ/nghĩa:`.
+
+## L-019 · 2026-09-22 · mô-tả-ngược-chế-độ-mới
+**Lỗi:** mục Bối cảnh mô tả **chế độ mới** là *"mỗi sản phẩm trong chương trình được cấp
+một quota bán riêng"* — đó là chế độ **cũ**, đang chạy production. Chế độ mới ngược lại:
+không quota riêng, trần bán là tồn khả dụng kho tổng lúc đặt hàng. Bài lên site với mô tả
+ngược, và mọi đoạn sau ("dòng bán theo kho chung") mâu thuẫn với chính mục Bối cảnh mà
+không ai để ý. Cùng bài còn một ví dụ số tự mâu thuẫn — "kho chung còn 10 … cùng đơn ấy
+thấy kho chung còn 0" — vì lẫn tồn vật lý với pool đã trừ phần phân bổ.
+**Ai bắt:** tác giả, đọc bản **đã live**, sau 4 lượt `/content-audit` đều "đạt".
+**Vì sao lọt:** đây là **lặp lần hai của L-018** trong cùng một bài, cùng một ngày: inbox
+ghi hành vi code và thứ tự sửa, không ghi *chế độ mới là gì so với chế độ cũ*. Bước viết
+lấp chỗ trống bằng suy luận từ chữ "quota" — và suy ra đúng cái đang chạy, vì đó là thứ
+hợp lý nhất khi không có thông tin. Bốn lượt audit không bắt được vì: (1) audit chỉ truy
+ngược về inbox, mà inbox không có câu nào để đối chiếu, nên "không tìm thấy nguồn" bị đọc
+thành "bối cảnh chung, không cần nguồn"; (2) người audit là cùng một tác nhân với người
+viết, nên đọc mục Bối cảnh trôi y như tác giả tự đọc — L-003 ở dạng nặng nhất. Chỉ người
+**sở hữu tài liệu thiết kế** đối chiếu được, và người đó không nằm trong vòng audit.
+**Dấu hiệu:** mục Bối cảnh mô tả **hệ thống trước và sau** thay đổi bằng một câu, mà inbox
+không có dòng "trước: … / sau: …". Phép thử: che mục Bối cảnh, hỏi "chế độ cũ khác chế độ
+mới ở điểm nào?" — trả lời được từ inbox thì mới được viết. Ví dụ số có **hai con số cho
+cùng một đại lượng** (pool = 10 rồi pool = 0) là dấu hiệu lẫn hai đại lượng khác nhau.
+**Đã vá:** nâng thành luật cùng L-018 — xem `**Đã vá**` của L-018. Thêm: `/content-audit`
+báo "đạt" **không** thay được một lượt đọc của tác giả trên bản render trước khi push;
+ghi vào `CONTENT_STYLE.md` mục 8.

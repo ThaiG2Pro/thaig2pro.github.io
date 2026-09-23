@@ -77,6 +77,14 @@ lại chỗ này"*.
 Soi trước hai vị trí, vì lỗi này gần như luôn nằm ở đó: câu **loại một phương án** trong
 mục Đánh đổi, và câu **giải thích vì sao bug lọt**.
 
+**Định nghĩa hệ thống cũng là khẳng định** (L-018, L-019 — lặp hai lần trong một bài).
+Câu dạng *"`X` nghĩa là …"*, *"chế độ mới là …"*, *"trước đây … / bây giờ …"* về dữ liệu
+hay tính năng của hệ thống phải trỏ được về một dòng inbox ghi đúng điều đó — không suy ra
+từ hướng sửa, không suy ra từ tên cột. Hành động kiểm được: liệt kê mọi câu định nghĩa
+trong mục Bối cảnh và mục cơ chế, ghi số dòng inbox bên cạnh; không có dòng thì hỏi tác
+giả và **ghi câu trả lời vào inbox trước**, rồi mới viết. Inbox thiếu thì bổ inbox, không
+bổ bằng suy luận.
+
 ---
 
 ## 3b. Cổng bảo mật nghề nghiệp (áp dụng từ Tầng 0)
@@ -100,6 +108,11 @@ Trước khi ghi bất cứ thứ gì sang vùng công khai, thay:
   "đã khử định danh", **không liệt kê thứ đã khử** — viết "đã khử định danh" rồi dừng.
   Kiểm: `grep -nE "khử định danh \(|đã loại \(" pipeline/state.json lessons/*.md` phải
   trả về rỗng (L-055).
+- **Code nguyên văn từ repo mình không sở hữu** là định danh (L-057). Trong bài chỉ được
+  có hai loại code: bản mình dựng lại trong `bench/<slug>/`, hoặc mô tả cơ chế bằng lời
+  ("chỗ kiểm tra đơn ép quota rỗng thành 0"). Tên cột, tên hàm, tên biến thật của hệ khác
+  → bỏ. Kiểm: mỗi hit của `grep -nE '`[^`]*[a-z]_[a-z][^`]*`' content/posts/<slug>*.md`
+  phải chỉ được về `bench/`.
 
 **Giữ nguyên:** con số, tỷ lệ, cơ chế, quyết định, cái giá phải trả. Đó mới là thứ làm
 bài có giá trị — và không có thứ nào trong đó cần định danh để hiểu được.
@@ -351,4 +364,8 @@ Ghi lỗi mới bằng `/content-lesson`. Soi bài theo kho này bằng `/conten
    lệnh đã dùng để kiểm (mục "Khẳng định về bối cảnh cũng phải truy nguồn")
 6. Đã qua `/content-audit` — vòng soi độc lập, không phải tự kiểm. Trong đó có bước
    đếm khái niệm mới trên mỗi câu dài (mục "Một câu, tối đa hai khái niệm mới")
-7. `hugo --gc --minify` chạy sạch
+7. **Tác giả đọc bản render** (`hugo server`) một lượt, tập trung mục Bối cảnh và mục
+   cơ chế, **trước khi push**. Audit "đạt" không thay được bước này: audit chỉ đối chiếu
+   được với inbox, còn tài liệu thiết kế nằm trong đầu tác giả (L-019 — bài lên site với
+   mô tả ngược chế độ mới sau 4 lượt audit đạt)
+8. `hugo --gc --minify` chạy sạch

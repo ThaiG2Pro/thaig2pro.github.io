@@ -66,3 +66,22 @@ rỗng hoặc lệch.
 báo thì bộ quét không nhìn file đó.
 **Đã vá:** script nhận đối số: có đối số thì quét đúng các file đó (vẫn áp `EXCLUDE`),
 không có thì quét staged như cũ; và in ra số file đã quét thay vì chỉ nói "sạch".
+
+## L-057 · 2026-09-22 · code-nguyên-văn-từ-repo-không-sở-hữu
+**Lỗi:** bài và cover chép **nguyên văn một dòng code kèm tên cột thật** từ repo của
+team khác — đúng repo mà bài nói "tôi không có quyền merge". Lên site ở cả hai bản và
+ảnh Open Graph. Bộ quét không bắt (tên cột không có trong `.git/identifiers.local`), bốn
+lượt audit đọc tay cũng không, vì dòng code trông như "cơ chế" chứ không như "định danh".
+**Ai bắt:** tác giả, trên bản đã live. So với hai bài trước cùng tuần đã khử sạch (`SKU-A`,
+"service tính tồn khả dụng").
+**Vì sao lọt:** mục 3b liệt kê ID, mã hàng, đường dẫn module, tên sản phẩm — không có
+dòng "code nguyên văn". Bước viết coi snippet là bằng chứng kỹ thuật, và audit vòng 4 hỏi
+"người ngoài có suy ra công ty không?" — một dòng code thì không suy ra công ty, nên qua.
+Nhưng phép thử đúng ở đây là câu khác: *người trong câu chuyện (team kia) đọc được thì có
+ổn không?* — code của họ, chưa xin phép, lên blog của người khác: không ổn.
+**Dấu hiệu:** mọi đoạn `code` trong bài A/D không nằm trong `bench/<slug>/` (tức không
+phải bản mình dựng lại) và có tên cột / tên hàm / tên biến cụ thể. Phép thử một lệnh:
+`grep -nE '`[^`]*[a-z]_[a-z][^`]*`' content/posts/<slug>*.md` — tên có gạch dưới gần như
+luôn là tên thật; mỗi hit phải trả lời được "cái này ở bench hay ở repo người khác?".
+**Đã vá:** `CONTENT_STYLE.md` mục 3b thêm gạch đầu dòng "Code nguyên văn"; `/content-audit`
+vòng 4 thêm bước grep trên.
