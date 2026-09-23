@@ -624,7 +624,7 @@
         "repro": "bench/merge-conflict-copy-nhanh-thu-ba/run.sh — một lệnh, cần git+bash+coreutils, ghi results/summary.json"
       },
       "blocked_on": null,
-      "next_action": "/content-derive trong 24h (deadline 2026-09-24). Cân nhắc /content-lesson: gộp 2 sự cố thành 1 rồi bịa lại trạng thái hệ thống cho khớp.",
+      "next_action": "/content-derive trước 2026-09-24. /content-lesson: (1) build sạch mà không sinh trang vì date tương lai, (2) từ điển noisy → sinh báo nhầm.",
       "paths": {
         "bench": "bench/merge-conflict-copy-nhanh-thu-ba/",
         "vi": "content/posts/merge-conflict-copy-nhanh-thu-ba.md",
@@ -659,6 +659,10 @@
         {
           "date": "2026-09-23",
           "event": "live: a99084a + 663873c. Lần push đầu trang không sinh ra vì date 17:00 nằm ở tương lai lúc build (hugo bỏ qua, build vẫn \"sạch\"); đổi date về giờ push. EN/VI/cover/bench đều 200."
+        },
+        {
+          "date": "2026-09-23",
+          "event": "audit vòng 3 (bản live): 1 chặn (số dòng rơi không có nguồn inbox) + 5 nên sửa. Tác giả xác nhận 1 dòng, bài đúng → bổ inbox. 5 nên sửa đã áp và push (5cf0f51). Lessons chưa ghi: hugo bỏ qua bài date tương lai mà build vẫn sạch; noisy→sinh báo nhầm."
         }
       ]
     },
