@@ -480,7 +480,7 @@
         "repro": "bench/bug-import-tra-nham-bang/ — ./run.sh chạy run.php 2 lần trong Docker (broken/fixed). Test 1 (1 SKU, 1 campaign) xanh cả hai; test 2 (1 SKU trong 2 campaign) đỏ broken \"expected 2, got 1\", xanh fixed."
       },
       "blocked_on": null,
-      "next_action": "git commit + push (bài VI/EN, bench, cover đã stage) → kiểm 200 trên site → /content-derive trong 24h",
+      "next_action": "/content-derive trong 24h (trước 2026-09-24 10:50)",
       "paths": {
         "vi": "content/posts/bug-import-tra-nham-bang.md",
         "en": "content/posts/bug-import-tra-nham-bang.en.md",
@@ -527,6 +527,10 @@
         {
           "date": "2026-09-23",
           "event": "content-audit vòng 3: ĐẠT. Bench chạy lại khớp README; mọi khẳng định trong Mổ xẻ và Đánh đổi truy về inbox dòng 74/86; L-057 grep 0 hit; scan sạch; cấu trúc 2 bản khớp; hugo sạch. Nên sửa (không chặn): lượng từ hình tượng \"a hundred times a day\" dòng 39. Stage → published, file đã stage, chờ commit."
+        },
+        {
+          "date": "2026-09-23",
+          "event": "Sửa lượng từ hình tượng dòng 39 (2 bản). Commit c40535f push main. Site: VI, EN, cover.png và link bench đều trả 200."
         }
       ]
     },
