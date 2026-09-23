@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" font-family="ui-monospace,'SFMono-Regular',Menlo,Consolas,monospace">
+  <rect width="1200" height="630" fill="#1d2021"/>
+  <rect x="0" y="0" width="1200" height="6" fill="#fb4934"/>
+
+  <text x="60" y="80" fill="#928374" font-size="22" letter-spacing="3">A MERGE HAS EXACTLY TWO PARENTS</text>
+
+  <!-- git graph -->
+  <g stroke="#665c54" stroke-width="3" fill="none">
+    <path d="M120 330 C 180 330, 200 230, 260 230"/>
+    <path d="M120 330 C 180 330, 200 430, 260 430"/>
+    <path d="M300 230 C 380 230, 400 330, 460 330"/>
+    <path d="M300 430 C 380 430, 400 330, 460 330"/>
+  </g>
+  <g stroke="#1d2021" stroke-width="4">
+    <circle cx="120" cy="330" r="13" fill="#928374"/>
+    <circle cx="280" cy="230" r="13" fill="#b8bb26"/>
+    <circle cx="280" cy="430" r="13" fill="#b8bb26"/>
+    <circle cx="480" cy="330" r="15" fill="#ebdbb2"/>
+    <circle cx="380" cy="560" r="13" fill="#fb4934"/>
+  </g>
+  <g font-size="22" fill="#a89984">
+    <text x="120" y="378" text-anchor="middle">merge-base</text>
+    <text x="280" y="196" text-anchor="middle">staging  p1</text>
+    <text x="280" y="476" text-anchor="middle">feature  p2</text>
+    <text x="480" y="290" text-anchor="middle" fill="#ebdbb2">merge</text>
+    <text x="380" y="604" text-anchor="middle" fill="#fb4934">development  (not a parent)</text>
+  </g>
+
+  <!-- merge -> file -->
+  <g stroke="#a89984" stroke-width="2" fill="none">
+    <path d="M500 330 L586 330"/>
+    <polygon points="596,330 582,323 582,337" fill="#a89984" stroke="none"/>
+  </g>
+
+  <!-- development -> stray line -->
+  <g stroke="#fb4934" stroke-width="2.5" fill="none" stroke-dasharray="8 7">
+    <path d="M396 556 C 470 530, 530 400, 586 378"/>
+  </g>
+  <polygon points="598,374 582,372 586,386" fill="#fb4934"/>
+
+  <!-- resolved file -->
+  <text x="610" y="176" fill="#a89984" font-size="22">kernel · api group · as resolved</text>
+  <rect x="610" y="196" width="530" height="270" rx="6" fill="none" stroke="#665c54" stroke-width="1.5"/>
+  <g font-size="24">
+    <text x="630" y="240" fill="#665c54">ThrottleRequests</text>
+    <text x="630" y="290" fill="#b8bb26">CheckTenantHeader</text>
+    <text x="1120" y="290" fill="#665c54" font-size="20" text-anchor="end">← p1</text>
+    <text x="630" y="340" fill="#b8bb26">VerifyApiSignature</text>
+    <text x="1120" y="340" fill="#665c54" font-size="20" text-anchor="end">← p2</text>
+    <rect x="618" y="360" width="514" height="44" rx="6" fill="#fb4934" opacity="0.18" stroke="#fb4934" stroke-width="1.5"/>
+    <text x="630" y="391" fill="#fb4934">RateLimitByPlan</text>
+    <text x="1120" y="391" fill="#fb4934" font-size="20" text-anchor="end">← neither</text>
+    <text x="630" y="443" fill="#665c54">SubstituteBindings</text>
+  </g>
+
+  <!-- footer -->
+  <text x="610" y="518" fill="#ebdbb2" font-size="24">Whole file copied from a third branch.</text>
+  <text x="610" y="552" fill="#ebdbb2" font-size="24">One line had no class on staging.</text>
+  <text x="610" y="590" fill="#928374" font-size="22">/api/* → 500 for 17h55'</text>
+</svg>

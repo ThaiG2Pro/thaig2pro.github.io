@@ -116,16 +116,23 @@
       "title": "Công thức trong ticket trừ hai lần",
       "created": "2026-09-21",
       "genre": "A",
-      "stage": "ready",
+      "stage": "needs-assets",
       "lang_primary": "en",
       "evidence": {
-        "numbers": "80 (đọc nghĩa đen) vs 90 (đúng) trên bộ số 200 / Σphân bổ 110 / Σđã bán 10; sai số 10 = Σ đã bán",
-        "method": "kiểm đại số 2 cách đọc công thức trên 1 SKU × 3 chương trình",
-        "repro": "bảng số trong bài — SKU-A, tổng nhập 200, 3 chương trình 10/1, 88/9, 12/0; không cần dữ liệu thật"
+        "numbers": "80 (đọc nghĩa đen) vs 90 (đúng, khớp màn hình) trên bộ số 200 / 10-1, 88-9, 12-0; sai số 10 = Σquota_used; 0/10000 ca ngẫu nhiên vi phạm đồng nhất thức gap = Σquota_used; hai dạng của spec (dạng batch và dạng T − Σqt − C, dạng sau là dạng đã ship) trùng nhau 10000/10000 ca dưới bất biến batch_used = Σqu + C; hai cách đọc trùng nhau khi Σquota_used = 0",
+        "method": "kiểm đại số 3 cách đọc (nghĩa đen / đúng / công thức đã ship) trên bộ số sự cố + 10000 ca ngẫu nhiên seed 20260907, Python stdlib, chạy local 3.12.3 và python:3.12-alpine cho cùng output",
+        "repro": "bench/cong-thuc-tru-hai-lan/run.sh — một lệnh, ghi results/summary.json; exit 1 nếu đồng nhất thức vỡ"
       },
       "blocked_on": null,
-      "next_action": "Viết bài A/EN. Bộ số minh họa đã khử định danh xong, đăng công khai được. ~1 buổi (4-5 giờ)",
-      "paths": {},
+      "next_action": "/content-audit vòng 3. Đạt thì commit bài + bench + ảnh trong một commit, push, kiểm link bench 200.",
+      "paths": {
+        "bench": "bench/cong-thuc-tru-hai-lan/",
+        "vi": "content/posts/cong-thuc-tru-hai-lan.md",
+        "en": "content/posts/cong-thuc-tru-hai-lan.en.md",
+        "cover": "static/images/posts/cong-thuc-tru-hai-lan/cover.png",
+        "career": "career/cong-thuc-tru-hai-lan.md",
+        "social": "drafts/social-cong-thuc-tru-hai-lan.md"
+      },
       "history": [
         {
           "date": "2026-09-21",
@@ -138,6 +145,30 @@
         {
           "date": "2026-09-21",
           "event": "gỡ chặn: bộ số đã có sẵn trong proposal.md:48 và vốn không chứa định danh — dựng bảng đại số 2 cách đọc, không cần 2 giờ"
+        },
+        {
+          "date": "2026-09-23",
+          "event": "measure: dựng bench kiểm đại số, chạy thật 2 môi trường, 0 vi phạm. Tác giả xác nhận bất biến batch_used = Σqu + C theo đường ghi đơn hàng; sửa nhãn README: dạng đã ship là T − Σqt − C, không phải dạng batch"
+        },
+        {
+          "date": "2026-09-23",
+          "event": "write: bản EN (1332 từ thân bài) + VI (1581 từ) xong, checklist tự kiểm: thiếu cover.png, còn lại đạt. hugo build sạch"
+        },
+        {
+          "date": "2026-09-23",
+          "event": "content-audit vòng 1: CHƯA ĐẠT. Chặn: (1) cover.png thiếu; (2) link bench 404 vì chưa push; (3) dòng 34 hai bản gọi tên hai màn hình chụp mà inbox chỉ ghi 'hai màn hình khác nhau'. Nên sửa: lý do review lọt không nguồn (d.41), đọc ý người viết (d.36), 'không nhanh không chậm' chưa đo (d.66), câu 4 khái niệm EN d.20. Số: 24/24 truy được inbox:25-29 + bench summary.json. Bench chạy lại Docker khớp README."
+        },
+        {
+          "date": "2026-09-23",
+          "event": "content-write fix pass sau audit vòng 1: bỏ tên hai màn hình chụp (d.34), 'đúng theo một cách đọc' (d.36), lý do lọt thành giả thuyết tự khai (d.41), 'không đo hiệu năng' (d.66), chẻ câu EN d.20. Hai bản. hugo sạch"
+        },
+        {
+          "date": "2026-09-23",
+          "event": "content-audit vòng 2: CHƯA ĐẠT. Chặn: (1) d.22 hai bản kể 'người lập trình đã cài đúng câu chữ' — sự kiện không có trong inbox (L-016 lặp); (2) link bench 404 tới khi push. Nên sửa: 'every inventory rule' d.44, 'unchecked' d.75 → 'tôi chưa kiểm', chẻ câu cuối d.54, 3 câu VI dịch sát (d.22, d.44, d.69). Bench Docker khớp README từng dòng; ảnh đã mở xem; scan sạch; hugo sạch; số hai bản khớp."
+        },
+        {
+          "date": "2026-09-23",
+          "event": "content-write fix pass 2 sau audit vòng 2: d.22 thành giả định 'nếu được cài y nguyên' (hai bản); 'every inventory rule' → 'a familiar shape'; 'unchecked' → 'tôi chưa kiểm'; chẻ câu cuối d.54; 3 câu VI viết lại (d.22, d.44, d.69). hugo sạch"
         }
       ]
     },
@@ -576,21 +607,68 @@
       "slug": "merge-conflict-copy-nhanh-thu-ba",
       "title": "Resolve conflict copy nguyên file nhánh thứ ba",
       "created": "2026-09-23",
-      "genre": null,
-      "stage": "inbox",
-      "lang_primary": "vi",
+      "genre": "A",
+      "stage": "published",
+      "lang_primary": "en",
       "evidence": {
-        "numbers": "17h55' toàn bộ route /api/* fatal error (từ merge tới fix xong) → 0 sau fix lần 2",
-        "method": null,
-        "repro": null
+        "numbers": "Sự cố thật (private, không tái lập): 17h55' toàn bộ route /api/* fatal 500 → 0 lỗi sau fix lần 2; verify lần 1 → 0 dòng mất nhưng lọt 1 dòng thừa; verify lần 2 → 0 dòng không giải thích được. Bench dựng lại (bench/merge-conflict-copy-nhanh-thu-ba, git 2.43.0, 2026-09-23): resolve 'correct' — verify1 0 dòng mất PASS, verify2 0 stray PASS, boot PASS; resolve 'copy-third-branch' — verify1 0 dòng mất PASS (âm tính giả), verify2 1 stray added PASS→FAIL, boot FAIL 1 class thiếu; resolve 'drop-a-line' (đối chứng) — verify1 1 dòng mất FAIL, verify2 1 stray removed FAIL, boot PASS. Chạy 2 lần, kết quả byte-identical.",
+        "method": "verify-merge.sh: lấy 2 cha thật (`git show -s --format='%P'`), merge-base, rồi tập dòng +/- của base..merge phải là tập con của (base..p1 ∪ base..p2); dòng ngoài tập → STRAY. Đối chiếu với verify1 (diff 1 phía, chỉ đếm dòng '-') và boot check (mỗi tên trong manifest phải có file class trong tree). Repo demo 4 nhánh, hash pin bằng GIT_*_DATE cố định.",
+        "repro": "bench/merge-conflict-copy-nhanh-thu-ba/run.sh — một lệnh, cần git+bash+coreutils, ghi results/summary.json"
       },
       "blocked_on": null,
-      "next_action": "content-triage",
-      "paths": {},
+      "next_action": "/content-derive trong 24h (deadline 2026-09-24). Cân nhắc /content-lesson: gộp 2 sự cố thành 1 rồi bịa lại trạng thái hệ thống cho khớp.",
+      "paths": {
+        "bench": "bench/merge-conflict-copy-nhanh-thu-ba/",
+        "vi": "content/posts/merge-conflict-copy-nhanh-thu-ba.md",
+        "en": "content/posts/merge-conflict-copy-nhanh-thu-ba.en.md",
+        "cover": "static/images/posts/merge-conflict-copy-nhanh-thu-ba/cover.png"
+      },
       "history": [
         {
           "date": "2026-09-23",
           "event": "capture từ sự cố merge conflict thật vừa xử lý xong"
+        },
+        {
+          "date": "2026-09-23",
+          "event": "triage: A/EN nhưng chặn ở cổng repro — tách 1 mục D/VI riêng (bi-do-oan-pha-staging-tu-dieu-tra-bang-git) theo L-041, không cần đo"
+        },
+        {
+          "date": "2026-09-23",
+          "event": "measure: bench 3 kịch bản resolve (correct / copy-third-branch / drop-a-line), verify1 âm tính giả đúng như sự cố, verify2 bắt 1 dòng lạ; deterministic; stage → ready"
+        },
+        {
+          "date": "2026-09-23",
+          "event": "write: bản EN gốc (~1270 từ thân bài) + bản VI; hugo build sạch; scan định danh sạch; thiếu cover → needs-assets"
+        },
+        {
+          "date": "2026-09-23",
+          "event": "artwork: cover.svg + cover.png (git graph 2 cha + nhánh thứ ba đẩy 1 dòng đỏ vào file resolve); stage → needs-audit"
+        },
+        {
+          "date": "2026-09-23",
+          "event": "audit vòng 2: 1 chặn (link bench 404 vì chưa push) + 4 nên sửa (2 câu nén L-008, caveat scale, inbox 11:13). Đã sửa hết, commit + push; stage → published"
+        }
+      ]
+    },
+    {
+      "slug": "bi-do-oan-pha-staging-tu-dieu-tra-bang-git",
+      "title": "Bị đổ oan làm sập staging — tự điều tra bằng git rồi tìm ra lỗi thật của chính mình",
+      "created": "2026-09-23",
+      "genre": "D",
+      "stage": "ready",
+      "lang_primary": "vi",
+      "evidence": {
+        "numbers": null,
+        "method": null,
+        "repro": null
+      },
+      "blocked_on": null,
+      "next_action": "Viết bài D/VI. Mốc thời gian: đồng nghiệp báo lỗi Middleware trên staging sáng 23/9, cáo buộc 'merge dev vào stg kéo theo commit dở'; điều tra bằng git reflog + merge-base/is-ancestor chứng minh cáo buộc sai (không có merge dev→stg nào); tiếp tục soi sâu hơn thì tự tìm ra 2 lỗi thật của chính mình (khác hẳn cáo buộc ban đầu), fix 2 lượt, commit cuối (commit fix lần 2) lúc 11:13. Vai trò: vừa là người bị nghi oan vừa là người tự điều tra và tự sửa. Quyết định: verify bằng dữ liệu git thay vì cãi lời nói; sau khi minh oan xong không dừng lại mà tiếp tục soi ra lỗi thật của mình. ~1 buổi (3-4 giờ).",
+      "paths": {},
+      "history": [
+        {
+          "date": "2026-09-23",
+          "event": "tách từ merge-conflict-copy-nhanh-thu-ba theo L-041 (một nguyên liệu ra nhiều bài) — góc storytelling, không cần số"
         }
       ]
     }
@@ -651,6 +729,10 @@
     {
       "date": "2026-09-23",
       "entry": "capture merge-conflict-copy-nhanh-thu-ba: sự cố merge conflict copy nguyên file từ nhánh thứ ba, verify nửa vời bỏ lọt dòng thừa, gây 500 toàn bộ /api/* trên staging ~17h55'. Có số (thời gian sự cố), chưa có method/repro — cần content-triage."
+    },
+    {
+      "date": "2026-09-23",
+      "entry": "content-triage merge-conflict-copy-nhanh-thu-ba: A/EN nhưng chặn ở cổng repro (biz repo private) → needs-measure, next_action = dựng demo repo git tối giản (~1-2 tiếng). Theo L-041, tách 1 mục D/VI riêng (bi-do-oan-pha-staging-tu-dieu-tra-bang-git) — đủ mốc thời gian/vai trò/quyết định, không cần số → ready ngay."
     }
   ],
   "behavioral_coverage_backup": {

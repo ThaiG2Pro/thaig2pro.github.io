@@ -1,0 +1,23 @@
+== scenario: correct  merge=2736472  parents=0557517 22784cc
+-- verify 1 (diff vs staging only, count '-' lines): 0  -> PASS
+-- verify 2 (two-parent provenance):
+   SUMMARY added=0 removed=0 base=9ab3a29 p1=0557517 p2=22784cc
+   -> PASS
+-- boot check (every listed middleware has a class in this tree): PASS
+
+== scenario: copy-third-branch  merge=8f202c5  parents=0557517 22784cc
+-- verify 1 (diff vs staging only, count '-' lines): 0  -> PASS
+-- verify 2 (two-parent provenance):
+   STRAY_ADDED     RateLimitByPlan
+   SUMMARY added=1 removed=0 base=9ab3a29 p1=0557517 p2=22784cc
+   -> FAIL
+-- boot check (every listed middleware has a class in this tree): FAIL missing=["RateLimitByPlan"]
+
+== scenario: drop-a-line  merge=3fa175d  parents=0557517 22784cc
+-- verify 1 (diff vs staging only, count '-' lines): 1  -> FAIL
+-- verify 2 (two-parent provenance):
+   STRAY_REMOVED     StartSession
+   SUMMARY added=0 removed=1 base=9ab3a29 p1=0557517 p2=22784cc
+   -> FAIL
+-- boot check (every listed middleware has a class in this tree): PASS
+
