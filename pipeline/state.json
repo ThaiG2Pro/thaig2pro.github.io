@@ -472,7 +472,7 @@
       "title": "Import tra nhầm bảng vì id hai bảng trùng nhau",
       "created": "2026-09-21",
       "genre": "A",
-      "stage": "published",
+      "stage": "done",
       "lang_primary": "en",
       "evidence": {
         "numbers": "0 test bắt được → 1 regression test cross-campaign",
@@ -480,12 +480,14 @@
         "repro": "bench/bug-import-tra-nham-bang/ — ./run.sh chạy run.php 2 lần trong Docker (broken/fixed). Test 1 (1 SKU, 1 campaign) xanh cả hai; test 2 (1 SKU trong 2 campaign) đỏ broken \"expected 2, got 1\", xanh fixed."
       },
       "blocked_on": null,
-      "next_action": "/content-derive trong 24h (trước 2026-09-24 10:50)",
+      "next_action": null,
       "paths": {
         "vi": "content/posts/bug-import-tra-nham-bang.md",
         "en": "content/posts/bug-import-tra-nham-bang.en.md",
         "bench": "bench/bug-import-tra-nham-bang/",
-        "cover": "static/images/posts/bug-import-tra-nham-bang/cover.png"
+        "cover": "static/images/posts/bug-import-tra-nham-bang/cover.png",
+        "career": "career/bug-import-tra-nham-bang.md",
+        "social": "drafts/social-bug-import-tra-nham-bang.md"
       },
       "history": [
         {
@@ -531,6 +533,10 @@
         {
           "date": "2026-09-23",
           "event": "Sửa lượng từ hình tượng dòng 39 (2 bản). Commit c40535f push main. Site: VI, EN, cover.png và link bench đều trả 200."
+        },
+        {
+          "date": "2026-09-23",
+          "event": "content-derive: career card (CV bullet + STAR + 3 lát cắt + 3 câu đào sâu) và social VI/EN. Mọi link kiểm 200. Không thêm dữ kiện ngoài bài/bench. behavioral: quyết định khó (dự phòng, ô đã có selector). Stage → done."
         }
       ]
     },
@@ -646,5 +652,8 @@
       "date": "2026-09-23",
       "entry": "capture merge-conflict-copy-nhanh-thu-ba: sự cố merge conflict copy nguyên file từ nhánh thứ ba, verify nửa vời bỏ lọt dòng thừa, gây 500 toàn bộ /api/* trên staging ~17h55'. Có số (thời gian sự cố), chưa có method/repro — cần content-triage."
     }
-  ]
+  ],
+  "behavioral_coverage_backup": {
+    "quyet-dinh-kho": "bug-import-tra-nham-bang"
+  }
 }
