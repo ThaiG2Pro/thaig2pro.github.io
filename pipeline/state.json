@@ -472,15 +472,15 @@
       "title": "Import tra nhầm bảng vì id hai bảng trùng nhau",
       "created": "2026-09-21",
       "genre": "A",
-      "stage": "needs-bench",
+      "stage": "published",
       "lang_primary": "en",
       "evidence": {
         "numbers": "0 test bắt được → 1 regression test cross-campaign",
         "method": "audit handler khi thêm AC resolve cặp (SKU × Campaign)",
-        "repro": "bench/bug-import-tra-nham-bang/ — 2 bảng auto-increment id trùng nhau, 1 test pass sai + 1 test bắt đúng"
+        "repro": "bench/bug-import-tra-nham-bang/ — ./run.sh chạy run.php 2 lần trong Docker (broken/fixed). Test 1 (1 SKU, 1 campaign) xanh cả hai; test 2 (1 SKU trong 2 campaign) đỏ broken \"expected 2, got 1\", xanh fixed."
       },
-      "blocked_on": "bench/bug-import-tra-nham-bang/ chưa tồn tại; cover.png chưa có",
-      "next_action": "/content-bench — 2 test: (1) 1 SKU trong 1 chương trình, xanh trên code hỏng; (2) 1 SKU trong 2 chương trình, đỏ trên code hỏng, xanh trên fix. Rồi /content-artwork → /content-audit vòng 2",
+      "blocked_on": null,
+      "next_action": "git commit + push (bài VI/EN, bench, cover đã stage) → kiểm 200 trên site → /content-derive trong 24h",
       "paths": {
         "vi": "content/posts/bug-import-tra-nham-bang.md",
         "en": "content/posts/bug-import-tra-nham-bang.en.md",
@@ -507,6 +507,26 @@
         {
           "date": "2026-09-23",
           "event": "content-write fix pass sau audit vòng 1: người dùng đối chiếu code/ADR/test → 1 đúng, 2 sai, 1 chưa xác nhận, 1 nửa đúng. Sửa cả VI+EN: (1) mở bài bỏ \"file một dòng\"; (2) cột file là mã SKU, code resolve sang id; (3) \"từ 1\" → \"từ số nhỏ\"; (4) ba phương án thay bằng ba phương án thật trong biên bản quyết định (validate-only / cả hai bước / tách ticket); (5) test hồi quy viết đúng: 1 SKU trong 2 chương trình, assert dòng resolve = B và ≠ id SKU, chỉ kiểm bước resolve — tự khai lỗ hổng chưa kiểm bước ghi. Bỏ \"two queries\". VI: chẻ 2 câu nén, sửa 3 cụm dịch cứng. Inbox bổ sung 2026-09-23. Scan sạch, hugo sạch."
+        },
+        {
+          "date": "2026-09-23",
+          "event": "content-bench: dựng bench thuần PHP+PDO sqlite, không framework. Chạy thật trong Docker php:8.2-cli (PHP 8.2.29) và php:cli (PHP 8.5.10), output giống nhau, khớp kịch bản. 1 lỗi lộ ra khi chạy: dòng comment SQL chứa dấu chấm làm vỡ split theo \";\" → strip comment trước khi split. README ghi output verbatim + What this does not measure (4 mục). Đã git add. Stage → needs-assets."
+        },
+        {
+          "date": "2026-09-23",
+          "event": "content-artwork: cover.svg + cover.png 1200×630. Vẽ cơ chế: hai bảng id song song, file import → product_variants id 7 → findOrFail(7) rơi vào campaign_product_variants id 7 (dòng khác SKU, khác chương trình), dòng đúng id 12 để mờ. Số trong ảnh là minh họa. Đã mở PNG soi: 1 lần chỉnh nhãn chạm ô. Scan sạch, hugo sạch. Stage → needs-audit."
+        },
+        {
+          "date": "2026-09-23",
+          "event": "content-audit vòng 2: CHƯA ĐẠT. Chặn: code block nguyên văn từ repo công ty (L-057) ở cả 2 bản; link bench 404 (chưa push). Nên sửa: 2 khẳng định chưa có nguồn trong mục Đánh đổi (AC nhắm validate; lý do loại phương án tách ticket), chữ \"now\" dòng 44, README bench đếm \"one more query\". Đạt: bench chạy lại khớp README, scan sạch, ảnh đã mở xem, cấu trúc 2 bản khớp, hugo sạch. Đề xuất lesson: dòng Nguồn của inbox bị chép thành code block."
+        },
+        {
+          "date": "2026-09-23",
+          "event": "content-write fix pass sau audit vòng 2: (1) code block nguyên văn → SQL bản dựng lại trong bench, bỏ tên model thật ở 3 chỗ; (2) đoạn AC mới viết lại theo spec: AC đòi từ chối dòng ở chế độ tồn kho mới, tra theo cặp là suy luận thiết kế, bỏ ý \"SKU giờ nằm nhiều chương trình\" (sai sự thật); (3) bỏ \"AC chỉ đòi tra ở validate\"; (4) lý do loại phương án tách ticket ghi đúng biên bản + tách rõ suy luận của tác giả; (5) README bench bỏ \"one more query\". Inbox bổ sung lần 2. Scan sạch, hugo sạch."
+        },
+        {
+          "date": "2026-09-23",
+          "event": "content-audit vòng 3: ĐẠT. Bench chạy lại khớp README; mọi khẳng định trong Mổ xẻ và Đánh đổi truy về inbox dòng 74/86; L-057 grep 0 hit; scan sạch; cấu trúc 2 bản khớp; hugo sạch. Nên sửa (không chặn): lượng từ hình tượng \"a hundred times a day\" dòng 39. Stage → published, file đã stage, chờ commit."
         }
       ]
     },
@@ -539,6 +559,28 @@
         {
           "date": "2026-09-21",
           "event": "triage: D/VI, ready"
+        }
+      ]
+    },
+    {
+      "slug": "merge-conflict-copy-nhanh-thu-ba",
+      "title": "Resolve conflict copy nguyên file nhánh thứ ba",
+      "created": "2026-09-23",
+      "genre": null,
+      "stage": "inbox",
+      "lang_primary": "vi",
+      "evidence": {
+        "numbers": "17h55' toàn bộ route /api/* fatal error (từ merge tới fix xong) → 0 sau fix lần 2",
+        "method": null,
+        "repro": null
+      },
+      "blocked_on": null,
+      "next_action": "content-triage",
+      "paths": {},
+      "history": [
+        {
+          "date": "2026-09-23",
+          "event": "capture từ sự cố merge conflict thật vừa xử lý xong"
         }
       ]
     }
@@ -595,6 +637,10 @@
     {
       "date": "2026-09-22",
       "entry": "behavioral_coverage: that-bai (1184-test-xanh-bug-van-len-staging) và quyet-dinh-kho (feature-flag-nhu-release-gate) chuyển sang selector-jquery-lot-len-staging — bài đã publish, có thẻ phỏng vấn. Hai mục cũ vẫn ở stage ready và giờ không còn giữ ô nào."
+    },
+    {
+      "date": "2026-09-23",
+      "entry": "capture merge-conflict-copy-nhanh-thu-ba: sự cố merge conflict copy nguyên file từ nhánh thứ ba, verify nửa vời bỏ lọt dòng thừa, gây 500 toàn bộ /api/* trên staging ~17h55'. Có số (thời gian sự cố), chưa có method/repro — cần content-triage."
     }
   ]
 }

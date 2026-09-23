@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" font-family="ui-monospace,'SFMono-Regular',Menlo,Consolas,monospace">
+  <rect width="1200" height="630" fill="#1d2021"/>
+  <rect x="0" y="0" width="1200" height="6" fill="#fb4934"/>
+
+  <text x="60" y="80" fill="#928374" font-size="22" letter-spacing="3">SAME NUMBER, DIFFERENT TABLE</text>
+
+  <!-- import row -->
+  <g font-size="24">
+    <text x="60" y="230" fill="#a89984">import file</text>
+    <rect x="60" y="248" width="270" height="92" rx="6" fill="none" stroke="#665c54" stroke-width="1.5"/>
+    <text x="80" y="284" fill="#ebdbb2">sku      SKU-A</text>
+    <text x="80" y="320" fill="#ebdbb2">campaign 3</text>
+  </g>
+
+  <!-- left table: product_variants -->
+  <g font-size="24">
+    <text x="400" y="150" fill="#a89984">product_variants</text>
+    <text x="400" y="185" fill="#665c54">id</text>
+    <text x="420" y="222" fill="#665c54">5   SKU-C</text>
+    <text x="420" y="262" fill="#665c54">6   SKU-D</text>
+    <rect x="400" y="278" width="240" height="44" rx="6" fill="#fabd2f" opacity="0.14" stroke="#fabd2f" stroke-width="1.5"/>
+    <text x="420" y="309" fill="#fabd2f">7   SKU-A</text>
+    <text x="420" y="352" fill="#665c54">…</text>
+  </g>
+
+  <!-- right table: campaign_product_variants -->
+  <g font-size="24">
+    <text x="760" y="150" fill="#a89984">campaign_product_variants</text>
+    <text x="760" y="185" fill="#665c54">id</text>
+    <text x="780" y="222" fill="#665c54">5   SKU-F · campaign 2</text>
+    <text x="780" y="262" fill="#665c54">6   SKU-A · campaign 1</text>
+    <rect x="760" y="278" width="380" height="44" rx="6" fill="#fb4934" opacity="0.18" stroke="#fb4934" stroke-width="1.5"/>
+    <text x="780" y="309" fill="#fb4934">7   SKU-B · campaign 1</text>
+    <text x="780" y="352" fill="#665c54">…</text>
+    <rect x="760" y="368" width="380" height="44" rx="6" fill="none" stroke="#665c54" stroke-width="1.5" stroke-dasharray="7 7"/>
+    <text x="780" y="399" fill="#a89984">12  SKU-A · campaign 3</text>
+    <text x="780" y="440" fill="#665c54" font-size="20" font-style="italic">the row it should have edited</text>
+  </g>
+
+  <!-- arrow: file -> left row 7 -->
+  <g stroke="#a89984" stroke-width="2" fill="none">
+    <path d="M330 300 L388 300"/>
+    <polygon points="398,300 384,293 384,307" fill="#a89984" stroke="none"/>
+  </g>
+
+  <!-- arrow: left row 7 -> right row 7 -->
+  <g stroke="#fb4934" stroke-width="2.5" fill="none">
+    <path d="M640 300 L748 300"/>
+    <polygon points="758,300 742,292 742,308" fill="#fb4934" stroke="none"/>
+  </g>
+  <text x="668" y="268" fill="#fb4934" font-size="20" text-anchor="middle">findOrFail(7)</text>
+
+  <!-- footer -->
+  <text x="60" y="540" fill="#ebdbb2" font-size="30">QA saw one row change. It was the wrong one.</text>
+  <text x="60" y="580" fill="#928374" font-size="22">for years · 0 tests · until one fixture had a SKU in two campaigns</text>
+</svg>
