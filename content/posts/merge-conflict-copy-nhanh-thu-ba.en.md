@@ -1,6 +1,6 @@
 ---
 title: "A Merge Has Exactly Two Parents. The Line From a Third Branch Took Down Every API Route."
-date: 2026-09-23T17:00:00+07:00
+date: 2026-09-23T14:42:00+07:00
 draft: false
 description: "A conflict in the HTTP kernel was resolved by copying the whole file from a third branch. One middleware line came along, its class did not, and /api/* returned 500 for almost 18 hours."
 tags: ["git", "merge-conflict", "laravel", "incident", "code-review"]

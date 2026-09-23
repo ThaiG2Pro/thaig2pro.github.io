@@ -1,6 +1,6 @@
 ---
 title: "Merge chỉ có đúng hai cha. Một dòng lấy từ nhánh thứ ba làm sập toàn bộ route API"
-date: 2026-09-23T17:00:00+07:00
+date: 2026-09-23T14:42:00+07:00
 draft: false
 description: "Conflict ở file đăng ký middleware được xử lý bằng cách copy nguyên file từ một nhánh thứ ba. Một dòng middleware đi theo, class của nó thì không, và /api/* trả 500 gần 18 tiếng."
 tags: ["git", "merge-conflict", "laravel", "incident", "code-review"]
