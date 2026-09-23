@@ -7,7 +7,7 @@
   "behavioral_coverage": {
     "that-bai": "selector-jquery-lot-len-staging",
     "mau-thuan": "quota-ma-thieu-foreign-key",
-    "deadline": null,
+    "deadline": "feature-flag-nhu-release-gate",
     "tu-hoc": "lock-bi-danh-roi-khi-refactor",
     "quyet-dinh-kho": "selector-jquery-lot-len-staging"
   },
@@ -386,7 +386,7 @@
       "title": "Feature flag như release gate liên team",
       "created": "2026-09-21",
       "genre": "D",
-      "stage": "published",
+      "stage": "done",
       "lang_primary": "vi",
       "evidence": {
         "numbers": "không có số — thể loại D không cần",
@@ -394,12 +394,15 @@
         "repro": null
       },
       "blocked_on": null,
-      "next_action": "Chạy /content-derive trong 24h (trước 2026-09-23 17:00): career/feature-flag-nhu-release-gate.md (câu behavioral: mâu thuẫn liên team / deadline) + social",
+      "next_action": "Tùy chọn: khi flag được bật thật, /content-capture con số production rồi bổ vào mục Cái giá; /content-review quý này.",
       "paths": {
         "post": "content/posts/feature-flag-nhu-release-gate.md",
         "post_alt": "content/posts/feature-flag-nhu-release-gate.en.md",
         "cover": "static/images/posts/feature-flag-nhu-release-gate/cover.png",
-        "cover_svg": "static/images/posts/feature-flag-nhu-release-gate/cover.svg"
+        "cover_svg": "static/images/posts/feature-flag-nhu-release-gate/cover.svg",
+        "career": "career/feature-flag-nhu-release-gate.md",
+        "video": "drafts/video-feature-flag-nhu-release-gate.md",
+        "social": "drafts/social-feature-flag-nhu-release-gate.md"
       },
       "history": [
         {
@@ -457,6 +460,10 @@
         {
           "date": "2026-09-23",
           "event": "content-write: áp 4 nên-sửa của audit lượt 5, cả hai bản — bước 2 hạ giọng còn 'rỗng không còn bị coi là hết hàng' (bỏ 'đọc theo cột nguồn hàng' vì inbox không có); thống nhất 'đã phân bổ' thay giữ chỗ/cấp/reserved; chẻ câu 'hai tầng'; reflow các đoạn gãy dòng sau hotfix. VI 1193 từ, EN 1053. Scan sạch, hugo sạch. Commit + push."
+        },
+        {
+          "date": "2026-09-23",
+          "event": "content-derive trong 24h: career/ (STAR + 3 lát cắt + 3 câu đào sâu; không có bullet CV có số — nói thẳng, cho một bullet không số), drafts/video- (1 ý: cùng ô rỗng hai hệ đọc ngược; hook 'ship tính năng biết chắc 100% bị từ chối'), drafts/social- (EN LinkedIn + VI Facebook). Link VI/EN curl 200, không placeholder, 3 file đều gitignored. behavioral_coverage: deadline -> slug này. Stage published -> done."
         }
       ]
     },
