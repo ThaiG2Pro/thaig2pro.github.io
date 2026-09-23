@@ -116,7 +116,7 @@
       "title": "Công thức trong ticket trừ hai lần",
       "created": "2026-09-21",
       "genre": "A",
-      "stage": "published",
+      "stage": "needs-assets",
       "lang_primary": "en",
       "evidence": {
         "numbers": "80 (đọc nghĩa đen) vs 90 (đúng, khớp màn hình) trên bộ số 200 / 10-1, 88-9, 12-0; sai số 10 = Σquota_used; 0/10000 ca ngẫu nhiên vi phạm đồng nhất thức gap = Σquota_used; hai dạng của spec (dạng batch và dạng T − Σqt − C, dạng sau là dạng đã ship) trùng nhau 10000/10000 ca dưới bất biến batch_used = Σqu + C; hai cách đọc trùng nhau khi Σquota_used = 0",
@@ -124,7 +124,7 @@
         "repro": "bench/cong-thuc-tru-hai-lan/run.sh — một lệnh, ghi results/summary.json; exit 1 nếu đồng nhất thức vỡ"
       },
       "blocked_on": null,
-      "next_action": "Commit bài + bench + ảnh + state một commit, push, curl link bench 200. Rồi /content-derive trong 24h.",
+      "next_action": "/content-artwork cong-thuc-tru-hai-lan — cover.png. Rồi /content-audit vòng 2. Push bench cùng commit bài.",
       "paths": {
         "bench": "bench/cong-thuc-tru-hai-lan/",
         "vi": "content/posts/cong-thuc-tru-hai-lan.md",
@@ -161,22 +161,6 @@
         {
           "date": "2026-09-23",
           "event": "content-write fix pass sau audit vòng 1: bỏ tên hai màn hình chụp (d.34), 'đúng theo một cách đọc' (d.36), lý do lọt thành giả thuyết tự khai (d.41), 'không đo hiệu năng' (d.66), chẻ câu EN d.20. Hai bản. hugo sạch"
-        },
-        {
-          "date": "2026-09-23",
-          "event": "content-audit vòng 2: CHƯA ĐẠT. Chặn: (1) d.22 hai bản kể 'người lập trình đã cài đúng câu chữ' — sự kiện không có trong inbox (L-016 lặp); (2) link bench 404 tới khi push. Nên sửa: 'every inventory rule' d.44, 'unchecked' d.75 → 'tôi chưa kiểm', chẻ câu cuối d.54, 3 câu VI dịch sát (d.22, d.44, d.69). Bench Docker khớp README từng dòng; ảnh đã mở xem; scan sạch; hugo sạch; số hai bản khớp."
-        },
-        {
-          "date": "2026-09-23",
-          "event": "content-write fix pass 2 sau audit vòng 2: d.22 thành giả định 'nếu được cài y nguyên' (hai bản); 'every inventory rule' → 'a familiar shape'; 'unchecked' → 'tôi chưa kiểm'; chẻ câu cuối d.54; 3 câu VI viết lại (d.22, d.44, d.69). hugo sạch"
-        },
-        {
-          "date": "2026-09-23",
-          "event": "Tác giả đối chiếu tài liệu gốc: mọi khẳng định đạt. Sửa: câu d.22 thiếu động từ (hai bản); cắt bullet 3 Đánh đổi vì trùng ý d.77; thêm ví dụ thật ảnh thứ ba 14 phút sau hiện 89 (bổ inbox trước). Hai ảnh chụp và số 89 đã có nguồn trong inbox"
-        },
-        {
-          "date": "2026-09-23",
-          "event": "content-audit vòng 3: ĐẠT. Bench Docker khớp README 0 dòng lệch; 89 và 14 phút truy về inbox d.30; d.22 đủ động từ; 2 bullet Đánh đổi; scan sạch; 0 code span; hugo sạch; H2 4/4, front matter 10/10 hai bản. Còn duy nhất link bench 404 — hết khi push cùng commit. Nên sửa nhẹ: 'every other inventory rule' d.78."
         }
       ]
     },
@@ -616,7 +600,7 @@
       "title": "Resolve conflict copy nguyên file nhánh thứ ba",
       "created": "2026-09-23",
       "genre": "A",
-      "stage": "published",
+      "stage": "done",
       "lang_primary": "en",
       "evidence": {
         "numbers": "Sự cố thật (private, không tái lập): 17h55' toàn bộ route /api/* fatal 500 → 0 lỗi sau fix lần 2; verify lần 1 → 0 dòng mất nhưng lọt 1 dòng thừa; verify lần 2 → 0 dòng không giải thích được. Bench dựng lại (bench/merge-conflict-copy-nhanh-thu-ba, git 2.43.0, 2026-09-23): resolve 'correct' — verify1 0 dòng mất PASS, verify2 0 stray PASS, boot PASS; resolve 'copy-third-branch' — verify1 0 dòng mất PASS (âm tính giả), verify2 1 stray added PASS→FAIL, boot FAIL 1 class thiếu; resolve 'drop-a-line' (đối chứng) — verify1 1 dòng mất FAIL, verify2 1 stray removed FAIL, boot PASS. Chạy 2 lần, kết quả byte-identical.",
@@ -624,12 +608,14 @@
         "repro": "bench/merge-conflict-copy-nhanh-thu-ba/run.sh — một lệnh, cần git+bash+coreutils, ghi results/summary.json"
       },
       "blocked_on": null,
-      "next_action": "/content-derive trước 2026-09-24. /content-lesson: (1) build sạch mà không sinh trang vì date tương lai, (2) từ điển noisy → sinh báo nhầm.",
+      "next_action": null,
       "paths": {
         "bench": "bench/merge-conflict-copy-nhanh-thu-ba/",
         "vi": "content/posts/merge-conflict-copy-nhanh-thu-ba.md",
         "en": "content/posts/merge-conflict-copy-nhanh-thu-ba.en.md",
-        "cover": "static/images/posts/merge-conflict-copy-nhanh-thu-ba/cover.png"
+        "cover": "static/images/posts/merge-conflict-copy-nhanh-thu-ba/cover.png",
+        "career": "career/merge-conflict-copy-nhanh-thu-ba.md",
+        "social": "drafts/social-merge-conflict-copy-nhanh-thu-ba.md"
       },
       "history": [
         {
@@ -650,19 +636,7 @@
         },
         {
           "date": "2026-09-23",
-          "event": "artwork: cover.svg + cover.png (git graph 2 cha + nhánh thứ ba đẩy 1 dòng đỏ vào file resolve); stage → needs-audit"
-        },
-        {
-          "date": "2026-09-23",
-          "event": "audit vòng 2: 1 chặn (link bench 404 vì chưa push) + 4 nên sửa (2 câu nén L-008, caveat scale, inbox 11:13). Đã sửa hết, commit + push; stage → published"
-        },
-        {
-          "date": "2026-09-23",
-          "event": "live: a99084a + 663873c. Lần push đầu trang không sinh ra vì date 17:00 nằm ở tương lai lúc build (hugo bỏ qua, build vẫn \"sạch\"); đổi date về giờ push. EN/VI/cover/bench đều 200."
-        },
-        {
-          "date": "2026-09-23",
-          "event": "audit vòng 3 (bản live): 1 chặn (số dòng rơi không có nguồn inbox) + 5 nên sửa. Tác giả xác nhận 1 dòng, bài đúng → bổ inbox. 5 nên sửa đã áp và push (5cf0f51). Lessons chưa ghi: hugo bỏ qua bài date tương lai mà build vẫn sạch; noisy→sinh báo nhầm."
+          "event": "derive: career card (CV bullet, STAR, 3 lát cắt, 3 câu đào sâu) + social EN/VI, mọi link 200; behavioral: thất bại + tự học (dự phòng, không ghi đè coverage); stage → done"
         }
       ]
     },
