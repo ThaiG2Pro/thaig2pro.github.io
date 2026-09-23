@@ -52,8 +52,9 @@ Hậu quả tôi đọc ra được từ hai dòng code: bật chế độ mới
 chung bị từ chối, trong khi màn hình vẫn bảo còn hàng.
 
 Tôi không sửa được chỗ đó — không phải repo của tôi, không phải team của tôi. Vì sao hai
-chỗ trong cùng một repo lệch nhau, tôi không biết và cũng không đi hỏi. Team kia không sai khi chưa sửa: hậu quả này chỉ xuất hiện khi
-chế độ mới bật, mà chế độ đó lúc ấy chưa tồn tại.
+chỗ trong cùng một repo lệch nhau, tôi không biết và cũng không đi hỏi. Team kia không
+sai khi chưa sửa: hậu quả này chỉ xuất hiện khi chế độ mới bật, mà chế độ đó lúc ấy chưa
+tồn tại.
 
 Hai điều đều đúng, nhưng không thể cùng đúng. Thứ nhất: lịch ship đã định, và phần việc
 của tôi không có lý do gì để trễ. Thứ hai: bật tính năng trước khi team kia sửa xong
@@ -66,14 +67,14 @@ Tôi ship đủ code và migration đúng lịch, nhưng để feature flag mặ
 production. Rồi tôi viết điều kiện được phép bật flag thành một thứ tự deploy bắt buộc
 cho team kia, hai bước, không đổi chỗ:
 
-1. **Rào phần kho đã giữ chỗ trước.** Phần kho đã cấp cho các chương trình khác phải
-   được tách khỏi kho chung, để đơn "không giới hạn" không bán vào đó.
+1. **Rào phần kho đã phân bổ trước.** Phần kho đã phân bổ cho các chương trình khác
+   phải được tách khỏi kho chung, để đơn "không giới hạn" không bán vào đó.
 2. **Nới cách đọc `NULL` sau.** Khi kho đã rào, chỗ kiểm tra đơn mới được đổi: rỗng
-   không còn bị coi là hết hàng, mà đọc theo cột nguồn hàng.
+   không còn bị coi là hết hàng.
 
 Làm ngược thứ tự thì ra lỗi ngược chiều. Bật sớm là từ chối hết. Nới trước rào sau là
 bán vượt kho (oversell) 100%. Lý do: giữa hai bước, đơn theo kho chung không bị quota
-riêng chặn, cũng không bị kho đã giữ chặn.
+riêng chặn, cũng không bị kho đã phân bổ chặn.
 
 Một ví dụ bằng số giả định, để thấy vì sao thứ tự quan trọng. Giả sử kho tổng có 10 đơn
 vị vật lý, và cả 10 đã được phân bổ cho một chương trình khác — nên phần kho chung còn
@@ -81,9 +82,9 @@ bán được là 0. Nới `NULL` trước khi rào: đơn theo kho chung đọc
 bán hết 10 đơn vị của chương trình kia. Rào trước rồi mới nới: cùng đơn ấy thấy kho
 chung bằng 0 và bị từ chối đúng.
 
-Flag tắt ở đây không phải chỉ là ẩn nút. Nó được kiểm ở hai tầng — giao diện và lớp
-nhận request lẫn import — nên gọi thẳng API khi flag tắt vẫn bị từ chối. Và điều kiện
-bật không chỉ là "team kia đã deploy": dữ liệu production phải qua các câu kiểm tra tiền
+Flag tắt ở đây không phải chỉ là ẩn nút. Nó được kiểm ở hai tầng: giao diện, và lớp
+nhận request lẫn import. Gọi thẳng API khi flag tắt vẫn bị từ chối. Điều kiện bật cũng
+không chỉ là "team kia đã deploy": dữ liệu production phải qua các câu kiểm tra tiền
 điều kiện với kết quả 0 dòng lỗi.
 
 Flag ở đây không dùng để thử nghiệm dần. Nó là cách viết một phụ thuộc liên team thành
@@ -93,14 +94,14 @@ tài liệu ai cũng đọc được.
 ## Cái giá
 
 Tới lúc viết bài này, flag vẫn tắt. Tính năng đã có trên production — nhưng với người
-dùng thật thì chưa có gì thay đổi. Nhìn từ ngoài, việc đó giống
-một tính năng chưa xong, dù phần việc của tôi đã hoàn tất đúng lịch. Cái "xong" của cả
-tính năng giờ phụ thuộc vào lịch của một team tôi không điều khiển được.
+dùng thật thì chưa có gì thay đổi. Nhìn từ ngoài, việc đó giống một tính năng chưa xong,
+dù phần việc của tôi đã hoàn tất đúng lịch. Cái "xong" của cả tính năng giờ phụ thuộc
+vào lịch của một team tôi không điều khiển được.
 
 Tôi cũng làm thêm một việc không có trong phạm vi ban đầu: viết tài liệu thứ tự deploy
-cho một repo không phải của mình.
-Và giá trị kinh doanh của chế độ khuyến mãi mới bị hoãn đúng bằng khoảng thời gian chờ
-team kia deploy. Bao lâu, bao nhiêu đơn — tôi chưa có con số, vì việc chưa kết thúc.
+cho một repo không phải của mình. Và giá trị kinh doanh của chế độ khuyến mãi mới bị
+hoãn đúng bằng khoảng thời gian chờ team kia deploy. Bao lâu, bao nhiêu đơn — tôi chưa
+có con số, vì việc chưa kết thúc.
 
 ## Điều tôi làm khác đi
 

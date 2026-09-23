@@ -68,14 +68,14 @@ I shipped the code and the migration on schedule, but kept the flag defaulted **
 production. Then I wrote the condition for turning it on as a mandatory two-step deploy
 order for the other team:
 
-1. **Fence the reserved stock first.** Stock already allocated to other campaigns has to
-   be split off from the shared pool, so an "unlimited" order can't sell into it.
+1. **Fence the allocated stock first.** Stock already allocated to other campaigns has
+   to be split off from the shared pool, so an "unlimited" order can't sell into it.
 2. **Loosen the `NULL` handling second.** Only once the pool is fenced does the order
-   check change: empty no longer means out of stock, it defers to the source column.
+   check change: empty no longer means out of stock.
 
 Reversing the order produces the opposite failure. Flag on too early: every shared-pool
 order is rejected. Loosen before fencing: 100% oversell. The reason: between the two
-steps, a shared-pool order is held back neither by its own quota nor by the reserved
+steps, a shared-pool order is held back neither by its own quota nor by the allocated
 stock.
 
 An illustrative number, to show why the order matters. Say the warehouse holds 10
@@ -84,10 +84,10 @@ Loosen `NULL` before fencing: a shared-pool order reads "unlimited" and sells al
 the other campaign's units. Fence first, then loosen: the same order sees a pool of 0 and
 is correctly rejected.
 
-The flag being off isn't just a hidden button. It's checked at two layers — the UI and
-the request/import layer — so calling the API directly with the flag off is still
-rejected. And the go condition isn't only "the other team has deployed": production data
-has to pass the pre-check queries with 0 offending rows first.
+The flag being off isn't just a hidden button. It's checked at two layers: the UI, and
+the request/import layer. Calling the API directly with the flag off is still rejected.
+And the go condition isn't only "the other team has deployed": production data has to
+pass the pre-check queries with 0 offending rows first.
 
 The flag here isn't for gradual rollout. It's a way to turn a cross-team dependency into
 something checkable: the flag being off means the conditions aren't met, and the
@@ -96,9 +96,9 @@ conditions live in a document anyone can read.
 ## The cost
 
 As of writing, the flag is still off. The feature is in production — but for real users
-nothing has changed. From the outside that looks like an
-unfinished feature, even though my part was done on schedule. "Done" for the whole
-feature now depends on the schedule of a team I don't control.
+nothing has changed. From the outside that looks like an unfinished feature, even though
+my part was done on schedule. "Done" for the whole feature now depends on the schedule of
+a team I don't control.
 
 I also took on work outside my original scope: writing a deploy-order document for a
 repo that isn't mine, clear enough for the other team to follow without me in the room.
@@ -109,9 +109,9 @@ over.
 ## What I'd do differently
 
 Next time I'd read the dependent service's code **during design review**, before writing
-any of my own — not after picking up the work and finding it then. "How does the downstream
-service handle an empty value" should be a mandatory item in any cross-team design
-review, not something one engineer digs up out of a habit of reading code before
+any of my own — not after picking up the work and finding it then. "How does the
+downstream service handle an empty value" should be a mandatory item in any cross-team
+design review, not something one engineer digs up out of a habit of reading code before
 changing it.
 
 I'd also push for treating the flag as a two-party contract from day one, instead of

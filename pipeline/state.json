@@ -449,6 +449,14 @@
         {
           "date": "2026-09-22",
           "event": "hotfix sau publish (tác giả review bản live): (1) lỗi sự thật — Bối cảnh mô tả nhầm chế độ CŨ (quota cố định riêng) thành chế độ mới; viết lại: chế độ mới = không quota riêng, bán theo tồn khả dụng kho tổng; (2) ví dụ số 10 tự mâu thuẫn (pool vừa 10 vừa 0) — tách tồn vật lý 10 / đã phân bổ 10 / pool 0; (3) rò rỉ — bỏ dòng code nguyên văn + tên cột thật của repo team khác khỏi 2 bài và cover, chỉ giữ cơ chế; (4) thêm 2 chi tiết làm flag thành rào thật: kiểm 2 tầng UI + request/import, pre-check production = 0 dòng trước khi bật. Nguồn: bổ sung inbox 2026-09-22. VI ~1200 từ, EN 1062 từ. Bài đã live 30s sau push đầu; hotfix push tiếp."
+        },
+        {
+          "date": "2026-09-23",
+          "event": "content-audit lượt 5 (bản hotfix đã live, có 2 bước mới): ĐẠT. Lượt 'định nghĩa hệ thống': 11 câu định nghĩa trong Bối cảnh + cơ chế đều trỏ được về inbox dòng 71-72 (bổ sung 2026-09-22). grep code nguyên văn: 0 hit ở bài và SVG. Scan 3 file sạch; live không còn tên cột. EN khớp VI đủ 12 điểm sửa. Nên sửa (không chặn): bước 2 'đọc theo cột nguồn hàng' là suy ra, inbox chỉ có 'nới NULL sau'; 3 từ cho cùng khái niệm (giữ chỗ/cấp/phân bổ); câu 'hai tầng' 4 khái niệm; dòng nguồn 55 dài 134 ký tự sau hotfix."
+        },
+        {
+          "date": "2026-09-23",
+          "event": "content-write: áp 4 nên-sửa của audit lượt 5, cả hai bản — bước 2 hạ giọng còn 'rỗng không còn bị coi là hết hàng' (bỏ 'đọc theo cột nguồn hàng' vì inbox không có); thống nhất 'đã phân bổ' thay giữ chỗ/cấp/reserved; chẻ câu 'hai tầng'; reflow các đoạn gãy dòng sau hotfix. VI 1193 từ, EN 1053. Scan sạch, hugo sạch. Commit + push."
         }
       ]
     },
@@ -464,8 +472,8 @@
         "method": "audit handler khi thêm AC resolve cặp (SKU × Campaign)",
         "repro": "bench/bug-import-tra-nham-bang/ — 2 bảng auto-increment id trùng nhau, 1 test pass sai + 1 test bắt đúng"
       },
-      "blocked_on": "bench/bug-import-tra-nham-bang/ chưa tồn tại (bài đã link tới); cover.png chưa có",
-      "next_action": "(1) bổ inbox hoặc hạ giọng 5 chi tiết chưa có nguồn (2) /content-bench (3) /content-artwork (4) /content-audit vòng 2",
+      "blocked_on": "bench/bug-import-tra-nham-bang/ chưa tồn tại; cover.png chưa có",
+      "next_action": "/content-bench — 2 test: (1) 1 SKU trong 1 chương trình, xanh trên code hỏng; (2) 1 SKU trong 2 chương trình, đỏ trên code hỏng, xanh trên fix. Rồi /content-artwork → /content-audit vòng 2",
       "paths": {
         "vi": "content/posts/bug-import-tra-nham-bang.md",
         "en": "content/posts/bug-import-tra-nham-bang.en.md",
@@ -488,6 +496,10 @@
         {
           "date": "2026-09-22",
           "event": "content-audit vòng 1: CHƯA ĐẠT. Chặn: bench chưa tồn tại (link 404), cover.png thiếu, EN:52/VI:52 \"two queries instead of one\" không có nguồn. Nên sửa: 5 chi tiết bản sửa/QA không có trong inbox (auto-increment từ 1, file một dòng, fixture kiểm soát auto-increment, ba phương án đã cân nhắc, file cũ phải sinh lại); VI 3 câu nén >2 khái niệm, 3 cụm dịch cứng. Đạt: scan định danh sạch, hugo sạch, tiêu đề 2 bản khớp, front matter 10/10, bảng số 2 bản khớp."
+        },
+        {
+          "date": "2026-09-23",
+          "event": "content-write fix pass sau audit vòng 1: người dùng đối chiếu code/ADR/test → 1 đúng, 2 sai, 1 chưa xác nhận, 1 nửa đúng. Sửa cả VI+EN: (1) mở bài bỏ \"file một dòng\"; (2) cột file là mã SKU, code resolve sang id; (3) \"từ 1\" → \"từ số nhỏ\"; (4) ba phương án thay bằng ba phương án thật trong biên bản quyết định (validate-only / cả hai bước / tách ticket); (5) test hồi quy viết đúng: 1 SKU trong 2 chương trình, assert dòng resolve = B và ≠ id SKU, chỉ kiểm bước resolve — tự khai lỗ hổng chưa kiểm bước ghi. Bỏ \"two queries\". VI: chẻ 2 câu nén, sửa 3 cụm dịch cứng. Inbox bổ sung 2026-09-23. Scan sạch, hugo sạch."
         }
       ]
     },
