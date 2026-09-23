@@ -647,6 +647,10 @@
         {
           "date": "2026-09-23",
           "event": "audit vòng 2: 1 chặn (link bench 404 vì chưa push) + 4 nên sửa (2 câu nén L-008, caveat scale, inbox 11:13). Đã sửa hết, commit + push; stage → published"
+        },
+        {
+          "date": "2026-09-23",
+          "event": "live: a99084a + 663873c. Lần push đầu trang không sinh ra vì date 17:00 nằm ở tương lai lúc build (hugo bỏ qua, build vẫn \"sạch\"); đổi date về giờ push. EN/VI/cover/bench đều 200."
         }
       ]
     },
