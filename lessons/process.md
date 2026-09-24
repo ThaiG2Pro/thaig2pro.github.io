@@ -85,3 +85,38 @@ phải bản mình dựng lại) và có tên cột / tên hàm / tên biến c�
 luôn là tên thật; mỗi hit phải trả lời được "cái này ở bench hay ở repo người khác?".
 **Đã vá:** `CONTENT_STYLE.md` mục 3b thêm gạch đầu dòng "Code nguyên văn"; `/content-audit`
 vòng 4 thêm bước grep trên.
+
+## L-058 · 2026-09-24 · build-sạch-nhưng-không-sinh-trang
+**Lỗi:** bài có `date` 17:00 nhưng push lúc 14:42 cùng ngày. Hugo coi đó là bài tương lai và
+bỏ qua **không một dòng cảnh báo**; `hugo --gc --minify` báo sạch, audit hai lượt cũng ghi
+"build sạch", nhưng `public/` không có trang. Site live trả 404 cho cả hai ngôn ngữ trong
+khi ảnh cover và link bench đều 200.
+**Ai bắt:** chạy thật — `curl` URL bài sau deploy, rồi `find public -name index.html` ra rỗng.
+**Vì sao lọt:** mọi cổng chỉ hỏi "build có lỗi không". Không cổng nào hỏi "build có sinh ra
+trang này không". Archetype đặt `date` bằng giờ tạo file, nhưng bước viết đặt tay 17:00 theo
+thói quen "giờ đăng đẹp", và không ai so `date` với giờ build.
+**Dấu hiệu:** `date` trong front matter lớn hơn giờ hiện tại, dù chỉ vài giờ. Hoặc
+`hugo list future` có dòng. Phép thử một lệnh: `find public -path '*<slug>*' -name
+index.html | wc -l` phải ra đúng 2.
+**Lặp:** lần thứ hai trong cùng ngày — bài `cong-thuc-tru-hai-lan` gặp y hệt ở phiên khác
+(date 14:00 đặt lại sau khi phát hiện `public/` thiếu trang). Hai lần → nâng thành luật.
+**Đã vá:** `CONTENT_STYLE.md` mục 8 (bước 1 và 8) và `/content-write` checklist bước 1 và 7:
+sau build phải đếm được đúng 2 `index.html` của slug.
+
+## L-059 · 2026-09-24 · hai-phiên-một-repo
+**Lỗi:** hai phiên làm hai bài song song trên cùng working tree. (1) Phiên A stage 10 file của
+bài của mình chờ commit; phiên B chạy `git add <file của B>` rồi `git commit` — commit gom cả
+10 file của A với message nói về bài của B. Bài của A lên site "nhầm", đúng nội dung nhưng
+không qua bước push có chủ ý, và lịch sử git nói dối về commit đó. (2) Cả hai phiên nạp
+`pipeline/state.json` vào bộ nhớ rồi ghi lại toàn file; bản ghi sau đè bản ghi trước, mất
+hai lượt history audit của A và để stage của A kẹt ở `needs-assets` trong khi bài đã live.
+**Ai bắt:** `/content-audit` lượt sau, khi thấy bài live mà state nói chưa có ảnh, và
+`git log -- content/posts/<slug>` trỏ về một commit tên khác.
+**Vì sao lọt:** `git commit` commit **cả index**, không chỉ thứ vừa `add`; và ghi state bằng
+"đọc → sửa → ghi cả file" không có gì bảo vệ. Cả hai đều vô hình khi chỉ có một phiên.
+**Dấu hiệu:** `git status` trước commit có file staged mà mình không nhớ đã add. `git log
+--oneline -- <file>` của một bài trỏ về commit có message nói bài khác. State có `paths`
+trỏ tới file không tồn tại.
+**Đã vá:** chưa nâng thành luật — lần đầu gặp. Cổng rẻ nên làm ngay: `git diff --cached
+--stat` trước mỗi commit và chỉ commit khi mọi dòng thuộc bài đang làm; với state.json, đọc
+lại file **ngay trước** khi ghi, không dùng bản đã nạp từ đầu phiên.

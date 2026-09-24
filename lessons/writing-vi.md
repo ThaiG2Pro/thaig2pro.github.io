@@ -15,6 +15,7 @@ Thành ngữ kỹ thuật tiếng Anh dịch thẳng ra thì đúng chữ nhưng
 | the boring one | cái nhàm chán nhất | ban đầu tôi nghĩ đơn giản |
 | silent no-op | no-op im lặng | im lặng biến mất / không làm gì mà không báo |
 | drop-in | thả vào là chạy | không phải bản dùng ngay, phải chỉnh |
+| noisy (for anything else) | ồn với thứ khác | sinh báo nhầm với file khác |
 
 Gặp thành ngữ mới dịch trật thì thêm một dòng vào bảng này.
 
@@ -106,3 +107,14 @@ giá trị, hệ quả). Quá 2 là nghi; quá 3 gần như chắc chắn phải
 dài có "nên", "và", ":" nối liên tiếp, hoặc một mệnh đề liệt kê ba chi phí.
 **Đã vá:** nâng thành luật — `CONTENT_STYLE.md` mục "Một câu, tối đa hai khái niệm mới"
 và mục 8 checklist (bước 6).
+
+## L-009 · 2026-09-24 · noisy-thành-ồn
+**Lỗi:** *"treats whitespace as content, which is right for a manifest and noisy for anything
+else"* dịch thành *"đúng với manifest nhưng ồn với thứ khác"*. "Noisy" trong tiếng Anh kỹ
+thuật nghĩa là "sinh nhiều báo động giả"; "ồn" trong tiếng Việt chỉ là âm thanh.
+**Ai bắt:** `/content-audit` vòng 3, đối chiếu bảng từ điển.
+**Vì sao lọt:** từ này chưa có trong bảng; hai lượt audit trước đọc trôi vì người đọc đã biết
+nghĩa gốc tiếng Anh.
+**Dấu hiệu:** tính từ tiếng Anh về **chất lượng tín hiệu** (noisy, flaky, brittle, clean)
+dịch bằng tính từ cảm giác tiếng Việt (ồn, bở, sạch) mà không kèm động từ nói nó *làm gì*.
+**Đã vá:** thêm dòng vào bảng từ điển đầu file.

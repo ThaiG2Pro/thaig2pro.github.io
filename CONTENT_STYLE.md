@@ -85,6 +85,13 @@ trong mục Bối cảnh và mục cơ chế, ghi số dòng inbox bên cạnh; 
 giả và **ghi câu trả lời vào inbox trước**, rồi mới viết. Inbox thiếu thì bổ inbox, không
 bổ bằng suy luận.
 
+**Sự kiện kể cũng là khẳng định** (L-016 ở bài D, L-061 lặp ở bài A). Mọi câu kể một lần
+quan sát hay một hành động cụ thể (một ảnh chụp, một lần chạy, một dòng log, một lần fix,
+một người đồng ý hay hỏi lại) phải trỏ được về một dòng inbox kể đúng lần đó. Hành động
+kiểm được: đếm số lần quan sát/hành động trong bài, đếm số lần trong mục inbox; bài nhiều
+hơn inbox là có sự kiện tự sinh. Sự kiện mang theo con số (89, "mười bốn phút") **không**
+được coi là đã qua cổng số chỉ vì các số chính của bài đã truy được nguồn.
+
 ---
 
 ## 3b. Cổng bảo mật nghề nghiệp (áp dụng từ Tầng 0)
@@ -355,7 +362,8 @@ Ghi lỗi mới bằng `/content-lesson`. Soi bài theo kho này bằng `/conten
 
 ## 8. Checklist trước khi publish
 
-1. `draft: false`, `date` không nằm ở tương lai xa
+1. `draft: false`, `date` **không lớn hơn giờ build** — Hugo bỏ qua bài tương lai mà không
+   cảnh báo (L-058)
 2. Có bản dịch
 3. Mọi ảnh tồn tại trong `static/images/posts/<slug>/`
 4. Có mục Trade-offs và mục giới hạn
@@ -368,4 +376,5 @@ Ghi lỗi mới bằng `/content-lesson`. Soi bài theo kho này bằng `/conten
    cơ chế, **trước khi push**. Audit "đạt" không thay được bước này: audit chỉ đối chiếu
    được với inbox, còn tài liệu thiết kế nằm trong đầu tác giả (L-019 — bài lên site với
    mô tả ngược chế độ mới sau 4 lượt audit đạt)
-8. `hugo --gc --minify` chạy sạch
+8. `hugo --gc --minify` chạy sạch, **và** `find public -path '*<slug>*' -name index.html |
+   wc -l` ra đúng 2. Build sạch không có nghĩa là trang được sinh ra (L-058)

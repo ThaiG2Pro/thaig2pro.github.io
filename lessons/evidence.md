@@ -107,9 +107,9 @@ qua. Cơ chế sinh lỗi giống L-010: khung D yêu cầu mục "Quyết đị
 lại, từ chối, sốt ruột) và mọi câu ở mục Cái giá viết ở **thì quá khứ hoàn thành** trong
 khi inbox ghi việc còn đang dở. Phép thử: với mỗi sự kiện, tìm được dòng inbox nào kể nó
 không? Không có → hoặc bổ inbox bằng `/content-capture` (nếu thật), hoặc xóa.
-**Đã vá:** chưa vá — lần đầu gặp. Đề xuất nếu lặp: thêm vào
-`references/genre-d-storytelling.md` một bước "liệt kê từng sự kiện có người khác tham
-gia, trỏ về dòng inbox", và `/content-audit` vòng 1 soi mục Cái giá của bài D trước.
+**Đã vá:** lặp lần hai ở bài A (L-061) → nâng thành luật cho **mọi** thể loại:
+`CONTENT_STYLE.md` mục 3, đoạn "Sự kiện kể cũng là khẳng định"; `/content-audit` vòng 1,
+lượt thứ tư.
 
 ## L-017 · 2026-09-22 · mốc-thời-gian-bịa
 **Lỗi:** bài viết *"Đầu tháng 9 năm ngoái"* / *"Early last September"* trong khi mục inbox
@@ -176,3 +176,37 @@ cùng một đại lượng** (pool = 10 rồi pool = 0) là dấu hiệu lẫn 
 **Đã vá:** nâng thành luật cùng L-018 — xem `**Đã vá**` của L-018. Thêm: `/content-audit`
 báo "đạt" **không** thay được một lượt đọc của tác giả trên bản render trước khi push;
 ghi vào `CONTENT_STYLE.md` mục 8.
+
+## L-060 · 2026-09-23 · gộp-hai-sự-cố-rồi-tự-điền-trạng-thái
+(Dải số 010-019 của file này đã hết; từ đây đánh số tiếp theo toàn repo.)
+**Lỗi:** một sự cố thật có hai lớp hỏng (copy file từ nhánh thứ ba làm **rơi** một dòng và
+**thừa** một dòng), inbox chỉ kể lớp thừa cho rõ luận điểm. Bước viết cần một câu bối cảnh
+"nhánh thứ ba lúc đó có gì", inbox không có, nên tự điền *"đã có sẵn cả hai dòng"* — trạng
+thái hợp lý nhất để câu chuyện một lớp đứng vững, và sai. Nó làm lệch cả câu nhân quả ngay
+sau ("trông thì đúng y nội dung cần có") và che mất lý do tồn tại của fix lần 1.
+**Ai bắt:** `/content-audit` vòng 1, đối chiếu với điều tra git trong hội thoại trước đó.
+**Vì sao lọt:** cùng cơ chế L-018/L-019 (lấp chỗ trống bằng suy luận), nhưng ở tầng **trạng
+thái của một nhánh/hệ tại một thời điểm**, không phải định nghĩa dữ liệu. Câu suy ra không
+có chữ số, không phải lượng từ, không phải "X nghĩa là Y", nên ba lượt soi của vòng 1 đều
+không có ô nào cho nó.
+**Dấu hiệu:** inbox kể **một** nguyên nhân nhưng có **hai** commit fix, hoặc hai lần verify;
+bài mô tả trạng thái một nhánh/môi trường/bảng "lúc đó có X" mà không có dòng inbox tương
+ứng. Phép thử: số lần fix trong inbox có bằng số lớp lỗi bài kể không? Lệch là có lớp bị gộp.
+**Đã vá:** chưa vá — lần đầu gặp. Nếu lặp: thêm vào `/content-audit` vòng 1 câu hỏi "mỗi
+commit fix trong inbox tương ứng với đoạn nào trong bài".
+
+## L-061 · 2026-09-24 · sự-kiện-kèm-số-trong-bài-A
+**Lỗi:** bài A kể *"một ảnh thứ ba của cùng mã hàng, chụp mười bốn phút sau, đã hiện 89 thay
+vì 90"* làm bằng chứng cho luận điểm "phải chụp cùng một phút". Inbox chỉ ghi **hai** ảnh,
+cùng một phút. Không có ảnh thứ ba, không có 89, không có 14 phút.
+**Ai bắt:** `/content-audit` lượt sau publish, `grep -nE '\b89\b|14 phút|ảnh thứ ba'` trên
+inbox ra 0.
+**Vì sao lọt:** đây là **L-016 lặp lần hai**, đổi thể loại: L-016 ghi sự kiện bịa ở bài D và
+đề xuất vá cho khung D. Bài này là A, và sự kiện mang theo hai con số nghe rất "đo được"
+(89, 14 phút), lại **bất lợi cho lập luận** (nó cho thấy bằng chứng dễ hỏng) nên đọc như tự
+phê bình và không ai nghi. Cổng số soi "80/90/10/10.000" xong thì hai số này đã trôi theo.
+**Dấu hiệu:** mọi câu kể một **lần quan sát cụ thể** (ảnh chụp, lần chạy, dòng log, lần
+đo) mà inbox không có: đặc biệt khi nó đứng làm ví dụ cho một câu "vì sao phải làm X đúng
+cách". Phép thử: đếm số lần quan sát trong bài và số lần trong inbox; bài nhiều hơn là bịa.
+**Đã vá:** nâng thành luật cùng L-016 — `CONTENT_STYLE.md` mục 3, tiểu mục "Khẳng định về
+bối cảnh", đoạn "Sự kiện kể cũng là khẳng định"; `/content-audit` vòng 1, lượt thứ tư.

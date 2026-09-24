@@ -87,7 +87,8 @@ Thường mất 2-3 vòng. Đó là bình thường, không phải dấu hiệu 
 
 Chạy hết, báo cáo từng mục:
 
-1. `draft: false`, `date` không nằm ở tương lai xa
+1. `draft: false`, `date` không lớn hơn giờ hiện tại — Hugo bỏ qua bài tương lai mà không
+   cảnh báo, build vẫn "sạch" (L-058)
 2. Có đủ bản gốc + bản dịch
 3. **Mọi ảnh được tham chiếu đều tồn tại** trong `static/images/posts/<slug>/` — liệt
    kê chính xác file nào còn thiếu, đừng báo chung chung
@@ -110,7 +111,8 @@ Chạy hết, báo cáo từng mục:
 6. **Đã khử định danh** — không còn ticket ID, mã hàng/khách thật, đường dẫn module
    nội bộ, commit hash, hay tên công ty/sản phẩm/đồng nghiệp. Phép thử: người ngoài đọc
    xong có suy ra được đây là công ty nào không? (`CONTENT_STYLE.md` mục 3b)
-7. `hugo --gc --minify` chạy sạch, không warning
+7. `hugo --gc --minify` chạy sạch, không warning, **và** `find public -path '*<slug>*'
+   -name index.html | wc -l` ra đúng 2 — build sạch không chứng minh trang được sinh ra
 
 Thiếu ảnh → stage `needs-assets`, gọi `/content-artwork`. Bench chưa chạy thử hoặc
 đang lỗi → gọi `/content-bench`. Skill này **không** vẽ ảnh và **không** viết bench —

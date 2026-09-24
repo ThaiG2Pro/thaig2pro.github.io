@@ -50,6 +50,11 @@ là "bối cảnh chung". "Không tìm thấy trong inbox" với một định n
 cái mới. Thêm: ví dụ số có hai giá trị cho cùng một đại lượng (pool = 10 rồi pool = 0)
 là dấu hiệu lẫn hai đại lượng.
 
+Rồi lượt thứ tư, cho **sự kiện kể** (L-016, L-061): liệt kê mọi lần quan sát hay hành động
+cụ thể trong bài — ảnh chụp, lần chạy, dòng log, lần fix, người phản ứng — và ghi dòng inbox
+kể đúng lần đó bên cạnh. Đếm hai phía: bài nhiều hơn inbox là có sự kiện tự sinh, **kể cả
+khi sự kiện đó mang con số** và các con số chính của bài đã truy được nguồn.
+
 Đọc luôn mục "What this does not measure" trong `bench/<slug>/README.md` và đối chiếu
 với bài: thứ bench tự khai là **không chứng minh được** mà bài vẫn khẳng định chắc nịch,
 là đúng chỗ cần soi.
