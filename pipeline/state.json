@@ -58,8 +58,14 @@
         {
           "date": "2026-09-21",
           "event": "seed từ bài đã publish"
+        },
+        {
+          "date": "2026-09-28",
+          "event": "cổng nhận ra mình (hồi tố): TRƯỢT. trượt câu 2: không có phép đo của chính tác giả; thay UUIDv7 bằng ULID thì cả bài vẫn đúng. Bài học ('tổ chức dữ liệu để chiều lòng phần cứng') thì chuyển giao được, nhưng không có mục Mổ xẻ nào hỏng khi swap."
         }
-      ]
+      ],
+      "transfer": null,
+      "gate_recognition": "trượt (hồi tố 2026-09-28) — trượt câu 2: không có phép đo của chính tác giả; thay UUIDv7 bằng ULID thì cả bài vẫn đúng. Bài học ('tổ chức dữ liệu để chiều lòng phần cứng') thì chuyển giao được, nhưng không có mục Mổ xẻ nào hỏng khi swap."
     },
     {
       "slug": "agentic-workflow-oop-architecture",
@@ -83,8 +89,14 @@
         {
           "date": "2026-09-21",
           "event": "seed từ bài đã publish"
+        },
+        {
+          "date": "2026-09-28",
+          "event": "cổng nhận ra mình (hồi tố): TRƯỢT. trượt câu 2: có đúng một chi tiết đã sống (script 200 dòng, công cụ thứ 5) còn lại là 4 nguyên lý OOP áp dụng chung — thay AI Agent bằng bất kỳ hệ điều phối nào thì bài vẫn đúng nguyên."
         }
-      ]
+      ],
+      "transfer": null,
+      "gate_recognition": "trượt (hồi tố 2026-09-28) — trượt câu 2: có đúng một chi tiết đã sống (script 200 dòng, công cụ thứ 5) còn lại là 4 nguyên lý OOP áp dụng chung — thay AI Agent bằng bất kỳ hệ điều phối nào thì bài vẫn đúng nguyên."
     },
     {
       "slug": "hugo-papermod-guide-for-beginners",
@@ -108,15 +120,21 @@
         {
           "date": "2026-09-21",
           "event": "seed từ bài đã publish"
+        },
+        {
+          "date": "2026-09-28",
+          "event": "cổng nhận ra mình (hồi tố): TRƯỢT. trượt câu 2 và câu 1: hướng dẫn công cụ, không có bằng chứng riêng của tác giả; 'bài học' là câu đúng-mọi-nơi, không có ai trong đó."
         }
-      ]
+      ],
+      "transfer": null,
+      "gate_recognition": "trượt (hồi tố 2026-09-28) — trượt câu 2 và câu 1: hướng dẫn công cụ, không có bằng chứng riêng của tác giả; 'bài học' là câu đúng-mọi-nơi, không có ai trong đó."
     },
     {
       "slug": "cong-thuc-tru-hai-lan",
       "title": "Công thức trong ticket trừ hai lần",
       "created": "2026-09-21",
       "genre": "A",
-      "stage": "needs-assets",
+      "stage": "done",
       "lang_primary": "en",
       "evidence": {
         "numbers": "80 (đọc nghĩa đen) vs 90 (đúng, khớp màn hình) trên bộ số 200 / 10-1, 88-9, 12-0; sai số 10 = Σquota_used; 0/10000 ca ngẫu nhiên vi phạm đồng nhất thức gap = Σquota_used; hai dạng của spec (dạng batch và dạng T − Σqt − C, dạng sau là dạng đã ship) trùng nhau 10000/10000 ca dưới bất biến batch_used = Σqu + C; hai cách đọc trùng nhau khi Σquota_used = 0",
@@ -124,7 +142,7 @@
         "repro": "bench/cong-thuc-tru-hai-lan/run.sh — một lệnh, ghi results/summary.json; exit 1 nếu đồng nhất thức vỡ"
       },
       "blocked_on": null,
-      "next_action": "/content-artwork cong-thuc-tru-hai-lan — cover.png. Rồi /content-audit vòng 2. Push bench cùng commit bài.",
+      "next_action": null,
       "paths": {
         "bench": "bench/cong-thuc-tru-hai-lan/",
         "vi": "content/posts/cong-thuc-tru-hai-lan.md",
@@ -161,8 +179,45 @@
         {
           "date": "2026-09-23",
           "event": "content-write fix pass sau audit vòng 1: bỏ tên hai màn hình chụp (d.34), 'đúng theo một cách đọc' (d.36), lý do lọt thành giả thuyết tự khai (d.41), 'không đo hiệu năng' (d.66), chẻ câu EN d.20. Hai bản. hugo sạch"
+        },
+        {
+          "date": "2026-09-23",
+          "event": "artwork: cover.svg/png 1200×630 — thanh 200 đơn vị, 10 đã bán nằm trong 110 phân bổ, hai phép trừ 80/90; sửa hộp lệch và footer tràn sau khi xem ảnh. Dùng lại làm Hình 1 trong bài. Đổi date về 14:00 vì Hugo bỏ trang có date tương lai"
+        },
+        {
+          "date": "2026-09-23",
+          "event": "content-audit vòng 2: CHƯA ĐẠT. Chặn: d.22 ngầm nói dev đã cài công thức nghĩa đen (L-016); 'mọi quy tắc tồn kho đều viết vậy' không nguồn. Nên sửa: 'unchecked', câu chấm phẩy, 2 calque VI"
+        },
+        {
+          "date": "2026-09-23",
+          "event": "content-write fix pass 2: d.22 thành giả định; 'a familiar shape'; 'I did not check'; chẻ câu; viết lại 2 câu VI. Hai bản"
+        },
+        {
+          "date": "2026-09-23",
+          "event": "tác giả đối chiếu intake + attachments: mọi khẳng định khớp nguồn. Sửa d.22 thiếu động từ; cắt bullet 3 Đánh đổi trùng d.77; thêm ảnh thứ ba 13:53 hiện 89 làm ví dụ 'cùng phút mới có nghĩa' — ghi inbox trước rồi mới thêm vào bài"
+        },
+        {
+          "date": "2026-09-23",
+          "event": "content-audit vòng 3: ĐẠT. Bench Docker khớp README 0 dòng lệch; 89/14 phút truy inbox; scan sạch; hugo 0 warning. Chờ commit"
+        },
+        {
+          "date": "2026-09-23",
+          "event": "published: 9 file của bài bị phiên song song (merge-conflict) cuốn vào commit 5cf0f51 lúc 14:49, không có commit publish riêng. EN/VI/cover/bench GitHub đều 200 sau deploy"
+        },
+        {
+          "date": "2026-09-24",
+          "event": "content-audit vòng 4 (sau khi lên mạng): phát hiện phiên song song đã ghi đè inbox.md (mất dòng nguồn 89/13:53) và state.json (mất 6 sự kiện). Fix pass: nối lại dòng inbox, hạ 'mọi quy tắc tồn kho' ở VI d.44 và EN/VI d.78, dựng lại state. Bài số vẫn nguyên"
+        },
+        {
+          "date": "2026-09-24",
+          "event": "derive: career card (CV bullet 80/90 + 0/10.000, STAR, 3 lát cắt, 3 câu đào sâu) + social EN/VI, mọi link 200; behavioral: quyết định khó (dự phòng, không ghi đè coverage); stage → done"
+        },
+        {
+          "date": "2026-09-28",
+          "event": "cổng nhận ra mình (hồi tố): ĐẠT — câu tư duy trích từ mục kết của chính bài, swap test hỏng đúng ở mục Mổ xẻ"
         }
-      ]
+      ],
+      "transfer": "A rule that has not been checked against a real number set is a sentence, not a specification."
     },
     {
       "slug": "pool-dung-chung-moi-where-la-quyet-dinh",
@@ -248,8 +303,13 @@
         {
           "date": "2026-09-22",
           "event": "Commit 1dc336b + 21e986f push main; site live 200 cả EN/VI/cover. content-derive: career card (CV bullet, STAR, 3 lát cắt, 3 câu đào sâu) + social EN/VI, link đã curl 200. behavioral_coverage mau-thuan ← slug này. Stage published -> done."
+        },
+        {
+          "date": "2026-09-28",
+          "event": "cổng nhận ra mình (hồi tố): ĐẠT — câu tư duy trích từ mục kết của chính bài, swap test hỏng đúng ở mục Mổ xẻ"
         }
-      ]
+      ],
+      "transfer": "Nợ kỹ thuật vô hại chỉ vô hại cho tới khi một tính năng mới biến nó thành trần doanh thu — và lúc đó nó không còn là việc của người dọn nợ nữa."
     },
     {
       "slug": "lock-bi-danh-roi-khi-refactor",
@@ -309,8 +369,13 @@
         {
           "date": "2026-09-22",
           "event": "điền 3 link thật vào bản social, kiểm 200 OK — trước đó còn placeholder"
+        },
+        {
+          "date": "2026-09-28",
+          "event": "cổng nhận ra mình (hồi tố): ĐẠT — câu tư duy trích từ mục kết của chính bài, swap test hỏng đúng ở mục Mổ xẻ"
         }
-      ]
+      ],
+      "transfer": "Nếu một tài liệu thiết kế phát biểu một bất biến, chính commit tạo ra bất biến đó phải kèm phép kiểm sẽ đỏ khi thiếu nó. Suite xanh luôn có lý do — chỉ là không phải lý do mình tưởng."
     },
     {
       "slug": "derived-table-trong-vong-lap-export",
@@ -401,8 +466,13 @@
         {
           "date": "2026-09-22",
           "event": "content-derive: thẻ phỏng vấn (CV bullet + STAR + 3 lát cắt + 3 câu đào sâu) và post social 2 thứ tiếng; 3 link kiểm 200; stage published -> done"
+        },
+        {
+          "date": "2026-09-28",
+          "event": "cổng nhận ra mình (hồi tố): ĐẠT — câu tư duy trích từ mục kết của chính bài, swap test hỏng đúng ở mục Mổ xẻ"
         }
-      ]
+      ],
+      "transfer": "Im lặng là một lỗi riêng, phải ghi nhận tách khỏi nguyên nhân gây ra nó. Hệ thống hỏng ồn ào thì được sửa; hỏng lịch sự thì nhận về một bug report ghi 'bấm vào không thấy gì'."
     },
     {
       "slug": "feature-flag-nhu-release-gate",
@@ -487,8 +557,13 @@
         {
           "date": "2026-09-23",
           "event": "content-derive trong 24h: career/ (STAR + 3 lát cắt + 3 câu đào sâu; không có bullet CV có số — nói thẳng, cho một bullet không số), drafts/video- (1 ý: cùng ô rỗng hai hệ đọc ngược; hook 'ship tính năng biết chắc 100% bị từ chối'), drafts/social- (EN LinkedIn + VI Facebook). Link VI/EN curl 200, không placeholder, 3 file đều gitignored. behavioral_coverage: deadline -> slug này. Stage published -> done."
+        },
+        {
+          "date": "2026-09-28",
+          "event": "cổng nhận ra mình (hồi tố): ĐẠT — câu tư duy trích từ mục kết của chính bài, swap test hỏng đúng ở mục Mổ xẻ"
         }
-      ]
+      ],
+      "transfer": "Một phụ thuộc liên team chỉ thật sự tồn tại khi nó được viết thành điều kiện kiểm tra được, không phải khi hai bên gật đầu."
     },
     {
       "slug": "bug-import-tra-nham-bang",
@@ -560,8 +635,13 @@
         {
           "date": "2026-09-23",
           "event": "content-derive: career card (CV bullet + STAR + 3 lát cắt + 3 câu đào sâu) và social VI/EN. Mọi link kiểm 200. Không thêm dữ kiện ngoài bài/bench. behavioral: quyết định khó (dự phòng, ô đã có selector). Stage → done."
+        },
+        {
+          "date": "2026-09-28",
+          "event": "cổng nhận ra mình (hồi tố): ĐẠT — câu tư duy trích từ mục kết của chính bài, swap test hỏng đúng ở mục Mổ xẻ"
         }
-      ]
+      ],
+      "transfer": "Một phép kiểm chạy trên dữ liệu trùng nhau thì xanh dù code đúng hay sai — nó tệ hơn không có phép kiểm nào, vì nó sinh ra niềm tin không có bằng chứng đỡ phía sau."
     },
     {
       "slug": "1184-test-xanh-bug-van-len-staging",
@@ -637,30 +717,163 @@
         {
           "date": "2026-09-23",
           "event": "derive: career card (CV bullet, STAR, 3 lát cắt, 3 câu đào sâu) + social EN/VI, mọi link 200; behavioral: thất bại + tự học (dự phòng, không ghi đè coverage); stage → done"
+        },
+        {
+          "date": "2026-09-28",
+          "event": "cổng nhận ra mình (hồi tố): câu tư duy còn dính cơ chế git (hai cha / nhánh thứ ba) — swap test đạt, nhưng bài học chưa swap được. Cần một câu không tên công nghệ."
         }
-      ]
+      ],
+      "transfer": null
     },
     {
       "slug": "bi-do-oan-pha-staging-tu-dieu-tra-bang-git",
       "title": "Bị đổ oan làm sập staging — tự điều tra bằng git rồi tìm ra lỗi thật của chính mình",
       "created": "2026-09-23",
       "genre": "D",
-      "stage": "ready",
+      "stage": "needs-angle",
       "lang_primary": "vi",
       "evidence": {
         "numbers": null,
         "method": null,
-        "repro": null
+        "repro": null,
+        "moment": null
       },
-      "blocked_on": null,
-      "next_action": "Viết bài D/VI. Mốc thời gian: đồng nghiệp báo lỗi Middleware trên staging sáng 23/9, cáo buộc 'merge dev vào stg kéo theo commit dở'; điều tra bằng git reflog + merge-base/is-ancestor chứng minh cáo buộc sai (không có merge dev→stg nào); tiếp tục soi sâu hơn thì tự tìm ra 2 lỗi thật của chính mình (khác hẳn cáo buộc ban đầu), fix 2 lượt, commit cuối (commit fix lần 2) lúc 11:13. Vai trò: vừa là người bị nghi oan vừa là người tự điều tra và tự sửa. Quyết định: verify bằng dữ liệu git thay vì cãi lời nói; sau khi minh oan xong không dừng lại mà tiếp tục soi ra lỗi thật của mình. ~1 buổi (3-4 giờ).",
+      "blocked_on": "Toàn bộ chuỗi sự kiện của bài (lời cáo buộc, các lệnh git đã chạy, hai lỗi thật tự tìm ra) không có trong drafts/inbox.md — chỉ nằm ở next_action cũ của chính mục này. Không có dòng inbox nào ghi lúc tác giả tin điều sai.",
+      "next_action": "Hỏi tác giả đúng 2 câu rồi /content-capture ghi vào inbox TRƯỚC khi viết: (1) \"Sáng 23/9 lúc đồng nghiệp nói merge dev vào stg kéo theo commit dở, ý nghĩ đầu tiên là gì — nghi mình đã làm thế thật, hay chắc chắn là không?\" (2) \"Lúc lệnh git trả về kết quả chứng minh cáo buộc sai, bạn đã định dừng ở đó chưa? Cái gì khiến bạn soi tiếp?\" Mục inbox mới phải có: câu cáo buộc nguyên văn (đã khử định danh), từng lệnh git đã chạy + output, hai lỗi thật tìm ra là gì, mốc giờ. ~20 phút hỏi + ghi. Rồi chạy lại /content-triage.",
       "paths": {},
       "history": [
         {
           "date": "2026-09-23",
           "event": "tách từ merge-conflict-copy-nhanh-thu-ba theo L-041 (một nguyên liệu ra nhiều bài) — góc storytelling, không cần số"
+        },
+        {
+          "date": "2026-09-28",
+          "event": "cổng nhận ra mình (mới): trượt câu 3 — không có dòng inbox nào cho chuỗi sự kiện lẫn khoảnh khắc tin sai. ready → needs-angle"
+        }
+      ],
+      "transfer": null
+    },
+    {
+      "slug": "cot-id-tran-trong-subquery-long-nhau",
+      "title": "Cột id viết trần trong subquery lồng nhau: SQL hợp lệ, trả thiếu dòng, và SQLite in-memory không tái tạo được",
+      "created": "2026-09-28",
+      "genre": "A",
+      "stage": "needs-measure",
+      "lang_primary": "en",
+      "evidence": {
+        "numbers": "1 hàm lọc dùng chung chạy ở 2 ngữ cảnh (prefix có/rỗng); đột biến xóa lời gọi → 5/26 test của file test builder export đỏ (suite 114); đột biến đổi về prefix.id: chưa đo; kiểm tay MariaDB 3381 → 1 → 0 dòng",
+        "method": "mutation thủ công 1 lần trên suite SQLite in-memory; ma trận lọc chạy tay trên MariaDB thật (không lọc / lọc đúng / sai định dạng)",
+        "repro": null
+      },
+      "blocked_on": null,
+      "next_action": "Dựng bench/cot-id-tran-trong-subquery-long-nhau/: 2 bảng cha-con cùng có cột id, 1 correlated whereExists viết cột ngoài dạng `id` trần vs đủ tên bảng; cùng một assert chạy trên SQLite :memory: và MariaDB Docker, mỗi bên 2 fixture (id hai bảng trùng nhau / cố tình lệch). Câu phải trả lời: SQLite có thật sự cho xanh giả không, hay xanh giả chỉ đến từ id trùng trong fixture nhỏ. Nếu SQLite cũng đỏ thì luận điểm bài đổi thành 'test không được viết, và đây là cái nó lẽ ra chỉ ra'. ~1 buổi tối (2-3 giờ).",
+      "paths": {},
+      "history": [
+        {
+          "date": "2026-09-28",
+          "event": "capture từ ticket thêm ô lọc voucher cho cổng quản trị đơn quà tặng; bẫy chặn ở bước thiết kế 2026-09-03"
+        },
+        {
+          "date": "2026-09-28",
+          "event": "triage: A/EN — hệ thống thật + quyết định (viết đủ tên bảng, từ chối test xanh giả); chặn ở cổng repro và ở khẳng định 'SQLite có thể vẫn xanh' chưa xác minh → needs-measure"
         }
       ]
+    },
+    {
+      "slug": "khong-them-index-viet-nguong-leo-thang-thanh-so",
+      "title": "Không thêm index cho cột tra cứu ở bảng team khác sở hữu, viết ngưỡng leo thang thành số: >1M dòng hoặc p95 >300 ms",
+      "created": "2026-09-28",
+      "genre": "A",
+      "stage": "published",
+      "lang_primary": "en",
+      "evidence": {
+        "numbers": "Staging (private): 3217 dòng, 2,14 voucher/đơn, EXPLAIN <1 ms; ngoại suy ~1 ms@100K, ~10 ms@1M; 9,8% mã bắt đầu bằng 0; COUNT(*) production chưa đo. Bench (2026-09-28, median 5 lần): không index 0,6 / 24,8 / 147,7 ms ở 3,2K / 100K / 1M trên MariaDB 13.0.2 (ô 1M chạy lại 3 lần: 162, 129 khi máy rảnh, 485 khi có tải CPU); 2,3 / 44,3 / 967,9 ms trên 10.11.18 — ngoại suy sai 15x đến 100x; có index non-unique phẳng 0,1-0,6 ms; OR hai cột có index dùng index_merge union <1 ms ở 1M trên cả hai bản (bác giả định ngầm 'khó index về sau', không bác lý do ghi trong biên bản 'không index thì full scan')",
+        "method": "Staging: COUNT + AVG + EXPLAIN chạy 1 lần, ngoại suy tuyến tính. Bench: bench.sql tự sinh dữ liệu bằng seq engine, đo server-side bằng SYSDATE(6), 5 lần/biến thể mỗi lần một voucher khác, 3 biến thể × 3 cỡ × 2 phiên bản MariaDB trong Docker",
+        "repro": "bench/khong-them-index-viet-nguong-leo-thang-thanh-so/ — ./run.sh (Docker, mariadb:latest hoặc MARIADB_IMAGE=mariadb:10.11), ~2 phút/phiên bản"
+      },
+      "blocked_on": null,
+      "next_action": "Commit + push (bài, bench, cover, state.json, lessons/writing-vi.md); kiểm link bench và 2 URL bài trả 200; rồi /content-derive trong 24h.",
+      "paths": {
+        "bench": "bench/khong-them-index-viet-nguong-leo-thang-thanh-so/",
+        "en": "content/posts/khong-them-index-viet-nguong-leo-thang-thanh-so.en.md",
+        "vi": "content/posts/khong-them-index-viet-nguong-leo-thang-thanh-so.md",
+        "cover": "static/images/posts/khong-them-index-viet-nguong-leo-thang-thanh-so/cover.png",
+        "cover_svg": "static/images/posts/khong-them-index-viet-nguong-leo-thang-thanh-so/cover.svg"
+      },
+      "history": [
+        {
+          "date": "2026-09-28",
+          "event": "capture từ ticket thêm ô lọc voucher; quyết định ADR ngày 2026-09-03"
+        },
+        {
+          "date": "2026-09-28",
+          "event": "triage: A/EN — quyết định thật với 3 phương án và ngưỡng bằng số; chặn ở cổng repro (đường ngoại suy chưa đo) → needs-measure. Tách 1 mục C/VI theo L-041."
+        },
+        {
+          "date": "2026-09-28",
+          "event": "bench chạy thật trong Docker trên MariaDB 13.0.2 và 10.11.18, 3 cỡ × 3 biến thể × 5 lần; ngoại suy trong ADR sai 15-100x, vế 1M dòng của ngưỡng bắn quá muộn trên 10.11, lý do loại OR sai; → ready"
+        },
+        {
+          "date": "2026-09-28",
+          "event": "content-write: EN gốc + VI viết xong, checklist tự kiểm đạt trừ ảnh cover (thiếu) → needs-assets"
+        },
+        {
+          "date": "2026-09-28",
+          "event": "content-artwork: cover log-log 3 đường (ngoại suy, 13.0, 10.11) + vạch 300 ms và 1M, xuất PNG, đã mở xem, sửa 2 vòng nhãn chồng → needs-audit"
+        },
+        {
+          "date": "2026-09-28",
+          "event": "content-audit lượt 1 CHƯA ĐẠT: 3 chặn (2 sự kiện kể không có trong inbox, 1 lý do loại phương án viết thêm cơ chế) + bench chạy lại 4 lần cho ô 1M/13.0 dao động 129-485 ms tùy tải máy; 10 mục nên sửa"
+        },
+        {
+          "date": "2026-09-28",
+          "event": "content-write sửa audit lượt 1: 4 chặn + 10 nên sửa ở cả hai bản; README bench thêm mục ô 1M nhạy tải kèm file thô 4 lần chạy; build sạch 2 trang"
+        },
+        {
+          "date": "2026-09-28",
+          "event": "content-audit lượt 2 CHƯA ĐẠT: 1 chặn (thứ tự lần chạy 485 ms kể sai so với file thô) + 8 nên sửa; mọi mục lượt 1 xác nhận đã sửa"
+        },
+        {
+          "date": "2026-09-28",
+          "event": "content-write sửa audit lượt 2: 1 chặn (thứ tự run 485 ms) + 8 nên sửa ở bài và README; thêm 7 thành ngữ vào từ điển writing-vi"
+        },
+        {
+          "date": "2026-09-28",
+          "event": "content-audit lượt 3 ĐẠT: 9 dòng sửa đối chiếu đúng file thô (485 ms = run 2), không còn cụm dịch thẳng, build sạch 2 trang → published (chờ push)"
+        },
+        {
+          "date": "2026-09-28",
+          "event": "người viết đối chiếu lại biên bản trước push: lý do loại OR trong biên bản chỉ có vế full scan (đúng), vế 'khó index về sau' là giả định ngầm → sửa luận điểm 3 và câu kết; phiên bản DB hạ xuống 'không tìm thấy chỗ pin'; mốc thời gian 'cuối tháng trước'; đại từ 'chúng tôi'"
+        }
+      ]
+    },
+    {
+      "slug": "ba-phan-xa-sai-khi-them-o-tim-kiem",
+      "title": "Ba phản xạ sai khi thêm một ô tìm kiếm: ép mã thành số, OR hai cột, và thêm index ngay",
+      "created": "2026-09-28",
+      "genre": "C",
+      "stage": "needs-angle",
+      "lang_primary": "vi",
+      "evidence": {
+        "numbers": "9,8% mã voucher trên staging bắt đầu bằng 0 (ép sang số → 1/10 lần tìm không thấy, không lỗi); 2 định dạng không giao nhau (10 chữ số / 11 ký tự có chữ cái); 3 nơi lọc dùng 1 value object",
+        "method": "đếm trên staging 1 lần; các ý còn lại là kiến thức + ví dụ, không cần đo",
+        "repro": null,
+        "moment": null
+      },
+      "blocked_on": "Trượt câu 2 (swap test) và câu 3. Bài dự định là kiến thức chung: thay tên công nghệ đi thì cả ba mục vẫn đúng nguyên — đúng dạng bài mà bất kỳ ai cũng viết được. Và inbox dòng 106 tự ghi rằng motif \"ba phản xạ\" là tóm tắt hồi cố, không phải trình tự đã sống, nên không có khoảnh khắc tin sai để kể. Thêm: phản xạ 3 (thêm index / ngưỡng) trùng nguyên liệu với bài đã publish khong-them-index-viet-nguong-leo-thang-thanh-so.",
+      "next_action": "Chọn 1 trong 2, ~15 phút quyết: (a) BỎ mục này — cả ba phản xạ đều không chuyển giao được gì mà bài đã publish chưa nói. (b) THU HẸP còn đúng phản xạ 1 và đổi câu hỏi của bài thành \"vì sao một lỗi im lặng không bao giờ được báo\": ép mã 10 chữ số thành số làm rơi số 0 đầu → 9,8% mã trên staging tìm không ra, không exception, không log, người dùng chỉ thấy \"không có kết quả\" (inbox dòng 99, 102). Chọn (b) thì phải đi đo thêm 1 thứ để swap test hỏng được: đếm xem trong 3 nơi lọc, nơi nào trả 0 dòng mà không ghi log gì. Bỏ hẳn phản xạ 3. Phản xạ 2 (OR hai cột) tách thành mục riêng nếu muốn — nó có phát hiện thật từ bench (index_merge union chạy <1 ms ở 1M, tức lý do \"OR không dùng được index\" trong ADR là sai với MariaDB), nhưng đó là nguyên liệu thể loại B, không phải C.",
+      "paths": {},
+      "history": [
+        {
+          "date": "2026-09-28",
+          "event": "tách từ khong-them-index-viet-nguong-leo-thang-thanh-so theo L-041 — góc giới thiệu, không cần bench"
+        },
+        {
+          "date": "2026-09-28",
+          "event": "cổng nhận ra mình (mới): trượt câu 2 (swap test không hỏng) và câu 3 (không có khoảnh khắc tin sai; motif là tóm tắt hồi cố). ready → needs-angle"
+        }
+      ],
+      "transfer": null
     }
   ],
   "log": [
@@ -723,6 +936,66 @@
     {
       "date": "2026-09-23",
       "entry": "content-triage merge-conflict-copy-nhanh-thu-ba: A/EN nhưng chặn ở cổng repro (biz repo private) → needs-measure, next_action = dựng demo repo git tối giản (~1-2 tiếng). Theo L-041, tách 1 mục D/VI riêng (bi-do-oan-pha-staging-tu-dieu-tra-bang-git) — đủ mốc thời gian/vai trò/quyết định, không cần số → ready ngay."
+    },
+    {
+      "date": "2026-09-28",
+      "entry": "capture 2 mục từ ticket lọc đơn theo voucher: cot-id-tran-trong-subquery-long-nhau (loại 4, có số, tổng test cần kiểm lại) và khong-them-index-viet-nguong-leo-thang-thanh-so (loại 2, có số staging, production chưa đo). Cần content-triage."
+    },
+    {
+      "date": "2026-09-28",
+      "entry": "content-triage 2 mục inbox: cot-id-tran-trong-subquery-long-nhau → A/EN needs-measure (bench SQLite vs MariaDB, 2 fixture id trùng/lệch); khong-them-index-viet-nguong-leo-thang-thanh-so → A/EN needs-measure (bench 3K/100K/1M dòng có/không index). Tách ba-phan-xa-sai-khi-them-o-tim-kiem C/VI → ready ngay."
+    },
+    {
+      "date": "2026-09-28",
+      "entry": "content-bench khong-them-index-viet-nguong-leo-thang-thanh-so: chạy thật 2 phiên bản MariaDB. Không index 148 ms (13.0) / 968 ms (10.11) ở 1M dòng so với ngoại suy 10 ms; index non-unique phẳng <1 ms; OR hai cột có index vẫn dùng index_merge. Bài phải sửa 3 khẳng định. → ready."
+    },
+    {
+      "date": "2026-09-28",
+      "entry": "content-write khong-them-index-viet-nguong-leo-thang-thanh-so: EN 1758 / VI 1980 từ kể cả front matter; build sạch, 2 trang sinh ra; quét định danh sạch; thiếu cover → needs-assets."
+    },
+    {
+      "date": "2026-09-28",
+      "entry": "content-artwork khong-them-index-viet-nguong-leo-thang-thanh-so: cover.svg/png xong, alt khớp ảnh, → needs-audit."
+    },
+    {
+      "date": "2026-09-28",
+      "entry": "content-audit khong-them-index-viet-nguong-leo-thang-thanh-so lượt 1: CHƯA ĐẠT. Số đo sạch 100%; chặn ở sự kiện/ước lượng công sức không nguồn (L-010/L-014/L-016) và độ ổn định ô 1M không index."
+    },
+    {
+      "date": "2026-09-28",
+      "entry": "content-write khong-them-index-viet-nguong-leo-thang-thanh-so lượt 2: sửa xong toàn bộ audit lượt 1, thêm results-13.0-reruns.txt; → needs-audit lượt 2."
+    },
+    {
+      "date": "2026-09-28",
+      "entry": "content-audit khong-them-index-viet-nguong-leo-thang-thanh-so lượt 2: CHƯA ĐẠT, còn 1 chặn nhỏ (sự kiện kể sai thứ tự run) và 8 nên sửa."
+    },
+    {
+      "date": "2026-09-28",
+      "entry": "content-write khong-them-index-viet-nguong-leo-thang-thanh-so lượt 3: sửa xong audit lượt 2; từ điển dịch +7 dòng; build sạch 2 trang; → needs-audit lượt 3."
+    },
+    {
+      "date": "2026-09-28",
+      "entry": "content-audit khong-them-index-viet-nguong-leo-thang-thanh-so lượt 3: ĐẠT. → published, chờ commit/push và derive."
+    },
+    {
+      "date": "2026-09-28",
+      "entry": "khong-them-index-viet-nguong-leo-thang-thanh-so: sửa 4 chỗ theo đối chiếu biên bản của tác giả (luận điểm OR, phiên bản DB, mốc thời gian, đại từ) ở bài, README bench, inbox. Vẫn published, chờ push."
+    },
+    {
+      "date": "2026-09-28",
+      "entry": "khong-them-index-viet-nguong-leo-thang-thanh-so: viết lại giọng theo nhận xét tác giả — Mổ xẻ kể theo thời gian, bỏ Reflex 1/2/3, 6 câu châm ngôn cắt còn 2, thêm hai sự kiện từ hồ sơ (ngưỡng thừa kế từ phân tích trước khi ngoại suy; 300 ms không có xuất xứ) và thứ tự phản ứng khi xem bench. EN 2065 từ, VI 2342 từ. Lùi về needs-audit lượt 4."
+    },
+    {
+      "date": "2026-09-28",
+      "entry": "content-triage chạy lại 2 mục ready qua cổng nhận ra mình vừa thêm vào CONTENT_STYLE.md mục 4: cả hai trượt → needs-angle. bi-do-oan-pha-staging: thiếu nguồn inbox cho toàn bộ sự kiện. ba-phan-xa-sai: swap test không hỏng + trùng nguyên liệu với bài đã publish."
+    },
+    {
+      "date": "2026-09-28",
+      "entry": "content-triage hồi tố 11 bài đã đăng qua cổng nhận ra mình: 6 đạt (ghi transfer), merge-conflict-copy-nhanh-thu-ba nửa đạt (câu tư duy còn dính git), 3 bài C đều trượt câu 2 (swap test không hỏng). Cảnh báo trùng: transfer của cong-thuc-tru-hai-lan gần với bài khong-them-index đang chờ publish."
+    },
+    {
+      "date": "2026-09-28",
+      "entry": "khong-them-index-viet-nguong-leo-thang-thanh-so: audit lượt 4 (agent độc lập) chưa đạt với 2 chặn (description nói \"shipped\"; \"không ai hỏi\" vượt hồ sơ) + 12 nên sửa. Đã sửa 2 chặn và 10 nên sửa ở EN, VI, README bench (run/pass hai nghĩa, châm ngôn còn 2, 4 cụm dịch thẳng, \"was moot\" → \"is moot\", README kể lại nhân quả). Bỏ qua: trường transfer chưa có (việc của skill status), đảo mở bài (tùy chọn). 5 dòng mới vào từ điển writing-vi.md. Published, chờ push."
     }
   ],
   "behavioral_coverage_backup": {

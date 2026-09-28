@@ -23,6 +23,11 @@ Thành ngữ kỹ thuật tiếng Anh dịch thẳng ra thì đúng chữ nhưng
 | the optimizer plans X | optimizer lập kế hoạch X | optimizer chọn phương án X |
 | the clause fires | vế bắn | vế chạm ngưỡng / kích hoạt |
 | escalate (in body text) | leo thang | đẩy lên hỏi team kia |
+| the shape of the decision | hình hài của quyết định | hướng của quyết định |
+| give it a footing | cho nó một chỗ đứng | để nó có cái mà tựa vào |
+| not in the room | không có mặt trong phòng | không tham gia lúc đó |
+| draw a line under it (EN idiom = khép lại) | kẻ một đường bên dưới | kẻ sau một đường thẳng để hợp thức hóa |
+| run (bench: 1 lần) vs pass (1 lượt = trung vị 5 lần) | lần chạy cho cả hai | lần = run đơn · lượt = pass |
 
 Gặp thành ngữ mới dịch trật thì thêm một dòng vào bảng này.
 

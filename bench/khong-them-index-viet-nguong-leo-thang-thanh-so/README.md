@@ -5,10 +5,11 @@ Then Measured It and Found It Off by 15x to 100x"* (`content/posts/khong-them-in
 
 ## The question
 
-A voucher filter was shipped against a table the team does not own, with **no index** on
+A voucher filter was merged against a table the team does not own, with **no index** on
 the lookup column, and a written trigger for asking the owning team: *"more than ~1M
-rows OR p95 above 300 ms"*. The trigger was extrapolated linearly from one EXPLAIN on
-staging (3.2K rows, under 1 ms): about 1 ms at 100K rows, about 10 ms at 1M.
+rows OR p95 above 300 ms"*. The trigger was already in the design record; a linear
+extrapolation from one EXPLAIN on staging (3.2K rows, under 1 ms) was written afterwards
+as its basis: about 1 ms at 100K rows, about 10 ms at 1M.
 
 Two questions this bench answers:
 
