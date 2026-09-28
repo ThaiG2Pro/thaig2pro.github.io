@@ -16,6 +16,13 @@ Thành ngữ kỹ thuật tiếng Anh dịch thẳng ra thì đúng chữ nhưng
 | silent no-op | no-op im lặng | im lặng biến mất / không làm gì mà không báo |
 | drop-in | thả vào là chạy | không phải bản dùng ngay, phải chỉnh |
 | noisy (for anything else) | ồn với thứ khác | sinh báo nhầm với file khác |
+| only as good as X | chỉ tốt bằng X | đáng tin đến đâu là tùy X |
+| ideal end state | trạng thái cuối lý tưởng | về lâu dài đó là đích đến đúng |
+| worse than linear | tệ hơn tuyến tính | tăng nhanh hơn cả tuyến tính |
+| sits comfortably below | nằm thoải mái dưới | còn xa mới tới |
+| the optimizer plans X | optimizer lập kế hoạch X | optimizer chọn phương án X |
+| the clause fires | vế bắn | vế chạm ngưỡng / kích hoạt |
+| escalate (in body text) | leo thang | đẩy lên hỏi team kia |
 
 Gặp thành ngữ mới dịch trật thì thêm một dòng vào bảng này.
 

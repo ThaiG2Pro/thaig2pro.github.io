@@ -1,0 +1,15 @@
+# Re-runs of the 1,000,000-row size on mariadb:latest (13.0.2), 2026-09-28, same machine.
+# Only the no-index variant is listed; the indexed variants stayed under 1 ms in every run.
+# Columns: min_ms | median_ms | max_ms over 5 runs. Copied from ./run.sh output.
+
+run 1 (the full run recorded in results-13.0.txt, machine otherwise idle)
+| single-noindex  | 137.774 |   147.656 | 159.883 |    1 |
+
+run 2 (./run.sh, while another CPU-heavy process was running on the same machine)
+| single-noindex  | 379.564 |   485.085 | 524.176 |    1 |
+
+run 3 (./run.sh 1000000, machine otherwise idle)
+| single-noindex  | 154.474 |   161.809 | 171.431 |    1 |
+
+run 4 (./run.sh 1000000, machine otherwise idle)
+| single-noindex  | 128.483 |   129.056 | 135.207 |    1 |

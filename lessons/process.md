@@ -117,6 +117,13 @@ hai lượt history audit của A và để stage của A kẹt ở `needs-asset
 **Dấu hiệu:** `git status` trước commit có file staged mà mình không nhớ đã add. `git log
 --oneline -- <file>` của một bài trỏ về commit có message nói bài khác. State có `paths`
 trỏ tới file không tồn tại.
+**Bổ sung 2026-09-24 (phiên A, audit lượt 4):** cùng sự cố, còn một nạn nhân thứ ba:
+`drafts/inbox.md`. Phiên A nối vào inbox dòng nguồn cho một con số mới (ảnh chụp thứ ba,
+14 phút sau, hiện 89) rồi mới đưa số đó vào bài, đúng kỷ luật L-016. Phiên B ghi lại inbox
+từ bản đã nạp trước đó, dòng ấy mất. Hậu quả nặng hơn mất history: bài đã live mang một con
+số mà **không file nào trong repo còn ghi nguồn**, tức L-010 xảy ra không do bịa mà do
+ghi đè. Dấu hiệu thêm: `grep` con số trong bài vào inbox ra rỗng ngay sau khi mình nhớ đã
+nối. Đã nối lại dòng inbox và 6 sự kiện history; bài không đổi số.
 **Đã vá:** chưa nâng thành luật — lần đầu gặp. Cổng rẻ nên làm ngay: `git diff --cached
---stat` trước mỗi commit và chỉ commit khi mọi dòng thuộc bài đang làm; với state.json, đọc
-lại file **ngay trước** khi ghi, không dùng bản đã nạp từ đầu phiên.
+--stat` trước mỗi commit và chỉ commit khi mọi dòng thuộc bài đang làm; với state.json
+**và inbox.md**, đọc lại file **ngay trước** khi ghi, không dùng bản đã nạp từ đầu phiên.

@@ -75,4 +75,4 @@ I did not measure performance; this was never about speed. What changed is that 
 
 **The rule I took away:** for every rule of the form "available = total − reserved − sold", ask two questions before it becomes an acceptance criterion. Does one term already contain another? And what does the production screen compute for one real SKU, right now? A rule that has not been checked against a real number set is a sentence, not a specification.
 
-**What I would do differently:** do the arithmetic on the day the sentence is written, not after a screen contradicts it. The numbers were already in the proposal. The subtraction itself is trivial; the only hard part is deciding that a sentence which reads like every other inventory rule still needs to be checked.
+**What I would do differently:** do the arithmetic on the day the sentence is written, not after a screen contradicts it. The numbers were already in the proposal. The subtraction itself is trivial; the only hard part is deciding that a sentence which reads like an ordinary inventory rule still needs to be checked.

@@ -41,7 +41,7 @@ Vậy người viết câu đó muốn nói cách đọc nào? Một câu chữ 
 Vì sao không ai bắt được sớm hơn? Hai lý do, nên tách riêng:
 
 1. **Trên chương trình mới, hai cách đọc cho cùng một số.** Chưa chương trình nào bán được gì thì số hạng "đã bán" bằng 0 theo cả hai cách, và hai công thức trả về cùng kết quả. Kiểm tay trên dữ liệu vừa tạo không thể nhìn thấy lỗi. Bench xác nhận: mọi ca ngẫu nhiên có tổng bán từ quota bằng 0 thì hai cách đọc trùng nhau.
-2. **Câu chữ có dáng của một công thức đúng.** "Tổng trừ đã giữ trừ đã bán" là cách mọi quy tắc tồn kho được viết ra. Tôi đoán, và chỉ là đoán, rằng một câu có dáng đó không làm ai dừng lại. Nó cũng không làm tôi dừng lại, cho đến khi màn hình bắt tôi dừng. Không chữ nào trong câu nói "một số hạng ở đây đã chứa sẵn số hạng kia".
+2. **Câu chữ có dáng của một công thức đúng.** "Tổng trừ đã giữ trừ đã bán" là dáng quen của một quy tắc tồn kho. Tôi đoán, và chỉ là đoán, rằng một câu có dáng đó không làm ai dừng lại. Nó cũng không làm tôi dừng lại, cho đến khi màn hình bắt tôi dừng. Không chữ nào trong câu nói "một số hạng ở đây đã chứa sẵn số hạng kia".
 
 ---
 
@@ -75,4 +75,4 @@ Tôi không đo hiệu năng; bài này không bàn tốc độ. Thứ thay đ�
 
 **Quy tắc tôi rút ra:** với mọi quy tắc dạng "khả dụng = tổng − đã giữ − đã bán", hỏi hai câu trước khi nó thành tiêu chí chấp nhận. Có số hạng nào đã chứa sẵn số hạng khác không? Và màn hình production đang tính ra bao nhiêu cho một mã hàng thật, ngay lúc này? Một quy tắc chưa được đối chiếu với một bộ số thật thì mới là một câu văn, chưa phải spec.
 
-**Điều tôi sẽ làm khác:** làm phép trừ ngay ngày câu đó được viết ra, không đợi đến khi màn hình phản bác. Bộ số nằm sẵn trong tài liệu đề xuất. Phép trừ thì tầm thường; phần khó duy nhất là quyết định rằng một câu trông giống mọi quy tắc tồn kho khác vẫn cần được kiểm.
+**Điều tôi sẽ làm khác:** làm phép trừ ngay ngày câu đó được viết ra, không đợi đến khi màn hình phản bác. Bộ số nằm sẵn trong tài liệu đề xuất. Phép trừ thì tầm thường; phần khó duy nhất là quyết định rằng một câu trông như một quy tắc tồn kho bình thường vẫn cần được kiểm.
