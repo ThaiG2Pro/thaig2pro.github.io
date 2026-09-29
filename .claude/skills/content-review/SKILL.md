@@ -46,9 +46,19 @@ Quét `content/posts/` tìm:
 - Front matter không phải YAML, hoặc thiếu trường
 - Ảnh được tham chiếu nhưng không tồn tại
 - Bài chưa có bản dịch
+- **Mục không có `transfer` trong `state.json`** — chưa qua cổng nhận ra mình
+- **Hai mục trùng `transfer`** — cùng một bài viết lại bằng công nghệ khác
+  (`CONTENT_STYLE.md` mục 7). Liệt kê cả hai, đề xuất bài nào rút
 
-Xếp theo mức hại: **số liệu không nguồn** nặng nhất (interviewer sẽ đào đúng vào đó),
-rồi tới ảnh hỏng (recruiter nhìn thấy ngay), rồi tới thiếu bản dịch.
+Riêng bài **thể loại C**: che mục "một lần tôi dùng và nó hỏng" đi, phần còn lại có khác
+trang tài liệu chính thức không? Không khác → ghi vào mục "bài cũ cần sửa", đừng lặng lẽ
+để đó. Ba bài C đăng trước 2026-09-28 đã biết là trượt, ghi trong
+`state.json.gate_recognition` — không phải phát hiện mới, nhưng phải nêu lại mỗi quý cho
+tới khi sửa hoặc rút.
+
+Xếp theo mức hại: **số liệu không nguồn** nặng nhất (interviewer sẽ đào đúng vào đó), rồi
+tới **bài không qua cổng nhận ra mình** (không ai cần đọc), rồi ảnh hỏng (recruiter nhìn
+thấy ngay), rồi thiếu bản dịch.
 
 ## Trả lời
 

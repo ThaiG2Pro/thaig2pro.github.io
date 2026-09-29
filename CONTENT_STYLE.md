@@ -11,7 +11,7 @@ nguồn nguyên liệu cho content video/social.
 ```
 Tầng 0 Bắt      → drafts/inbox.md           (ghi nguyên liệu trong ngày)
 Tầng 1 Cổng đo  → bench/<slug>/             (số + phương pháp + script reproduce)
-Tầng 2 Phân luồng→ chọn thể loại A/B/C/D theo bằng chứng đang có
+Tầng 2 Phân luồng→ cổng nhận ra mình + chọn thể loại A/B/C/D
 Tầng 3 Bản gốc  → content/posts/<slug>.md   (+ bản dịch)
 Tầng 4 Dẫn xuất → career/ , drafts/video-<slug>.md
 Tầng 5 Rà soát  → mỗi quý, soi lỗ hổng behavioral
@@ -152,13 +152,54 @@ Nhìn vào bằng chứng đang cầm, **không** nhìn chủ đề.
 |---|---|---|---|---|
 | Hệ thống thật + số trước/sau + quyết định của bạn | **A. Case study** | EN đầy đủ | CV + behavioral | Video |
 | Benchmark tự chạy + phương pháp đo | **B. Benchmark/deep-dive** | EN đầy đủ | CV + traffic | Video |
-| Kiến thức + ví dụ đời thường, chưa đo | **C. Giới thiệu công nghệ** | VI đầy đủ | Video + traffic | Traffic EN |
+| Kiến thức + **một lần tự dùng và hỏng** (hoặc một con số tự đo) | **C. Giới thiệu công nghệ** | VI đầy đủ | Video + traffic | Traffic EN |
 | Trải nghiệm ngành/con người, không có số | **D. Storytelling** | VI đầy đủ | Video + behavioral | — |
 | Có code nhưng chưa đo gì | **Chưa viết** | — | → quay lại Tầng 1 | — |
+
+**C không còn là "viết lại kiến thức" (siết 2026-09-28).** Mỗi bài C phải có ít nhất một
+mục kể **một lần chính tác giả dùng thứ đó và nó hỏng**, hoặc **một con số tác giả tự đo**
+— đủ để swap test hỏng đúng mục đó. Kiến thức trích dẫn có link vẫn là phần thân bài, nhưng
+một bài toàn trích dẫn thì bất kỳ ai cũng viết được, kể cả máy, và nó không qua được cổng
+nhận ra mình.
+
+Kiểm được: che mục đó đi, bài còn lại có khác gì trang tài liệu chính thức không? Không
+khác → chưa phải bài C, mới là bản dịch tài liệu. Ba bài C đã đăng trước ngày siết
+(`uuidv7-...`, `agentic-workflow-oop-...`, `hugo-papermod-...`) đều trượt đúng chỗ này;
+chúng ở lại vì đã đăng, không phải vì đạt.
 
 **Lý do chọn ngôn ngữ gốc theo thể loại:** viết đầy đủ 2 thứ tiếng cho mọi bài là gấp
 đôi công và sẽ bỏ cuộc sau 3 bài. Bài recruiter big tech đọc thì EN là bản gốc chất
 lượng cao; bài nuôi khán giả VN thì ngược lại. Bản còn lại là bản rút gọn 60-70%.
+
+### Cổng nhận ra mình (gate bắt buộc, chạy sau cổng đo)
+
+Cổng đo ở Tầng 1 chặn bài **sai**. Cổng này chặn bài **rỗng** — bài đúng từng chữ, đủ
+nguồn, mà không ai cần đọc. Lý do phải có: chi phí viết một bài kỹ thuật đã gần bằng 0,
+nên bài đúng không còn hiếm. Thứ hiếm là bài làm một kỹ sư dừng lại và nghĩ *"mình cũng
+đang làm y hệt"*.
+
+Ba câu, phải trả lời được **cả ba** mới lên `ready`:
+
+| Câu hỏi | Không đạt thì |
+|---|---|
+| 1. **Câu tư duy** — viết cái sai thành một câu không chứa tên công nghệ nào | chưa có bài, mới chỉ có một lần sửa lỗi |
+| 2. **Swap test** — thay hết tên công nghệ (MySQL→Postgres, index→cache): mục Mổ xẻ còn đúng không? | còn đúng nghĩa là bài rỗng → `needs-angle` |
+| 3. **Dòng inbox ghi lúc tác giả tin điều sai** — ngày nào, tin vào đâu | `needs-angle`: hỏi tác giả, ghi vào inbox **trước khi** viết |
+
+Bài đạt có hai lớp swap ngược nhau:
+
+- mục **Mổ xẻ** swap **không** được — nó dính chặt vào số đo, câu `EXPLAIN` cụ thể, ngày cụ thể
+- mục **Bài học** swap **được** — câu tư duy phải đúng cả với stack khác, và 20 năm nữa vẫn đúng
+
+Sai chiều nào cũng hỏng: swap được cả bài thì AI viết cũng ra bài đó; swap không được
+chỗ nào thì đó là ghi chép nội bộ, người ngoài không mang đi đâu được.
+
+Câu tư duy ghi vào `pipeline/state.json` ở trường `transfer` — **không** thêm vào front
+matter (front matter giữ đúng 10 trường). Ví dụ đã dùng thật: *"Tôi ngoại suy từ một
+điểm dữ liệu, rồi viết kết quả ra thành con số có hai chữ số thập phân."*
+
+Framework chết nhanh, cách nghĩ thì không. Bài sống lâu là bài trả lời *"tôi đã đổi cách
+nghĩ như thế nào"*, không phải *"hôm nay tôi dùng thư viện gì"*.
 
 ---
 
@@ -169,8 +210,23 @@ lượng cao; bài nuôi khán giả VN thì ngược lại. Bản còn lại l�
 - Có mục **Đánh đổi (Trade-offs)** — không bài nào khen một chiều
 - Ngôi "tôi" gắn với **quyết định cụ thể** bạn đã ra
 - Tự nêu **giới hạn / thứ chưa giải quyết được**
+- Có **đúng một câu tư duy** (`state.json` → `transfer`), nằm ở cuối bài
+- Mở bài đặt người đọc vào chỗ **họ** đang đứng, trước khi kể chỗ tác giả đã đứng
 
-Điểm cuối là tín hiệu senior mạnh nhất và rẻ nhất để làm.
+Điểm áp chót là tín hiệu senior mạnh nhất và rẻ nhất để làm.
+
+### Câu tư duy đặt ở đâu
+
+Một bài, **một** câu tư duy. Nhiều câu tư duy nghĩa là nhiều bài đang bị nhét chung.
+
+- **Mở bài:** tình huống người đọc đang ở trong đó ngay lúc này ("bạn vừa viết một ngưỡng
+  vào tài liệu thiết kế tuần trước"), rồi mới đến con số của tác giả.
+- **Cuối bài:** câu tư duy, viết trần, không tên công nghệ, không mở đầu bằng "tóm lại".
+- **Cấm kết luận không có người trong đó.** "Hãy luôn đo trước khi tối ưu" là khẩu hiệu.
+  "Tôi đã không đo, và đây là cái giá" mới là bài học.
+
+**Tối đa 2 câu châm ngôn trong một bài.** Nhiều hơn thì bài đọc như tuyển tập trích dẫn
+và không câu nào còn sức nặng — câu tư duy cũng chìm theo.
 
 ### Giải thích mắt xích trước khi dùng cách nói tắt
 
@@ -341,6 +397,10 @@ Phép thử: đọc to một đoạn. Nếu phải dừng lại giữa câu đ�
 **Lý do có ràng buộc A/B:** C và D dễ viết hơn nhiều; không ràng buộc thì sau 6 tháng
 có 12 bài giới thiệu công nghệ và 0 tài sản CV.
 
+**Hai bài trùng câu tư duy là một bài**, dù khác công nghệ, khác thể loại. Rà soát quý
+phải liệt kê trường `transfer` của mọi bài đã publish; trùng nhau thì bài sau đổi góc
+hoặc không viết. Nhịp 2 bài/tháng là trần, không phải chỉ tiêu phải lấp đầy.
+
 **Rà soát mỗi quý:** đọc `career/`, hỏi "đủ đạn cho 5 câu behavioral kinh điển chưa?"
 — thất bại, mâu thuẫn, deadline, tự học, quyết định khó. Thiếu câu nào → quý sau ưu
 tiên sinh nguyên liệu cho câu đó.
@@ -376,5 +436,8 @@ Ghi lỗi mới bằng `/content-lesson`. Soi bài theo kho này bằng `/conten
    cơ chế, **trước khi push**. Audit "đạt" không thay được bước này: audit chỉ đối chiếu
    được với inbox, còn tài liệu thiết kế nằm trong đầu tác giả (L-019 — bài lên site với
    mô tả ngược chế độ mới sau 4 lượt audit đạt)
-8. `hugo --gc --minify` chạy sạch, **và** `find public -path '*<slug>*' -name index.html |
+8. **Swap test** (mục "Cổng nhận ra mình"): thay hết tên công nghệ trong bài — mục Mổ xẻ
+   phải hỏng, mục Bài học phải còn đúng. Câu tư duy trong bài khớp `transfer` ở
+   `state.json`, và không trùng câu tư duy của bài đã publish nào. Đếm câu châm ngôn: ≤ 2
+9. `hugo --gc --minify` chạy sạch, **và** `find public -path '*<slug>*' -name index.html |
    wc -l` ra đúng 2. Build sạch không có nghĩa là trang được sinh ra (L-058)

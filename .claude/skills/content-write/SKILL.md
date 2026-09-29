@@ -15,8 +15,10 @@ lỗi đã thực sự xảy ra trên blog này, không phải ví dụ giả đ
 
 ## Bước 0 — Xác định thể loại và ngôn ngữ gốc
 
-Đọc `genre` và `lang_primary` từ `pipeline/state.json`. Chưa có → chạy
-`/content-triage` trước, đừng đoán. Viết sai thể loại sẽ phải dựng lại từ đầu vì khung
+Đọc `genre`, `lang_primary` và `transfer` từ `pipeline/state.json`. Thiếu bất kỳ cái
+nào → chạy `/content-triage` trước, đừng đoán. `transfer` là **câu tư duy** của bài: một
+câu không chứa tên công nghệ, đã qua cổng nhận ra mình. Viết mà chưa có nó thì bài sẽ
+đúng và rỗng. Viết sai thể loại sẽ phải dựng lại từ đầu vì khung
 khác hẳn.
 
 Rồi đọc **đúng một** file khung tương ứng:
@@ -33,7 +35,7 @@ Rồi đọc **đúng một** file khung tương ứng:
 Viết bằng `lang_primary`, dài **900-1100 từ**. Dùng khung của thể loại, kèm xương sống
 bắt buộc (`CONTENT_STYLE.md` mục 5).
 
-Ba thứ hay bị bỏ quên, kiểm lại trước khi coi là xong:
+Năm thứ hay bị bỏ quên, kiểm lại trước khi coi là xong:
 
 1. **Mọi con số phải truy được** về `bench/<slug>/` hoặc một link ngoài. Số không nguồn
    thì xóa hoặc đi đo — đừng để lại.
@@ -41,6 +43,17 @@ Ba thứ hay bị bỏ quên, kiểm lại trước khi coi là xong:
    sâu, không phải dấu hiệu giải pháp hoàn hảo.
 3. **Mục giới hạn / thứ chưa giải quyết được** — lấy từ ô "thứ không đo được" trong
    `bench/<slug>/README.md`.
+4. **Mở bài đặt người đọc vào chỗ họ đang đứng**, rồi mới đến con số của tác giả. Người
+   đọc không quan tâm hệ thống của bạn; họ quan tâm việc họ đang làm y hệt mà chưa biết.
+   Không mở bài bằng tên công cụ, cũng không mở bằng "tuần trước tôi gặp một sự cố".
+5. **Câu tư duy của `transfer` nằm nguyên vẹn ở cuối bài**, viết trần, không tên công
+   nghệ, không mở đầu bằng "tóm lại". Kết luận không có người trong đó là khẩu hiệu:
+   "hãy đo trước khi tối ưu" hỏng, "tôi đã không đo, và đây là cái giá" đạt.
+
+**Đếm câu châm ngôn: tối đa 2 trong một bài** (`CONTENT_STYLE.md` mục "Câu tư duy đặt ở
+đâu"). Câu châm ngôn là câu ngắn, cân đối, đúng-mọi-nơi, không mang dữ kiện nào của bài.
+Nhiều hơn 2 thì bài đọc như tuyển tập trích dẫn và câu tư duy chìm theo. Cắt bằng cách
+đổi câu châm ngôn thành câu kể có ngày tháng và số.
 
 Front matter YAML đủ 10 trường, đường dẫn ảnh bắt đầu bằng `/`.
 
@@ -111,7 +124,11 @@ Chạy hết, báo cáo từng mục:
 6. **Đã khử định danh** — không còn ticket ID, mã hàng/khách thật, đường dẫn module
    nội bộ, commit hash, hay tên công ty/sản phẩm/đồng nghiệp. Phép thử: người ngoài đọc
    xong có suy ra được đây là công ty nào không? (`CONTENT_STYLE.md` mục 3b)
-7. `hugo --gc --minify` chạy sạch, không warning, **và** `find public -path '*<slug>*'
+7. **Swap test.** Thay hết tên công nghệ trong bài (MySQL→Postgres, index→cache) và đọc
+   lại hai mục: mục **Mổ xẻ** phải **hỏng** — nếu vẫn đúng thì bài chưa kể hệ thống thật,
+   chỉ đang kể kiến thức chung. Mục **Bài học** phải **còn đúng** — nếu hỏng thì câu tư
+   duy vẫn còn dính công nghệ. Đồng thời đếm câu châm ngôn: quá 2 thì cắt.
+8. `hugo --gc --minify` chạy sạch, không warning, **và** `find public -path '*<slug>*'
    -name index.html | wc -l` ra đúng 2 — build sạch không chứng minh trang được sinh ra
 
 Thiếu ảnh → stage `needs-assets`, gọi `/content-artwork`. Bench chưa chạy thử hoặc

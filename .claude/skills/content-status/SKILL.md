@@ -29,7 +29,8 @@ Trạng thái: `pipeline/state.json`.
 |---|---|---|---|
 | `inbox` | mới ghi, chưa qua cổng đo | chạy cổng đo + phân luồng | `/content-triage` |
 | `needs-measure` | thiếu số hoặc thiếu phương pháp | thiết kế và chạy phép đo | `/content-measure` |
-| `ready` | đã có bằng chứng + thể loại | viết bản gốc | `/content-write` |
+| `needs-angle` | có số nhưng chưa qua cổng nhận ra mình: chưa có câu tư duy, hoặc thiếu dòng inbox ghi lúc tin điều sai | hỏi tác giả 2 câu rồi ghi vào inbox | `/content-capture` → `/content-triage` |
+| `ready` | đã có bằng chứng + câu tư duy + thể loại | viết bản gốc | `/content-write` |
 | `drafting` | bản gốc đang dở | viết tiếp phần còn thiếu | `/content-write` |
 | `needs-translation` | bản gốc xong, thiếu bản dịch | viết bản rút gọn | `/content-write` |
 | `needs-audit` | viết xong, chưa soi độc lập | kiểm duyệt trước publish | `/content-audit` |
@@ -48,8 +49,9 @@ thực hóa khi bài lên; còn mục `published` chưa cắt dẫn xuất thì 
 2. `needs-audit` / `needs-translation` / `needs-assets` / `needs-bench` (gần xong nhất)
 3. `drafting`
 4. `ready`
-5. `needs-measure`
-6. `inbox`
+5. `needs-angle`
+6. `needs-measure`
+7. `inbox`
 
 Nếu tháng này chưa có bài A/B nào và đã qua ngày 15 → nâng mục A/B gần nhất lên đầu,
 nói rõ lý do là chỉ tiêu tháng.

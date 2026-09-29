@@ -18,9 +18,11 @@ Checklist của `/content-write` nói "đạt" không có giá trị ở đây.
 thể loại tương ứng. Đó là danh sách lỗi **đã thực sự xảy ra** trên blog này — soi đúng
 những chỗ đó trước, vì chúng có xác suất tái phát cao nhất.
 
-## Sáu vòng kiểm
+## Bảy vòng kiểm
 
-Chạy theo thứ tự này. Vòng nào cũng phải tự thực thi, không suy luận.
+Chạy theo thứ tự này. Vòng nào cũng phải tự thực thi, không suy luận. Hai vòng đầu chặn
+hai loại hỏng khác nhau — vòng 1 chặn bài sai, vòng 2 chặn bài rỗng — và một bài có thể
+đạt vòng 1 tuyệt đối mà vẫn phải chặn ở vòng 2.
 
 ### 1. Truy nguồn từng con số
 Liệt kê **mọi** con số trong bài. Với mỗi con số, tìm nó trong `drafts/inbox.md`,
@@ -59,7 +61,33 @@ khi sự kiện đó mang con số** và các con số chính của bài đã tr
 với bài: thứ bench tự khai là **không chứng minh được** mà bài vẫn khẳng định chắc nịch,
 là đúng chỗ cần soi.
 
-### 2. Chạy lại bằng chứng
+### 2. Swap test — bài này có đáng đọc không
+
+Vòng 1 chặn bài **sai**. Vòng này chặn bài **rỗng**: đúng từng chữ, đủ nguồn, mà thay
+tên công nghệ đi thì vẫn còn nguyên 80% — tức bài nào cũng viết được, kể cả máy.
+
+Làm thật, không cảm nhận: chép bài ra file tạm, thay hết tên công nghệ và tên cơ chế
+(MySQL→Postgres, index→cache, UUIDv7→ULID), rồi đọc lại hai mục.
+
+| Mục | Sau khi swap phải | Nếu ngược lại |
+|---|---|---|
+| **Mổ xẻ** | **hỏng** — vì nó dính vào số đo, câu `EXPLAIN`, ngày cụ thể | **chặn**: bài đang kể kiến thức chung, chưa kể hệ thống thật |
+| **Bài học** | **còn đúng** — câu tư duy không lệ thuộc stack | **chặn**: câu tư duy còn dính công nghệ, đó là mẹo chứ không phải tư duy |
+
+Rồi ba phép đếm, mỗi phép ra một con số, không ra nhận xét:
+
+1. **Câu tư duy.** Đối chiếu câu cuối bài với trường `transfer` trong
+   `pipeline/state.json`. Không khớp → báo. Bài không có câu nào như vậy → **chặn**.
+2. **Trùng bài.** So `transfer` với `transfer` của mọi mục `published` khác. Trùng nghĩa
+   là cùng một bài viết lại bằng công nghệ khác (`CONTENT_STYLE.md` mục 7).
+3. **Châm ngôn.** Đếm câu ngắn, cân đối, đúng-mọi-nơi, không mang dữ kiện nào của bài.
+   Quá **2** → báo từng dòng, đề xuất đổi thành câu kể có ngày tháng và số.
+
+Phép kiểm cuối, cho mở bài: đoạn mở có đặt người đọc vào chỗ **họ** đang đứng không, hay
+chỉ kể chỗ tác giả đã đứng? Mở bài bằng "tuần trước tôi gặp một sự cố" là dấu hiệu — nó
+mời người đọc xem, không mời họ nhận ra mình.
+
+### 3. Chạy lại bằng chứng
 Đừng đọc `bench/README.md` rồi tin. **Chạy** kịch bản trong đó bằng Docker, so từng bước
 với kết quả được ghi. Đồng thời `curl` mọi link trong bài — link `bench/` chỉ sống sau
 khi thư mục đã push.
@@ -67,7 +95,7 @@ khi thư mục đã push.
 Hỏi thêm: bước nào trong bench minh họa **phát hiện** của bài? Không có → bench đang
 chứng minh nhầm thứ (L-021).
 
-### 3. Đọc to
+### 4. Đọc to
 Với bản tiếng Việt: đối chiếu bảng từ điển dịch trật trong `lessons/writing-vi.md`. Tìm
 thành ngữ Anh dịch thẳng, câu nhiều danh từ ghép, câu bị nuốt từ nối.
 
@@ -84,7 +112,7 @@ lại, nếu mục đầu đã trả lời được "vì sao hỏng" thì lộ r
 
 Báo cáo theo **số dòng**, kèm câu viết lại đề xuất. Nói "văn hơi cứng" là vô dụng.
 
-### 4. Khử định danh
+### 5. Khử định danh
 Chạy `scripts/scan-identifiers.sh` trên các file của bài. Rồi tự đọc một lượt tìm thứ
 regex không bắt được: tên sản phẩm, tên đồng nghiệp, chi tiết đủ đặc trưng để nhận ra
 công ty. Phép thử: *người ngoài đọc xong có suy ra được đây là công ty nào không?*
@@ -95,11 +123,11 @@ Mỗi hit phải trả lời được "cái này ở `bench/<slug>/` hay ở rep
 người khác thì **chặn**, dù không suy ra được công ty. Phép thử thứ hai của mục 3b áp ở
 đây: *team sở hữu đoạn code đó đọc được thì có ổn không?*
 
-### 5. Ảnh
+### 6. Ảnh
 Mọi ảnh được tham chiếu có tồn tại không. **Mở ảnh ra nhìn** — chữ tràn khung và chữ
 chồng nhau không lộ ra trong code SVG (L-032).
 
-### 6. Cấu trúc và tính nhất quán hai bản
+### 7. Cấu trúc và tính nhất quán hai bản
 Có mục Đánh đổi và mục giới hạn. Hai bản cùng bộ tiêu đề. Front matter đủ trường. Con số
 trong hai bản khớp nhau. `hugo --gc --minify` sạch.
 
@@ -118,8 +146,9 @@ Dòng đầu: **đạt** hay **chưa đạt**, và nếu chưa thì thứ nặng
 <một dòng cho mỗi vòng, nói rõ đã chạy gì — không nói "OK" suông>
 ```
 
-Xếp theo mức hại: **số không nguồn** nặng nhất (interviewer sẽ đào đúng vào đó) → bằng
-chứng không chạy được → rò rỉ định danh → ảnh hỏng → văn khó đọc → lệch cấu trúc.
+Xếp theo mức hại: **số không nguồn** nặng nhất (interviewer sẽ đào đúng vào đó) → **bài
+rỗng** (trượt swap test: không ai cần đọc, và nó nói lên rằng bài chưa kể hệ thống thật)
+→ bằng chứng không chạy được → rò rỉ định danh → ảnh hỏng → văn khó đọc → lệch cấu trúc.
 
 Không tự sửa bài trong skill này. Việc của nó là **tìm ra**, việc sửa thuộc về skill
 chuyên môn tương ứng. Trộn hai việc thì người kiểm lại thành người tự chấm bài mình.
