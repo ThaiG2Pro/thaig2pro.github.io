@@ -784,7 +784,7 @@
       "title": "Không thêm index cho cột tra cứu ở bảng team khác sở hữu, viết ngưỡng leo thang thành số: >1M dòng hoặc p95 >300 ms",
       "created": "2026-09-28",
       "genre": "A",
-      "stage": "published",
+      "stage": "done",
       "lang_primary": "en",
       "evidence": {
         "numbers": "Staging (private): 3217 dòng, 2,14 voucher/đơn, EXPLAIN <1 ms; ngoại suy ~1 ms@100K, ~10 ms@1M; 9,8% mã bắt đầu bằng 0; COUNT(*) production chưa đo. Bench (2026-09-28, median 5 lần): không index 0,6 / 24,8 / 147,7 ms ở 3,2K / 100K / 1M trên MariaDB 13.0.2 (ô 1M chạy lại 3 lần: 162, 129 khi máy rảnh, 485 khi có tải CPU); 2,3 / 44,3 / 967,9 ms trên 10.11.18 — ngoại suy sai 15x đến 100x; có index non-unique phẳng 0,1-0,6 ms; OR hai cột có index dùng index_merge union <1 ms ở 1M trên cả hai bản (bác giả định ngầm 'khó index về sau', không bác lý do ghi trong biên bản 'không index thì full scan')",
@@ -792,13 +792,15 @@
         "repro": "bench/khong-them-index-viet-nguong-leo-thang-thanh-so/ — ./run.sh (Docker, mariadb:latest hoặc MARIADB_IMAGE=mariadb:10.11), ~2 phút/phiên bản"
       },
       "blocked_on": null,
-      "next_action": "Push 2 file bài đã sửa (mở bài + câu kết), rồi /content-derive trong 24h.",
+      "next_action": "Không còn việc. Bài đã derive; behavioral_coverage giữ nguyên (that-bai và quyet-dinh-kho vẫn do selector giữ, bài này là dự phòng ghi trong thẻ career).",
       "paths": {
         "bench": "bench/khong-them-index-viet-nguong-leo-thang-thanh-so/",
         "en": "content/posts/khong-them-index-viet-nguong-leo-thang-thanh-so.en.md",
         "vi": "content/posts/khong-them-index-viet-nguong-leo-thang-thanh-so.md",
         "cover": "static/images/posts/khong-them-index-viet-nguong-leo-thang-thanh-so/cover.png",
-        "cover_svg": "static/images/posts/khong-them-index-viet-nguong-leo-thang-thanh-so/cover.svg"
+        "cover_svg": "static/images/posts/khong-them-index-viet-nguong-leo-thang-thanh-so/cover.svg",
+        "career": "career/khong-them-index-viet-nguong-leo-thang-thanh-so.md",
+        "social": "drafts/social-khong-them-index-viet-nguong-leo-thang-thanh-so.md"
       },
       "history": [
         {
@@ -848,6 +850,10 @@
         {
           "date": "2026-09-28",
           "event": "content-audit lượt 4 (vòng swap test mới): CHƯA ĐẠT — câu kết trùng câu tư duy với cong-thuc-tru-hai-lan, mở bài đặt tác giả thay vì người đọc. content-write sửa 2 chỗ trên cả EN và VI, ghi transfer."
+        },
+        {
+          "date": "2026-09-29",
+          "event": "VI viết lại từ ý (2 lượt), push 001386b; content-derive: thẻ career (CV bullet + STAR + 3 lát cắt) và social EN/VI, 3 link 200 → done"
         }
       ],
       "transfer": "Tôi không ngoại suy để biết câu trả lời — tôi ngoại suy để bảo vệ một con số đã chốt."
@@ -1005,6 +1011,10 @@
     {
       "date": "2026-09-28",
       "entry": "khong-them-index: audit lượt 4 bắt 2 lỗi thuộc luật mới (trùng câu tư duy với cong-thuc-tru-hai-lan; mở bài không đặt người đọc). Đã sửa câu kết và thêm 2 câu mở ở cả hai bản, ghi transfer. Chờ push."
+    },
+    {
+      "date": "2026-09-29",
+      "entry": "khong-them-index-viet-nguong-leo-thang-thanh-so: derive xong, career + social, stage done. Ghi chú: 2 lượt viết lại VI vẫn bị đọc là dài dòng; đã lên theo yêu cầu, cần lesson về S-V-O quá tay."
     }
   ],
   "behavioral_coverage_backup": {
