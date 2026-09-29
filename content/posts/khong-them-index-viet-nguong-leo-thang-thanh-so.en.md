@@ -13,6 +13,8 @@ cover:
     alt: "Log-log chart: a dotted extrapolation line ending near 10 ms, two measured no-index curves far above it (MariaDB 10.11 at 968 ms and 13.0 at 148 ms at 1M rows), a dashed 300 ms threshold, and a flat under-1 ms line for the indexed case"
 ---
 
+Somewhere in a design document you have signed off on, there is a sentence of the form "when it passes X, we will do Y." Has anyone ever generated X rows to check that the number means what it says?
+
 At the end of last month I signed off on a design that runs a lookup against a column with no index, on a table my team does not own, and wrote the condition for fixing it as a sentence with two numbers in it: *"when the table passes about 1,000,000 rows or the p95 of the voucher filter passes 300 ms, request a non-unique index from the owning team."* The sentence had one job: get the option "ship without the index" through design review, with "we will add it later" turned into something a reviewer could sign. It did that job.
 
 This week I built a bench to check the numbers. The row-count clause is off by a factor of 15 on one MariaDB version and about 100 on another. The decision to defer the index still stands. The numbers I attached to it do not, and this post is about how those numbers got written.
@@ -93,4 +95,4 @@ The non-unique index removes the growth entirely: flat between 0.1 and 0.6 ms ac
 
 What I would do differently is small and specific. The next time I write a threshold in rows, I will generate that many rows first: the bench that does it is one SQL file and one shell script, two minutes per version, and it needs nothing beyond Docker. Where a number is inherited rather than measured, say so in the record, instead of drawing a line through it afterwards to prop it up. A number with no origin, like the 300 ms, should be marked as a placeholder until someone measures it. I would also write the trigger with the latency clause first and the row count second, because the row count was the clause I was sure about, and it is the one that turned out to be version-dependent. And I would write down every reason a design leans on, including the ones that feel too obvious to record, so that someone who was not part of the discussion can check each one later.
 
-The sentence with two numbers in it is still better than "add the index later." It was just not yet a measured sentence.
+The sentence with two numbers in it is still better than "add the index later." But I did not extrapolate to find out the answer — I extrapolated to defend a number that was already decided.

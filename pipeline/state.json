@@ -792,7 +792,7 @@
         "repro": "bench/khong-them-index-viet-nguong-leo-thang-thanh-so/ — ./run.sh (Docker, mariadb:latest hoặc MARIADB_IMAGE=mariadb:10.11), ~2 phút/phiên bản"
       },
       "blocked_on": null,
-      "next_action": "Commit + push (bài, bench, cover, state.json, lessons/writing-vi.md); kiểm link bench và 2 URL bài trả 200; rồi /content-derive trong 24h.",
+      "next_action": "Push 2 file bài đã sửa (mở bài + câu kết), rồi /content-derive trong 24h.",
       "paths": {
         "bench": "bench/khong-them-index-viet-nguong-leo-thang-thanh-so/",
         "en": "content/posts/khong-them-index-viet-nguong-leo-thang-thanh-so.en.md",
@@ -844,8 +844,13 @@
         {
           "date": "2026-09-28",
           "event": "người viết đối chiếu lại biên bản trước push: lý do loại OR trong biên bản chỉ có vế full scan (đúng), vế 'khó index về sau' là giả định ngầm → sửa luận điểm 3 và câu kết; phiên bản DB hạ xuống 'không tìm thấy chỗ pin'; mốc thời gian 'cuối tháng trước'; đại từ 'chúng tôi'"
+        },
+        {
+          "date": "2026-09-28",
+          "event": "content-audit lượt 4 (vòng swap test mới): CHƯA ĐẠT — câu kết trùng câu tư duy với cong-thuc-tru-hai-lan, mở bài đặt tác giả thay vì người đọc. content-write sửa 2 chỗ trên cả EN và VI, ghi transfer."
         }
-      ]
+      ],
+      "transfer": "Tôi không ngoại suy để biết câu trả lời — tôi ngoại suy để bảo vệ một con số đã chốt."
     },
     {
       "slug": "ba-phan-xa-sai-khi-them-o-tim-kiem",
@@ -996,6 +1001,10 @@
     {
       "date": "2026-09-28",
       "entry": "khong-them-index-viet-nguong-leo-thang-thanh-so: audit lượt 4 (agent độc lập) chưa đạt với 2 chặn (description nói \"shipped\"; \"không ai hỏi\" vượt hồ sơ) + 12 nên sửa. Đã sửa 2 chặn và 10 nên sửa ở EN, VI, README bench (run/pass hai nghĩa, châm ngôn còn 2, 4 cụm dịch thẳng, \"was moot\" → \"is moot\", README kể lại nhân quả). Bỏ qua: trường transfer chưa có (việc của skill status), đảo mở bài (tùy chọn). 5 dòng mới vào từ điển writing-vi.md. Published, chờ push."
+    },
+    {
+      "date": "2026-09-28",
+      "entry": "khong-them-index: audit lượt 4 bắt 2 lỗi thuộc luật mới (trùng câu tư duy với cong-thuc-tru-hai-lan; mở bài không đặt người đọc). Đã sửa câu kết và thêm 2 câu mở ở cả hai bản, ghi transfer. Chờ push."
     }
   ],
   "behavioral_coverage_backup": {
