@@ -28,6 +28,7 @@ Thành ngữ kỹ thuật tiếng Anh dịch thẳng ra thì đúng chữ nhưng
 | not in the room | không có mặt trong phòng | không tham gia lúc đó |
 | draw a line under it (EN idiom = khép lại) | kẻ một đường bên dưới | kẻ sau một đường thẳng để hợp thức hóa |
 | run (bench: 1 lần) vs pass (1 lượt = trung vị 5 lần) | lần chạy cho cả hai | lần = run đơn · lượt = pass |
+| every sentence with an explicit subject (EN grammar) | tôi… tôi… tôi… ở đầu mỗi câu | bỏ chủ ngữ khi đã rõ, chỉ nhắc lại khi đổi chủ thể |
 
 Gặp thành ngữ mới dịch trật thì thêm một dòng vào bảng này.
 
@@ -130,3 +131,22 @@ nghĩa gốc tiếng Anh.
 **Dấu hiệu:** tính từ tiếng Anh về **chất lượng tín hiệu** (noisy, flaky, brittle, clean)
 dịch bằng tính từ cảm giác tiếng Việt (ồn, bở, sạch) mà không kèm động từ nói nó *làm gì*.
 **Đã vá:** thêm dòng vào bảng từ điển đầu file.
+
+## L-062 · 2026-09-29 · sửa-quá-tay-thành-văn-đều
+**Lỗi:** sửa bản VI dịch bám câu bằng cách chẻ câu và thêm chủ ngữ rõ cho mọi câu, ra
+một kiểu cứng khác: bài khong-them-index có "tôi" 65 lần trên 203 câu, câu nào cũng
+~13 từ, "con số" 26 lần. Người đọc ngoài nhận xét "dài dòng, chắp vá từ những từ phổ
+biến, không giống người viết". Bản VI dài 2.695 từ, bản EN 2.259.
+**Ai bắt:** người đọc ngoài dự án, sau hai lượt viết lại.
+**Vì sao lọt:** cả hai lượt đều đi từ bản EN, sửa câu trên câu; kiểm tra chỉ đếm số liệu
+và build, không đếm nhịp câu. Luật chống dịch cứng (L-001, L-004, L-008) nói "chẻ câu",
+"thêm động từ", nên sửa theo luật ra văn đúng ngữ pháp mà không ai nói vậy. Bước 2b hỏi
+"chỗ nào phải dừng để ghép nghĩa" bắt câu khó hiểu, không bắt câu đều đều.
+**Dấu hiệu:** đếm được, không cần đọc to: (1) số lần "tôi" chia số câu > 0,25;
+(2) độ dài câu không có câu nào < 6 từ và không câu nào > 25 từ trong cả mục;
+(3) một danh từ chung ("con số", "thứ", "chỗ", "việc") lặp > 10 lần trong bài;
+(4) bản VI dài hơn bản EN quá 20%.
+**Đã vá:** chưa vá. Cách sửa đúng không phải lượt ba của cùng phương pháp: bản VI phải
+được kể lại từ ý (tác giả kể thô 5 phút, không nhìn bản EN) rồi mới ghép số liệu vào.
+Đề xuất nâng: thêm bốn phép đếm trên vào vòng 3 của `/content-audit`.
+
