@@ -32,6 +32,13 @@ xóa hoặc đổi thành lời tự khai.
 Soi kỹ nhất những con số **bất lợi cho tác giả** (L-010): chúng nghe như tự phê bình nên
 dễ lọt qua mọi vòng kiểm.
 
+Hai loại số không được dừng ở "có dòng nguồn khớp" (L-063): số về **cấu trúc dữ liệu**
+(kích thước struct, page, số trường) thì tính lại từ code; số **tỉ lệ phần trăm** trong
+một kết luận thì truy tới **phép đo** sinh ra nó, không dừng ở dòng tóm tắt. Nhật ký của
+tác giả cũng sai được. Mọi biểu thức `A / B = x` thì tự chia lại từ hai số gốc, kiểm
+cả chiều lẫn giá trị (L-065), và kiểm hai vế có **cùng lượt chạy** không. Khác lượt mà vế
+là số đếm thô thì phải chuẩn hóa theo khối lượng trước khi chia (L-068).
+
 Rồi làm lượt thứ hai, cho thứ **không phải con số** (L-014, L-015). Liệt kê mọi câu nói
 dự án **có** hay **không có** thứ gì, mọi câu ước lượng công sức ("mất vài ngày"), và
 mọi lượng từ không đếm — **vài, nhiều, hầu hết, thường xuyên, một số, hiếm khi**. Với

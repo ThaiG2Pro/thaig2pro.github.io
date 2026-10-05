@@ -210,3 +210,56 @@ phê bình và không ai nghi. Cổng số soi "80/90/10/10.000" xong thì hai s
 cách". Phép thử: đếm số lần quan sát trong bài và số lần trong inbox; bài nhiều hơn là bịa.
 **Đã vá:** nâng thành luật cùng L-016 — `CONTENT_STYLE.md` mục 3, tiểu mục "Khẳng định về
 bối cảnh", đoạn "Sự kiện kể cũng là khẳng định"; `/content-audit` vòng 1, lượt thứ tư.
+
+## L-063 · 2026-10-05 · số-có-nguồn-nhưng-nguồn-là-nhật-ký-sai
+**Lỗi:** bài ghi "struct 48 byte" và "60% là page fault". Cả hai truy được về nhật ký của
+chính tác giả, nên qua vòng truy nguồn. Nhưng code thật là 40 byte (`unsafe.Sizeof`), và
+chính nhật ký ở mục gốc hơn ghi tắt page fault chỉ mất gần một nửa, không phải 60%.
+**Ai bắt:** `/content-audit` lượt 1 của bài cho-cham-khong-nam-o-cho-ban-doan, bằng cách mở
+code trong clone và đọc mục nhật ký **gốc** thay vì bảng tóm tắt "Giả thuyết sai".
+**Vì sao lọt:** vòng truy nguồn dừng ở "có dòng inbox/diary khớp". Nhật ký là bản ghi của
+người, cũng sai được, và bảng tóm tắt cuối nhật ký hay làm tròn số của mục gốc.
+**Dấu hiệu:** số về **cấu trúc dữ liệu** (kích thước struct, số trường, kích thước page) và
+số **tỉ lệ phần trăm** trong một kết luận. Loại một tính lại được từ code trong 30 giây;
+loại hai phải tìm phép đo sinh ra nó, không chỉ dòng nhắc lại nó.
+**Đã vá:** `/content-audit` vòng 1 — với số về cấu trúc dữ liệu, tính lại từ code; với tỉ
+lệ, truy tới **phép đo** chứ không dừng ở dòng tóm tắt.
+
+## L-065 · 2026-10-05 · tỉ-số-lộn-chiều
+**Lỗi:** bài viết `oldest / newest = 0.98`, trong khi 1480 / 1450 = 1,02. Con số 0,98 là
+newest / oldest. Nhật ký tự tính sai (phase6:817), bài chép theo, cover vẽ theo. Bài sống
+nhờ chính tỉ số này, và đoạn kết còn nói "nó là câu trả lời".
+**Ai bắt:** `/content-audit` lượt 2. Lượt 1 và bước viết đều không bắt được, vì 0,98 với
+1,02 cùng kể một chuyện ("bằng nhau"), đọc lướt không thấy gì lạ.
+**Vì sao lọt:** L-063 đã vá cho số cấu trúc và tỉ lệ phần trăm. Tỉ số A/B nằm cạnh cả hai
+số A và B thì trông như đã tự kiểm, nên không ai chia lại.
+**Dấu hiệu:** mọi biểu thức `A / B = x` có A và B ở trong bài hoặc trong bảng.
+**Đã vá:** `/content-audit` vòng 1 — tự chia lại mọi tỉ số từ hai số gốc, kiểm cả chiều
+(A/B hay B/A) lẫn giá trị.
+
+## L-067 · 2026-10-05 · cấu-hình-kiểm-tay-không-để-lại-dấu
+**Lỗi:** bài viết "tôi đã kiểm `innodb_flush_method=O_DIRECT` và `innodb_log_file_buffering=0`
+trên container 11.8.9 ngày 2026-10-05". Lần kiểm có thật, nhưng chỉ chạy tay trong phiên làm
+việc. Nguồn duy nhất còn lại là một dòng history trong `pipeline/state.json`, không có giá trị
+nào.
+**Ai bắt:** `/content-audit` vòng 1, lượt định nghĩa hệ thống (L-018).
+**Vì sao lọt:** vòng truy nguồn của bước viết chỉ đi tìm **con số**. Giá trị cấu hình kèm ngày
+và phiên bản trông như dữ kiện đã kiểm, nên không ai hỏi nó nằm ở file nào.
+**Dấu hiệu:** câu "tôi đã kiểm X trên phiên bản Y ngày Z" mà trong `bench/<slug>/results/` không
+có dòng nào in ra X. Lưu ý thêm: `--help` hay tài liệu chỉ cho giá trị **mặc định**, không phải
+giá trị **lúc chạy** (server có thể tự đổi khi filesystem không hỗ trợ).
+**Đã vá:** `run.sh` của bài in biến lúc chạy vào `results/`, và bài dẫn link tới file đó. Chưa
+nâng thành luật (lần đầu).
+
+## L-068 · 2026-10-05 · tỉ-số-giữa-hai-lượt-không-chuẩn-hóa
+**Lỗi:** bài chia số commit mất thô của hai lượt chạy riêng (9123 / 6 ≈ 1500 lần), trong khi số
+commit đã báo OK của hai lượt lệch nhau 1,8 lần (43427 với 24339). Chuẩn hóa theo tỉ lệ mất thì
+ra 21% so với 0,025%, khoảng 850 lần.
+**Ai bắt:** `/content-audit` vòng 1.
+**Vì sao lọt:** luật L-065 bắt chia lại mọi `A / B` và kiểm **chiều**. Phép chia ở đây đúng cả
+chiều lẫn giá trị. Cái sai nằm ở chỗ A và B có **mẫu số khác nhau**.
+**Dấu hiệu:** tỉ số mà hai vế lấy từ hai lượt chạy, hai máy, hoặc hai khoảng thời gian khác
+nhau, và mỗi vế là số đếm thô (mất, lỗi, request) chứ không phải tỉ lệ.
+**Đã vá:** lỗi lặp lần hai của nhóm "tỉ số" (L-065) → nới luật `/content-audit` vòng 1: ngoài
+chiều và giá trị, kiểm hai vế có cùng lượt chạy không. Khác lượt thì chuẩn hóa theo khối lượng
+trước khi chia.

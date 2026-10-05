@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" font-family="ui-monospace,'SFMono-Regular',Menlo,Consolas,monospace">
+  <rect width="1200" height="630" fill="#1d2021"/>
+  <rect x="0" y="0" width="1200" height="6" fill="#fb4934"/>
+
+  <text x="60" y="64" fill="#928374" font-size="22" letter-spacing="3">READ COST OF A 60-VERSION CHAIN, ns</text>
+
+  <!-- left panel: what I wrote down -->
+  <text x="60" y="124" fill="#ebdbb2" font-size="26">what my explanation predicted</text>
+  <text x="60" y="156" fill="#928374" font-size="22">oldest walks 59 more steps, pays more</text>
+
+  <g stroke="#3c3836" stroke-width="1">
+    <line x1="60" y1="500" x2="560" y2="500"/>
+  </g>
+  <!-- bars: newest short, oldest tall -->
+  <rect x="130" y="400" width="140" height="100" fill="#504945"/>
+  <rect x="340" y="200" width="140" height="300" fill="#504945"/>
+  <text x="200" y="534" fill="#a89984" font-size="22" text-anchor="middle">newest</text>
+  <text x="410" y="534" fill="#a89984" font-size="22" text-anchor="middle">oldest</text>
+  <text x="310" y="578" fill="#928374" font-size="22" text-anchor="middle">written in the diary, 02 Sep</text>
+  <!-- strike-through -->
+  <line x1="90" y1="470" x2="530" y2="230" stroke="#fb4934" stroke-width="5" stroke-linecap="round"/>
+
+  <!-- divider -->
+  <line x1="600" y1="110" x2="600" y2="590" stroke="#3c3836" stroke-width="2"/>
+
+  <!-- right panel: what the table already said -->
+  <text x="640" y="124" fill="#ebdbb2" font-size="26">what the same table already said</text>
+  <text x="640" y="156" fill="#928374" font-size="22">two lines above the explanation</text>
+
+  <g stroke="#3c3836" stroke-width="1">
+    <line x1="640" y1="500" x2="1140" y2="500"/>
+  </g>
+  <!-- bars: equal heights (1450 vs 1480) -->
+  <rect x="710" y="206" width="140" height="294" fill="#83a598"/>
+  <rect x="920" y="200" width="140" height="300" fill="#83a598"/>
+  <text x="780" y="186" fill="#ebdbb2" font-size="26" text-anchor="middle">1450</text>
+  <text x="990" y="186" fill="#ebdbb2" font-size="26" text-anchor="middle">1480</text>
+  <text x="780" y="534" fill="#a89984" font-size="22" text-anchor="middle">newest</text>
+  <text x="990" y="534" fill="#a89984" font-size="22" text-anchor="middle">oldest</text>
+
+  <!-- ratio callout -->
+  <rect x="770" y="300" width="230" height="64" rx="8" fill="#1d2021" stroke="#fabd2f" stroke-width="3"/>
+  <text x="885" y="344" fill="#fabd2f" font-size="34" text-anchor="middle">ratio 1.02</text>
+  <text x="890" y="578" fill="#928374" font-size="22" text-anchor="middle">noticed 01 Oct, after a wrong fix</text>
+</svg>

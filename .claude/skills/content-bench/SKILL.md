@@ -62,6 +62,14 @@ Chạy trên **phiên bản mới nhất** của framework/thư viện, không c
 ở công ty — người đọc sẽ cài bản mới nhất. Không tương thích thì sửa code cho chạy được
 cả hai, hoặc ghi rõ phiên bản trong README.
 
+Chạy **hai lần liên tiếp** trong cùng thư mục. Lần hai phải đọc đúng kết quả của lần
+hai: lệnh hậu xử lý nhận glob (`results-*.txt`) sẽ lặng lẽ cầm file cũ (L-064).
+Hai lần đó phải là **toàn bộ** kịch bản, không chạy riêng từng phần. Lưu cả hai vào
+`results/`, đặt kết quả cạnh nhau, và README chỉ khẳng định thứ đứng vững ở **cả hai**: một
+thứ tự hay một phép so giữa các chế độ mà hai lần đảo nhau thì phải ghi thẳng là "không tái
+hiện được" (L-066). Cấu hình server mà bài dẫn ra thì bench phải **in ra lúc chạy**, đừng để
+nó nằm trong trí nhớ của phiên làm việc (L-067).
+
 Bước nào ra khác kỳ vọng thì **sửa code hoặc sửa kịch bản**, rồi chạy lại từ đầu. Đừng
 sửa mỗi README cho khớp cái đang chạy — làm vậy là lặng lẽ đổi lời hứa của bài.
 

@@ -1,0 +1,163 @@
+# host: docker-container (golang:1.26 on a WSL2 host)  date: 2026-10-05T03:52:53+00:00  go: go version go1.26.8 linux/amd64  pairs: 10
+# before=348f120 fix1=e48552f after=4a4ef0f copybench=807b7be
+## pair 1  commit 348f120
+BenchmarkGetChainDepth/depth=1/newest-6  	  200000	       177.4 ns/op	      64 B/op	       3 allocs/op
+BenchmarkGetChainDepth/depth=1/oldest-6  	  200000	       174.8 ns/op	      64 B/op	       3 allocs/op
+BenchmarkGetChainDepth/depth=60/newest-6 	  200000	      1613 ns/op	    3585 B/op	       3 allocs/op
+BenchmarkGetChainDepth/depth=60/oldest-6 	  200000	      1992 ns/op	    3585 B/op	       3 allocs/op
+## pair 1  commit e48552f
+BenchmarkGetChainDepth/depth=1/newest-6  	  200000	       179.1 ns/op	      16 B/op	       2 allocs/op
+BenchmarkGetChainDepth/depth=1/oldest-6  	  200000	       178.4 ns/op	      16 B/op	       2 allocs/op
+BenchmarkGetChainDepth/depth=60/newest-6 	  200000	      1302 ns/op	     897 B/op	       2 allocs/op
+BenchmarkGetChainDepth/depth=60/oldest-6 	  200000	      1401 ns/op	     897 B/op	       2 allocs/op
+## pair 1  commit 4a4ef0f
+BenchmarkGetChainDepth/depth=1/newest-6  	  200000	       159.1 ns/op	       4 B/op	       2 allocs/op
+BenchmarkGetChainDepth/depth=1/oldest-6  	  200000	       158.0 ns/op	       4 B/op	       2 allocs/op
+BenchmarkGetChainDepth/depth=60/newest-6 	  200000	       391.0 ns/op	       4 B/op	       2 allocs/op
+BenchmarkGetChainDepth/depth=60/oldest-6 	  200000	       361.1 ns/op	       4 B/op	       2 allocs/op
+## pair 2  commit 348f120
+BenchmarkGetChainDepth/depth=1/newest-6  	  200000	       178.0 ns/op	      64 B/op	       3 allocs/op
+BenchmarkGetChainDepth/depth=1/oldest-6  	  200000	       178.8 ns/op	      64 B/op	       3 allocs/op
+BenchmarkGetChainDepth/depth=60/newest-6 	  200000	      1808 ns/op	    3585 B/op	       3 allocs/op
+BenchmarkGetChainDepth/depth=60/oldest-6 	  200000	      2086 ns/op	    3585 B/op	       3 allocs/op
+## pair 2  commit e48552f
+BenchmarkGetChainDepth/depth=1/newest-6  	  200000	       287.4 ns/op	      16 B/op	       2 allocs/op
+BenchmarkGetChainDepth/depth=1/oldest-6  	  200000	       247.3 ns/op	      16 B/op	       2 allocs/op
+BenchmarkGetChainDepth/depth=60/newest-6 	  200000	      1783 ns/op	     897 B/op	       2 allocs/op
+BenchmarkGetChainDepth/depth=60/oldest-6 	  200000	      1558 ns/op	     897 B/op	       2 allocs/op
+## pair 2  commit 4a4ef0f
+BenchmarkGetChainDepth/depth=1/newest-6  	  200000	       180.1 ns/op	       4 B/op	       2 allocs/op
+BenchmarkGetChainDepth/depth=1/oldest-6  	  200000	       188.8 ns/op	       4 B/op	       2 allocs/op
+BenchmarkGetChainDepth/depth=60/newest-6 	  200000	       435.9 ns/op	       4 B/op	       2 allocs/op
+BenchmarkGetChainDepth/depth=60/oldest-6 	  200000	       481.8 ns/op	       4 B/op	       2 allocs/op
+## pair 3  commit 348f120
+BenchmarkGetChainDepth/depth=1/newest-6  	  200000	       361.2 ns/op	      64 B/op	       3 allocs/op
+BenchmarkGetChainDepth/depth=1/oldest-6  	  200000	       320.7 ns/op	      64 B/op	       3 allocs/op
+BenchmarkGetChainDepth/depth=60/newest-6 	  200000	      2352 ns/op	    3585 B/op	       3 allocs/op
+BenchmarkGetChainDepth/depth=60/oldest-6 	  200000	      1955 ns/op	    3585 B/op	       3 allocs/op
+## pair 3  commit e48552f
+BenchmarkGetChainDepth/depth=1/newest-6  	  200000	       203.6 ns/op	      16 B/op	       2 allocs/op
+BenchmarkGetChainDepth/depth=1/oldest-6  	  200000	       207.9 ns/op	      16 B/op	       2 allocs/op
+BenchmarkGetChainDepth/depth=60/newest-6 	  200000	      1340 ns/op	     897 B/op	       2 allocs/op
+BenchmarkGetChainDepth/depth=60/oldest-6 	  200000	      1454 ns/op	     897 B/op	       2 allocs/op
+## pair 3  commit 4a4ef0f
+BenchmarkGetChainDepth/depth=1/newest-6  	  200000	       171.9 ns/op	       4 B/op	       2 allocs/op
+BenchmarkGetChainDepth/depth=1/oldest-6  	  200000	       173.3 ns/op	       4 B/op	       2 allocs/op
+BenchmarkGetChainDepth/depth=60/newest-6 	  200000	       388.1 ns/op	       4 B/op	       2 allocs/op
+BenchmarkGetChainDepth/depth=60/oldest-6 	  200000	       402.9 ns/op	       4 B/op	       2 allocs/op
+## pair 4  commit 348f120
+BenchmarkGetChainDepth/depth=1/newest-6  	  200000	       201.1 ns/op	      64 B/op	       3 allocs/op
+BenchmarkGetChainDepth/depth=1/oldest-6  	  200000	       190.4 ns/op	      64 B/op	       3 allocs/op
+BenchmarkGetChainDepth/depth=60/newest-6 	  200000	      2005 ns/op	    3585 B/op	       3 allocs/op
+BenchmarkGetChainDepth/depth=60/oldest-6 	  200000	      1917 ns/op	    3585 B/op	       3 allocs/op
+## pair 4  commit e48552f
+BenchmarkGetChainDepth/depth=1/newest-6  	  200000	       204.1 ns/op	      16 B/op	       2 allocs/op
+BenchmarkGetChainDepth/depth=1/oldest-6  	  200000	       195.0 ns/op	      16 B/op	       2 allocs/op
+BenchmarkGetChainDepth/depth=60/newest-6 	  200000	      1578 ns/op	     897 B/op	       2 allocs/op
+BenchmarkGetChainDepth/depth=60/oldest-6 	  200000	      1734 ns/op	     897 B/op	       2 allocs/op
+## pair 4  commit 4a4ef0f
+BenchmarkGetChainDepth/depth=1/newest-6  	  200000	       386.5 ns/op	       4 B/op	       2 allocs/op
+BenchmarkGetChainDepth/depth=1/oldest-6  	  200000	       287.9 ns/op	       4 B/op	       2 allocs/op
+BenchmarkGetChainDepth/depth=60/newest-6 	  200000	       556.7 ns/op	       4 B/op	       2 allocs/op
+BenchmarkGetChainDepth/depth=60/oldest-6 	  200000	       490.9 ns/op	       4 B/op	       2 allocs/op
+## pair 5  commit 348f120
+BenchmarkGetChainDepth/depth=1/newest-6  	  200000	       217.4 ns/op	      64 B/op	       3 allocs/op
+BenchmarkGetChainDepth/depth=1/oldest-6  	  200000	       205.1 ns/op	      64 B/op	       3 allocs/op
+BenchmarkGetChainDepth/depth=60/newest-6 	  200000	      1846 ns/op	    3585 B/op	       3 allocs/op
+BenchmarkGetChainDepth/depth=60/oldest-6 	  200000	      1935 ns/op	    3585 B/op	       3 allocs/op
+## pair 5  commit e48552f
+BenchmarkGetChainDepth/depth=1/newest-6  	  200000	       217.6 ns/op	      16 B/op	       2 allocs/op
+BenchmarkGetChainDepth/depth=1/oldest-6  	  200000	       207.1 ns/op	      16 B/op	       2 allocs/op
+BenchmarkGetChainDepth/depth=60/newest-6 	  200000	      1389 ns/op	     897 B/op	       2 allocs/op
+BenchmarkGetChainDepth/depth=60/oldest-6 	  200000	      1446 ns/op	     897 B/op	       2 allocs/op
+## pair 5  commit 4a4ef0f
+BenchmarkGetChainDepth/depth=1/newest-6  	  200000	       176.9 ns/op	       4 B/op	       2 allocs/op
+BenchmarkGetChainDepth/depth=1/oldest-6  	  200000	       180.9 ns/op	       4 B/op	       2 allocs/op
+BenchmarkGetChainDepth/depth=60/newest-6 	  200000	       392.2 ns/op	       4 B/op	       2 allocs/op
+BenchmarkGetChainDepth/depth=60/oldest-6 	  200000	       406.6 ns/op	       4 B/op	       2 allocs/op
+## pair 6  commit 348f120
+BenchmarkGetChainDepth/depth=1/newest-6  	  200000	       206.3 ns/op	      64 B/op	       3 allocs/op
+BenchmarkGetChainDepth/depth=1/oldest-6  	  200000	       191.6 ns/op	      64 B/op	       3 allocs/op
+BenchmarkGetChainDepth/depth=60/newest-6 	  200000	      1888 ns/op	    3585 B/op	       3 allocs/op
+BenchmarkGetChainDepth/depth=60/oldest-6 	  200000	      1774 ns/op	    3585 B/op	       3 allocs/op
+## pair 6  commit e48552f
+BenchmarkGetChainDepth/depth=1/newest-6  	  200000	       202.6 ns/op	      16 B/op	       2 allocs/op
+BenchmarkGetChainDepth/depth=1/oldest-6  	  200000	       197.8 ns/op	      16 B/op	       2 allocs/op
+BenchmarkGetChainDepth/depth=60/newest-6 	  200000	      1308 ns/op	     897 B/op	       2 allocs/op
+BenchmarkGetChainDepth/depth=60/oldest-6 	  200000	      1366 ns/op	     897 B/op	       2 allocs/op
+## pair 6  commit 4a4ef0f
+BenchmarkGetChainDepth/depth=1/newest-6  	  200000	       166.1 ns/op	       4 B/op	       2 allocs/op
+BenchmarkGetChainDepth/depth=1/oldest-6  	  200000	       168.8 ns/op	       4 B/op	       2 allocs/op
+BenchmarkGetChainDepth/depth=60/newest-6 	  200000	       358.9 ns/op	       4 B/op	       2 allocs/op
+BenchmarkGetChainDepth/depth=60/oldest-6 	  200000	       358.4 ns/op	       4 B/op	       2 allocs/op
+## pair 7  commit 348f120
+BenchmarkGetChainDepth/depth=1/newest-6  	  200000	       201.6 ns/op	      64 B/op	       3 allocs/op
+BenchmarkGetChainDepth/depth=1/oldest-6  	  200000	       194.4 ns/op	      64 B/op	       3 allocs/op
+BenchmarkGetChainDepth/depth=60/newest-6 	  200000	      1856 ns/op	    3585 B/op	       3 allocs/op
+BenchmarkGetChainDepth/depth=60/oldest-6 	  200000	      1872 ns/op	    3585 B/op	       3 allocs/op
+## pair 7  commit e48552f
+BenchmarkGetChainDepth/depth=1/newest-6  	  200000	       195.9 ns/op	      16 B/op	       2 allocs/op
+BenchmarkGetChainDepth/depth=1/oldest-6  	  200000	       188.9 ns/op	      16 B/op	       2 allocs/op
+BenchmarkGetChainDepth/depth=60/newest-6 	  200000	      1323 ns/op	     897 B/op	       2 allocs/op
+BenchmarkGetChainDepth/depth=60/oldest-6 	  200000	      1384 ns/op	     897 B/op	       2 allocs/op
+## pair 7  commit 4a4ef0f
+BenchmarkGetChainDepth/depth=1/newest-6  	  200000	       172.5 ns/op	       4 B/op	       2 allocs/op
+BenchmarkGetChainDepth/depth=1/oldest-6  	  200000	       172.2 ns/op	       4 B/op	       2 allocs/op
+BenchmarkGetChainDepth/depth=60/newest-6 	  200000	       382.7 ns/op	       4 B/op	       2 allocs/op
+BenchmarkGetChainDepth/depth=60/oldest-6 	  200000	       428.3 ns/op	       4 B/op	       2 allocs/op
+## pair 8  commit 348f120
+BenchmarkGetChainDepth/depth=1/newest-6  	  200000	       215.2 ns/op	      64 B/op	       3 allocs/op
+BenchmarkGetChainDepth/depth=1/oldest-6  	  200000	       197.2 ns/op	      64 B/op	       3 allocs/op
+BenchmarkGetChainDepth/depth=60/newest-6 	  200000	      1838 ns/op	    3585 B/op	       3 allocs/op
+BenchmarkGetChainDepth/depth=60/oldest-6 	  200000	      2687 ns/op	    3585 B/op	       3 allocs/op
+## pair 8  commit e48552f
+BenchmarkGetChainDepth/depth=1/newest-6  	  200000	       271.1 ns/op	      16 B/op	       2 allocs/op
+BenchmarkGetChainDepth/depth=1/oldest-6  	  200000	       236.1 ns/op	      16 B/op	       2 allocs/op
+BenchmarkGetChainDepth/depth=60/newest-6 	  200000	      1739 ns/op	     897 B/op	       2 allocs/op
+BenchmarkGetChainDepth/depth=60/oldest-6 	  200000	      1709 ns/op	     897 B/op	       2 allocs/op
+## pair 8  commit 4a4ef0f
+BenchmarkGetChainDepth/depth=1/newest-6  	  200000	       340.5 ns/op	       4 B/op	       2 allocs/op
+BenchmarkGetChainDepth/depth=1/oldest-6  	  200000	       257.6 ns/op	       4 B/op	       2 allocs/op
+BenchmarkGetChainDepth/depth=60/newest-6 	  200000	       499.6 ns/op	       4 B/op	       2 allocs/op
+BenchmarkGetChainDepth/depth=60/oldest-6 	  200000	       477.9 ns/op	       4 B/op	       2 allocs/op
+## pair 9  commit 348f120
+BenchmarkGetChainDepth/depth=1/newest-6  	  200000	       213.0 ns/op	      64 B/op	       3 allocs/op
+BenchmarkGetChainDepth/depth=1/oldest-6  	  200000	       198.6 ns/op	      64 B/op	       3 allocs/op
+BenchmarkGetChainDepth/depth=60/newest-6 	  200000	      1912 ns/op	    3585 B/op	       3 allocs/op
+BenchmarkGetChainDepth/depth=60/oldest-6 	  200000	      1856 ns/op	    3585 B/op	       3 allocs/op
+## pair 9  commit e48552f
+BenchmarkGetChainDepth/depth=1/newest-6  	  200000	       203.3 ns/op	      16 B/op	       2 allocs/op
+BenchmarkGetChainDepth/depth=1/oldest-6  	  200000	       195.6 ns/op	      16 B/op	       2 allocs/op
+BenchmarkGetChainDepth/depth=60/newest-6 	  200000	      1445 ns/op	     897 B/op	       2 allocs/op
+BenchmarkGetChainDepth/depth=60/oldest-6 	  200000	      1439 ns/op	     897 B/op	       2 allocs/op
+## pair 9  commit 4a4ef0f
+BenchmarkGetChainDepth/depth=1/newest-6  	  200000	       177.6 ns/op	       4 B/op	       2 allocs/op
+BenchmarkGetChainDepth/depth=1/oldest-6  	  200000	       170.8 ns/op	       4 B/op	       2 allocs/op
+BenchmarkGetChainDepth/depth=60/newest-6 	  200000	       367.2 ns/op	       4 B/op	       2 allocs/op
+BenchmarkGetChainDepth/depth=60/oldest-6 	  200000	       381.2 ns/op	       4 B/op	       2 allocs/op
+## pair 10  commit 348f120
+BenchmarkGetChainDepth/depth=1/newest-6  	  200000	       209.0 ns/op	      64 B/op	       3 allocs/op
+BenchmarkGetChainDepth/depth=1/oldest-6  	  200000	       204.5 ns/op	      64 B/op	       3 allocs/op
+BenchmarkGetChainDepth/depth=60/newest-6 	  200000	      2426 ns/op	    3585 B/op	       3 allocs/op
+BenchmarkGetChainDepth/depth=60/oldest-6 	  200000	      2652 ns/op	    3585 B/op	       3 allocs/op
+## pair 10  commit e48552f
+BenchmarkGetChainDepth/depth=1/newest-6  	  200000	       269.0 ns/op	      16 B/op	       2 allocs/op
+BenchmarkGetChainDepth/depth=1/oldest-6  	  200000	       265.8 ns/op	      16 B/op	       2 allocs/op
+BenchmarkGetChainDepth/depth=60/newest-6 	  200000	      1951 ns/op	     897 B/op	       2 allocs/op
+BenchmarkGetChainDepth/depth=60/oldest-6 	  200000	      2098 ns/op	     897 B/op	       2 allocs/op
+## pair 10  commit 4a4ef0f
+BenchmarkGetChainDepth/depth=1/newest-6  	  200000	       208.9 ns/op	       4 B/op	       2 allocs/op
+BenchmarkGetChainDepth/depth=1/oldest-6  	  200000	       220.6 ns/op	       4 B/op	       2 allocs/op
+BenchmarkGetChainDepth/depth=60/newest-6 	  200000	       447.0 ns/op	       4 B/op	       2 allocs/op
+BenchmarkGetChainDepth/depth=60/oldest-6 	  200000	       489.3 ns/op	       4 B/op	       2 allocs/op
+## copy vs alloc  commit 807b7be
+BenchmarkCopyVsAlloc/alloc+copy-6         	 3315096	       556.6 ns/op	    1024 B/op	       1 allocs/op   # scan-ok
+BenchmarkCopyVsAlloc/alloc+copy-6         	 2204702	       673.1 ns/op	    1024 B/op	       1 allocs/op   # scan-ok
+BenchmarkCopyVsAlloc/alloc+copy-6         	 2343752	       448.8 ns/op	    1024 B/op	       1 allocs/op   # scan-ok
+BenchmarkCopyVsAlloc/alloc+copy-6         	 3281739	       696.0 ns/op	    1024 B/op	       1 allocs/op   # scan-ok
+BenchmarkCopyVsAlloc/alloc+copy-6         	 2409790	       466.0 ns/op	    1024 B/op	       1 allocs/op   # scan-ok
+BenchmarkCopyVsAlloc/copy-6               	100000000	        11.07 ns/op	       0 B/op	       0 allocs/op   # scan-ok
+BenchmarkCopyVsAlloc/copy-6               	100000000	        10.76 ns/op	       0 B/op	       0 allocs/op   # scan-ok
+BenchmarkCopyVsAlloc/copy-6               	100000000	        11.90 ns/op	       0 B/op	       0 allocs/op   # scan-ok
+BenchmarkCopyVsAlloc/copy-6               	100000000	        11.18 ns/op	       0 B/op	       0 allocs/op   # scan-ok
+BenchmarkCopyVsAlloc/copy-6               	100000000	        11.70 ns/op	       0 B/op	       0 allocs/op   # scan-ok

@@ -885,6 +885,511 @@
         }
       ],
       "transfer": null
+    },
+    {
+      "slug": "test-xanh-vi-viet-tu-tien-de-sai-cua-design",
+      "title": "QA GO, toàn bộ test xanh, 0 bug — rồi người dùng thấy lỗi bằng mắt: test được viết từ chính tiền đề sai của design",
+      "created": "2026-09-29",
+      "genre": null,
+      "stage": "inbox",
+      "evidence": {
+        "numbers": "25/25 test module xanh + 17 test case QA + smoke E2E trên dữ liệu thật → QA GO 0 bug; lỗi lộ ra ngày hôm sau qua người dùng; sau fix 28/28 xanh. Số đơn bị ảnh hưởng: chưa đo",
+        "method": "đếm từ biên bản pipeline và kết quả chạy test; chưa đo trên dữ liệu",
+        "repro": null
+      },
+      "blocked_on": null,
+      "next_action": "Chạy /content-triage. Thiếu: số đơn đã mã hoá xuất hiện lại trong danh sách chọn của màn tạo yêu cầu mã hoá (đếm trên staging). Kiểm chồng lấn với mục cùng chủ đề 'suite xanh bảo đảm điều gì'.",
+      "paths": {},
+      "history": [
+        {
+          "date": "2026-09-29",
+          "event": "capture từ change thêm cột số voucher + thời gian hoàn tất mã hoá ở màn danh sách đơn của yêu cầu mã hoá dữ liệu cá nhân; sự việc ngày 2026-07-28/29"
+        }
+      ],
+      "transfer": null
+    },
+    {
+      "slug": "tai-lieu-mot-ten-code-doc-ten-khac-17-thang",
+      "title": "Tài liệu và validator gọi field một tên, code đọc tên khác: 17 tháng client làm đúng tài liệu bị âm thầm lấy giá trị mặc định — rồi tôi suýt sửa bằng một alias cũng im lặng",
+      "created": "2026-09-29",
+      "genre": null,
+      "stage": "inbox",
+      "evidence": {
+        "numbers": "lệch tồn tại ≈17 tháng (từ lúc tạo API tới lúc fix), 0 lỗi, 0 log; số request production gửi tên bị bỏ qua: chưa đo; số client bị ảnh hưởng: chưa đo",
+        "method": "đếm mốc từ lịch sử git và biên bản thiết kế; chưa đo trên dữ liệu production",
+        "repro": null
+      },
+      "blocked_on": null,
+      "next_action": "Chạy /content-triage. Thiếu số quyết định giá trị bài: số request production có gửi tên field theo tài liệu (bị bỏ qua) trong 17 tháng, và số client khác nhau. Thiếu lý do chính tác giả chọn alias đọc cả hai tên ở vòng thiết kế đầu.",
+      "paths": {},
+      "history": [
+        {
+          "date": "2026-09-29",
+          "event": "capture từ change mở phiên bản API mới cho dịch vụ nạp tiền điện thoại; sự việc 2026-08-24 → 2026-08-26"
+        }
+      ],
+      "transfer": null
+    },
+    {
+      "slug": "doi-ten-field-am-tham-tat-ma-hoa",
+      "title": "Đổi tên field từ snake sang camelCase có thể âm thầm tắt mã hoá số thẻ: middleware nhận diện dữ liệu nhạy cảm theo tên key",
+      "created": "2026-09-29",
+      "genre": null,
+      "stage": "inbox",
+      "evidence": {
+        "numbers": "1 middleware mã hoá khoá theo tên key; nếu rename sót: 0 lỗi, số thẻ trả plaintext; số test đỏ khi giữ detector tên cũ: chưa đo",
+        "method": "đọc code + biên bản thiết kế; chưa chạy mutation",
+        "repro": null
+      },
+      "blocked_on": null,
+      "next_action": "Chạy /content-triage. Thiếu: mutation giữ detector tên cũ → đếm test đỏ/xanh; và một khoảnh khắc tác giả tin rename là vô hại (hiện chưa có — có thể trượt câu 3 của cổng nhận ra mình).",
+      "paths": {},
+      "history": [
+        {
+          "date": "2026-09-29",
+          "event": "capture từ cùng change API nạp tiền phiên bản mới; quyết định thiết kế 2026-08-26"
+        }
+      ],
+      "transfer": null
+    },
+    {
+      "slug": "db-tren-may-ban-la-file-chia-page",
+      "title": "Bài 0 minidb — \"Postgres\" trên máy là 1 file/bảng chia page 8KB + tiến trình cache page; tìm đúng byte của một hàng",
+      "created": "2026-10-05",
+      "genre": null,
+      "stage": "inbox",
+      "evidence": {
+        "numbers": "bảng 100000 hàng = 541 page × 8192 byte (pg_relation_filepath + pg_relation_size); 48 byte cuối của page đầu = header + hàng xếp từ cuối page ngược lên; Postgres nhiều tiến trình/page 8KB/heap không thứ tự vs MySQL một tiến trình/16KB/hàng trong cây",
+        "method": "đã đo trên Postgres 17 / MySQL 8.4 / MariaDB 11.8 (Docker) và minidb (Go); môi trường WSL2 i5-1235U, một phần đo lại Linux thuần; chỉ tỉ số đáng tin",
+        "repro": "repo minidb công khai: blog/lab/, reallab/, diary/phase9.md"
+      },
+      "blocked_on": null,
+      "next_action": "Chạy /content-triage. Bài gốc đã hoàn chỉnh trong repo minidb (1200–2100 từ, khung riêng); cần quyết định: viết lại theo khung A/B/C/D 900–1200 từ hay chỉ trỏ link. Kiểm cổng nhận ra mình: chưa thấy khoảnh khắc sai",
+      "paths": {
+        "source_repo": "minidb (GitHub ThaiG2Pro/mini-kv-db)",
+        "source_post": "blog/00-*.md"
+      },
+      "history": [
+        {
+          "date": "2026-10-05",
+          "event": "capture lô 13 bài series 'Mở nắp database' từ repo minidb"
+        }
+      ],
+      "transfer": null
+    },
+    {
+      "slug": "commit-tung-dong-cham-170-310-lan-vi-fsync",
+      "title": "Bài 1 minidb — 5000 INSERT: commit từng dòng chậm hơn commit một lần 170–310x; 64 client thì 27 commit chia nhau 1 fsync",
+      "created": "2026-10-05",
+      "genre": null,
+      "stage": "inbox",
+      "evidence": {
+        "numbers": "PG17 5000 commit 2687–2723 ms vs 1 commit 8.6–10.9 ms; MySQL 8.4 10146–13106 ms vs 59–61 ms; commit mỗi 100 dòng ≈ 60x nhanh hơn từng dòng; synchronous_commit=off 16.5–17.9 ms (nhanh 25–160x, mất dữ liệu); write() vs fsync chênh 700x; pgbench 64 client → 27 commit/fsync (group commit)",
+        "method": "đã đo trên Postgres 17 / MySQL 8.4 / MariaDB 11.8 (Docker) và minidb (Go); môi trường WSL2 i5-1235U, một phần đo lại Linux thuần; chỉ tỉ số đáng tin",
+        "repro": "repo minidb công khai: blog/lab/, reallab/, diary/phase9.md"
+      },
+      "blocked_on": null,
+      "next_action": "Chạy /content-triage. Bài gốc đã hoàn chỉnh trong repo minidb (1200–2100 từ, khung riêng); cần quyết định: viết lại theo khung A/B/C/D 900–1200 từ hay chỉ trỏ link. Kiểm cổng nhận ra mình: chưa thấy khoảnh khắc sai",
+      "paths": {
+        "source_repo": "minidb (GitHub ThaiG2Pro/mini-kv-db)",
+        "source_post": "blog/01-*.md"
+      },
+      "history": [
+        {
+          "date": "2026-10-05",
+          "event": "capture lô 13 bài series 'Mở nắp database' từ repo minidb"
+        }
+      ],
+      "transfer": null
+    },
+    {
+      "slug": "update-doi-ctid-delete-khong-co-file",
+      "title": "Bài 2 minidb — soi page bằng pageinspect: UPDATE = chèn bản mới + đánh dấu bản cũ (ctid đổi), DELETE/VACUUM không làm file nhỏ đi, REDIRECT giữ ô cũ sống",
+      "created": "2026-10-05",
+      "genre": null,
+      "stage": "inbox",
+      "evidence": {
+        "numbers": "chưa đo tỉ số — bài là ảnh chụp header page (lower 36 / upper 8088 / special 8192), mảng con trỏ, HOT update, redirect, compact; số phình đo ở bài 7",
+        "method": "đã đo trên Postgres 17 / MySQL 8.4 / MariaDB 11.8 (Docker) và minidb (Go); môi trường WSL2 i5-1235U, một phần đo lại Linux thuần; chỉ tỉ số đáng tin",
+        "repro": "repo minidb công khai: blog/lab/, reallab/, diary/phase9.md"
+      },
+      "blocked_on": null,
+      "next_action": "Chạy /content-triage. Bài gốc đã hoàn chỉnh trong repo minidb (1200–2100 từ, khung riêng); cần quyết định: viết lại theo khung A/B/C/D 900–1200 từ hay chỉ trỏ link. Kiểm cổng nhận ra mình: chưa thấy khoảnh khắc sai",
+      "paths": {
+        "source_repo": "minidb (GitHub ThaiG2Pro/mini-kv-db)",
+        "source_post": "blog/02-*.md"
+      },
+      "history": [
+        {
+          "date": "2026-10-05",
+          "event": "capture lô 13 bài series 'Mở nắp database' từ repo minidb"
+        }
+      ],
+      "transfer": null
+    },
+    {
+      "slug": "select-sao-duoi-du-lieu-nong-khoi-ram",
+      "title": "Bài 3 minidb — một SELECT * quét 590MB có đuổi dữ liệu nóng khỏi buffer pool không: bật bảo vệ còn nguyên 2050 page, tắt innodb_old_blocks_time thì mất sạch",
+      "created": "2026-10-05",
+      "genre": null,
+      "stage": "inbox",
+      "evidence": {
+        "numbers": "PG: hit=1551 read=50225 page, I/O 62.7 ms; bảng hot 25MB, big 400–590MB, buffer pool 256MB; sau quét big: bảo vệ bật → 2050 page nóng còn nguyên · innodb_old_blocks_time=0 → NULL (mất sạch); hit ratio OLTP khoẻ >99%",
+        "method": "đã đo trên Postgres 17 / MySQL 8.4 / MariaDB 11.8 (Docker) và minidb (Go); môi trường WSL2 i5-1235U, một phần đo lại Linux thuần; chỉ tỉ số đáng tin",
+        "repro": "repo minidb công khai: blog/lab/, reallab/, diary/phase9.md"
+      },
+      "blocked_on": null,
+      "next_action": "Chạy /content-triage. Bài gốc đã hoàn chỉnh trong repo minidb (1200–2100 từ, khung riêng); cần quyết định: viết lại theo khung A/B/C/D 900–1200 từ hay chỉ trỏ link. Kiểm cổng nhận ra mình: chưa thấy khoảnh khắc sai",
+      "paths": {
+        "source_repo": "minidb (GitHub ThaiG2Pro/mini-kv-db)",
+        "source_post": "blog/03-*.md"
+      },
+      "history": [
+        {
+          "date": "2026-10-05",
+          "event": "capture lô 13 bài series 'Mở nắp database' từ repo minidb"
+        }
+      ],
+      "transfer": null
+    },
+    {
+      "slug": "uuidv4-lam-cham-insert-mysql-6-11x-postgres-khong-sao",
+      "title": "Bài 4 minidb — 2 triệu hàng, UUIDv4 vs khoá tăng dần: MySQL/MariaDB chậm 6.5–11x, to hơn 43–62%, đọc 2.4–2.9GB đĩa để nạp 300MB; Postgres 1.0–1.8x",
+      "created": "2026-10-05",
+      "genre": "B",
+      "stage": "needs-angle",
+      "evidence": {
+        "numbers": "MySQL 8.4 tổng thời gian 6.5–8.3x, MariaDB 9.7–11.0x, PG 1.0–1.8x; phần tư cuối 16–19x / 32–34x / 0.7–2.2x; page ghi 32x / 26x / 1.2–1.6x; bảng 1.62x / 1.43x / 1.0x (index PK PG 1.3x); đọc đĩa 2.4GB / 2.9GB / 1–3MB; phần tư đầu MySQL chỉ chậm 1.4x (vừa RAM); minidb lá đầy 98.87% tăng dần vs 69.48% ngẫu nhiên → 1.42x, khớp MariaDB 1.43x; minidb 33x page write vs InnoDB 26–32x; dữ liệu ~300MB > buffer pool 256MB",
+        "method": "reallab pkorder: 2 triệu hàng × ~150B, lô 1000/commit, dữ liệu 300MB > buffer pool 256MB, 3 DB Docker, 2 lượt; minidb phase 4 1M khoá",
+        "repro": "repo minidb công khai (GitHub ThaiG2Pro/mini-kv-db): lệnh ghi trong bài gốc + diary; bench/<slug>/ trong blog này cần quyết định: vendor script hay link ra"
+      },
+      "blocked_on": null,
+      "next_action": "Trượt câu 3 cổng nhận ra mình: dự đoán viết trước và đúng, không có lúc tin sai trong diary. Hai câu hỏi cho tác giả: (1) Trước phase 4 (đầu tháng 9), bạn đứng phía nào trong tranh luận 'UUID làm chậm DB' vs 'tôi dùng UUID mấy năm có sao đâu', và tin vào đâu? (2) Lúc thấy phần tư đầu MySQL chỉ chậm 1.4x, bạn có thoáng nghĩ dự đoán sai không, hay đã đoán trước đường cong? Ghi câu trả lời bằng /content-capture rồi triage lại. Nếu không có khoảnh khắc nào: vẫn viết được thể loại B thuần (phép đo trả lời câu hỏi), nhưng góc phải là 'số của đồ chơi 33x dự báo đúng InnoDB 26–32x'.",
+      "paths": {
+        "source_repo": "minidb (GitHub ThaiG2Pro/mini-kv-db)",
+        "source_post": "blog/04-*.md",
+        "bench_source": "reallab/pkorder.go trong repo minidb"
+      },
+      "history": [
+        {
+          "date": "2026-10-05",
+          "event": "capture lô 13 bài series 'Mở nắp database' từ repo minidb"
+        },
+        {
+          "date": "2026-10-05",
+          "event": "triage: qua cổng đo; trượt câu 3 cổng nhận ra mình → needs-angle"
+        }
+      ],
+      "transfer": null,
+      "lang_primary": "en",
+      "priority": "high"
+    },
+    {
+      "slug": "kill-9-mat-bao-nhieu-commit-da-bao-ok",
+      "title": "Bài 5 minidb — kill -9 giữa lúc ghi ×15: mặc định 0 commit mất ở cả 3 DB; synchronous_commit=off mất 2400, MariaDB flush_log=0 mất 9123, MySQL flush_log=0+sync_binlog=0 mất 6; full page write 8KB vs 176 byte",
+      "created": "2026-10-05",
+      "genre": null,
+      "stage": "inbox",
+      "evidence": {
+        "numbers": "PG mặc định 5/5 vòng không mất (12246 đã báo OK), off → mất 2400/34302; MySQL =1 0 mất, =2 0, =0 0, =0+sync_binlog=0 → mất 6/19304; MariaDB =1 0, =2 0, =0 → mất 9123/43427; WAL sau checkpoint phình 67–87x do full page write (UPDATE 900 lần → 208 byte/lần); minidb ARIES 200/200 lần kill -9 giữ nguyên txn đã commit, 9194 txn kiểm; phản chứng: cố tình mất log → test phải đỏ 10/10",
+        "method": "đã đo trên Postgres 17 / MySQL 8.4 / MariaDB 11.8 (Docker) và minidb (Go); môi trường WSL2 i5-1235U, một phần đo lại Linux thuần; chỉ tỉ số đáng tin",
+        "repro": "repo minidb công khai: blog/lab/, reallab/, diary/phase9.md"
+      },
+      "blocked_on": null,
+      "next_action": "Chạy /content-triage. Bài gốc đã hoàn chỉnh trong repo minidb (1200–2100 từ, khung riêng); cần quyết định: viết lại theo khung A/B/C/D 900–1200 từ hay chỉ trỏ link. Kiểm cổng nhận ra mình: chưa thấy khoảnh khắc sai",
+      "paths": {
+        "source_repo": "minidb (GitHub ThaiG2Pro/mini-kv-db)",
+        "source_post": "blog/05-*.md"
+      },
+      "history": [
+        {
+          "date": "2026-10-05",
+          "event": "capture lô 13 bài series 'Mở nắp database' từ repo minidb"
+        }
+      ],
+      "transfer": null
+    },
+    {
+      "slug": "cung-ten-repeatable-read-ba-db-ba-nghia",
+      "title": "Bài 6 minidb — 5 anomaly × 4 mức × 3 DB: REPEATABLE READ của MySQL để lọt lost update, Postgres huỷ (40001), MariaDB huỷ bằng mã 1020/HY000 mà code bắt 40001 bỏ sót",
+      "created": "2026-10-05",
+      "genre": "B",
+      "stage": "ready",
+      "evidence": {
+        "numbers": "ma trận 5×4×3: hàng read-committed giống hệt 3 DB; khác biệt dồn 3 chỗ: lost-update ở RR (PG .a · MySQL X · MariaDB .a nhưng mã 1020); dirty read ở read-uncommitted (PG . vì không có mức này thật, MySQL/MariaDB X); SERIALIZABLE PG huỷ (.a) còn MySQL/MariaDB chờ khoá (.w); write skew lọt ở mọi mức dưới SERIALIZABLE cả 3 DB; minidb khớp lý thuyết từng ô cả hai chiều",
+        "method": "reallab/anomaly.go: 2 kết nối thật chạy xen kẽ 5 kịch bản × 4 mức × 3 DB, timeout 400ms/bước; 2 lượt đầu lỗi bộ lập lịch, lượt 3 là số công bố; phản chứng tắt innodb_snapshot_isolation",
+        "repro": "repo minidb công khai (GitHub ThaiG2Pro/mini-kv-db): lệnh ghi trong bài gốc + diary; bench/<slug>/ trong blog này cần quyết định: vendor script hay link ra",
+        "moment": "drafts/inbox.md:180"
+      },
+      "blocked_on": null,
+      "next_action": "Chạy /content-write bản EN thể loại B. Đưa hai bug của bộ lập lịch (bộ đo tự deadlock) vào bài — bài gốc để ở diary; đó là khoảnh khắc 'bài học phase 6 lặp lại trong chính bộ đo'. ~5h.",
+      "paths": {
+        "source_repo": "minidb (GitHub ThaiG2Pro/mini-kv-db)",
+        "source_post": "blog/06-*.md",
+        "bench_source": "reallab/anomaly.go trong repo minidb"
+      },
+      "history": [
+        {
+          "date": "2026-10-05",
+          "event": "capture lô 13 bài series 'Mở nắp database' từ repo minidb"
+        },
+        {
+          "date": "2026-10-05",
+          "event": "triage: qua cổng đo và cổng nhận ra mình → ready, thể loại B, ưu tiên cao"
+        }
+      ],
+      "transfer": "Tôi coi tên của một mức đảm bảo là định nghĩa của nó, trong khi tên đó chỉ gọi một cách cài, và cách cài quyết định điều gì lọt.",
+      "lang_primary": "en",
+      "priority": "high"
+    },
+    {
+      "slug": "transaction-quen-commit-heap-phinh-11x-undo-chi-phat-phien-cu",
+      "title": "Bài 7 minidb — phiên REPEATABLE READ chỉ đọc bị bỏ quên, 10 vòng UPDATE 100000 hàng: Postgres heap phình 11x (14→155MB) và người đọc mới chậm 5.1x; InnoDB bảng không đổi, chỉ phiên cũ chậm 35x/18.5x; VACUUM dọn xác nhưng bảng vẫn 155MB",
+      "created": "2026-10-05",
+      "genre": null,
+      "stage": "inbox",
+      "evidence": {
+        "numbers": "PG: 1M version chết, 14.1→155.4MB, đọc mới 3.9→19.9 ms (5.1x), phiên cũ 5.9x; sau COMMIT+VACUUM 93 ms xác sạch nhưng vẫn 155MB, seq scan vẫn chậm 2.8x; VACUUM FULL 229 ms khoá ACCESS EXCLUSIVE; MySQL phiên cũ 35x, MariaDB 18.5x, bảng không đổi; undo MariaDB chỉ +13.7MB cho 1M phiên bản vs heap PG +141MB; purge \"8s vs 200ms\" là bộ đếm History list length về 0, không phải dọn xong — MySQL dọn xong ~2s, innodb_purge_rseg_truncate_frequency=1 → <100 ms; minidb phase 6 bảng phình 18x vì 1 reader",
+        "method": "đã đo trên Postgres 17 / MySQL 8.4 / MariaDB 11.8 (Docker) và minidb (Go); môi trường WSL2 i5-1235U, một phần đo lại Linux thuần; chỉ tỉ số đáng tin",
+        "repro": "repo minidb công khai: blog/lab/, reallab/, diary/phase9.md"
+      },
+      "blocked_on": null,
+      "next_action": "Chạy /content-triage. Bài gốc đã hoàn chỉnh trong repo minidb (1200–2100 từ, khung riêng); cần quyết định: viết lại theo khung A/B/C/D 900–1200 từ hay chỉ trỏ link. Kiểm cổng nhận ra mình: có khoảnh khắc sai rõ trong bài",
+      "paths": {
+        "source_repo": "minidb (GitHub ThaiG2Pro/mini-kv-db)",
+        "source_post": "blog/07-*.md"
+      },
+      "history": [
+        {
+          "date": "2026-10-05",
+          "event": "capture lô 13 bài series 'Mở nắp database' từ repo minidb"
+        }
+      ],
+      "transfer": null
+    },
+    {
+      "slug": "co-index-van-quet-ca-bang-hoa-von-5-7-phan-tram",
+      "title": "Bài 8 minidb — 5 cách viết WHERE làm mất index (hàm bọc cột, cột thứ 2 composite, LIKE '%', so chuỗi với số, LIKE tiền tố trên collation khác C); điểm hoà vốn index vs seq scan đo được 4.7% / 4.9% / 7.0%",
+      "created": "2026-10-05",
+      "genre": null,
+      "stage": "inbox",
+      "evidence": {
+        "numbers": "MySQL lower(email)= → type=ALL rows=199526; age=30 trên index (city,age): PG Bitmap Index Scan nhưng đọc gấp ~90 lần page (Buffers), MySQL ALL; code=77 (số) vs '00000077' → ALL vs ref; LIKE 'user42@%' PG Seq Scan trừ khi text_pattern_ops; OR 2 cột cả hai DB dùng được (BitmapOr / index_merge union); hoà vốn selectivity 4.7 / 4.9 / 7.0% (3 DB); 0.1% index 0.02x thời gian seq scan, 2.0% 0.42x; minidb mã hoá khoá giữ thứ tự byte (go run ./cmd/idxlab -work bytes)",
+        "method": "đã đo trên Postgres 17 / MySQL 8.4 / MariaDB 11.8 (Docker) và minidb (Go); môi trường WSL2 i5-1235U, một phần đo lại Linux thuần; chỉ tỉ số đáng tin",
+        "repro": "repo minidb công khai: blog/lab/, reallab/, diary/phase9.md"
+      },
+      "blocked_on": null,
+      "next_action": "Chạy /content-triage. Bài gốc đã hoàn chỉnh trong repo minidb (1200–2100 từ, khung riêng); cần quyết định: viết lại theo khung A/B/C/D 900–1200 từ hay chỉ trỏ link. Kiểm cổng nhận ra mình: chưa thấy khoảnh khắc sai",
+      "paths": {
+        "source_repo": "minidb (GitHub ThaiG2Pro/mini-kv-db)",
+        "source_post": "blog/08-*.md"
+      },
+      "history": [
+        {
+          "date": "2026-10-05",
+          "event": "capture lô 13 bài series 'Mở nắp database' từ repo minidb"
+        }
+      ],
+      "transfer": null
+    },
+    {
+      "slug": "planner-doan-mo-them-thong-ke-co-the-lam-uoc-luong-xau-di",
+      "title": "Bài 9 minidb — planner không biết truy vấn lấy bao nhiêu hàng, nó đoán bằng thống kê; 3 cách làm nó đoán sai: lệch (MySQL 98% bảng đi index 1337 ms vs quét 198 ms), tương quan (sai 10 lần), cũ (đoán 1 cho 100000 hàng → Nested Loop)",
+      "created": "2026-10-05",
+      "genre": null,
+      "stage": "inbox",
+      "evidence": {
+        "numbers": "MySQL 98% bảng qua index 1337 ms vs seq scan 198 ms (7x); tương quan city=c7 ⇒ k7: ước lượng 1%×10% = 1000 hàng, thật 10000 (sai 10x), cả 3 DB; thêm histogram MariaDB làm ước lượng xấu đi; thống kê cũ: ANALYZE lúc chưa có 'pending' → đoán 1 hàng, JOIN 100000 hàng Nested Loop 95.7 ms vs Merge Join 58.7 ms (1.6x vì trong RAM; ngoài RAM có thể hàng trăm lần); minidb Selectivity không biết thì 0.5; ngưỡng auto-recalc ≈10% bảng",
+        "method": "đã đo trên Postgres 17 / MySQL 8.4 / MariaDB 11.8 (Docker) và minidb (Go); môi trường WSL2 i5-1235U, một phần đo lại Linux thuần; chỉ tỉ số đáng tin",
+        "repro": "repo minidb công khai: blog/lab/, reallab/, diary/phase9.md"
+      },
+      "blocked_on": null,
+      "next_action": "Chạy /content-triage. Bài gốc đã hoàn chỉnh trong repo minidb (1200–2100 từ, khung riêng); cần quyết định: viết lại theo khung A/B/C/D 900–1200 từ hay chỉ trỏ link. Kiểm cổng nhận ra mình: chưa thấy khoảnh khắc sai trong bài, có thể có trong diary",
+      "paths": {
+        "source_repo": "minidb (GitHub ThaiG2Pro/mini-kv-db)",
+        "source_post": "blog/09-*.md"
+      },
+      "history": [
+        {
+          "date": "2026-10-05",
+          "event": "capture lô 13 bài series 'Mở nắp database' từ repo minidb"
+        }
+      ],
+      "transfer": null
+    },
+    {
+      "slug": "doc-explain-nhu-nguoi-viet-ra-no-limit-10-chenh-221-lan",
+      "title": "Bài 10 minidb — EXPLAIN là cây toán tử Volcano; ORDER BY … LIMIT 10 có/không index trên cột ORDER BY chênh 221x (0.337 vs 74.6 ms); Hash Join tràn đĩa (work_mem 1MB, 16 batch) lại nhanh hơn chạy trong RAM 1.2–1.3x, chưa giải thích được",
+      "created": "2026-10-05",
+      "genre": null,
+      "stage": "inbox",
+      "evidence": {
+        "numbers": "LIMIT 10: 0.337 ms (index) vs 74.649 ms (Sort cả bảng) = 221x; minidb bỏ Sort nhờ index nhanh 3x không LIMIT, >3000x có LIMIT; Hash Join work_mem=1MB Batches=16 temp 4131 page 268–291 ms vs work_mem=256MB Batches=1 21.6MB 344–366 ms (3 lượt, ổn định) — giả thuyết L3 12MB chưa chứng minh; Sort external merge 8488kB 602.8 ms vs quicksort 23957kB 591.5 ms; optimizer minidb tự suy điều kiện dim.kind<5 sang ev.kind<5 → nhanh 18.53x",
+        "method": "đã đo trên Postgres 17 / MySQL 8.4 / MariaDB 11.8 (Docker) và minidb (Go); môi trường WSL2 i5-1235U, một phần đo lại Linux thuần; chỉ tỉ số đáng tin",
+        "repro": "repo minidb công khai: blog/lab/, reallab/, diary/phase9.md"
+      },
+      "blocked_on": null,
+      "next_action": "Chạy /content-triage. Bài gốc đã hoàn chỉnh trong repo minidb (1200–2100 từ, khung riêng); cần quyết định: viết lại theo khung A/B/C/D 900–1200 từ hay chỉ trỏ link. Kiểm cổng nhận ra mình: chưa thấy khoảnh khắc sai trong bài, có thể có trong diary",
+      "paths": {
+        "source_repo": "minidb (GitHub ThaiG2Pro/mini-kv-db)",
+        "source_post": "blog/10-*.md"
+      },
+      "history": [
+        {
+          "date": "2026-10-05",
+          "event": "capture lô 13 bài series 'Mở nắp database' từ repo minidb"
+        }
+      ],
+      "transfer": null
+    },
+    {
+      "slug": "bo-dem-cung-ten-khac-nghia-mariadb-dem-ca-buffer",
+      "title": "Bài 12 minidb — cùng innodb_flush_log_at_trx_commit=0, kill -9 ×5: MariaDB mất 9123 commit, MySQL mất 6; bộ đo nói dối một lần: Innodb_os_log_written của MariaDB tăng đúng bằng lsn_current (đếm cả log buffer), nên \"ghi mỗi 5.6ms\" là giả; đo lại bằng số write() thật: MariaDB 3 lần/3s cách nhau 1002 ms, MySQL 508 lần",
+      "created": "2026-10-05",
+      "genre": "B",
+      "stage": "published",
+      "evidence": {
+        "numbers": "lograte 3s: MySQL 514 write (5.8 ms/lần), tắt log_writer_threads → 8 (172.8 ms); MariaDB bộ đếm 526 (5.6 ms) nhưng Innodb_os_log_written tăng 850223 byte = Innodb_lsn_current tăng 850223 (lệch 0 byte) → bộ đếm = buffer; đo thẳng syscall: MySQL 508 / tắt luồng 8 / MariaDB 3 lần cách 1001.7–1002.6 ms; dự báo mất khi chết: 11 / 844 / 1363 vs thực đo 6 / — / 9123; crash lại MySQL =0+sync_binlog=0 mất 6/24339; chênh ~1500x cùng engine cùng biến; tiêu đề 575x",
+        "method": "reallab/lograte.go lấy mẫu bộ đếm InnoDB mỗi 5ms trong 3s + đếm syscall write() thật; reallab/crash.go kill -9 ×5 vòng; MySQL 8.4 vs MariaDB 11.8 Docker; 2–3 lượt",
+        "repro": "bench/bo-dem-cung-ten-khac-nghia-mariadb-dem-ca-buffer/run.sh (Docker only), 2 lượt lưu trong results/: tái hiện phát hiện bộ đếm (MariaDB os_log_written = lsn_current) và khoảng cách vài commit / hàng nghìn commit; KHÔNG tái hiện thứ tự giữa MySQL-tắt-luồng-ghi và MariaDB. Số trong bài lấy từ diary/phase9.md minidb.",
+        "moment": "drafts/inbox.md:216"
+      },
+      "blocked_on": null,
+      "next_action": "commit + push (bài + bench cùng lúc, --no-verify vì LSN dương tính giả), rồi /content-derive trong 24h",
+      "paths": {
+        "source_repo": "minidb (GitHub ThaiG2Pro/mini-kv-db)",
+        "source_post": "blog/12-*.md",
+        "bench_source": "reallab/lograte.go, reallab/crash.go trong repo minidb",
+        "cover": "static/images/posts/bo-dem-cung-ten-khac-nghia-mariadb-dem-ca-buffer/cover.png",
+        "bench": "bench/bo-dem-cung-ten-khac-nghia-mariadb-dem-ca-buffer/"
+      },
+      "history": [
+        {
+          "date": "2026-10-05",
+          "event": "capture lô 13 bài series 'Mở nắp database' từ repo minidb"
+        },
+        {
+          "date": "2026-10-05",
+          "event": "triage: qua cổng đo và cổng nhận ra mình → ready, thể loại B, ưu tiên cao"
+        },
+        {
+          "date": "2026-10-05",
+          "event": "content-write: bản EN + VI viết xong (draft). Sửa transfer: bản cũ nói \"tin con số tên quen thay vì nghi bộ đo\", nhưng diary/phase9.md bảng 7 cho thấy đã nghi bộ đo ngay khi thấy mâu thuẫn; niềm tin sai nằm ở lúc chọn bộ đếm theo tên. Kiểm O_DIRECT trên container mariadb 11.8.9. Bỏ khẳng định \"đo thẳng syscall\" (thật ra là đếm số lần bộ đếm nhảy, lấy mẫu 5ms) và khẳng định crashlab -nowrite bắt mất commit."
+        },
+        {
+          "date": "2026-10-05",
+          "event": "content-artwork: cover.svg + cover.png; sửa alt cả hai bản cho khớp ảnh"
+        },
+        {
+          "date": "2026-10-05",
+          "event": "content-bench: run.sh chạy thật trên mysql 8.4.11 + mariadb 11.8.9 (Docker, WSL2). lograte: MariaDB os_log_written delta = lsn_current delta = 1116696 byte, lsn_flushed 3 lần nhảy ~1004ms. crash 5 vòng: mất 2 / 3653 / 7034. Bài thêm link bench."
+        },
+        {
+          "date": "2026-10-05",
+          "event": "content-write checklist: 8/8 đạt về nội dung, draft:false, build sạch, 2 trang. Chờ audit."
+        },
+        {
+          "date": "2026-10-05",
+          "event": "content-audit lượt 2 (agent độc lập): Đạt, không chặn. Áp các sửa nhỏ (VI:80/112/140, EN/VI:120, README commit/s, evidence.repro). Cảnh báo: transfer gần trục với cung-ten-repeatable-read-ba-db-ba-nghia (stage ready)."
+        }
+      ],
+      "transfer": "Tôi chọn bộ đo theo cái tên của nó, và chỉ biết nó đếm thứ khác vì một con số thứ hai tôi tự đo không thể cùng đúng với nó.",
+      "lang_primary": "en",
+      "priority": "high",
+      "transfer_old": "Hai con số tôi tự đo không thể cùng đúng, và tôi đã tin con số mang cái tên quen hơn thay vì nghi bộ đo."
+    },
+    {
+      "slug": "cho-cham-khong-nam-o-cho-ban-doan-cap-phat-khong-phai-giai-ma",
+      "title": "Bài 13 minidb — chuỗi 60 phiên bản đọc chậm 8.5x, tôi giải thích \"vì giải mã chuỗi\" rồi ghi vào nhật ký và bài 7; sửa đúng cái đó không đổi gì; profile chỉ ra cấp phát + chép struct: 5213 → 708 ns, 897 → 4 byte/Get",
+      "created": "2026-10-05",
+      "genre": "B",
+      "stage": "published",
+      "evidence": {
+        "numbers": "phase 6: depth=60 newest 1450 ns / oldest 1480 ns (0.98x, hai nhánh bằng nhau = manh mối), depth=1 171 ns (8.5x); sửa lần 1 (VisibleRaw không dựng mảng): 2125–2211 vs 2355–2640 ns, không đổi; pprof 300000 lần: VisibleRaw 56%, db.Get 43%, memmove 0.51s → \"chép 900 byte 1.7µs\" vô lý; BenchmarkCopyVsAlloc: alloc+copy 890–1865 ns vs copy 18–27 ns (~20 ns); sau sửa GetFunc (view, không chép): depth=60 newest 5213→708 ns (0.14 [0.13,0.16]), oldest 3878→714 (0.18), depth=1 348→299 (0.85), 897→4 B/op; depth 60 vẫn đắt hơn depth 1 ~2.4x (kiểm đuôi chuỗi, cố ý giữ); phản ví dụ cùng tuần: seq scan 7→2 cấp phát/hàng nhưng byte chỉ 352→312, không nhanh hơn — GC tỉ lệ byte không tỉ lệ số lần gọi; A/B theo cặp xen kẽ trên máy ồn, tứ phân vị tỉ số | tái hiện trong container: before oldest/newest 1.03, fix1 0.77/0.75 (3585→897 B/op), fix2 0.21/0.21 (→4 B/op), depth60/depth1 sau sửa 2.2x; copy 11 ns vs alloc+copy 449–696 ns",
+        "method": "Go benchmark BenchmarkGetChainDepth 200000–300000 lần, pprof, BenchmarkCopyVsAlloc tách chép/cấp phát; A/B 10 cặp xen kẽ trên máy ồn, báo tứ phân vị tỉ số; đo lại Linux thuần",
+        "repro": "bench/cho-cham-khong-nam-o-cho-ban-doan-cap-phat-khong-phai-giai-ma/run.sh + ratio.py — đã chạy thật trong golang:1.26 (go1.26.8) trên host WSL2, 10 cặp, 3 commit minidb; kết quả results-docker-wsl2-20261005.txt",
+        "moment": "drafts/inbox.md:224"
+      },
+      "blocked_on": null,
+      "next_action": "Commit + push (bench link 404 tới khi push), rồi /content-derive trong 24h.",
+      "paths": {
+        "source_repo": "minidb (GitHub ThaiG2Pro/mini-kv-db)",
+        "source_post": "blog/13-*.md",
+        "bench_source": "internal/txn/bench_test.go, internal/btree/bench_test.go trong repo minidb",
+        "post_en": "content/posts/cho-cham-khong-nam-o-cho-ban-doan-cap-phat-khong-phai-giai-ma.en.md",
+        "post_vi": "content/posts/cho-cham-khong-nam-o-cho-ban-doan-cap-phat-khong-phai-giai-ma.md",
+        "bench": "bench/cho-cham-khong-nam-o-cho-ban-doan-cap-phat-khong-phai-giai-ma/ (đã git add)",
+        "cover": "static/images/posts/cho-cham-khong-nam-o-cho-ban-doan-cap-phat-khong-phai-giai-ma/cover.png (+ cover.svg)"
+      },
+      "history": [
+        {
+          "date": "2026-10-05",
+          "event": "capture lô 13 bài series 'Mở nắp database' từ repo minidb"
+        },
+        {
+          "date": "2026-10-05",
+          "event": "triage: qua cổng đo và cổng nhận ra mình → ready, thể loại B, ưu tiên cao"
+        },
+        {
+          "date": "2026-10-05",
+          "event": "write: bản EN + VI xong, bench skeleton (run.sh, ratio.py, README) tạo nhưng chưa chạy; thiếu cover"
+        },
+        {
+          "date": "2026-10-05",
+          "event": "bench chạy thật: golang:1.26 container, 3 commit, 10 cặp; phát hiện tái hiện (oldest/newest≈1.0 ở cả 3 commit). Phát hiện lệch so với bài: B/op 'trước' là 3585 chứ không phải 897 (897 là sau fix 1) → sửa bài EN+VI+README. BenchmarkCopyVsAlloc chỉ có từ commit 807b7be → run.sh dùng commit đó"
+        },
+        {
+          "date": "2026-10-05",
+          "event": "artwork: cover.svg/png 1200×630, hai panel dự báo (gạch đỏ) vs bảng thật (1450/1480, ratio 0.98); alt sửa theo ảnh"
+        },
+        {
+          "date": "2026-10-05",
+          "event": "audit lượt 1: chưa đạt — 3 chặn (số 48 byte sai so với code, 60% page fault sai so với mục gốc diary, ratio.py đọc nhầm file cũ khi chạy lần hai) + 15 nên-sửa. Đã sửa hết trong cùng ngày; ghi L-063 (evidence), L-064 (bench)"
+        },
+        {
+          "date": "2026-10-05",
+          "event": "audit lượt 2: chặn 1 (tỉ số oldest/newest ghi 0.98, đúng là 1.02 — nhật ký chia ngược). Sửa 2 bài, cover, README; thêm 550 ns thay \"gần một nửa\"; bench chạy lại 2 cặp khớp phát hiện. → published"
+        }
+      ],
+      "transfer": "Tôi giải thích một con số bằng câu chuyện nghe hợp lý rồi ghi câu chuyện đó thành sự thật, trong khi tỉ số bác nó đã nằm ngay cạnh từ đầu.",
+      "lang_primary": "en",
+      "priority": "high"
+    },
+    {
+      "slug": "test-phai-do-crashlab-200-lan-xanh-khong-phai-bang-chung",
+      "title": "200/200 lần kill -9 xanh không phải bằng chứng: tắt sạch fsync vẫn xanh vì kill -9 không giết page cache; phải thêm chế độ mất dữ liệu thật để bài test đỏ 10/10",
+      "created": "2026-10-05",
+      "genre": "B",
+      "stage": "needs-angle",
+      "lang_primary": "en",
+      "priority": "high",
+      "evidence": {
+        "numbers": "tắt hoàn toàn fsync: 20/20 vòng đúng, 10641 txn kiểm; giữ log trong RAM tiến trình: 0/10 đúng, 10 sai, exit 1, 1944 txn; bài chính 200/200 kill -9, 9194 txn",
+        "method": "cmd/crashlab trong minidb: kill -9 ngẫu nhiên giữa lúc ghi, mở lại, Verify cây + so khớp từng txn đã commit; 3 chế độ: mặc định / -nosync / -nowrite; make target bắt buộc đỏ",
+        "repro": "repo minidb công khai (GitHub ThaiG2Pro/mini-kv-db): lệnh ghi trong bài gốc + diary; bench/<slug>/ trong blog này cần quyết định: vendor script hay link ra",
+        "moment": "drafts/inbox.md:231"
+      },
+      "blocked_on": "2 khẳng định cốt lõi sai so với nguồn: (1) crashlab từng đỏ 4/20 (diary/phase5-log.md:168, lỗi freelist); (2) -nowrite đỏ 30/30 vòng (10 gốc + 20 chạy lại 2026-10-05, pool 16 và 4096) đều ở bước Verify cây, bước so commit (D1) chưa từng chạy tới — verifyInner return sớm",
+      "next_action": "Gác lại theo quyết định tác giả 2026-10-05. Hướng đề xuất nếu quay lại: bộ kiểm tra được kiểm hai lần và lần hai vẫn hở; cần đo chế độ mất commit mà cây lành (/content-measure) + viết lại transfer.",
+      "paths": {
+        "source_repo": "minidb (GitHub ThaiG2Pro/mini-kv-db)",
+        "source": "diary/phase5.md mục 2026-09-02; cmd/crashlab; Makefile"
+      },
+      "history": [
+        {
+          "date": "2026-10-05",
+          "event": "capture từ diary phase 5 theo yêu cầu sau khi lọc bài cho interviewer"
+        },
+        {
+          "date": "2026-10-05",
+          "event": "triage: ready, thể loại B"
+        },
+        {
+          "date": "2026-10-05",
+          "event": "content-write dừng trước khi viết: phát hiện 2 khẳng định sai nguồn; tác giả chọn gác lại → needs-angle"
+        }
+      ],
+      "transfer": "Một phép kiểm chưa bao giờ đỏ chưa chứng minh điều gì; tôi đã đếm số lần nó xanh và gọi đó là bằng chứng, dù cơ chế khiến nó không thể đỏ tôi đã ghi lại từ trước."
     }
   ],
   "log": [
@@ -1015,6 +1520,42 @@
     {
       "date": "2026-09-29",
       "entry": "khong-them-index-viet-nguong-leo-thang-thanh-so: derive xong, career + social, stage done. Ghi chú: 2 lượt viết lại VI vẫn bị đọc là dài dòng; đã lên theo yêu cầu, cần lesson về S-V-O quá tay."
+    },
+    {
+      "date": "2026-09-29",
+      "entry": "test-xanh-vi-viet-tu-tien-de-sai-cua-design: capture loại 4 (tiền đề design sai, test + QA đều xanh vì cùng dựa trên tiền đề). Số bị ảnh hưởng chưa đo."
+    },
+    {
+      "date": "2026-09-29",
+      "entry": "tai-lieu-mot-ten-code-doc-ten-khac-17-thang (loại 4+2) + doi-ten-field-am-tham-tat-ma-hoa (loại 2): capture. Cả hai thiếu số production/mutation."
+    },
+    {
+      "date": "2026-10-05",
+      "entry": "capture lô 13 mục từ repo minidb (series blog 'Mở nắp database' bài 0–10, 12, 13; bỏ bài 11 tổng kết): loại 3 ×7, loại 4 ×6. Tất cả đã có số đo; thiếu quyết định viết lại hay trỏ link, và cổng nhận ra mình chỉ rõ ở bài 7, 12, 13."
+    },
+    {
+      "date": "2026-10-05",
+      "entry": "triage 4 mục ưu tiên từ series minidb: 3 ready (B, EN) — chuỗi phiên bản/cấp phát, bộ đếm cùng tên khác nghĩa, repeatable read ba nghĩa; UUID → needs-angle (không có khoảnh khắc tin sai). Capture + triage thêm 'test phải đỏ' → ready (B, EN). Cảnh báo: transfer của 'test phải đỏ' gần với lock-bi-danh-roi-khi-refactor và bug-import-tra-nham-bang (cùng họ 'suite xanh không chứng minh'); khác ở cơ chế: môi trường không tạo được thất bại, không phải dữ liệu hay bất biến."
+    },
+    {
+      "date": "2026-10-05",
+      "entry": "cho-cham-khong-nam-o-cho-ban-doan-cap-phat-khong-phai-giai-ma: viết xong EN (1529 từ) + VI (1796 từ), thể loại B. Build sạch, 2 trang, scan định danh sạch. Chặn: bench chưa chạy thật, chưa có cover → needs-bench."
+    },
+    {
+      "date": "2026-10-05",
+      "entry": "cho-cham-khong-nam-o-cho-ban-doan-cap-phat-khong-phai-giai-ma: bench chạy thật, tái hiện đúng phát hiện; sửa 1 số sai trong bài (byte cấp phát trước sửa 3585, không phải 897). → needs-assets."
+    },
+    {
+      "date": "2026-10-05",
+      "entry": "cho-cham-khong-nam-o-cho-ban-doan-cap-phat-khong-phai-giai-ma: cover xong, alt cập nhật → needs-audit."
+    },
+    {
+      "date": "2026-10-05",
+      "entry": "cho-cham-khong-nam-o-cho-ban-doan-cap-phat-khong-phai-giai-ma: audit lượt 1 chưa đạt (3 chặn), sửa xong → chờ audit lượt 2. Lesson mới: L-063 số có nguồn nhưng nguồn là nhật ký sai; L-064 bench đúng lần đầu sai lần hai."
+    },
+    {
+      "date": "2026-10-05",
+      "entry": "cho-cham-khong-nam-o-cho-ban-doan-cap-phat-khong-phai-giai-ma: audit lượt 2 — tỉ số trung tâm lộn chiều (0.98→1.02), đã sửa bài/cover/README → published. Lesson L-065 tỉ số lộn chiều."
     }
   ],
   "behavioral_coverage_backup": {
