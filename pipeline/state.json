@@ -1303,7 +1303,7 @@
       "title": "Bài 13 minidb — chuỗi 60 phiên bản đọc chậm 8.5x, tôi giải thích \"vì giải mã chuỗi\" rồi ghi vào nhật ký và bài 7; sửa đúng cái đó không đổi gì; profile chỉ ra cấp phát + chép struct: 5213 → 708 ns, 897 → 4 byte/Get",
       "created": "2026-10-05",
       "genre": "B",
-      "stage": "published",
+      "stage": "done",
       "evidence": {
         "numbers": "phase 6: depth=60 newest 1450 ns / oldest 1480 ns (0.98x, hai nhánh bằng nhau = manh mối), depth=1 171 ns (8.5x); sửa lần 1 (VisibleRaw không dựng mảng): 2125–2211 vs 2355–2640 ns, không đổi; pprof 300000 lần: VisibleRaw 56%, db.Get 43%, memmove 0.51s → \"chép 900 byte 1.7µs\" vô lý; BenchmarkCopyVsAlloc: alloc+copy 890–1865 ns vs copy 18–27 ns (~20 ns); sau sửa GetFunc (view, không chép): depth=60 newest 5213→708 ns (0.14 [0.13,0.16]), oldest 3878→714 (0.18), depth=1 348→299 (0.85), 897→4 B/op; depth 60 vẫn đắt hơn depth 1 ~2.4x (kiểm đuôi chuỗi, cố ý giữ); phản ví dụ cùng tuần: seq scan 7→2 cấp phát/hàng nhưng byte chỉ 352→312, không nhanh hơn — GC tỉ lệ byte không tỉ lệ số lần gọi; A/B theo cặp xen kẽ trên máy ồn, tứ phân vị tỉ số | tái hiện trong container: before oldest/newest 1.03, fix1 0.77/0.75 (3585→897 B/op), fix2 0.21/0.21 (→4 B/op), depth60/depth1 sau sửa 2.2x; copy 11 ns vs alloc+copy 449–696 ns",
         "method": "Go benchmark BenchmarkGetChainDepth 200000–300000 lần, pprof, BenchmarkCopyVsAlloc tách chép/cấp phát; A/B 10 cặp xen kẽ trên máy ồn, báo tứ phân vị tỉ số; đo lại Linux thuần",
@@ -1311,7 +1311,7 @@
         "moment": "drafts/inbox.md:224"
       },
       "blocked_on": null,
-      "next_action": "Commit + push (bench link 404 tới khi push), rồi /content-derive trong 24h.",
+      "next_action": null,
       "paths": {
         "source_repo": "minidb (GitHub ThaiG2Pro/mini-kv-db)",
         "source_post": "blog/13-*.md",
@@ -1319,7 +1319,9 @@
         "post_en": "content/posts/cho-cham-khong-nam-o-cho-ban-doan-cap-phat-khong-phai-giai-ma.en.md",
         "post_vi": "content/posts/cho-cham-khong-nam-o-cho-ban-doan-cap-phat-khong-phai-giai-ma.md",
         "bench": "bench/cho-cham-khong-nam-o-cho-ban-doan-cap-phat-khong-phai-giai-ma/ (đã git add)",
-        "cover": "static/images/posts/cho-cham-khong-nam-o-cho-ban-doan-cap-phat-khong-phai-giai-ma/cover.png (+ cover.svg)"
+        "cover": "static/images/posts/cho-cham-khong-nam-o-cho-ban-doan-cap-phat-khong-phai-giai-ma/cover.png (+ cover.svg)",
+        "career": "career/cho-cham-khong-nam-o-cho-ban-doan-cap-phat-khong-phai-giai-ma.md",
+        "social": "drafts/social-cho-cham-khong-nam-o-cho-ban-doan-cap-phat-khong-phai-giai-ma.md"
       },
       "history": [
         {
@@ -1349,6 +1351,10 @@
         {
           "date": "2026-10-05",
           "event": "audit lượt 2: chặn 1 (tỉ số oldest/newest ghi 0.98, đúng là 1.02 — nhật ký chia ngược). Sửa 2 bài, cover, README; thêm 550 ns thay \"gần một nửa\"; bench chạy lại 2 cặp khớp phát hiện. → published"
+        },
+        {
+          "date": "2026-10-05",
+          "event": "Commit 20dbd90 push main; site live 200 cả EN/VI/cover/bench. content-derive: career card (CV bullet có số, STAR, 3 lát cắt, 3 câu đào sâu) + social EN/VI, link curl 200, không placeholder. Behavioral: thất bại + tự học (dự phòng, không ghi đè ô đang có). Stage published -> done."
         }
       ],
       "transfer": "Tôi giải thích một con số bằng câu chuyện nghe hợp lý rồi ghi câu chuyện đó thành sự thật, trong khi tỉ số bác nó đã nằm ngay cạnh từ đầu.",
@@ -1556,6 +1562,10 @@
     {
       "date": "2026-10-05",
       "entry": "cho-cham-khong-nam-o-cho-ban-doan-cap-phat-khong-phai-giai-ma: audit lượt 2 — tỉ số trung tâm lộn chiều (0.98→1.02), đã sửa bài/cover/README → published. Lesson L-065 tỉ số lộn chiều."
+    },
+    {
+      "date": "2026-10-05",
+      "entry": "cho-cham-khong-nam-o-cho-ban-doan-cap-phat-khong-phai-giai-ma: derive xong → done."
     }
   ],
   "behavioral_coverage_backup": {
