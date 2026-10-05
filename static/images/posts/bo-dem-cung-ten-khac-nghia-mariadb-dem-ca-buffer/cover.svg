@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <pattern id="dense" width="2" height="70" patternUnits="userSpaceOnUse">
+      <rect x="0" y="0" width="1" height="70" fill="#e6a23c"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="630" fill="#0f1419"/>
+  <text x="100" y="78" font-family="ui-monospace, monospace" font-size="24" fill="#8b949e">MariaDB 11.8 · flush_log_at_trx_commit=0 · one 3 s run per counter</text>
+
+  <!-- row A: the counter with the familiar name -->
+  <text x="100" y="152" font-family="ui-monospace, monospace" font-size="30" fill="#e6a23c">Innodb_os_log_written</text>
+  <text x="1100" y="152" text-anchor="end" font-family="ui-monospace, monospace" font-size="26" fill="#e6a23c">526 jumps · every 5.6 ms</text>
+  <rect x="100" y="172" width="1000" height="70" fill="url(#dense)" opacity="0.85"/>
+
+  <!-- row B: the counter that tracks real writes -->
+  <text x="100" y="322" font-family="ui-monospace, monospace" font-size="30" fill="#4fc1b0">Innodb_lsn_flushed</text>
+  <text x="1100" y="322" text-anchor="end" font-family="ui-monospace, monospace" font-size="26" fill="#4fc1b0">3 jumps · every 1002 ms</text>
+  <rect x="100" y="342" width="1000" height="70" fill="#f85149" opacity="0.12"/>
+  <line x1="100" y1="412" x2="1100" y2="412" stroke="#30363d" stroke-width="2"/>
+  <rect x="263" y="342" width="7" height="70" fill="#4fc1b0"/>
+  <rect x="597" y="342" width="7" height="70" fill="#4fc1b0"/>
+  <rect x="931" y="342" width="7" height="70" fill="#4fc1b0"/>
+  <text x="430" y="386" text-anchor="middle" font-family="ui-monospace, monospace" font-size="22" fill="#f0a5a0">redo still in RAM</text>
+  <text x="764" y="386" text-anchor="middle" font-family="ui-monospace, monospace" font-size="22" fill="#f0a5a0">redo still in RAM</text>
+
+  <!-- axis -->
+  <text x="100" y="448" font-family="ui-monospace, monospace" font-size="22" fill="#8b949e">0 s</text>
+  <text x="1100" y="448" text-anchor="end" font-family="ui-monospace, monospace" font-size="22" fill="#8b949e">3 s</text>
+
+  <!-- consequence -->
+  <line x1="100" y1="490" x2="1100" y2="490" stroke="#30363d" stroke-width="1"/>
+  <text x="100" y="548" font-family="ui-monospace, monospace" font-size="32" fill="#f85149">kill -9 ×5 → 9,123 acknowledged commits lost</text>
+  <text x="100" y="592" font-family="ui-monospace, monospace" font-size="24" fill="#c9d1d9">Same name as on MySQL. Different meaning.</text>
+</svg>

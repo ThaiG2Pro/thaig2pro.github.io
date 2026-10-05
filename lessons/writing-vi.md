@@ -29,6 +29,7 @@ Thành ngữ kỹ thuật tiếng Anh dịch thẳng ra thì đúng chữ nhưng
 | draw a line under it (EN idiom = khép lại) | kẻ một đường bên dưới | kẻ sau một đường thẳng để hợp thức hóa |
 | run (bench: 1 lần) vs pass (1 lượt = trung vị 5 lần) | lần chạy cho cả hai | lần = run đơn · lượt = pass |
 | every sentence with an explicit subject (EN grammar) | tôi… tôi… tôi… ở đầu mỗi câu | bỏ chủ ngữ khi đã rõ, chỉ nhắc lại khi đổi chủ thể |
+| turned one knob (đổi một tham số để thử nhân quả) | vặn đúng một núm | đổi đúng một biến |
 
 Gặp thành ngữ mới dịch trật thì thêm một dòng vào bảng này.
 
@@ -150,3 +151,13 @@ và build, không đếm nhịp câu. Luật chống dịch cứng (L-001, L-004
 được kể lại từ ý (tác giả kể thô 5 phút, không nhìn bản EN) rồi mới ghép số liệu vào.
 Đề xuất nâng: thêm bốn phép đếm trên vào vòng 3 của `/content-audit`.
 
+
+## L-069 · 2026-10-05 · vặn-một-núm
+**Lỗi:** "Muốn chắc thì phải vặn đúng một núm rồi giết thật" (bài bo-dem-cung-ten, bản VI). Câu
+gốc EN "turned one knob and killed for real" là cách nói bình thường của tiếng Anh kỹ thuật.
+Dịch thẳng ra thì vừa có "núm" vừa có "giết", không ai nói vậy về một biến cấu hình.
+**Ai bắt:** `/content-audit` vòng 4.
+**Vì sao lọt:** bảng từ điển chưa có dòng này. Vòng đọc lại 2b chỉ đọc một đoạn khác.
+**Dấu hiệu:** động từ vật lý (vặn, bắn, giết, đẩy) đứng trước một khái niệm cấu hình hoặc tiến
+trình.
+**Đã vá:** thêm dòng vào bảng từ điển đầu file.

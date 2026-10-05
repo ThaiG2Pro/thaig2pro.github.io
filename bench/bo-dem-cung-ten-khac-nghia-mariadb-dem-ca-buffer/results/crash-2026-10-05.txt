@@ -1,0 +1,21 @@
+images: mysql:8.4 (8.4.11), mariadb:11.8 (11.8.9) · WSL2, i5-1235U · 2026-10-05
+== crash: kill -9 after 1-3 s of inserts, 5 rounds per mode ==
+mode                                              acked     lost  extra
+    round 1: acked 4820, lost 0, extra 0
+    round 2: acked 4443, lost 2, extra 0
+    round 3: acked 1863, lost 0, extra 0
+    round 4: acked 990, lost 0, extra 0
+    round 5: acked 2250, lost 0, extra 0
+mysql =0 + sync_binlog=0                          14366        2      0
+    round 1: acked 1054, lost 56, extra 0
+    round 2: acked 3988, lost 358, extra 0
+    round 3: acked 4622, lost 639, extra 0
+    round 4: acked 5928, lost 1154, extra 0
+    round 5: acked 6219, lost 1446, extra 0
+mysql =0 + sync_binlog=0 + log_writer=OFF         21811     3653      0
+    round 1: acked 5040, lost 204, extra 0
+    round 2: acked 5429, lost 1571, extra 0
+    round 3: acked 6916, lost 2914, extra 0
+    round 4: acked 9337, lost 1796, extra 0
+    round 5: acked 6576, lost 549, extra 0
+mariadb flush_log_at_trx_commit=0                 33298     7034      0

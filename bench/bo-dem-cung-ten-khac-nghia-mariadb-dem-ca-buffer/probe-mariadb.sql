@@ -1,0 +1,20 @@
+-- Sample redo counters every 5 ms into a MEMORY table (MEMORY writes no redo,
+-- so the probe does not feed the counters it reads).
+DROP TABLE IF EXISTS samples;
+CREATE TABLE samples (t DATETIME(6), n BIGINT, os_log_written BIGINT,
+                      lsn_current BIGINT, lsn_flushed BIGINT) ENGINE=MEMORY;
+DROP PROCEDURE IF EXISTS probe;
+DELIMITER //
+CREATE PROCEDURE probe(ms INT)
+BEGIN
+  DECLARE stop DATETIME(6) DEFAULT SYSDATE(6) + INTERVAL ms * 1000 MICROSECOND;
+  WHILE SYSDATE(6) < stop DO
+    INSERT INTO samples SELECT SYSDATE(6),
+      (SELECT COALESCE(MAX(id),0) FROM t),
+      (SELECT VARIABLE_VALUE FROM information_schema.GLOBAL_STATUS WHERE VARIABLE_NAME='INNODB_OS_LOG_WRITTEN'),
+      (SELECT VARIABLE_VALUE FROM information_schema.GLOBAL_STATUS WHERE VARIABLE_NAME='INNODB_LSN_CURRENT'),
+      (SELECT VARIABLE_VALUE FROM information_schema.GLOBAL_STATUS WHERE VARIABLE_NAME='INNODB_LSN_FLUSHED');
+    DO SLEEP(0.005);
+  END WHILE;
+END//
+DELIMITER ;

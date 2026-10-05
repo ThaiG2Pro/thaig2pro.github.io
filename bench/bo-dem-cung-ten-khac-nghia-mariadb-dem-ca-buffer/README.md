@@ -1,0 +1,115 @@
+# bench/bo-dem-cung-ten-khac-nghia-mariadb-dem-ca-buffer — same counter name, different meaning
+
+Supporting evidence for the post *"A Counter Said MariaDB Wrote Its Redo Log Every 5.6 ms.
+It Wrote It Once a Second."* (`content/posts/bo-dem-cung-ten-khac-nghia-mariadb-dem-ca-buffer.en.md`).
+
+## The question
+
+At `innodb_flush_log_at_trx_commit = 0`, how often does each server move redo out of its
+own process with `write()`? `kill -9` erases only what has not left the process, so this
+interval decides how many acknowledged commits a process crash loses.
+
+The finding this bench must reproduce: **on MariaDB 11.8, `Innodb_os_log_written` moves in
+lockstep with `Innodb_lsn_current` (redo generated), not with redo written.** Read it as
+"bytes written" and MariaDB seems to write every ~6 ms; the counter that tracks writes,
+`Innodb_lsn_flushed`, jumps about once a second.
+
+## Method
+
+- **Servers:** `mysql:8.4` and `mariadb:11.8` in Docker. MySQL runs with
+  `--innodb_flush_method=fsync --innodb_use_native_aio=0`, as in the post.
+- **Load:** one client streams `INSERT INTO t VALUES(i); SELECT i;` with autocommit, so each
+  insert is one commit. The client prints `i` only after the insert returned, so the last
+  number in its log is the last acknowledged commit.
+- **Probe (`lograte`):** a stored procedure (`probe-*.sql`) samples three status counters
+  every 5 ms for 3 s into a `MEMORY` table. `MEMORY` writes no redo, so the probe does not
+  feed the counters it reads. `run.sh` then counts jumps and gaps between jumps per counter.
+- **Crash (`crash`):** start the load, wait a random 1–3 s, `docker kill -s KILL` the server,
+  restart, count ids ≤ last acknowledged that are missing ("lost") and ids above it that
+  exist ("extra", allowed: a commit in flight).
+
+| Mode | Settings |
+|---|---|
+| `mysql =0 + sync_binlog=0` | writer thread on (default) |
+| `mysql =0 + sync_binlog=0 + log_writer=OFF` | `innodb_log_writer_threads=OFF` |
+| `mariadb flush_log_at_trx_commit=0` | — |
+
+## How to run
+
+Needs only Docker. About 1 minute for `lograte`, 4–5 minutes for `crash 5`. Every run is
+saved to `results/run-<date>-<time>.txt`, and each server prints the runtime settings the
+post relies on when it starts:
+
+```text
+settings mysql: version=8.4.11 flush_method=fsync log_writer_threads=1 flush_log_at_timeout=1
+settings mariadb: version=11.8.9-MariaDB-ubu2404 flush_method=O_DIRECT log_file_buffering=OFF flush_log_at_timeout=1
+```
+
+```bash
+./run.sh lograte          # step 1: the counter finding
+./run.sh crash 5          # step 2: the consequence under kill -9
+./run.sh all 5            # both
+MARIADB_IMAGE=mariadb:11.4 ./run.sh lograte   # another version
+```
+
+Expected, and what two saved runs on 2026-10-05 printed (`results/lograte-2026-10-05.txt`,
+`results/crash-2026-10-05.txt`, `results/run-2026-10-05-1631.txt`):
+
+**Step 1 — `lograte`.** On MariaDB, `os_log_written` and `lsn_current` grow by the **same**
+byte count; `lsn_flushed` jumps about 3 times, ~1 s apart.
+
+```text
+mariadb flush_log_at_trx_commit=0        commit/s   2147   (2.99 s, 488 samples)
+    os_log_written   jumps  487  gap p50     6.0ms  gap max    23.9ms  delta      1116696 bytes
+    lsn_current      jumps  487  gap p50     6.0ms  gap max    23.9ms  delta      1116696 bytes
+    lsn_flushed      jumps    3  gap p50  1003.6ms  gap max  1004.9ms  delta      1066451 bytes
+```
+
+Second run: same pattern, both grew by 1,244,149 bytes; `lsn_flushed` jumped 3 times, 1008.7 ms apart.
+
+On MySQL, `os_log_written` jumps every ~6 ms with the writer thread on, and only 7 times in
+3 s with it off:
+
+```text
+mysql =0 + sync_binlog=0                 os_log_written   jumps  495  gap p50     5.8ms
+mysql =0 + sync_binlog=0 + log_writer=OFF os_log_written   jumps    7  gap p50   499.9ms
+```
+
+**Step 2 — `crash 5`.** Two saved runs:
+
+```text
+mode                                              run 1 acked / lost    run 2 acked / lost
+mysql =0 + sync_binlog=0                               14366 /    2         18383 /    4
+mysql =0 + sync_binlog=0 + log_writer=OFF              21811 / 3653         24313 / 4756
+mariadb flush_log_at_trx_commit=0                      33298 / 7034         28665 / 3809
+```
+
+What reproduces: with the MySQL writer thread on, a handful of commits are lost; the other
+two modes lose thousands. What does **not** reproduce: which of those two loses more. Run 1
+had MariaDB ahead, run 2 had MySQL with the writer off ahead. Kill timing and commit rate
+move the counts more than the difference between those two modes. These are also not the
+numbers in the post (6 / 3447 / 9123 from the original runs in the minidb repo).
+
+Versions checked: MySQL 8.4.11, MariaDB 11.8.9, Docker on WSL2 (i5-1235U), 2026-10-05.
+
+## What this does not measure
+
+- **Power loss.** `kill -9` kills the server process; the host kernel's page cache survives.
+  Nothing here tests `fsync`.
+- **Why MariaDB's counter counts generated bytes.** The bench shows *that* it moves with
+  `lsn_current`, not why. No source code was read.
+- **The exact meaning of MySQL's counter.** On MySQL, `os_log_written` grew by 2,850,816
+  bytes while the LSN grew by 1,522,191, so it is not the LSN there. That fits "bytes
+  written, including rewritten partial blocks", but the bench does not trace `write()`
+  calls to confirm it.
+- **MySQL's `lsn_flushed` column is a different counter.** MySQL has no
+  `Innodb_lsn_flushed`; the column reads `Innodb_redo_log_flushed_to_disk_lsn` (after
+  `fsync`), so it is not comparable with MariaDB's column of the same name in this output.
+  MySQL's `Innodb_redo_log_current_lsn` also jumps less often than `os_log_written`
+  (289 vs 495); the bench does not explain this.
+- **Anything finer than ~5 ms.** The probe sleeps 5 ms between samples; faster write
+  rhythms all show up as ~6 ms.
+- **An ordering between the two "thousands" modes.** See step 2; two runs disagree.
+- **Stable absolute numbers.** Five kills per mode on a laptop under WSL2. Commit rates
+  differ between modes and runs (910–2407 commit/s across the saved `lograte` runs), so compare orders of
+  magnitude, not exact counts.

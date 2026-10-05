@@ -1,0 +1,36 @@
+images: mysql:8.4, mariadb:11.8 · 2026-10-05T16:31:45+07:00
+== lograte: counters sampled every 5 ms for 3 s, inserts running ==
+settings mysql: version=8.4.11 flush_method=fsync log_writer_threads=1 flush_log_at_timeout=1
+mysql =0 + sync_binlog=0                 commit/s   1749   (2.99 s, 498 samples)
+    os_log_written   jumps  497  gap p50     5.9ms  gap max    10.6ms  delta      2855424 bytes
+    lsn_current      jumps  295  gap p50    11.6ms  gap max    17.0ms  delta      1489692 bytes
+    lsn_flushed      jumps    4  gap p50   988.5ms  gap max   992.5ms  delta      1486842 bytes
+mysql =0 + sync_binlog=0 + log_writer=OFF commit/s   2206   (2.99 s, 511 samples)
+    os_log_written   jumps    6  gap p50   610.5ms  gap max   621.4ms  delta      1906688 bytes
+    lsn_current      jumps  295  gap p50    11.5ms  gap max    21.4ms  delta      1883875 bytes
+    lsn_flushed      jumps    6  gap p50   614.6ms  gap max   621.5ms  delta      1903709 bytes
+settings mariadb: version=11.8.9-MariaDB-ubu2404 flush_method=O_DIRECT log_file_buffering=OFF flush_log_at_timeout=1
+mariadb flush_log_at_trx_commit=0        commit/s   2407   (3.00 s, 496 samples)
+    os_log_written   jumps  495  gap p50     5.9ms  gap max    21.2ms  delta      1244149 bytes
+    lsn_current      jumps  495  gap p50     5.9ms  gap max    21.2ms  delta      1244149 bytes
+    lsn_flushed      jumps    3  gap p50  1008.7ms  gap max  1009.6ms  delta      1156788 bytes
+== crash: kill -9 after 1-3 s of inserts, 5 rounds per mode ==
+mode                                              acked     lost  extra
+    round 1: acked 4781, lost 1, extra 0
+    round 2: acked 2271, lost 0, extra 0
+    round 3: acked 3077, lost 1, extra 0
+    round 4: acked 4741, lost 1, extra 0
+    round 5: acked 3513, lost 1, extra 0
+mysql =0 + sync_binlog=0                          18383        4      0
+    round 1: acked 5502, lost 2075, extra 0
+    round 2: acked 4462, lost 1168, extra 0
+    round 3: acked 6087, lost 146, extra 0
+    round 4: acked 3205, lost 1366, extra 0
+    round 5: acked 5057, lost 1, extra 0
+mysql =0 + sync_binlog=0 + log_writer=OFF         24313     4756      0
+    round 1: acked 8405, lost 515, extra 0
+    round 2: acked 7387, lost 1811, extra 0
+    round 3: acked 4651, lost 331, extra 0
+    round 4: acked 4391, lost 496, extra 0
+    round 5: acked 3831, lost 656, extra 0
+mariadb flush_log_at_trx_commit=0                 28665     3809      0

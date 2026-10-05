@@ -1,0 +1,14 @@
+images: mysql:8.4 (8.4.11), mariadb:11.8 (11.8.9) · WSL2, i5-1235U · 2026-10-05
+== lograte: counters sampled every 5 ms for 3 s, inserts running ==
+mysql =0 + sync_binlog=0                 commit/s   1785   (3.00 s, 496 samples)
+    os_log_written   jumps  495  gap p50     5.8ms  gap max    29.8ms  delta      2850816 bytes
+    lsn_current      jumps  289  gap p50    11.6ms  gap max    35.6ms  delta      1522191 bytes
+    lsn_flushed      jumps    5  gap p50   500.0ms  gap max  1006.9ms  delta      1504811 bytes
+mysql =0 + sync_binlog=0 + log_writer=OFF commit/s    910   (2.99 s, 413 samples)
+    os_log_written   jumps    7  gap p50   499.9ms  gap max   549.9ms  delta       745984 bytes
+    lsn_current      jumps  288  gap p50     9.1ms  gap max    21.4ms  delta       777176 bytes
+    lsn_flushed      jumps    6  gap p50   528.7ms  gap max   560.6ms  delta       743004 bytes
+mariadb flush_log_at_trx_commit=0        commit/s   2147   (2.99 s, 488 samples)
+    os_log_written   jumps  487  gap p50     6.0ms  gap max    23.9ms  delta      1116696 bytes
+    lsn_current      jumps  487  gap p50     6.0ms  gap max    23.9ms  delta      1116696 bytes
+    lsn_flushed      jumps    3  gap p50  1003.6ms  gap max  1004.9ms  delta      1066451 bytes
