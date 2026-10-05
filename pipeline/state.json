@@ -1247,7 +1247,7 @@
       "title": "Bài 12 minidb — cùng innodb_flush_log_at_trx_commit=0, kill -9 ×5: MariaDB mất 9123 commit, MySQL mất 6; bộ đo nói dối một lần: Innodb_os_log_written của MariaDB tăng đúng bằng lsn_current (đếm cả log buffer), nên \"ghi mỗi 5.6ms\" là giả; đo lại bằng số write() thật: MariaDB 3 lần/3s cách nhau 1002 ms, MySQL 508 lần",
       "created": "2026-10-05",
       "genre": "B",
-      "stage": "published",
+      "stage": "done",
       "evidence": {
         "numbers": "lograte 3s: MySQL 514 write (5.8 ms/lần), tắt log_writer_threads → 8 (172.8 ms); MariaDB bộ đếm 526 (5.6 ms) nhưng Innodb_os_log_written tăng 850223 byte = Innodb_lsn_current tăng 850223 (lệch 0 byte) → bộ đếm = buffer; đo thẳng syscall: MySQL 508 / tắt luồng 8 / MariaDB 3 lần cách 1001.7–1002.6 ms; dự báo mất khi chết: 11 / 844 / 1363 vs thực đo 6 / — / 9123; crash lại MySQL =0+sync_binlog=0 mất 6/24339; chênh ~1500x cùng engine cùng biến; tiêu đề 575x",
         "method": "reallab/lograte.go lấy mẫu bộ đếm InnoDB mỗi 5ms trong 3s + đếm syscall write() thật; reallab/crash.go kill -9 ×5 vòng; MySQL 8.4 vs MariaDB 11.8 Docker; 2–3 lượt",
@@ -1255,13 +1255,15 @@
         "moment": "drafts/inbox.md:216"
       },
       "blocked_on": null,
-      "next_action": "commit + push (bài + bench cùng lúc, --no-verify vì LSN dương tính giả), rồi /content-derive trong 24h",
+      "next_action": null,
       "paths": {
         "source_repo": "minidb (GitHub ThaiG2Pro/mini-kv-db)",
         "source_post": "blog/12-*.md",
         "bench_source": "reallab/lograte.go, reallab/crash.go trong repo minidb",
         "cover": "static/images/posts/bo-dem-cung-ten-khac-nghia-mariadb-dem-ca-buffer/cover.png",
-        "bench": "bench/bo-dem-cung-ten-khac-nghia-mariadb-dem-ca-buffer/"
+        "bench": "bench/bo-dem-cung-ten-khac-nghia-mariadb-dem-ca-buffer/",
+        "career": "career/bo-dem-cung-ten-khac-nghia-mariadb-dem-ca-buffer.md",
+        "social": "drafts/social-bo-dem-cung-ten-khac-nghia-mariadb-dem-ca-buffer.md"
       },
       "history": [
         {
@@ -1291,6 +1293,10 @@
         {
           "date": "2026-10-05",
           "event": "content-audit lượt 2 (agent độc lập): Đạt, không chặn. Áp các sửa nhỏ (VI:80/112/140, EN/VI:120, README commit/s, evidence.repro). Cảnh báo: transfer gần trục với cung-ten-repeatable-read-ba-db-ba-nghia (stage ready)."
+        },
+        {
+          "date": "2026-10-05",
+          "event": "Commit 9cabc5c push main; site live 200 cả EN/VI/cover/bench/results. content-derive: career card (CV bullet có số + cảnh báo 850x, STAR có chỗ sai, 3 lát cắt, 3 câu đào sâu) + social EN/VI, link curl 200, không placeholder. Behavioral: tự học (dự phòng, không ghi đè). Stage published -> done."
         }
       ],
       "transfer": "Tôi chọn bộ đo theo cái tên của nó, và chỉ biết nó đếm thứ khác vì một con số thứ hai tôi tự đo không thể cùng đúng với nó.",
